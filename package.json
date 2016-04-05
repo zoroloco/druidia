@@ -1,0 +1,36 @@
+{
+  "name": "druidia.net",
+  "version": "0.0.1",
+  "description": "My web home.",
+  "main": "node index.js",
+  "scripts": {
+    "start" : "node index.js",
+    "test"  : "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoroloco/druidia.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zoroloco/druidia.git/issues",
+    "email": "kcenturion@yahoo.com"
+  },
+  "author": {
+    "name": "Kenneth Centurion"
+  },
+  "dependencies": {
+    "async"           : "^1.5.0",
+    "winston"         : "^2.1.1",
+    "mysql"           : "^2.10.2",
+    "express"         : "^4.13.4",
+    "underscore"      : "^1.8.3",
+    "jade"            : "^1.11.0",
+    "body-parser"     : "^1.15.0",
+    "method-override" : "^2.3.5",
+    "bower"           : "1.7.7"
+  },
+  "engines": {
+    "node": "^4.3.0"
+  }
+}

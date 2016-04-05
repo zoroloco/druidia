@@ -1,0 +1,15 @@
+{ "title" : "druidia.net",
+
+  "port"  : 80,
+
+  "logger" : {
+    "enabled" : true,
+    "dir"     : "logs"
+  },
+
+  "mySqlServer" : {
+    "host" : "",
+    "port" : ""
+  }
+
+}
