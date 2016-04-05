@@ -1,4 +1,4 @@
-var log = require(pathUtil.join(__dirname,'../../lib/logger.js'));
+var log = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
 module.exports = function(app) {
     //context root
