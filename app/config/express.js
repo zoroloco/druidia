@@ -24,6 +24,6 @@ module.exports = function(properties) {
     // set the static files location /public/img will be /img for users
     app.use(express.static(pathUtil.join(__dirname,'../public')));
 
-    require('../app/routes/index.server.routes.js')(app);
+    require('../routes/index.server.routes.js')(app);
     return app;
 };
