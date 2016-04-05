@@ -8,7 +8,7 @@ clear
 SRC_DIR="/usr/local/src/druidia"
 
 echo "Stopping web server..."
-sudo /etc/init.d/druidia-daemon.sh stop
+sudo systemctl stop druidia.service
 
 echo "Gitting latest code..."
 
@@ -20,15 +20,16 @@ cd $SRC_DIR
 sudo npm install
 
 echo "Now updating/syncing dependencies with bower..."
-bower install
+sudo chown kcenturion $SRC_DIR/public/libs
+bower install --allow-root
 
 echo "making scripts executable..."
-chmod +x $SRC_DIR/scripts/shell/druidia-run.sh
+sudo chmod +x $SRC_DIR/scripts/shell/druidia-run.sh
 
 echo "moving and updating startup daemon script..."
-sudo cp $SRC_DIR/scripts/shell/druidia-daemon.sh /etc/init.d/
-sudo chmod +x /etc/init.d/druidia-daemon.sh
-sudo update-rc.d druidia-daemon.sh defaults
+sudo cp $SRC_DIR/scripts/shell/druidia /etc/init.d/
+sudo chmod +x /etc/init.d/druidia
 
 echo "Now running server..."
-$SRC_DIR/scripts/shell/druidia-run.sh
+sudo chmod +x $SRC_DIR/scripts/shell/druidia-run.sh
+sudo $SRC_DIR/scripts/shell/druidia-run.sh
