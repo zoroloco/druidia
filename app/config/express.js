@@ -4,7 +4,7 @@ const express        = require('express'),
 
 module.exports = function(properties) {
     var app = express();
-    app.set('views',pathUtil.join(__dirname,'../public'));
+    app.set('views',pathUtil.join(__dirname,'../../public/views'));
     app.set('view engine', 'jade');
     app.set('properties', properties);
 
@@ -22,7 +22,7 @@ module.exports = function(properties) {
     app.use(methodOverride('X-HTTP-Method-Override'));
 
     // set the static files location /public/img will be /img for users
-    app.use(express.static(pathUtil.join(__dirname,'../public')));
+    app.use(express.static(pathUtil.join(__dirname,'../../public')));
 
     require('../routes/index.server.routes.js')(app);
     return app;
