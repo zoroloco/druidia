@@ -1,3 +1,10 @@
+#dependencies
+
+sudo npm install -g bower
+sudo npm install phantomjs -g
+sudo npm install -g karma-cli
+
+
 #Website application.
 
 1.) Move scripts/shell/build.sh to /usr/local/src
