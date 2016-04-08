@@ -17,8 +17,11 @@ describe('Controller: LoginController', function() {
 
   //test case 1
   it('should submit credentials to server only if validation passes.', function() {
-
-    //expect(foo).toBeTruthy();
+    //happy path
+    ctrl.creds.username = "test";
+    ctrl.creds.password = "test";
+    ctrl.onLogon();//simulate user click.
+    //expect()
   });
 
 });
