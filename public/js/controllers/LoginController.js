@@ -1,12 +1,15 @@
 angular.module('login-module', ['ngMaterial']).
   controller('LoginController',['$log','LoginService',function($log,loginService) {
     var self = this;
-    this.username = "";
-    this.password = "";
+
+    this.creds = {
+      "username" : "",
+      "password" : ""
+    };
 
     self.onLogon = function(){
-      $log.log("User "+self.username+" is attempting to login.");
-      //loginService.processLogin();
+      $log.log("User "+self.creds.username+" is attempting to login.");
+      loginService.processLogin(self.creds);
     }
 
   }]);

@@ -7,6 +7,7 @@ module.exports = function(properties) {
     app.set('views',pathUtil.join(__dirname,'../../public/views'));
     app.set('view engine', 'jade');
     app.set('properties', properties);
+    app.set('title', properties.title);
 
     // get all data/stuff of the body (POST) parameters
     // parse application/json

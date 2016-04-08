@@ -1,17 +1,17 @@
 var log    = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
-module.exports = IndexController;
+module.exports = LoginController;
 
-function IndexController(properties){
+function LoginController(properties){
 
-  if(this instanceof IndexController === false){
+  if(this instanceof LoginController === false){
     throw new TypeError("Classes can't be function-called.");
   }
 
   var self = this;
   this._properties = properties;
 
-  IndexController.prototype.render = function(req,res){
+  LoginController.prototype.render = function(req,res){
     log.info("Default page requested.");
 
     res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
@@ -21,5 +21,12 @@ function IndexController(properties){
       props : JSON.stringify(self._properties)
     })
     */
+  }
+
+  LoginController.prototype.auth = function(req,res){
+    log.info("Attempting to authenticate login: "+JSON.stringify(req.body));
+
+
+    res.sendStatus(200);
   }
 }

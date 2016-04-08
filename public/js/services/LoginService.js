@@ -1,8 +1,8 @@
 function LoginService($http){
     var self = this;
 
-    self.processLogin = function(){
-      //$http.post('robo',cmd);
+    self.processLogin = function(creds){
+      $http.post('login',creds);
     }
 }
 

@@ -2,9 +2,10 @@ var log = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
 module.exports = function(app) {
     //context root
-    var index = require('../controllers/index.server.controller');
-    var indexController = new index(app.get('properties'));
-    app.get('/', indexController.render);
+    var login = require('../controllers/login.server.controller');
+    var loginController = new login(app.get('properties'));
+    app.get('/', loginController.render);
+    app.post('/login',loginController.auth);
     log.info("Created route for context root.");
 
     //define other routes here for restFul endpoints.

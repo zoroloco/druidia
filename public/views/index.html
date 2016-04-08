@@ -29,8 +29,8 @@
 <body ng-app="druidia-web" ng-controller="LoginController as ctrl">
   <div class="container">
     <form ng-submit="ctrl.onLogon()">
-        <b>Username</b><input type="text" ng-model="ctrl.username"></br>
-        <b>Password</b><input type="password" ng-model="ctrl.password"></br>
+        Username<input type="text" ng-model="ctrl.creds.username">
+        Password<input type="password" ng-model="ctrl.creds.password">
         <input type="submit" value="Login">
     </form>
   </div>

@@ -8,7 +8,7 @@
     "test"  : "node_modules/karma/bin/karma start test/karma.conf.js"
   },
   "keywords" : [
-    "druidai.net"
+    "druidia.net"
   ],
   "repository": {
     "type": "git",
