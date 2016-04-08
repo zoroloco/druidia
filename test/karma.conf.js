@@ -5,7 +5,7 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
-    browsers: ['PhantomJS', 'PhantomJS_custom'],
+    //browsers: ['PhantomJS', 'PhantomJS_custom'],
 
     port: 8081,
 
@@ -13,7 +13,9 @@ module.exports = function(config) {
 
     autoWatch: true,
 
+    browers['Chrome'];
     // you can define custom flags
+    /*
     customLaunchers: {
       'PhantomJS_custom': {
         base: 'PhantomJS',
@@ -32,5 +34,6 @@ module.exports = function(config) {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
       exitOnResourceError: true
     }
+    */
   })
 }

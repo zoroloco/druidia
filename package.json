@@ -30,7 +30,8 @@
     "underscore"      : "^1.8.3",
     "jade"            : "^1.11.0",
     "body-parser"     : "^1.15.0",
-    "method-override" : "^2.3.5"
+    "method-override" : "^2.3.5",
+    "ionic-sdk"       : "^1.2.4"
   },
   "engines": {
     "node": "^4.3.0"
@@ -38,7 +39,6 @@
   "devDependencies": {
    "bower"                    : "^1.7.7",
    "karma"                    : "^0.13.22",
-   "karma-phantomjs-launcher" : "^1.0.0",
-   "phantomjs-prebuilt"       : "^2.1.7"
+   "karma-chrome-launcher"    : "^0.2.3"
  }
 }

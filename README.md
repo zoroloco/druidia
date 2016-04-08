@@ -1,9 +1,7 @@
 #dependencies
 
 sudo npm install -g bower
-sudo npm install phantomjs -g
-sudo npm install -g karma-cli
-
+sudo npm install -g ionic
 
 #Website application.
 
