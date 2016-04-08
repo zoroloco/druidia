@@ -27,6 +27,7 @@ echo "making scripts executable..."
 sudo chmod +x $SRC_DIR/scripts/shell/druidia-run.sh
 
 echo "moving and updating startup daemon script..."
+#sudo rm -rf /usr/lib/systemd/system/druidia.service
 sudo chmod +x $SRC_DIR/scripts/shell/druidia.service
 sudo cp $SRC_DIR/scripts/shell/druidia.service /usr/lib/systemd/system/
 cd /etc/systemd/system
