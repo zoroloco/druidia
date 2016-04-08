@@ -4,6 +4,8 @@ sudo npm install -g bower
 sudo npm install phantomjs -g
 sudo npm install -g karma-cli
 
+#note
+The init script is meant to work on Centos 7.
 
 #Website application.
 
