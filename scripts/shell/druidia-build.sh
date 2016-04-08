@@ -25,6 +25,7 @@ bower install --allow-root
 
 echo "making scripts executable..."
 sudo chmod +x $SRC_DIR/scripts/shell/druidia-run.sh
+sudo chmod +x $SRC_DIR/scripts/shell/druidia-update.sh
 
 echo "moving and updating startup daemon script..."
 #sudo rm -rf /usr/lib/systemd/system/druidia.service
