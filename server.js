@@ -69,7 +69,7 @@ function Server(conf){
   }
 
   Server.prototype.start = function(){
-    self._server = self._app.listen(self._conf.port,function(){
+    self._server = self._app.listen(self._app.get('port'),function(){
         log.info(process.title+" server now listening on port:"+self._server.address().port);
     });
 

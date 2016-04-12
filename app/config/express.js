@@ -1,9 +1,12 @@
+//This is my express wrapper object where all the config takes place.
+
 const express        = require('express'),
       bodyParser     = require('body-parser');
       methodOverride = require('method-override');
 
 module.exports = function(properties) {
     var app = express();
+    app.set('port', process.env.PORT || properties.port);
     app.set('views',pathUtil.join(__dirname,'../../public/views'));
     app.set('view engine', 'jade');
     app.set('properties', properties);
@@ -26,5 +29,17 @@ module.exports = function(properties) {
     app.use(express.static(pathUtil.join(__dirname,'../../public')));
 
     require('../routes/index.server.routes.js')(app);
+
+    //error route middleware must go AFTER our own routes.
+
+    //custom 404 page
+    app.use(function(req,res){
+      res.status(404);
+      res.render(pathUtil.join(__dirname,'../../public/views/errors/404.jade'), {
+          title : "The page you were looking for could not be found.",
+          message : properties.messages.notFoundMessage
+        });
+    });
+
     return app;
 };
