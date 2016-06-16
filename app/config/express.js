@@ -3,6 +3,7 @@
 const express        = require('express'),
       bodyParser     = require('body-parser');
       methodOverride = require('method-override');
+      mongoose       = require('mongoose');
 
 module.exports = function(properties) {
     var app = express();
@@ -11,6 +12,13 @@ module.exports = function(properties) {
     app.set('view engine', 'jade');
     app.set('properties', properties);
     app.set('title', properties.title);
+
+    var opts = {
+        server: {
+           socketOptions: { keepAlive: 1 }
+        }
+    };
+    mongoose.connect(properties.mongoCredentials.connectionString,opts);
 
     // get all data/stuff of the body (POST) parameters
     // parse application/json

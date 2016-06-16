@@ -31,7 +31,7 @@
     "jade"            : "^1.11.0",
     "body-parser"     : "^1.15.0",
     "method-override" : "^2.3.5",
-    "ionic-sdk"       : "^1.2.4"
+    "mongoose"        : "^4.4.0"
   },
   "engines": {
     "node": "^4.3.0"

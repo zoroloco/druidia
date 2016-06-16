@@ -1,6 +1,6 @@
 { "title" : "druidia.net",
 
-  "port"  : 8081,
+  "port"  : 8080,
 
   "logger" : {
     "enabled" : true,
@@ -10,6 +10,10 @@
   "mySqlServer" : {
     "host" : "",
     "port" : ""
+  },
+
+  "mongoCredentials" : {
+    "connectionString" : "mongodb://localhost/druidia"
   },
 
   "messages" : {
