@@ -18,8 +18,11 @@ function LoginController(properties){
 
   LoginController.prototype.auth = function(req,res){
     log.info("Attempting to authenticate login: "+JSON.stringify(req.body));
+    req.session.userName = req.body.username;
+    req.session.domain   = properties.title;
+    log.info("req.session.username="+req.session.userName);
 
-
+    res.cookie(properties.title,'nom nom');
     res.sendStatus(200);
   }
 }

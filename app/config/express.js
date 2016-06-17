@@ -3,7 +3,8 @@
 const express        = require('express'),
       bodyParser     = require('body-parser');
       methodOverride = require('method-override');
-      mongoose       = require('mongoose');
+      mongoose       = require('mongoose'),
+      credentials    = require('./credentials.js');
 
 module.exports = function(properties) {
     var app = express();
@@ -20,6 +21,9 @@ module.exports = function(properties) {
     };
     mongoose.connect(properties.mongoCredentials.connectionString,opts);
 
+    app.use(require('cookie-parser')(credentials.cookieSecretValue));
+    app.use(require('express-session')());
+    
     // get all data/stuff of the body (POST) parameters
     // parse application/json
     app.use(bodyParser.json());

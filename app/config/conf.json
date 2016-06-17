@@ -1,6 +1,6 @@
 { "title" : "druidia.net",
 
-  "port"  : 8080,
+  "port"  : 88,
 
   "logger" : {
     "enabled" : true,

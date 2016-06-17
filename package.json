@@ -31,7 +31,9 @@
     "jade"            : "^1.11.0",
     "body-parser"     : "^1.15.0",
     "method-override" : "^2.3.5",
-    "mongoose"        : "^4.4.0"
+    "mongoose"        : "^4.4.0",
+    "cookie-parser"   : "^1.4.3",
+    "express-session" : "^1.13.0"
   },
   "engines": {
     "node": "^4.3.0"
