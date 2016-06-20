@@ -1,10 +1,12 @@
-//This is my express wrapper object where all the config takes place.
+//This is my express wrapper object where all the config for the server takes place.
 
 const express        = require('express'),
+      pathUtil       = require('path')
       bodyParser     = require('body-parser');
       methodOverride = require('method-override');
       mongoose       = require('mongoose'),
-      credentials    = require('./credentials.js');
+      fs             = require('fs'),
+      credentials    = require('../security/credentials.js');
 
 module.exports = function(properties) {
     var app = express();
@@ -13,6 +15,12 @@ module.exports = function(properties) {
     app.set('view engine', 'jade');
     app.set('properties', properties);
     app.set('title', properties.title);
+
+    app.set('httpsOptions',
+    {
+        key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
+        cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
+    });
 
     var opts = {
         server: {
@@ -23,7 +31,7 @@ module.exports = function(properties) {
 
     app.use(require('cookie-parser')(credentials.cookieSecretValue));
     app.use(require('express-session')());
-    
+
     // get all data/stuff of the body (POST) parameters
     // parse application/json
     app.use(bodyParser.json());

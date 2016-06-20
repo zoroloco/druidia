@@ -2,7 +2,8 @@ var pathUtil   = require('path'),
     async      = require('async'),
     _          = require('underscore'),
     log        = require(pathUtil.join(__dirname,'./app/lib/logger.js')),
-    express    = require(pathUtil.join(__dirname,'./app/config/express'));
+    express    = require(pathUtil.join(__dirname,'./app/config/express')),
+    https      = require('https');
 
 module.exports = Server;
 
@@ -69,8 +70,8 @@ function Server(conf){
   }
 
   Server.prototype.start = function(){
-    self._server = self._app.listen(self._app.get('port'),function(){
-        log.info(process.title+" server now listening on port:"+self._server.address().port);
+    self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
+      log.info(process.title+" server now listening on port:"+self._server.address().port);
     });
 
     module.exports = self._app;
