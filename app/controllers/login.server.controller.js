@@ -1,4 +1,5 @@
-var log    = require(pathUtil.join(__dirname,'../lib/logger.js'));
+var log    = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
 module.exports = LoginController;
 
@@ -18,11 +19,7 @@ function LoginController(properties){
 
   LoginController.prototype.login = function(req,res){
     log.info("Attempting to authenticate login: "+JSON.stringify(req.body));
-    req.session.userName = req.body.username;
-    req.session.domain   = properties.title;
-    log.info("req.session.username="+req.session.userName);
-
-    res.cookie(properties.title,req.body.username, {signed: true, maxAge: 9999, httpOnly: true, secure: true});
+    //res.cookie(properties.title,req.body.username, {signed: true, maxAge: 9999, httpOnly: true, secure: true});
     res.sendStatus(200);
   }
 }
