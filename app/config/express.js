@@ -16,12 +16,14 @@ module.exports = function(properties) {
     app.set('properties', properties);
     app.set('title', properties.title);
 
+    //CONFIGURE SSL
     app.set('httpsOptions',
     {
         key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
         cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
     });
 
+    //CONFIGURE MONGO
     var opts = {
         server: {
            socketOptions: { keepAlive: 1 }
@@ -29,8 +31,17 @@ module.exports = function(properties) {
     };
     mongoose.connect(properties.mongoCredentials.connectionString,opts);
 
+    //CONFIGURE SESSION STORE
+    const session    = require('express-session');
+    const MongoStore = require('connect-mongo')(session);
+    app.use(session({
+        secret: credentials.cookieSecretValue,
+        saveUninitialized: false, // don't create session until something stored
+        resave: false, //don't save session if unmodified
+        store: new MongoStore({ url: properties.mongoCredentials.connectionString })
+    }));
+
     app.use(require('cookie-parser')(credentials.cookieSecretValue));
-    app.use(require('express-session')());
 
     // get all data/stuff of the body (POST) parameters
     // parse application/json
