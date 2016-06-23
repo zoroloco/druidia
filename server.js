@@ -22,7 +22,7 @@ function Server(conf){
 
   try{
     if(!_.isEmpty(this._conf)){
-      log.info("Successfully read well-formatted config file:\n"+JSON.stringify(this._conf));
+      log.info("Using config file:\n"+JSON.stringify(this._conf));
     }
     else{
       log.warn("No config file defined. Bailing.");

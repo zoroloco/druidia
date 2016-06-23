@@ -9,8 +9,11 @@ var log    = require(pathUtil.join(__dirname,'../lib/logger.js'));
     basically working with JavaScript objects. The states of these objects are then updated
     on the session store.
     */
+    req.logout();
+
+
     req.session.userName = req.body.username;
     req.session.domain   = properties.title;
   }
 
-exports.executeCommand = createSession;
+exports.createSession = createSession;

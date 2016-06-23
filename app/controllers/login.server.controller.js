@@ -20,6 +20,7 @@ function LoginController(properties){
   LoginController.prototype.login = function(req,res){
     log.info("Attempting to authenticate login: "+JSON.stringify(req.body));
     //res.cookie(properties.title,req.body.username, {signed: true, maxAge: 9999, httpOnly: true, secure: true});
+    sessionHandler.createSession(req,self._properties);
     res.sendStatus(200);
   }
 }
