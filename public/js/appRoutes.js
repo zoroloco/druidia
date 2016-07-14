@@ -4,7 +4,7 @@ angular.module('appRoutes', []).
        function($routeProvider, $locationProvider) {
 
         $routeProvider.when('/', {
-              templateUrl : 'views/index.html',
+              templateUrl : 'views/login.html',
               controller  : 'LoginController'
           });
 

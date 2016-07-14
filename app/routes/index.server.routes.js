@@ -2,12 +2,14 @@ var log = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
 module.exports = function(app) {
 
-    var login = require('../controllers/login.server.controller'),
-    loginController = new login(app.get('properties'));
+    var login           = require('../controllers/login.server.controller'),
+        rootc           = require('../controllers/root.server.controller'),
+        rootController  = new rootc(app.get('properties')),
+        loginController = new login(app.get('properties'));
 
-    app.get('/', loginController.render);
+    app.get('/', rootController.render);
 
     app.post('/login',loginController.login);
 
-    //define other routes here for restFul endpoints.
+    app.post('/logout',rootController.logout);
 };

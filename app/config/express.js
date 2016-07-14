@@ -36,8 +36,10 @@ module.exports = function(properties) {
     const MongoStore = require('connect-mongo')(session);
     app.use(session({
         secret: credentials.cookieSecretValue,
+        cookie: {secure:true},
         saveUninitialized: false, // don't create session until something stored
         resave: false, //don't save session if unmodified
+        maxAge: new Date(Date.now()+3600000),//one hour
         store: new MongoStore({ url: properties.mongoCredentials.connectionString })
     }));
 

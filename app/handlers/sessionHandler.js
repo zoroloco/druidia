@@ -12,9 +12,6 @@ var log    = require(pathUtil.join(__dirname,'../lib/logger.js'));
     //req.logout();
 
     var sessionName = req.session.name;
-    req.session.destroy(function() {
-      log.info(sessionName+" has been destroyed.");
-    });
 
     req.session.userName       = req.body.username;
     req.session.domain         = properties.title;

@@ -10,12 +10,7 @@ function LoginController(properties){
   }
 
   var self = this;
-  this._properties = properties;
-
-  LoginController.prototype.render = function(req,res){
-    log.info("Default page requested.");
-    res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
-  }
+  this._properties = properties;  
 
   LoginController.prototype.login = function(req,res){
     log.info("Attempting to authenticate login: "+JSON.stringify(req.body));
