@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/src/druidia/scripts/shell/druidia-run.sh
+ExecStart=/usr/local/src/druidia/app/scripts/shell/druidia-run.sh
 Restart=on-abort
 
 
