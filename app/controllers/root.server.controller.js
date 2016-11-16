@@ -16,8 +16,7 @@ function RootController(properties){
   RootController.prototype.render = function(req,res){
     log.info("root page requested.");
     //log.info("Found following session open on client machine: "+req.sessionID);
-
-    log.info("Routing "+req.session.userName+" to index.");
+    //log.info("Routing "+req.session.userName+" to index.");
     res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
     /*
     if(!_.isEmpty(req.sessionID)){
