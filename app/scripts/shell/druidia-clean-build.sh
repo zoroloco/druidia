@@ -24,18 +24,18 @@ sudo chown kcenturion $SRC_DIR/public/libs
 bower install --allow-root
 
 echo "making scripts executable..."
-sudo chmod +x $SRC_DIR/scripts/shell/druidia-run.sh
-sudo chmod +x $SRC_DIR/scripts/shell/druidia-update.sh
+sudo chmod +x $SRC_DIR/app/scripts/shell/druidia-run.sh
+sudo chmod +x $SRC_DIR/app/scripts/shell/druidia-update.sh
 
 echo "moving and updating startup daemon script..."
 #sudo rm -rf /usr/lib/systemd/system/druidia.service
-sudo chmod +x $SRC_DIR/scripts/shell/druidia.service
-sudo cp $SRC_DIR/scripts/shell/druidia.service /usr/lib/systemd/system/
+sudo chmod +x $SRC_DIR/app/scripts/shell/druidia.service
+sudo cp $SRC_DIR/app/scripts/shell/druidia.service /usr/lib/systemd/system/
 cd /etc/systemd/system
 sudo ln -s /usr/lib/systemd/system/druidia.service ./druidia.service
 sudo systemctl daemon-reload
 
 echo "Now running server..."
-sudo chmod +x $SRC_DIR/scripts/shell/druidia-run.sh
+sudo chmod +x $SRC_DIR/app/scripts/shell/druidia-run.sh
 sudo systemctl start druidia.service
 #sudo $SRC_DIR/scripts/shell/druidia-run.sh
