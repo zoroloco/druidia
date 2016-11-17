@@ -4,8 +4,8 @@ module.exports = function(app) {
 
     var login           = require('../controllers/login.server.controller'),
         rootc           = require('../controllers/root.server.controller'),
-        rootController  = new rootc(app.get('properties')),
-        loginController = new login(app.get('properties'));
+        rootController  = new rootc(),
+        loginController = new login();
 
     app.get('/', rootController.render);
 

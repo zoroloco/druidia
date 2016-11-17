@@ -1,20 +1,22 @@
 //This is my express wrapper object where all the config for the server takes place.
 
-const express        = require('express'),
-      pathUtil       = require('path')
-      bodyParser     = require('body-parser');
-      methodOverride = require('method-override');
-      mongoose       = require('mongoose'),
+const express        = require('express');
+var   pathUtil       = require('path'),
+      bodyParser     = require('body-parser'),
+      methodOverride = require('method-override'),
       fs             = require('fs'),
-      credentials    = require('../security/credentials.js');
+      credentials    = require(pathUtil.join(__dirname,'../security/credentials.js')),
+      conf           = require(pathUtil.join(__dirname,'./conf.json')),
+      log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
-module.exports = function(properties) {
+module.exports = function() {
     var app = express();
-    app.set('port', process.env.PORT || properties.port);
+    log.info("Setting default and config values for express app.");
+    app.set('port', process.env.PORT || conf.port);
     app.set('views',pathUtil.join(__dirname,'../../public/views'));
     app.set('view engine', 'jade');
-    app.set('properties', properties);
-    app.set('title', properties.title);
+    app.set('properties', conf);
+    app.set('title', conf.title);
 
     //CONFIGURE SSL
     app.set('httpsOptions',
@@ -22,14 +24,6 @@ module.exports = function(properties) {
         key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
         cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
     });
-
-    //CONFIGURE MONGO
-    var opts = {
-        server: {
-           socketOptions: { keepAlive: 1 }
-        }
-    };
-    mongoose.connect(properties.mongoCredentials.connectionString,opts);
 
     //CONFIGURE SESSION STORE
     const session    = require('express-session');
@@ -40,8 +34,9 @@ module.exports = function(properties) {
         saveUninitialized: false, // don't create session until something stored
         resave: false, //don't save session if unmodified
         maxAge: new Date(Date.now()+3600000),//one hour
-        store: new MongoStore({ url: properties.mongoCredentials.connectionString })
+        store: new MongoStore({ url: conf.mongo.connectionString })
     }));
+    log.info("Defined mongo store with credentials.");
 
     app.use(require('cookie-parser')(credentials.cookieSecretValue));
 
@@ -60,17 +55,19 @@ module.exports = function(properties) {
 
     // set the static files location /public/img will be /img for users
     app.use(express.static(pathUtil.join(__dirname,'../../public')));
+    log.info("Setting static file directory.");
 
     require('../routes/index.server.routes.js')(app);
-
+    log.info("Defining routing file.");
     //error route middleware must go AFTER our own routes.
 
     //custom 404 page
+    log.info("Defining 404 status page.");
     app.use(function(req,res){
       res.status(404);
       res.render(pathUtil.join(__dirname,'../../public/views/errors/404.jade'), {
           title : "The page you were looking for could not be found.",
-          message : properties.messages.notFoundMessage
+          message : conf.messages.notFoundMessage
         });
     });
 

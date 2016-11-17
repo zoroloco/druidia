@@ -1,6 +1,7 @@
-var log    = require(pathUtil.join(__dirname,'../lib/logger.js'));
+var log    = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    conf   = require(pathUtil.join(__dirname,'../config/conf.json'));
 
-  function createSession(req,properties){
+  function createSession(req){
     log.info("Creating session.");
 
     /* While it might look like we are dealing a JavaScript object, it is not completely true;
@@ -14,7 +15,7 @@ var log    = require(pathUtil.join(__dirname,'../lib/logger.js'));
     var sessionName = req.session.name;
 
     req.session.userName       = req.body.username;
-    req.session.domain         = properties.title;
+    req.session.domain         = conf.title;
   }
 
 exports.createSession = createSession;

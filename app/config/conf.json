@@ -12,8 +12,9 @@
     "port" : ""
   },
 
-  "mongoCredentials" : {
-    "connectionString" : "mongodb://localhost/druidia"
+  "mongo" : {
+    "connectionString" : "mongodb://localhost/druidia",
+    "keepAlive" : 300000
   },
 
   "messages" : {

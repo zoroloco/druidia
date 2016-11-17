@@ -1,0 +1,4 @@
+Table = Collection
+Row   = Document
+Column= Field
+Join  = Embedded Documents

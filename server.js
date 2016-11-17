@@ -3,26 +3,29 @@ var pathUtil   = require('path'),
     _          = require('underscore'),
     log        = require(pathUtil.join(__dirname,'./app/lib/logger.js')),
     express    = require(pathUtil.join(__dirname,'./app/config/express')),
-    https      = require('https');
+    https      = require('https'),
+    mongoose   = require('mongoose'),
+    mongoloid  = require(pathUtil.join(__dirname,'./app/mongoose/mongoloid.js')),
+    conf       = require(pathUtil.join(__dirname,'./app/config/conf.json'));
 
 module.exports = Server;
 
-function Server(conf){
+function Server(){
 
-  log.init(conf.logger);
+  log.init();
+  mongoloid.init();
 
   if(this instanceof Server === false){
     throw new TypeError("Classes can't be function-called.");
   }
 
   var self      = this;
-  this._conf    = conf;
-  this._app     = express(conf);
+  this._app     = express();
   process.title = conf.title;
 
   try{
-    if(!_.isEmpty(this._conf)){
-      log.info("Using config file:\n"+JSON.stringify(this._conf));
+    if(!_.isEmpty(conf)){
+      log.info("Using config file:\n"+JSON.stringify(conf));
     }
     else{
       log.warn("No config file defined. Bailing.");
@@ -63,6 +66,11 @@ function Server(conf){
   //members
   Server.prototype.shutdown = function shutdown(INTERRUPT){
     log.warn("Starting clean shutdown.");
+
+    mongoose.connection.close(function () {
+        log.info('Mongoose default connection disconnected through app termination');
+    });
+
     if(!_.isEmpty(self._server)){
       self._server.close();
     }
