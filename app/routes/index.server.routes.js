@@ -10,6 +10,6 @@ module.exports = function(app) {
     app.get('/', rootController.render);
 
     app.post('/login',loginController.login);
-
+    app.post('/addUser',loginController.addUser);
     app.post('/logout',rootController.logout);
 };
