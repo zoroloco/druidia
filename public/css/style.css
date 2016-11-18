@@ -1,7 +1,151 @@
-#login {
-  background-color: cyan;
+<style type="text/css">
+
+#druidiaForm{
+width: 100%;
+font-size: 16px; /* Primary font size of form. Contained elements' font size are all relative to this setting */
 }
 
-#addUser {
-  background-color: gray;
+
+#druidiaForm input, #druidiaForm textarea{
+width: 150px;
+border-radius: 5px;
+border: 1px solid gray;
+font: normal 1.5em auto; /* 24px, or 16px x 1.5 */
+padding: 0.1166666666666667em; /* 10px, or 24px x 0.4166666666666667 */
+box-shadow: 0 0 10px gray inset;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
 }
+
+#druidiaForm textarea{
+resize:vertical; /* allow vertical resize of textarea */
+height: 200px;
+}
+
+
+#druidiaForm input:focus, #druidiaForm textarea:focus{
+box-shadow: 0 0 10px green inset;
+}
+
+
+#druidiaForm input[type="radio"], #druidiaForm input[type="checkbox"]{
+padding: 0;
+width: auto;
+height: auto;
+border-radius: 0;
+}
+
+#druidiaForm select{
+width: 80%;
+font-size: 1.5em;
+border: 2px solid #eee;
+}
+
+#druidiaForm .formcolumn{ /* column div inside form */
+width: 49%;
+float: left;
+}
+
+#druidiaForm .formcolumn:first-of-type{
+margin-right: 2%; /* 2% margin after first column */
+}
+
+#druidiaForm .formcolumn label, #druidiaForm .formcolumn fieldset{
+font: bold 0.8em Verdana; /* font size is 12.8px, or 16 x 0.8 */
+text-transform: uppercase;
+display: block;
+margin-top: 2em;
+margin-bottom: 3px;
+}
+
+#druidiaForm fieldset{
+width: 98%;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+#druidiaForm .formcolumn label:first-child, #druidiaForm .formcolumn fieldset:first-child{
+margin-top: 0; /* first label or fieldset within each column should not no top margin */
+}
+
+#druidiaForm fieldset ul{
+list-type: none;
+margin: 0;
+padding: 0;
+}
+
+#druidiaForm fieldset ul li{
+display: inline-block;
+margin-bottom: 5px;
+margin-right: 1em;
+}
+
+#druidiaForm div.buttons{
+clear: both;
+text-align: center;
+float: left;
+}
+
+#druidiaForm input.button{
+margin-top: 1.5EM;
+width: 150px;
+box-shadow: 0 0 10px gray;
+text-transform: uppercase;
+cursor: pointer;
+min-width: 100px;
+max-width: 600px;
+color: white;
+font-weight: bold;
+letter-spacing: 5px;
+text-shadow: 0 -2px 1px #8a8a8a;
+background: rgb(169,3,41);
+background: -moz-linear-gradient(top,  rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,3,41,1)), color-stop(44%,rgba(143,2,34,1)), color-stop(100%,rgba(109,0,25,1)));
+background: -webkit-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+background: -o-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+background: -ms-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+background: linear-gradient(to bottom,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 );
+}
+
+#druidiaForm input.button:active{
+text-shadow: 0 0 1px #8a8a8a;
+background: rgb(109,0,25);
+background: -moz-linear-gradient(top,  rgba(109,0,25,1) 0%, rgba(143,2,34,1) 56%, rgba(169,3,41,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(109,0,25,1)), color-stop(56%,rgba(143,2,34,1)), color-stop(100%,rgba(169,3,41,1)));
+background: -webkit-linear-gradient(top,  rgba(109,0,25,1) 0%,rgba(143,2,34,1) 56%,rgba(169,3,41,1) 100%);
+background: -o-linear-gradient(top,  rgba(109,0,25,1) 0%,rgba(143,2,34,1) 56%,rgba(169,3,41,1) 100%);
+background: -ms-linear-gradient(top,  rgba(109,0,25,1) 0%,rgba(143,2,34,1) 56%,rgba(169,3,41,1) 100%);
+background: linear-gradient(to bottom,  rgba(109,0,25,1) 0%,rgba(143,2,34,1) 56%,rgba(169,3,41,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#a90329',GradientType=0 );
+}
+
+@media screen and (max-width: 480px){ /* responsive form settings, when window width is 480px or less */
+
+	#druidiaForm{
+	font-size: 14px; /* decrease form font size */
+	}
+
+	#druidiaForm .formcolumn{
+	width: 100%;
+	float: none;
+	}
+
+	#druidiaForm .formcolumn:first-of-type{
+	margin-right: 0; /* remove right margin from first form column */
+	}
+
+	#druidiaForm .formcolumn:nth-of-type(2){
+	padding-top: 2em; /* add padding to top of 2nd form column, so there is a gap between the 1st and 2nd column */
+	}
+
+	#druidiaForm select{
+	width: 98%;
+	}
+
+}
+
+
+</style>
