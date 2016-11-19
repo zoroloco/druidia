@@ -1,4 +1,5 @@
 var mongoose   = require('mongoose'),
+    _          = require('underscore'),
     conf       = require(pathUtil.join(__dirname,'../config/conf.json')),
     log        = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
@@ -51,6 +52,50 @@ var self = module.exports = {
     myUser.save(function(err){
       if(err){
         log.error("Error saving:"+err);
+      }
+      else{
+        log.info("Successfully saved user:"+user.username);
+      }
+    });
+  },
+
+  findUser: function findUser(user,cb){
+    log.info("Finding user:"+JSON.stringify(user));
+
+    userModel.findOne({"username":user.username},function(err,foundUser){
+      if(err){
+        log.error(err);
+        cb(null);
+      }
+      else{
+        if(!_.isEmpty(foundUser)){
+          log.info("Found user:"+foundUser.username);
+          cb(foundUser);
+        }
+        else{
+          log.info("Did not find user:"+user.username);
+          cb(null);
+        }
+      }
+    });
+  },
+
+  validateUser: function validateUser(user,cb){
+    log.info("Validating user:"+JSON.stringify(user));
+    self.findUser(user,function(foundUser){
+      if(!_.isEmpty(foundUser)){
+        if(_.isEqual(user.password,foundUser.password)){
+          log.info("Validation successfull for user:"+user.username);
+          cb(true);
+        }
+        else{
+          log.error("Incorrect password for user:"+user.username);
+          cb(false);
+        }
+      }
+      else{
+        log.info("Did not find user:"+user.username);
+        cb(false);
       }
     });
   }

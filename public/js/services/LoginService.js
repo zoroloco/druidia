@@ -1,8 +1,18 @@
-function LoginService($http){
+function LoginService($http,$log){
     var self = this;
+    var msg  = null;
 
-    self.processLogin = function(creds){
-      $http.post('login',creds);
+    self.processLogin = function(creds,cb){
+      $http.post('login',creds).then(
+       function(response){
+         $log.log("Login successful.");
+         cb(response.data);
+       },
+       function(response){
+         $log.log("Login failed.");
+         cb(response.data);
+       }
+    );
     }
 
     self.processCreateUser = function(newCreds){
@@ -11,4 +21,4 @@ function LoginService($http){
 }
 
 angular.module('login-module')
-  .service('LoginService',['$http',LoginService]);
+  .service('LoginService',['$http','$log',LoginService]);

@@ -2,6 +2,8 @@ angular.module('login-module', ['ngMaterial']).
   controller('LoginController',['$log','LoginService',function($log,loginService) {
     var self = this;
 
+    $log.log("Instantiated login controller.");
+
     this.creds = {
       "username" : "",
       "password" : ""
@@ -12,9 +14,13 @@ angular.module('login-module', ['ngMaterial']).
       "password" : ""
     }
 
+    this.loginMsg = "";
+
     self.onLogon = function(){
       $log.log("User "+self.creds.username+" is attempting to login.");
-      loginService.processLogin(self.creds);
+      loginService.processLogin(self.creds,function(msg){
+        self.loginMsg = msg;
+      });
     }
 
     self.onCreateUser = function(){

@@ -20,10 +20,12 @@
     <script src="libs/angular-material/angular-material.min.js"></script>
 
     <!-- ANGULAR CUSTOM -->
+    <script src="js/controllers/IndexController.js"></script>
+    <script src="js/services/IndexService.js"></script>
     <script src="js/controllers/LoginController.js"></script>
     <script src="js/services/LoginService.js"></script>
-    <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/appRoutes.js"></script>
 </head>
 
 <body ng-app="druidia-web" ng-controller="LoginController as ctrl">
@@ -32,18 +34,26 @@
     <div align="center">
       <input type="text" id="username" placeholder="username" ng-model="ctrl.creds.username"/>
       <input type="password" id="password" placeholder="password" ng-model="ctrl.creds.password"/>
-      <input class="button" type="submit" value="Log In"/>
+      <input class="btn" type="submit" value="Log In"/>
+    </div>
+  </form>
+
+  <div>
+    <span ng-bind="ctrl.loginMsg"></span>
+  </div>
+
+  <form id="druidiaForm" ng-submit="ctrl.onCreateUser()">
+    <div align="center">
+      <input type="text" id="username" placeholder="username" ng-model="ctrl.newCreds.username"/>
+      <input type="password" id="password" placeholder="password" ng-model="ctrl.newCreds.password"/>
+      <input class="btn" type="submit" value="Sign Up"/>
     </div>
   </form>
 
 <!--
-  <div id="addUser">
-    <form ng-submit="ctrl.onCreateUser()">
-        Username<input type="text" ng-model="ctrl.newCreds.username">
-        Password<input type="password" ng-model="ctrl.newCreds.password">
-        <input type="submit" value="Add User">
-    </form>
-  </div>
+  <p><a href = "#index">to index</a></p>
+  <div ng-view></div>
 -->
+
 </body>
 </html>
