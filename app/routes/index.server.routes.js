@@ -1,12 +1,16 @@
-var log             = require(pathUtil.join(__dirname,'../lib/logger.js')),
-    loginController = require(pathUtil.join(__dirname,'../controllers/login.server.controller.js')),
-    rootController  = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js'));
+var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
+    rootController     = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js'));
 
 module.exports = function(app) {
+  app.get('/',securityController.renderLogin);
 
-    app.get('/', rootController.render);
+  app.post('/login',securityController.onLogin);
 
-    app.post('/login',loginController.login);
-    app.post('/addUser',loginController.addUser);
-    app.post('/logout',rootController.logout);
+  app.post('/addUser',securityController.onAddUser);
+
+  app.post('/logout',securityController.onLogout);
+
+  app.get('/secure',securityController.authenticate);
+
 };

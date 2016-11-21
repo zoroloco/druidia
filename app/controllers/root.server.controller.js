@@ -3,36 +3,13 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
 
-  exports.render = function(req,res){
+  exports.renderHome = function(err,req,res,next){
+    if(err){
+      log.error("Error routed to me:"+err);
+    }
+
     log.info("root page requested.");
     //log.info("Found following session open on client machine: "+req.sessionID);
     //log.info("Routing "+req.session.userName+" to index.");
-    res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
-
-    /*
-    if(!_.isEmpty(req.sessionID)){
-      log.info("Routing "+req.session.userName+" to index.");
-      res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
-    }
-    else{
-      log.info("Routing to login page.");
-      res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
-    }
-    */
-  };
-
-  exports.logout = function(req,res){
-    log.info("logout initiated.");
-    var sessionID = req.sessionID;
-    if(!_.isEmpty(sessionID)){
-      log.info("destroying session "+sessionID);
-      req.session.destroy(function(err) {
-        if(err){
-          log.error("Error encountered while destroying session ID:"+sessionID);
-        }
-        else{
-          log.info("Successfully destroyed session ID:"+sessionID);
-        }
-      })
-    }
+    res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
   };
