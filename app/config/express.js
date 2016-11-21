@@ -61,6 +61,14 @@ module.exports = function() {
     log.info("Defining routing file.");
     //error route middleware must go AFTER our own routes.
 
+    //error handlers should be defined last.
+    /*
+    app.use(function(err, req, res, next) {
+      res.status(401);
+      res.render('error', { error: err })
+    }
+    */
+
     //custom 404 page
     log.info("Defining 404 status page.");
     app.use(function(req,res){

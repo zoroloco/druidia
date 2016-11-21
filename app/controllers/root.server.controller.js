@@ -2,17 +2,8 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
-module.exports = RootController;
 
-function RootController(){
-
-  if(this instanceof RootController === false){
-    throw new TypeError("Classes can't be function-called.");
-  }
-
-  var self           = this;
-
-  RootController.prototype.render = function(req,res){
+  exports.render = function(req,res){
     log.info("root page requested.");
     //log.info("Found following session open on client machine: "+req.sessionID);
     //log.info("Routing "+req.session.userName+" to index.");
@@ -28,9 +19,9 @@ function RootController(){
       res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
     }
     */
-  }
+  };
 
-  RootController.prototype.logout = function(req,res){
+  exports.logout = function(req,res){
     log.info("logout initiated.");
     var sessionID = req.sessionID;
     if(!_.isEmpty(sessionID)){
@@ -44,5 +35,4 @@ function RootController(){
         }
       })
     }
-  }
-}
+  };

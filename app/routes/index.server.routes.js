@@ -1,11 +1,8 @@
-var log = require(pathUtil.join(__dirname,'../lib/logger.js'));
+var log             = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    loginController = require(pathUtil.join(__dirname,'../controllers/login.server.controller.js')),
+    rootController  = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js'));
 
 module.exports = function(app) {
-
-    var login           = require('../controllers/login.server.controller'),
-        rootc           = require('../controllers/root.server.controller'),
-        rootController  = new rootc(),
-        loginController = new login();
 
     app.get('/', rootController.render);
 

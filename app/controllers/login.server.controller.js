@@ -3,17 +3,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
-module.exports = LoginController;
-
-function LoginController(){
-
-  if(this instanceof LoginController === false){
-    throw new TypeError("Classes can't be function-called.");
-  }
-
-  var self = this;
-
-  LoginController.prototype.login = function(req,res){
+  exports.login = function(req,res){
     log.info("Attempting to authenticate login: "+JSON.stringify(req.body));
     //res.cookie(properties.title,req.body.username, {signed: true, maxAge: 9999, httpOnly: true, secure: true});
     mongoloid.validateUser(req.body,function(validationResult){
@@ -23,12 +13,15 @@ function LoginController(){
       }
       else{
         log.info("Sending failed login response message for user:"+req.body.username);
-        res.send("Login failed!");
+        //res.send("Login failed!");//TODO: send error message back.
+//TODO: fix this....
+        res.status(401);
+        res.render('error', { error: "Login Failed." });
       }
     });
-  }
+  };
 
-  LoginController.prototype.addUser = function(req,res){
+  exports.addUser = function(req,res){
     log.info("Creating user:"+JSON.stringify(req.body));
 
     mongoloid.findUser(req.body,function(foundUser){
@@ -44,5 +37,4 @@ function LoginController(){
         mongoloid.saveUser(user);
       }
     });
-  }
-}
+  };
