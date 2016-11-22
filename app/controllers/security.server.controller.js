@@ -3,18 +3,25 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
-  exports.authenticate = function(err,req,res,next){
+  exports.authenticate = function(req,res,next){
     log.info("Attempting to verify authentication of:"+req.session.username);
     if(req.session.authenticated){
-      next();
+      log.info("User session exists!");
+      return next();
     }
     else{
-      next("Authentication failed!");
+      log.warn("User session does not exist!");
+      var err = new Error();
+      err.status = 401;
+      return next(err);
     }
   }
 
   exports.renderLogin = function(err,req,res,next){
     log.info("Routing to login page.");
+    if(err.status != 200){
+      log.error("renderlogin came from error:"+err.status);
+    }
     res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
   };
 
