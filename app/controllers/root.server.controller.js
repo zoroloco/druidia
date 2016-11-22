@@ -1,12 +1,8 @@
 var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
-    _              = require('underscore'),
-    sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
+    _              = require('underscore');
 
-
-  exports.renderHome = function(req,res,next){
-    
-    log.info("root page requested.");
-    //log.info("Found following session open on client machine: "+req.sessionID);
-    //log.info("Routing "+req.session.userName+" to index.");
+  exports.renderRoot = function(req,res,next){
+    log.info("Root page requested.");
+    //res.redirect('/views/index.html');
     res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
   };

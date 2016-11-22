@@ -8,13 +8,18 @@ angular.module('appRoutes', []).
     config(['$routeProvider', '$locationProvider',
        function($routeProvider, $locationProvider) {
 
-        $routeProvider.when('/index', {
-              templateUrl : 'views/index.html',
+        $routeProvider.when('/', {
+              templateUrl : '/views/index.html',
               controller  : 'IndexController'
-          }).
+          }).when('/login', {
+                templateUrl : '/views/login.html',
+                controller  : 'LoginController'
+            }).when('/home', {
+                  templateUrl : '/views/home.html'
+              }).
           otherwise({
-            redirectTo: 'views/login.html',
-            controller  : 'LoginController'
+            redirectTo: '/views/index.html',
+            controller  : 'IndexController'
           });
 
         $locationProvider.html5Mode(true);

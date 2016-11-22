@@ -6,13 +6,13 @@ function LoginService($http,$log){
       $http.post('login',creds).then(
        function(response){
          $log.log("Login successful.");
-         cb(response.data);
+         cb(true,response.data);
        },
        function(response){
          $log.log("Login failed.");
-         cb(response.data);
+         cb(false,response.data);
        }
-    );
+     );
     }
 
     self.processCreateUser = function(newCreds){

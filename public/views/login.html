@@ -1,35 +1,4 @@
-<!-- public/login.html -->
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <base href="/">
-
-    <title>druidia.net - login</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
-    <link rel="stylesheet" href="libs/angular-material/angular-material.css">
-
-    <!-- JS -->
-    <script src="libs/angular/angular.js"></script>
-    <script src="libs/angular-route/angular-route.min.js"></script>
-    <script src="libs/angular-aria/angular-aria.min.js"></script>
-    <script src="libs/angular-animate/angular-animate.min.js"></script>
-    <script src="libs/angular-material/angular-material.min.js"></script>
-
-    <!-- ANGULAR CUSTOM -->
-    <script src="js/controllers/IndexController.js"></script>
-    <script src="js/services/IndexService.js"></script>
-    <script src="js/controllers/LoginController.js"></script>
-    <script src="js/services/LoginService.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/appRoutes.js"></script>
-</head>
-
-<body ng-app="druidia-web" ng-controller="LoginController as ctrl">
-
+<div ng-controller="LoginController as ctrl">
   <form id="druidiaForm" ng-submit="ctrl.onLogon()">
     <div align="center">
       <input type="text" id="username" placeholder="username" ng-model="ctrl.creds.username"/>
@@ -41,19 +10,4 @@
   <div>
     <span ng-bind="ctrl.loginMsg"></span>
   </div>
-
-  <form id="druidiaForm" ng-submit="ctrl.onCreateUser()">
-    <div align="center">
-      <input type="text" id="username" placeholder="username" ng-model="ctrl.newCreds.username"/>
-      <input type="password" id="password" placeholder="password" ng-model="ctrl.newCreds.password"/>
-      <input class="btn" type="submit" value="Sign Up"/>
-    </div>
-  </form>
-
-<!--
-  <p><a href = "#index">to index</a></p>
-  <div ng-view></div>
--->
-
-</body>
-</html>
+</div>

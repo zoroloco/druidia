@@ -4,38 +4,32 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
   exports.authenticate = function(req,res,next){
-    log.info("Attempting to verify authentication of:"+req.session.username);
+    log.info("AUTHENTICATING:"+req.session.username);
     if(req.session.authenticated){
       log.info("User session exists!");
-      return next();
+      next();//continue the route.
+      //res.sendFile(pathUtil.join(__dirname,'../../public/views/home.html'));
     }
     else{
-      log.warn("User session does not exist!");
-      var err = new Error();
-      err.status = 401;
-      return next(err);
+      res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
     }
   }
 
-  exports.renderLogin = function(err,req,res,next){
+  exports.renderLogin = function(req,res,next){
     log.info("Routing to login page.");
-    if(err.status != 200){
-      log.error("renderlogin came from error:"+err.status);
-    }
     res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
   };
 
-  exports.onLogin = function(err,req,res,next){
-    log.info("Attempting to authenticate login: "+JSON.stringify(req.body));
+  exports.onLogin = function(req,res,next){
+    log.info("onLogin: "+JSON.stringify(req.body));
     //res.cookie(properties.title,req.body.username, {signed: true, maxAge: 9999, httpOnly: true, secure: true});
     mongoloid.validateUser(req.body,function(validationResult){
       if(true === validationResult){
         sessionHandler.createSession(req);
-        next();
+        res.sendStatus(200);
       }
       else{
         log.info("Sending failed login response message for user:"+req.body.username);
-        next("Login Auth failed!");
         res.sendStatus(401);
       }
     });
@@ -52,6 +46,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
         }
         else{
           log.info("Successfully destroyed session ID:"+sessionID);
+          res.sendStatus(200);
         }
       })
     }

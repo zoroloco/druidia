@@ -60,27 +60,5 @@ module.exports = function() {
     log.info("Defining routing file.");
     require('../routes/index.server.routes.js')(app);
 
-
-    //error route middleware must go AFTER our own routes.
-
-    //error handlers should be defined last.
-    /*
-    app.use(function(err, req, res, next) {
-      res.status(401);
-      res.render('error', { error: err })
-    }
-    */
-
-    //custom 404 page
-    /*
-    log.info("Defining 404 status page.");
-    app.use(function(err,req,res,next){
-      res.status(404);
-      res.render(pathUtil.join(__dirname,'../../public/views/errors/404.jade'), {
-          title : "The page you were looking for could not be found.",
-          message : conf.messages.notFoundMessage
-        });
-    });
-    */
     return app;
 };

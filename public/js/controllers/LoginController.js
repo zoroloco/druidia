@@ -1,5 +1,5 @@
 angular.module('login-module', ['ngMaterial']).
-  controller('LoginController',['$log','LoginService',function($log,loginService) {
+  controller('LoginController',['$log','$location','LoginService',function($log,$location,loginService) {
     var self = this;
 
     $log.log("Instantiated login controller.");
@@ -18,8 +18,14 @@ angular.module('login-module', ['ngMaterial']).
 
     self.onLogon = function(){
       $log.log("User "+self.creds.username+" is attempting to login.");
-      loginService.processLogin(self.creds,function(msg){
-        self.loginMsg = msg;
+      loginService.processLogin(self.creds,function(validated,response){
+        if(validated === true){
+          $log.log("/login post returned true. Validated successful.");
+          $location.url('/home');
+        }
+
+        //self.loginMsg = response;
+
       });
     }
 
