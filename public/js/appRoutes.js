@@ -15,8 +15,8 @@ angular.module('appRoutes', []).
                       }).when('/test', {
                         templateUrl : '/views/secure/test.html'
                       }).otherwise({
-                        redirectTo: '/views/secure/index.html',
-                        controller  : 'IndexController'
+                        redirectTo: '/views/login.html',
+                        controller  : 'LoginController'
                       });
 
         $locationProvider.html5Mode(true);

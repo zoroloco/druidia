@@ -31,12 +31,14 @@
   </head>
 
   <body ng-app="druidia-web" ng-controller="LoginController as ctrl">
-    <form id="druidiaForm" ng-submit="ctrl.onLogon()">
+    <form id="druidiaForm">
       <div align="center">
-        <input type="text" id="username" placeholder="username" ng-model="ctrl.creds.username"/>
-        <input type="password" id="password" placeholder="password" ng-model="ctrl.creds.password"/>
-        <input class="btn" type="submit" value="Log In"/>
-        <span ng-bind="ctrl.loginMsg"></span>
+        <input type="text" id="username" placeholder="username" ng-model="ctrl.creds.username"/><br/>
+        <input type="password" id="password" placeholder="password" ng-model="ctrl.creds.password"/></br>
+        <input class="btn" type="submit" value="Log In" ng-click="ctrl.onLogon()"/><br/>
+        <span ng-bind="ctrl.loginMsg"></span></br>
+        <input class="btn" type="submit" value="Create" ng-click="ctrl.onCreateUser()"/><br/>
+        <span ng-bind="ctrl.addUserMsg"></span>
       </div>
     </form>
   </body>

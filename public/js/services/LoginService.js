@@ -15,9 +15,19 @@ function LoginService($http,$log){
      );
     }
 
-    self.processCreateUser = function(newCreds){
-      $http.post('addUser',newCreds);
-    }
+    self.processCreateUser = function(newCreds,cb){
+      $http.post('addUser',newCreds).then(
+        function(response){//first method is always the success handler (response of 200)
+          $log.log("Create user successful.");
+          cb(response.data);
+      },
+      function(response){//second method is the error handler.
+          $log.log("Create user failed.");
+          cb(response.data);
+      }
+    );
+  }
+
 }
 
 angular.module('login-module')

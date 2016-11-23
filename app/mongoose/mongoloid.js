@@ -46,15 +46,17 @@ var self = module.exports = {
       userModel = mongoose.model('Users',UserSchema);
   },
 
-  saveUser: function saveUser(user){
+  saveUser: function saveUser(user,cb){
     log.info("Creating user from object:"+JSON.stringify(user));
     var myUser = new userModel(user);
     myUser.save(function(err){
       if(err){
         log.error("Error saving:"+err);
+        cb(false);
       }
       else{
         log.info("Successfully saved user:"+user.username);
+        cb(true);
       }
     });
   },

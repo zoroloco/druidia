@@ -10,6 +10,9 @@ module.exports = function(app) {
   //login added first because we always want to be able to process a login post.
   app.post('/login',securityController.onLogin);
 
+  //add user is public. does not go through authenticate middleware.
+  app.post('/addUser',securityController.onAddUser);
+
   //app.get('/index',rootController.renderRoot);
 
   //add middleware before our route handlers so it will be invoked first.
@@ -26,8 +29,6 @@ module.exports = function(app) {
   //app.get('/home',homeController.renderHome);
 
   app.post('/logoff',securityController.onLogout);
-
-  app.post('/addUser',securityController.onAddUser);
 
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.

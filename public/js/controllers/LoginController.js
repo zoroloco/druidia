@@ -9,11 +9,6 @@ angular.module('login-module', ['ngMaterial']).
       "password" : ""
     };
 
-    this.newCreds = {
-      "username" : "",
-      "password" : ""
-    }
-
     this.loginMsg = "";
 
     self.onLogon = function(){
@@ -25,13 +20,18 @@ angular.module('login-module', ['ngMaterial']).
           //$location.path('home');
           $window.location.href = "/home";//reload entire page.
         }
-        self.loginMsg = response;
+        else{
+          self.loginMsg = response;
+        }
       });
     }
 
     self.onCreateUser = function(){
-      $log.log("User "+self.newCreds.username+" is being added.");
-      loginService.processCreateUser(self.newCreds);
+      $log.log("User "+self.creds.username+" is being added.");
+      loginService.processCreateUser(self.creds,function(err){
+        $log.log("Received error when creating user:"+err);
+        self.addUserMsg = err;
+      });
     }
 
   }]);

@@ -11,6 +11,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
       //res.sendFile(pathUtil.join(__dirname,'../../public/views/home.html'));
     }
     else{
+      log.error("User session does not exist. Rerouting to login.");
       res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
     }
   }
@@ -58,7 +59,8 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
 
     mongoloid.findUser(req.body,function(foundUser){
       if(!_.isEmpty(foundUser)){//prevent duplicate users
-        log.warn("User "+req.body.username+" already exists.");
+        log.error("User "+req.body.username+" already exists.");
+        res.status(401).send("User "+req.body.username+" not available.");
       }
       else{//create the new user
         var user = {
@@ -66,7 +68,14 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
           "password" : req.body.password,
           "role"     : "admin"
         }
-        mongoloid.saveUser(user);
+        mongoloid.saveUser(user,function(result){
+          if(result === true){
+            res.status(200).send("User "+req.body.username+" created successfully.");
+          }
+          else{
+            res.status(401).send("User "+req.body.username+" save failed.");
+          }
+        });
       }
     });
   };
