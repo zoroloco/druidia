@@ -4,15 +4,14 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
   exports.authenticate = function(req,res,next){
-    log.info("AUTHENTICATING:"+req.session.username);
+    log.info("AUTHENTICATING:"+req.session.username+" Trying to access:"+req.path);
     if(req.session.authenticated){
       log.info("User session exists!");
       next();//continue the route.
       //res.sendFile(pathUtil.join(__dirname,'../../public/views/home.html'));
     }
     else{
-      log.info("User session does not exist.");
-      res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
+      res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
     }
   }
 
@@ -31,7 +30,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
       }
       else{
         log.info("Sending failed login response message for user:"+req.body.username);
-        res.sendStatus(401);
+        res.status(401).send("Invalid Login.");
       }
     });
   };
@@ -44,6 +43,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
       req.session.destroy(function(err) {
         if(err){
           log.error("Error encountered while destroying session ID:"+sessionID);
+          next("500");
         }
         else{
           log.info("Successfully destroyed session ID:"+sessionID);

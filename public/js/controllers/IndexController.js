@@ -5,7 +5,6 @@ angular.module('index-module', ['ngMaterial']).
     $log.log("Instantiated index controller.");
 
     //by default when this controller instantiates, we want to load the login
-    $location.url('/login');
-    $log.log("Routing to /login by default.");
-
+    $log.log("Attempting to load home by default.");
+    $location.url('/home');
   }]);

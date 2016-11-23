@@ -1,5 +1,5 @@
 angular.module('login-module', ['ngMaterial']).
-  controller('LoginController',['$log','$location','LoginService',function($log,$location,loginService) {
+  controller('LoginController',['$log','$window','LoginService',function($log,$window,loginService) {
     var self = this;
 
     $log.log("Instantiated login controller.");
@@ -21,11 +21,11 @@ angular.module('login-module', ['ngMaterial']).
       loginService.processLogin(self.creds,function(validated,response){
         if(validated === true){
           $log.log("/login post returned true. Validated successful.");
-          $location.url('/home');
+          //$location.url('/home');
+          //$location.path('home');
+          $window.location.href = "/home";//reload entire page.
         }
-
-        //self.loginMsg = response;
-
+        self.loginMsg = response;
       });
     }
 

@@ -3,5 +3,5 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
 
   exports.renderHome = function(req,res,next){
     log.info("Home page requested.");
-    res.sendFile(pathUtil.join(__dirname,'../../public/views/home.html'));
+    res.sendFile(pathUtil.join(__dirname,'../../public/views/secure/home.html'));
   };
