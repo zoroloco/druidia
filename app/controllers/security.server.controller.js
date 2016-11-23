@@ -11,6 +11,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
       //res.sendFile(pathUtil.join(__dirname,'../../public/views/home.html'));
     }
     else{
+      log.info("User session does not exist.");
       res.sendFile(pathUtil.join(__dirname,'../../public/views/index.html'));
     }
   }

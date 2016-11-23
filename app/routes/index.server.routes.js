@@ -25,7 +25,9 @@ module.exports = function(app) {
   //this is the 'next' call after successful authentication.
   app.get('/',rootController.renderRoot);
 
-  app.get('/home',homeController.renderHome);
+  app.get('/login.html',securityController.renderLogin);
+
+  app.get('/home.html',homeController.renderHome);
 
   app.get('/logout',securityController.onLogout);
 
