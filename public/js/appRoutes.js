@@ -3,6 +3,9 @@
  *
  * When you use ngroute, you are using a single page application that
  * does not reload a page.  It just replaces content.
+ *
+ * Note: After first fetch, the next fetches are cached. Only hits server first time.
+ *
 */
 
 // public/js/appRoutes.js

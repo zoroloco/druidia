@@ -13,6 +13,7 @@ module.exports = function() {
     var app = express();
     log.info("Setting default and config values for express app.");
     app.set('port', process.env.PORT || conf.port);
+    app.set('httpPort', conf.httpPort);
     app.set('views',pathUtil.join(__dirname,'../../public/views'));
     app.set('view engine', 'jade');
     app.set('properties', conf);

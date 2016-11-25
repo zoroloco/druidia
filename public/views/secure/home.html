@@ -1,5 +1,6 @@
-<div ng-controller="CommonController as commonCtrl">
+<div ng-controller="CommonController as commonCtrl" ng-init="commonCtrl.fetchUser()">
   <form id="druidiaForm" ng-submit="commonCtrl.onLogOff()">
-      <input class="btn" type="submit" value="Log Off"/>
+     Home page for user:<span ng-bind="commonCtrl.user"></span>
+     <input class="btn" type="submit" value="Log Off"/>
   </form>
 </div>

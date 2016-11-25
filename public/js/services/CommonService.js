@@ -14,6 +14,12 @@ function CommonService($log,$http){
      );
     }
 
+    self.fetchUser = function(cb){
+      return $http.get('/common/fetchUser').then(function(response){
+        cb(response.data);
+      });
+    }
+
 }
 
 angular.module('common-module')

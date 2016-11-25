@@ -3,6 +3,22 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
+  exports.auditRequest = function(req,res,next){
+    log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip);
+    next();
+  }
+
+  exports.reRouteHttps = function(req,res,next){
+    if('https' == req.protocol){
+      //log.info("Request is secure.");
+      next();
+    }
+    else{
+      log.warn("Request not secure. Redirecting to secure site:"+req.hostname+req.url);
+      res.redirect("https://"+req.hostname+req.url);
+    }
+  }
+
   exports.authenticate = function(req,res,next){
     log.info("AUTHENTICATING:"+req.session.username+" Trying to access:"+req.path);
     if(req.session.authenticated){

@@ -2,6 +2,7 @@ var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
     conf               = require(pathUtil.join(__dirname,'../config/conf.json')),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
     rootController     = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js')),
+    commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
     homeController     = require(pathUtil.join(__dirname,'../controllers/home.server.controller.js'));
 
 module.exports = function(app) {
@@ -13,7 +14,8 @@ module.exports = function(app) {
   //add user is public. does not go through authenticate middleware.
   app.post('/addUser',securityController.onAddUser);
 
-  //app.get('/index',rootController.renderRoot);
+  //top level middleware to catch any request and log it. Will reroute to secure site if not https.
+  app.use('*',securityController.auditRequest,securityController.reRouteHttps);
 
   //add middleware before our route handlers so it will be invoked first.
   //every request will go through authenticate
@@ -29,6 +31,8 @@ module.exports = function(app) {
   //app.get('/home',homeController.renderHome);
 
   app.post('/logoff',securityController.onLogout);
+
+  app.get('/common/fetchUser',commonController.fetchUser);
 
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.

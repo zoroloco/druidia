@@ -9,7 +9,8 @@ angular.module('login-module', ['ngMaterial']).
       "password" : ""
     };
 
-    this.loginMsg = "";
+    this.loginMsg   = "";
+    this.addUserMsg = "";
 
     self.onLogon = function(){
       $log.log("User "+self.creds.username+" is attempting to login.");
