@@ -15,20 +15,19 @@ module.exports = function(app) {
   app.post('/addUser',securityController.onAddUser);
 
   //top level middleware to catch any request and log it. Will reroute to secure site if not https.
-  app.use('*',securityController.auditRequest,securityController.reRouteHttps);
+  app.use('*',securityController.auditRequest,
+              securityController.reRouteHttps,
+              securityController.authenticate);
 
   //add middleware before our route handlers so it will be invoked first.
   //every request will go through authenticate
-  app.use('/',securityController.authenticate);
+  //app.use('/',securityController.authenticate);
 
   //if authentication passed and trying to get root, then send to root.
   app.get('/',rootController.renderRoot);
 
-  //this is the 'next' call after successful authentication.
+  //called when root page first loaded.
   app.get('/home',rootController.renderRoot);
-
-  //called by indexController by default.
-  //app.get('/home',homeController.renderHome);
 
   app.post('/logoff',securityController.onLogout);
 

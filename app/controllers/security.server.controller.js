@@ -28,7 +28,10 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     }
     else{
       log.error("User session does not exist. Rerouting to login.");
-      res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
+      //res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
+      //res.redirect('/views/login.html');
+      //res.status(401).redirect('/views/login.html');//unauthorized
+      res.sendStatus(401);
     }
   }
 

@@ -9,7 +9,7 @@
 */
 
 // public/js/appRoutes.js
-angular.module('appRoutes', []).
+angular.module('route-module', []).
     config(['$routeProvider', '$locationProvider',
        function($routeProvider, $locationProvider) {
 

@@ -23,5 +23,4 @@ angular.module('common-module', ['ngMaterial']).
         }
       });
     }
-
   }]);
