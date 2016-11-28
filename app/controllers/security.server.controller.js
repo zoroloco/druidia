@@ -19,8 +19,9 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     }
   }
 
+  //Used when trying to access the secure part of the site.
   exports.authenticate = function(req,res,next){
-    log.info("AUTHENTICATING:"+req.session.username+" Trying to access:"+req.path);
+    log.info("AUTHENTICATING:"+req.session.username+" Trying to access:"+req.originalUrl);
     if(req.session.authenticated){
       log.info("User session exists!");
       next();//continue the route.

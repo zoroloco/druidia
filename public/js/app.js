@@ -9,3 +9,5 @@ angular.module('druidia-web', ['ngRoute',
 //The ngRoute module routes your application to different pages without reloading the entire application.
 
 //appRoutes defines the route provider.
+
+//TODO: put all services in an array. all controllers in an array.

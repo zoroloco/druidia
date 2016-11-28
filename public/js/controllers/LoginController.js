@@ -19,7 +19,7 @@ angular.module('login-module', ['ngMaterial']).
           $log.log("/login post returned true. Validated successful.");
           //$location.url('/home');
           //$location.path('home');
-          $window.location.href = "/home";//reload entire page.
+          $window.location.href = "/";//reload entire page.
         }
         else{
           self.loginMsg = response;

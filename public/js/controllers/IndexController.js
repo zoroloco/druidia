@@ -1,5 +1,5 @@
 angular.module('index-module', ['ngMaterial']).
-  controller('IndexController',['$log','$location','IndexService',function($log,$location,indexService) {
+  controller('IndexController',['$log','$location',function($log,$location) {
     var self = this;
 
     $log.log("Instantiated index controller.");

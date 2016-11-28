@@ -8,6 +8,11 @@ var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
 module.exports = function(app) {
   //order important here.
 
+  //if authentication passed and trying to get root, then send to root.
+  app.get('/',securityController.auditRequest,
+              securityController.reRouteHttps,
+              rootController.renderRoot);
+
   //login added first because we always want to be able to process a login post.
   app.post('/login',securityController.onLogin);
 
@@ -15,23 +20,16 @@ module.exports = function(app) {
   app.post('/addUser',securityController.onAddUser);
 
   //top level middleware to catch any request and log it. Will reroute to secure site if not https.
-  app.use('*',securityController.auditRequest,
+  app.use('/secure',securityController.auditRequest,
               securityController.reRouteHttps,
               securityController.authenticate);
 
-  //add middleware before our route handlers so it will be invoked first.
-  //every request will go through authenticate
-  //app.use('/',securityController.authenticate);
-
-  //if authentication passed and trying to get root, then send to root.
-  app.get('/',rootController.renderRoot);
-
   //called when root page first loaded.
-  app.get('/home',rootController.renderRoot);
+  app.get('/secure/home',rootController.renderRoot);
 
-  app.post('/logoff',securityController.onLogout);
+  app.post('/secure/logoff',securityController.onLogout);
 
-  app.get('/common/fetchUser',commonController.fetchUser);
+  app.get('/secure/common/fetchUser',commonController.fetchUser);
 
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.

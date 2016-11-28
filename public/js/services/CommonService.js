@@ -2,7 +2,7 @@ function CommonService($log,$http){
     var self = this;
 
     self.processLogOff = function(cb){
-      $http.post('logoff').then(
+      $http.post('secure/logoff').then(
        function(response){
          $log.log("Logoff successful.");
          cb(true);
@@ -15,7 +15,7 @@ function CommonService($log,$http){
     }
 
     self.fetchUser = function(cb){
-      return $http.get('/common/fetchUser').then(function(response){
+      return $http.get('/secure/common/fetchUser').then(function(response){
         cb(response.data);
       });
     }
