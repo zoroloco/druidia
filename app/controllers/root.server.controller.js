@@ -5,6 +5,8 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
   exports.renderRoot = function(req,res,next){
     log.info("Root page requested.");
 
+    res.sendFile(pathUtil.join(__dirname,'../../public/views/secure/index.html'));
+    /*
     var md = new MobileDetect(req.headers['user-agent']);
 
     if(md.is('iPhone')){
@@ -18,6 +20,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
       }
       else{
         res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
-      }  
+      }
     }
+    */
   };

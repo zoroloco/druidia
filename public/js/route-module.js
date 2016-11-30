@@ -13,9 +13,9 @@ angular.module('route-module', []).
     config(['$routeProvider', '$locationProvider',
        function($routeProvider, $locationProvider) {
 
-        $routeProvider.when('/home', {
+        $routeProvider.when('/secure/home', {
                         templateUrl : '/views/secure/home.html'
-                      }).when('/test', {
+                      }).when('/secure/test', {
                         templateUrl : '/views/secure/test.html'
                       }).otherwise({
                         redirectTo: '/views/login.html',

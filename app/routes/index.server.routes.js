@@ -1,19 +1,21 @@
+//This script defines the routes taken by the server.
+
 var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
     conf               = require(pathUtil.join(__dirname,'../config/conf.json')),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
     rootController     = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js')),
     commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
-    homeController     = require(pathUtil.join(__dirname,'../controllers/home.server.controller.js'));
+    homeController     = require(pathUtil.join(__dirname,'../controllers/home.server.controller.js')),
+    errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js'));
 
 module.exports = function(app) {
   //order important here.
-  app.get('/test',function(req,res,next){
-    res.sendFile(pathUtil.join(__dirname,'../../public/mobile/test.html'));
-  });
 
-  //if authentication passed and trying to get root, then send to root.
+  //Accessing the root / needs to first send down some initial html such as the login
+  //or the index, depending if authentication passed.
   app.get('/',securityController.auditRequest,
               securityController.reRouteHttps,
+              securityController.authenticate,
               rootController.renderRoot);
 
   //login added first because we always want to be able to process a login post.
@@ -24,25 +26,24 @@ module.exports = function(app) {
 
   //top level middleware to catch any request and log it. Will reroute to secure site if not https.
   app.use('/secure',securityController.auditRequest,
-              securityController.reRouteHttps,
-              securityController.authenticate);
+                    securityController.reRouteHttps,
+                    securityController.authenticate);
 
-  //called when root page first loaded.
+  //once logged in, all of our secure requests will be prepended with 'secure'.
+  //As you see above, all 'secure' routes first go through authentication. If auth passes, then the
+  //'next' routes are defined below.
   app.get('/secure/home',rootController.renderRoot);
-
   app.post('/secure/logoff',securityController.onLogout);
-
   app.get('/secure/common/fetchUser',commonController.fetchUser);
+
+  //Everything else requested will get routed back to the root page.
+  //Root page will be home if authenticated, login page otherwise.
+  app.get('*',securityController.auditRequest,
+              securityController.reRouteHttps,
+              securityController.authenticate,
+              rootController.renderRoot);
 
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
-  app.use(function(err,req,res,next){
-    log.error("Error middleware caught with error:"+err);
-
-    res.status(404);
-    res.render(pathUtil.join(__dirname,'../../public/views/errors/404.jade'), {
-        title : "The page you were looking for could not be found.",
-        message : conf.messages.notFoundMessage
-      });
-  });
+  app.use(errorController.handleError);
 };

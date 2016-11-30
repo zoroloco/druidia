@@ -6,5 +6,5 @@ angular.module('index-module', ['ngMaterial']).
 
     //by default when this controller instantiates, we want to load the login
     $log.log("Attempting to load home by default.");
-    $location.url('/home');
+    $location.url('/secure/home');
   }]);

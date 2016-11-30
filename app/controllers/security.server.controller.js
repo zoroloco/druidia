@@ -1,4 +1,5 @@
 var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    underStr       = require('underscore.string'),
     _              = require('underscore'),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
@@ -10,7 +11,6 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
 
   exports.reRouteHttps = function(req,res,next){
     if('https' == req.protocol){
-      //log.info("Request is secure.");
       next();
     }
     else{
@@ -25,21 +25,20 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     if(req.session.authenticated){
       log.info("User session exists!");
       next();//continue the route.
-      //res.sendFile(pathUtil.join(__dirname,'../../public/views/home.html'));
     }
     else{
-      log.error("User session does not exist. Rerouting to login.");
-      //res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
-      //res.redirect('/views/login.html');
-      //res.status(401).redirect('/views/login.html');//unauthorized
-      res.sendStatus(401);
+      log.error("User session does not exist.");
+
+      if(underStr.startsWith(req.originalUrl,"/secure")){
+        log.error("Unauthorized tried to access a secure section of the site.");
+        next(401);
+        return;
+      }
+      else{
+        next(200);
+      }
     }
   }
-
-  exports.renderLogin = function(req,res,next){
-    log.info("Routing to login page.");
-    res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
-  };
 
   exports.onLogin = function(req,res,next){
     log.info("onLogin: "+JSON.stringify(req.body));
