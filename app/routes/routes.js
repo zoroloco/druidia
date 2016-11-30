@@ -7,14 +7,14 @@ var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
     commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
     homeController     = require(pathUtil.join(__dirname,'../controllers/home.server.controller.js')),
     errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js')),
-    htmlHandler        = require(pathUtil.join(__dirname,'../handlers/htmlHandler.js'));
+    mobileHandler      = require(pathUtil.join(__dirname,'../handlers/mobileHandler.js'));
 
 module.exports = function(app) {
   //order important here.
 
   //Accessing the root / needs to first send down some initial html such as the login
   //or the index, depending if authentication passed.
-  app.get('/',htmlHandler.reRouteMobile,//first see if we need to re-route to mobile site.
+  app.get('/',mobileHandler.reRouteMobile,//first see if we need to re-route to mobile site.
               securityController.auditRequest,//if not mobile site, then log it.
               securityController.reRouteHttps,//after logging, forward to https site.
               securityController.authenticate,//after https site, then authenticate for active session.
@@ -27,7 +27,7 @@ module.exports = function(app) {
   app.post('/addUser',securityController.onAddUser);
 
   //top level middleware to catch any request and log it. Will reroute to secure site if not https.
-  app.use('/secure',htmlHandler.reRouteMobile,//first see if we need to re-route to mobile site.
+  app.use('/secure',mobileHandler.reRouteMobile,//first see if we need to re-route to mobile site.
                     securityController.auditRequest,//if not mobile site, then log it.
                     securityController.reRouteHttps,//after logging, forward to https site.
                     securityController.authenticate);//after https site, then authenticate for active session.

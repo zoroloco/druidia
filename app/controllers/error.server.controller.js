@@ -22,3 +22,16 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
         });
     }
   }
+
+  exports.handleMobileError = function(err,req,res,next){
+    log.error("Error middleware caught with error:"+err);
+
+    if(err === 200){
+      log.info("Sending initial login page to client.");
+      res.send("mobile login page holder.");
+      return;
+    }
+    else{
+      res.sendStatus(401);
+    }
+  }

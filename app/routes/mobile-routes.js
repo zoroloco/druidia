@@ -1,5 +1,6 @@
 var securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
-    rootController     = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js'));
+    rootController     = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js')),
+    errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js')),
 
 module.exports = function(app) {
   //order important here.
@@ -18,7 +19,6 @@ module.exports = function(app) {
               securityController.authenticate,
               rootController.sendMobileRoot);
 
-  app.use(function(err,req,res,next){
-    res.send("error on mobile side of things.");
-  });
+  app.use(errorController.handleMobileError);
+  
 };
