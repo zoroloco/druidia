@@ -7,6 +7,9 @@ var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
 
 module.exports = function(app) {
   //order important here.
+  app.get('/test',function(req,res,next){
+    res.sendFile(pathUtil.join(__dirname,'../../public/mobile/test.html'));
+  });
 
   //if authentication passed and trying to get root, then send to root.
   app.get('/',securityController.auditRequest,
