@@ -63,7 +63,9 @@ module.exports = function() {
 
     log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
     app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,mobileApp));
-    require('../routes/index.server.routes.js')(mobileApp);
+    mobileApp.get('/',function(req,res){
+      res.send("you be it!");
+    });
 
     log.info("Defining routing file.");
     require('../routes/index.server.routes.js')(app);
