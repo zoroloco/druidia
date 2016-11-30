@@ -11,10 +11,12 @@ module.exports = function(app) {
               securityController.authenticate,
               rootController.sendMobileRoot);
 
-  //login added first because we always want to be able to process a login post.
-  //app.post('/login',securityController.onLogin);
+//TODO: fix mobile routes.
 
-  //top level middleware to catch any request and log it. Will reroute to secure site if not https.
+  app.get('*',securityController.auditRequest,
+              //securityController.reRouteHttps,
+              securityController.authenticate,
+              rootController.sendMobileRoot);
 
   app.use(function(err,req,res,next){
     res.send("error on mobile side of things.");
