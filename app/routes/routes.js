@@ -6,17 +6,19 @@ var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
     rootController     = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js')),
     commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
     homeController     = require(pathUtil.join(__dirname,'../controllers/home.server.controller.js')),
-    errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js'));
+    errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js')),
+    htmlHandler        = require(pathUtil.join(__dirname,'../handlers/htmlHandler.js'));
 
 module.exports = function(app) {
   //order important here.
 
   //Accessing the root / needs to first send down some initial html such as the login
   //or the index, depending if authentication passed.
-  app.get('/',securityController.auditRequest,
-              securityController.reRouteHttps,
-              securityController.authenticate,
-              rootController.renderRoot);
+  app.get('/',htmlHandler.reRouteMobile,//first see if we need to re-route to mobile site.
+              securityController.auditRequest,//if not mobile site, then log it.
+              securityController.reRouteHttps,//after logging, forward to https site.
+              securityController.authenticate,//after https site, then authenticate for active session.
+              rootController.sendRoot);//if authenticated, then send home page.
 
   //login added first because we always want to be able to process a login post.
   app.post('/login',securityController.onLogin);
@@ -25,14 +27,16 @@ module.exports = function(app) {
   app.post('/addUser',securityController.onAddUser);
 
   //top level middleware to catch any request and log it. Will reroute to secure site if not https.
-  app.use('/secure',securityController.auditRequest,
-                    securityController.reRouteHttps,
-                    securityController.authenticate);
+  app.use('/secure',htmlHandler.reRouteMobile,//first see if we need to re-route to mobile site.
+                    securityController.auditRequest,//if not mobile site, then log it.
+                    securityController.reRouteHttps,//after logging, forward to https site.
+                    securityController.authenticate);//after https site, then authenticate for active session.
+                    //if authentication passes, then flow will go to 'next', which is one of the routes defined below.
 
   //once logged in, all of our secure requests will be prepended with 'secure'.
   //As you see above, all 'secure' routes first go through authentication. If auth passes, then the
   //'next' routes are defined below.
-  app.get('/secure/home',rootController.renderRoot);
+  app.get('/secure/home',rootController.sendRoot);
   app.post('/secure/logoff',securityController.onLogout);
   app.get('/secure/common/fetchUser',commonController.fetchUser);
 
@@ -41,7 +45,7 @@ module.exports = function(app) {
   app.get('*',securityController.auditRequest,
               securityController.reRouteHttps,
               securityController.authenticate,
-              rootController.renderRoot);
+              rootController.sendRoot);
 
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
