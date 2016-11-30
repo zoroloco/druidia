@@ -6,6 +6,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
 
   exports.auditRequest = function(req,res,next){
     log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip);
+    log.info("vhost:"+req.vhost[0]);
     next();
   }
 
