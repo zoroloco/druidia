@@ -23,8 +23,6 @@ function Server(){
   }
 
   var self        = this;
-  this._app       = express();//This is the main express app that was setup in config/express.js
-  this._mobileApp = mobileExpress();
 
   try{
     if(!_.isEmpty(conf)){
@@ -40,10 +38,16 @@ function Server(){
     process.exit(1);
   }
 
-  process.title   = conf.title;
+  this._app     = express();//This is the main express app that was setup in config/express.js
+
+  process.title = conf.title;
+
   if(conf.mobileSite === true){
+    this._mobileApp = mobileExpress();
     log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
-    self._app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,self._mobileApp));
+    this._app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,this._mobileApp));
+    log.info("Defining mobile routing file.");
+    require(pathUtil.join(__dirname,'./app/routes/mobile-routes.js'))(this._mobileApp);
   }
 
   //define process handlers

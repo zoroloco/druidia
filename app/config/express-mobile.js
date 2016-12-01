@@ -56,8 +56,7 @@ module.exports = function() {
     mobileApp.use(express.static(pathUtil.join(__dirname,'../../public')));
 */
 
-    log.info("Defining mobile routing file.");
-    require('../routes/mobile-routes.js')(mobileApp);
+  
 
     return mobileApp;
 };
