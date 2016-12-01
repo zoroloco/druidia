@@ -14,9 +14,9 @@ angular.module('route-module', []).
        function($routeProvider, $locationProvider) {
 
         $routeProvider.when('/secure/home', {
-                        templateUrl : '/views/secure/home.html'
+                        templateUrl : '/views/secure/templates/home.html'
                       }).when('/secure/test', {
-                        templateUrl : '/views/secure/test.html'
+                        templateUrl : '/views/secure/templates/test.html'
                       }).otherwise({
                         redirectTo: '/views/login.html',
                         controller  : 'LoginController'

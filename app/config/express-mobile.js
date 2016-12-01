@@ -12,7 +12,7 @@ var   pathUtil       = require('path'),
 module.exports = function() {
     var mobileApp       = express();
 
-    mobileApp.set('views',pathUtil.join(__dirname,'../../public/mobile-views'));
+    mobileApp.set('views',pathUtil.join(__dirname,'../../public/views'));
     mobileApp.set('title', conf.title);
 
     //CONFIGURE SSL

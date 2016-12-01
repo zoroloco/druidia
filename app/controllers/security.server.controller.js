@@ -27,7 +27,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
       next();//continue the route.
     }
     else{
-      log.error("User session does not exist.");
+      log.warn("User session does not exist.");
 
       if(underStr.startsWith(req.originalUrl,"/secure")){
         log.error("Unauthorized tried to access a secure section of the site.");

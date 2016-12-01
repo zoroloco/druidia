@@ -4,4 +4,5 @@ server       = require(pathUtil.join(__dirname,'./server.js'));
 
 var myServer = new server();
 
+//initiate all of the servers.
 myServer.start();
