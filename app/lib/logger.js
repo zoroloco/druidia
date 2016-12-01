@@ -39,11 +39,11 @@ var self = module.exports = {
         log = new (winston.Logger)({
       		  transports: [
       			new (winston.transports.Console)({'timestamp' : true,'colorize': true})
-      			,new winston.transports.File({ filename: pathUtil.join(conf.logger.dir,process.title+"_"+"error.log"), name:'file.error',
+      			,new winston.transports.File({ filename: pathUtil.join(conf.logger.dir,conf.hostname+"_"+"error.log"), name:'file.error',
       				level: 'error','maxsize':4194304,maxFiles:256, handleExceptions: true,json: false })
-      			,new winston.transports.File({ filename: pathUtil.join(conf.logger.dir,process.title+"_"+"warn.log"), name:'file.warn',
+      			,new winston.transports.File({ filename: pathUtil.join(conf.logger.dir,conf.hostname+"_"+"warn.log"), name:'file.warn',
       				level: 'warn','maxsize':4194304,maxFiles:256, handleExceptions: true,json: false })
-      			,new winston.transports.File({ filename: pathUtil.join(conf.logger.dir,process.title+"_"+"info.log"), name:'file.info',
+      			,new winston.transports.File({ filename: pathUtil.join(conf.logger.dir,conf.hostname+"_"+"info.log"), name:'file.info',
       				level: 'info','maxsize':4194304,maxFiles:256, handleExceptions: true,json: false })
       		  ],
       		  exceptionHandlers: [
