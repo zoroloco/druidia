@@ -1,5 +1,7 @@
 //Determines if mobile.
 var log          = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    underStr     = require('underscore.string'),
+    conf         = require(pathUtil.join(__dirname,'./conf.json')),
     MobileDetect = require('mobile-detect');
 
 exports.reRouteMobile = function(req,res,next){
@@ -7,12 +9,11 @@ exports.reRouteMobile = function(req,res,next){
   var md = new MobileDetect(req.headers['user-agent']);
 
   if(md.is('iPhone')){//TODO: add more mobile devices.
-    log.info("hostname="+req.hostname);
-    log.info("req.url="+req.url);
-    log.info("req.originalURL="+req.originalURL);
-    log.info("req.vhost[0]="+req.vhost[0]);
-    log.info("req.vhost.length="+req.vhost.length);
-    log.info("req.vhost.hostname="+req.vhost.hostname);
+
+    if(underStr.startsWith(req.hostname,"/www")){
+      req.hostname = underStr.replaceAll(req.hostname,"/www",conf.virtualHostnameMobile);
+      log.info("Changed hostname to:"+req.hostname);
+    }
 
     var mobilePath = "https://mobile."+req.hostname+req.url;
     log.info("Mobile device detected! Rerouting to: "+mobilePath);
