@@ -9,6 +9,7 @@ exports.reRouteMobile = function(req,res,next){
   var md = new MobileDetect(req.headers['user-agent']);
 
   if(md.is('iPhone')){//TODO: add more mobile devices.
+    log.warn("hosname = "+req.hostname);
 
     if(underStr.startsWith(req.hostname,"www")){
       req.hostname = underStr.replaceAll(req.hostname,"/www",conf.virtualHostnameMobile);
