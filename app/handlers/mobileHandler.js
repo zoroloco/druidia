@@ -1,7 +1,7 @@
 //Determines if mobile.
 var log          = require(pathUtil.join(__dirname,'../lib/logger.js')),
     underStr     = require('underscore.string'),
-    conf         = require(pathUtil.join(__dirname,'./conf.json')),
+    conf         = require(pathUtil.join(__dirname,'../config/conf.json')),
     MobileDetect = require('mobile-detect');
 
 exports.reRouteMobile = function(req,res,next){
