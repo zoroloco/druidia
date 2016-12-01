@@ -23,8 +23,8 @@ function Server(){
   }
 
   var self        = this;
-  this._app       = express();//This is the main express app that was setup in config/express.js
   this._mobileApp = mobileExpress();
+  this._app       = express();//This is the main express app that was setup in config/express.js  
   process.title   = conf.title;
 
   try{
