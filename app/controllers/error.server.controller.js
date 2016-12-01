@@ -27,7 +27,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
     log.error("Error middleware caught with error:"+err);
 
     if(err === 200){
-      log.info("Sending initial login page to client.");
+      log.info("Sending initial mobile login page to client.");
       res.send("mobile login page holder.");
       return;
     }
