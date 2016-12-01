@@ -4,7 +4,6 @@ var pathUtil   = require('path'),
     vhost      = require('vhost'),
     log        = require(pathUtil.join(__dirname,'./app/lib/logger.js')),
     express    = require(pathUtil.join(__dirname,'./app/config/express.js')),
-    mobileExpress = require(pathUtil.join(__dirname,'./app/config/express-mobile.js')),
     https      = require('https'),
     http       = require('http'),
     mongoose   = require('mongoose'),
@@ -41,14 +40,6 @@ function Server(){
   this._app     = express();//This is the main express app that was setup in config/express.js
 
   process.title = conf.title;
-
-  if(conf.mobileSite === true){
-    this._mobileApp = mobileExpress();
-    log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
-    this._app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,this._mobileApp));
-    log.info("Defining mobile routing file.");
-    require(pathUtil.join(__dirname,'./app/routes/mobile-routes.js'))(this._mobileApp);
-  }
 
   //define process handlers
   process.on('SIGTERM', function() {

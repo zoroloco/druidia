@@ -4,6 +4,7 @@ const express        = require('express');
 var   pathUtil       = require('path'),
       bodyParser     = require('body-parser'),
       methodOverride = require('method-override'),
+      vhost          = require('vhost'),
       fs             = require('fs'),
       credentials    = require(pathUtil.join(__dirname,'../security/credentials.js')),
       conf           = require(pathUtil.join(__dirname,'./conf.json')),
@@ -57,6 +58,15 @@ module.exports = function() {
     // set the static files location /public/img will be /img for users
     log.info("Setting static file directory.");
     app.use(express.static(pathUtil.join(__dirname,'../../public')));
+
+    if(conf.mobileSite === true){
+      log.info("Setting up mobile express site.");
+      var mobileApp = express();
+      log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
+      app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,mobileApp));
+      log.info("Defining mobile routes.");
+      require('../routes/mobile-routes.js')(mobileApp);
+    }
 
     log.info("Defining routing file.");
     require('../routes/routes.js')(app);
