@@ -7,6 +7,10 @@ exports.reRouteMobile = function(req,res,next){
   var md = new MobileDetect(req.headers['user-agent']);
 
   if(md.is('iPhone')){//TODO: add more mobile devices.
+    log.info("hostname="+req.hostname);
+    log.info("req.url="+req.url);
+    log.info("req.originalURL="+req.originalURL);
+    
     var mobilePath = "https://mobile."+req.hostname+req.url;
     log.info("Mobile device detected! Rerouting to: "+mobilePath);
     res.redirect(mobilePath);
