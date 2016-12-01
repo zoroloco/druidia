@@ -23,9 +23,8 @@ function Server(){
   }
 
   var self        = this;
+  this._app       = express();//This is the main express app that was setup in config/express.js
   this._mobileApp = mobileExpress();
-  this._app       = express();//This is the main express app that was setup in config/express.js  
-  process.title   = conf.title;
 
   try{
     if(!_.isEmpty(conf)){
@@ -39,6 +38,12 @@ function Server(){
   catch(e){
     log.warn("Starting server resulted in the exception:"+e);
     process.exit(1);
+  }
+
+  process.title   = conf.title;
+  if(conf.mobileSite === true){
+    log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
+    self._app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,self._mobileApp));
   }
 
   //define process handlers
@@ -82,11 +87,6 @@ function Server(){
   }
 
   Server.prototype.start = function(){
-    if(conf.mobileSite === true){
-      log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
-      self._app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,self._mobileApp));
-    }
-
     //secure site
     self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
       log.info(process.title+" server now listening on port:"+self._server.address().port);
