@@ -7,7 +7,8 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
     //still an error, so you need to be feed the initial login html.
     if(err === 200){
       log.info("Sending initial login page to client.");
-      res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
+      //res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
+      res.sendFile(pathUtil.join(__dirname,'../../public/mobile-views/login.html'));
       return;
     }
     else if(err === 401){
@@ -28,7 +29,7 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
     if(err === 200){
       log.info("Sending initial mobile login page to client.");
-      res.send("mobile login page holder.");
+      res.sendFile(pathUtil.join(__dirname,'../../public/mobile-views/login.html'));
       return;
     }
     else{

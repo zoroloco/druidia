@@ -7,14 +7,20 @@ exports.reRouteMobile = function(req,res,next){
   log.info("Determining if mobile device used.");
   var md = new MobileDetect(req.headers['user-agent']);
 
-  if(md.is('iPhone')){//TODO: add more mobile devices.
-    log.info("Mobile device detected!");
-    var mobilePath = "https://mobile."+conf.hostname+"/"+req.url;
-    log.info("Rerouting to: "+mobilePath);
-    res.redirect(mobilePath);
-    return;
+  if(conf.mobileSite === true &&
+     (md.is('iOS') ||
+      md.is('AndroidOS') ||
+      md.is('WindowsMobileOS') ||
+      md.is('WindowsPhoneOS')) ){
+
+       log.info("Mobile device detected!");
+       var mobilePath = "https://mobile."+conf.hostname+"/"+req.url;
+       log.info("Rerouting to: "+mobilePath);
+       res.redirect(mobilePath);
+       return;
   }
   else{
+    log.info("Mobile device not detected or disabled.");
     next();//keep on proceeding to non mobile site request.
   }
 }

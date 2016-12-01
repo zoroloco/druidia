@@ -1,8 +1,10 @@
 var pathUtil   = require('path'),
     async      = require('async'),
     _          = require('underscore'),
+    vhost      = require('vhost'),
     log        = require(pathUtil.join(__dirname,'./app/lib/logger.js')),
-    express    = require(pathUtil.join(__dirname,'./app/config/express')),
+    express    = require(pathUtil.join(__dirname,'./app/config/express.js')),
+    mobileExpress = require(pathUtil.join(__dirname,'./app/config/express-mobile.js')),
     https      = require('https'),
     http       = require('http'),
     mongoose   = require('mongoose'),
@@ -20,9 +22,10 @@ function Server(){
     throw new TypeError("Classes can't be function-called.");
   }
 
-  var self      = this;
-  this._app     = express();
-  process.title = conf.title;
+  var self        = this;
+  this._app       = express();//This is the main express app that was setup in config/express.js
+  this._mobileApp = mobileExpress();
+  process.title   = conf.title;
 
   try{
     if(!_.isEmpty(conf)){
@@ -79,10 +82,17 @@ function Server(){
   }
 
   Server.prototype.start = function(){
+    if(conf.mobileSite === true){
+      log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
+      self._app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,self._mobileApp));
+    }
+
+    //secure site
     self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
       log.info(process.title+" server now listening on port:"+self._server.address().port);
     });
 
+    //non secure site used to reroute to secure site.
     self._httpServer = http.createServer(self._app).listen(self._app.get('httpPort'),function(){
       log.info(process.title+" server now listening on port:"+self._httpServer.address().port);
     })

@@ -2,6 +2,8 @@
   "hostname" : "druidia.net",
   "virtualHostnameMobile" : "mobile",
 
+  "mobileSite": true,
+
   "port"  : 443,
   "httpPort" : 80,
 

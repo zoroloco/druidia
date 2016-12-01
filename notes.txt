@@ -2,3 +2,6 @@ Table = Collection
 Row   = Document
 Column= Field
 Join  = Embedded Documents
+
+Helpful links:
+http://mobileangularui.com/docs/

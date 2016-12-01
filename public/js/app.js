@@ -2,6 +2,7 @@
 angular.module('druidia-web', ['ngRoute',
                                'route-module',
                                'http-module',
+                               'ui.bootstrap',
                                'common-module',
                                'index-module',
                                'login-module']);

@@ -2,11 +2,13 @@
   "name": "druidia.net",
   "version": "1.0.0",
   "dependencies": {
-    "bootstrap": "latest",
-    "font-awesome": "latest",
-    "animate.css": "latest",
-    "angular": "latest",
-    "angular-route": "latest",
-    "angular-material": "latest",
+    "bootstrap"         : "latest",
+    "angular-bootstrap" : "latest",
+    "mobile-angular-ui" : "latest",
+    "font-awesome"      : "latest",
+    "animate.css"       : "latest",
+    "angular"           : "latest",
+    "angular-route"     : "latest",
+    "angular-material"  : "latest"
   }
 }
