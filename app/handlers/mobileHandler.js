@@ -14,7 +14,7 @@ exports.reRouteMobile = function(req,res,next){
       md.is('WindowsPhoneOS')) ){
 
        log.info("Mobile device detected!");
-       var mobilePath = "https://mobile."+conf.hostname;
+       var mobilePath = "https://mobile."+conf.hostname+req.url;
        log.info("Rerouting to: "+mobilePath);
        res.redirect(mobilePath);
        return;

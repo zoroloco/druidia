@@ -12,6 +12,7 @@ var   pathUtil       = require('path'),
 module.exports = function() {
     var mobileApp       = express();
 
+/*
     mobileApp.set('views',pathUtil.join(__dirname,'../../public/views'));
     mobileApp.set('title', conf.title);
 
@@ -53,6 +54,7 @@ module.exports = function() {
     // set the static files location /public/img will be /img for users
     log.info("Setting static file directory.");
     mobileApp.use(express.static(pathUtil.join(__dirname,'../../public')));
+*/
 
     log.info("Defining mobile routing file.");
     require('../routes/mobile-routes.js')(mobileApp);
