@@ -1,4 +1,4 @@
-//Determines if mobile.
+//Determines if mobile and re-route if necessary.
 var log          = require(pathUtil.join(__dirname,'../lib/logger.js')),
     conf         = require(pathUtil.join(__dirname,'../config/conf.json')),
     MobileDetect = require('mobile-detect');
@@ -16,7 +16,7 @@ exports.reRouteMobile = function(req,res,next){
        log.info("Mobile device detected!");
        var mobilePath = "https://mobile."+conf.hostname+req.url;
        log.info("Rerouting to: "+mobilePath);
-       res.redirect(mobilePath);
+       res.redirect(mobilePath);//now mobile-routes.js will take over the routing.
        return;
   }
   else{

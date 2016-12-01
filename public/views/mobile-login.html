@@ -15,45 +15,37 @@
     <script src="libs/angular-route/angular-route.min.js"></script>
     <script src="libs/mobile-angular-ui/dist/js/mobile-angular-ui.min.js"></script>
     <!--custom js-->
+    <script src="js/controllers/LoginController.js"></script>
     <script src="js/controllers/MobileLoginController.js"></script>
+    <script src="js/services/LoginService.js"></script>
     <script src="js/mobile-app.js"></script>
 
   </head>
   <body ng-app="druidia-mobile-web" ng-controller="LoginController as ctrl">
 
-      <form role="form">
+      <form role="form" >
       <fieldset>
         <legend>Login</legend>
           <div class="form-group has-success has-feedback">
-            <label>Email</label>
-            <input type="email"
-                   ng-model="email"
+            <label>Username</label>
+            <input ng-model="ctrl.creds.username"
                    class="form-control"
-                   placeholder="Enter email">
+                   placeholder="username">
           </div>
 
           <div class="form-group">
             <label>Password</label>
-            <input type="password"
+            <input ng-model="ctrl.creds.password"
+                   type="password"
                    class="form-control"
-                   placeholder="Password">
-          </div>
-
-          <div class="form-group">
-            <label>Remember Me</label>
-            <ui-switch
-              ng-model="rememberMe"></ui-switch>
+                   placeholder="password">
           </div>
       </fieldset>
-      <hr>
-
-      <button class="btn btn-primary btn-block">
+      <button class="btn btn-primary btn-block" ng-click="ctrl.onLogon()">
         Login
       </button>
 
-      <div ui-content-for="navbarAction">
-        <a class="btn" ng-click="login()">Login</a>
-      </div>
+
 
     </form>
   </body>
