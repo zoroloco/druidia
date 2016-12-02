@@ -5,3 +5,9 @@ Join  = Embedded Documents
 
 Helpful links:
 http://mobileangularui.com/docs/
+https://angular-ui.github.io/bootstrap/#/getting_started
+
+TODO:
+-- angular-material.css and style.css have many errors.
+-- verify same user, different browsers.
+-- logger name.
