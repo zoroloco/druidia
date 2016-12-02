@@ -24,3 +24,6 @@ function CommonService($log,$http){
 
 angular.module('common-module')
   .service('CommonService',['$log','$http',CommonService]);
+
+angular.module('mobile-index-module')
+    .service('CommonService',['$log','$http',CommonService]);

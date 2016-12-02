@@ -29,8 +29,15 @@
     <script src="js/http-module.js"></script>
     <script src="js/mobile-route-module.js"></script>
   </head>
-  <body ng-app="druidia-mobile-web" ng-controller="IndexController as ctrl">
-    mobile index page!
+  <body ng-app="druidia-mobile-web" ng-controller="IndexController as ctrl" ng-init="ctrl.fetchUser()">
+    <span class="label label-default">Welcome:
+      <span ng-bind="ctrl.user"></span>
+    </span>
+    <ul class="nav nav-pills">
+      <li role="presentation" class="active"><a href="#">Home</a></li>
+      <li role="presentation"><a href="#">Uptime</a></li>
+      <li role="presentation"><a href="#">Log Off</a></li>
+    </ul>
     <ng-view></ng-view>
   </body>
 </html>
