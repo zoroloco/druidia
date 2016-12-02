@@ -8,14 +8,15 @@ module.exports = function(app) {
   //Accessing the root / needs to first send down some initial html such as the login
   //or the index, depending if authentication passed.
   app.get('/',securityController.auditRequest,
-              //securityController.reRouteHttps,
+              securityController.reRouteHttps,
               securityController.authenticate,
               rootController.sendMobileRoot);
 
-//TODO: fix mobile routes.
+  //login added first because we always want to be able to process a login post.
+  app.post('/login',securityController.onLogin);
 
   app.get('*',securityController.auditRequest,
-              //securityController.reRouteHttps,
+              securityController.reRouteHttps,
               securityController.authenticate,
               rootController.sendMobileRoot);
 

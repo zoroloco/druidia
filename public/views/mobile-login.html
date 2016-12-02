@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <base href="/">
     <title>druidia.net</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,15 +13,21 @@
 
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
+    <script src="libs/angular-material/angular-material.min.js"></script>
 
     <!--custom js-->
     <script src="js/controllers/MobileLoginController.js"></script>
+    <script src="js/controllers/MobileIndexController.js"></script>
     <script src="js/controllers/LoginController.js"></script>
+    <script src="js/controllers/IndexController.js"></script>
+    <script src="js/controllers/CommonController.js"></script>
+
     <script src="js/services/LoginService.js"></script>
+    <script src="js/services/CommonService.js"></script>
 
     <script src="js/mobile-app.js"></script>
     <script src="js/http-module.js"></script>
-    <script src="js/route-module.js"></script>
+    <script src="js/mobile-route-module.js"></script>
 
   </head>
   <body ng-app="druidia-mobile-web" ng-controller="LoginController as ctrl">

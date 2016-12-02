@@ -1,4 +1,5 @@
 angular.module('druidia-mobile-web', ['ngRoute',
-                                      'route-module',
+                                      'mobile-route-module',
                                       'http-module',
+                                      'mobile-index-module',
                                       'mobile-login-module']);

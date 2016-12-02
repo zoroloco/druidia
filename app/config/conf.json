@@ -4,6 +4,8 @@
 
   "mobileSite": true,
 
+  "debugMobile": false,
+
   "port"  : 443,
   "httpPort" : 80,
 

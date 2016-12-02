@@ -1,4 +1,5 @@
-var log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
+var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    conf           = require(pathUtil.join(__dirname,'../config/conf.json'));
 
   exports.handleError = function(err,req,res,next){
     log.error("Error middleware caught with error:"+err);
@@ -7,8 +8,14 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
     //still an error, so you need to be feed the initial login html.
     if(err === 200){
       log.info("Sending initial login page to client.");
-      res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
-      //res.sendFile(pathUtil.join(__dirname,'../../public/views/mobile-login.html'));//for debug's test-sake.
+
+      if(conf.debugMobile === true){
+          res.sendFile(pathUtil.join(__dirname,'../../public/views/mobile-login.html'));//for debug's test-sake.
+      }
+      else{
+        res.sendFile(pathUtil.join(__dirname,'../../public/views/login.html'));
+      }
+
       return;
     }
     else if(err === 401){

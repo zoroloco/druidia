@@ -2,20 +2,35 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <base href="/">
     <title>druidia.net</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/mobile-style.css"> <!-- custom styles -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
-    <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <!--custom js-->
-    <script src="js/controllers/LoginController.js"></script>
-    <script src="js/services/LoginService.js"></script>
-    <script src="js/mobile-app.js"></script>
+    <script src="libs/angular-material/angular-material.min.js"></script>
 
+    <!--custom js-->
+    <script src="js/controllers/MobileLoginController.js"></script>
+    <script src="js/controllers/MobileIndexController.js"></script>
+    <script src="js/controllers/LoginController.js"></script>
+    <script src="js/controllers/IndexController.js"></script>
+    <script src="js/controllers/CommonController.js"></script>
+
+    <script src="js/services/LoginService.js"></script>
+    <script src="js/services/CommonService.js"></script>
+
+    <script src="js/mobile-app.js"></script>
+    <script src="js/http-module.js"></script>
+    <script src="js/mobile-route-module.js"></script>
   </head>
-  <body ng-app="druidia-mobile-web">
+  <body ng-app="druidia-mobile-web" ng-controller="IndexController as ctrl">
+    mobile index page!
     <ng-view></ng-view>
   </body>
 </html>
