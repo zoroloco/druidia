@@ -1,5 +1,5 @@
 angular.module('mobile-index-module', []).
-  controller('IndexController',['$log','$location','CommonService',function($log,$location,commonService) {
+  controller('MobileIndexController',['$log','$location','CommonService',function($log,$location,commonService) {
     var self = this;
 
     $log.log("Instantiated index controller.");

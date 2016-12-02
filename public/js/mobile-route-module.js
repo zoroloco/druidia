@@ -5,8 +5,8 @@ angular.module('mobile-route-module', []).
 
         $routeProvider.when('/secure/mobile-home', {
                         templateUrl : '/views/secure/templates/mobile-home.html'
-                      }).when('/secure/test', {
-                        templateUrl : '/views/secure/templates/test.html'
+                      }).when('/secure/mobile-test', {
+                        templateUrl : '/views/secure/templates/mobile-test.html'
                       }).otherwise({
                         redirectTo: '/views/mobile-login.html',
                         controller  : 'MobileLoginController'

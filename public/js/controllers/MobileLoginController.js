@@ -1,5 +1,5 @@
 angular.module('mobile-login-module', []).
-  controller('LoginController',['$log','$location','LoginService',function($log,$location,loginService) {
+  controller('MobileLoginController',['$log','$window','LoginService',function($log,$window,loginService) {
     var self = this;
 
     $log.log("Instantiated mobile login controller.");
@@ -18,7 +18,7 @@ angular.module('mobile-login-module', []).
           $log.log("/login post returned true. Validated successful.");
           //$location.url('/home');
           //$location.path('home');
-          //$window.location.href = "/";//reload entire page.
+          $window.location.href = "/";//reload entire page.
         }
         else{
           self.loginMsg = response;
