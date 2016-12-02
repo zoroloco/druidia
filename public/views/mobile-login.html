@@ -5,6 +5,7 @@
     <title>druidia.net</title>
 
     <link rel="stylesheet" href="css/mobile-style.css"> <!-- custom styles -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -19,37 +20,26 @@
 
   </head>
   <body ng-app="druidia-mobile-web" ng-controller="LoginController as ctrl">
-    <div class="row text-left">
-       <div class="col-md-6 col-md-offset-3">
-         <form role="form" name="loginForm" ng-submit="ctrl.onLogon()" ng-class="{submitted:submitted}" novalidate>
-           <div class="form-group">
-             <label for="username">Username</label>
-             <input type="text"
-                    class="form-control"
-                    name="username"
-                    id="username"
-                    ng-model="ctrl.creds.username"
-                    placeholder="Username"
-                    required />
-           </div>
-           <div class="form-group">
-             <label for="password">Password</label>
-             <input type="password"
-                    class="form-control"
-                    name="password"
-                    id="password"
-                    ng-model="ctrl.creds.password"
-                    placeholder="Password"
-                    required />
-           </div>
-           <div class="form-group">
-             <button type="submit"
-                     class="btn btn-primary pull-right"
-                     value="Login" title="Login">Login</button>
-             <!-- ng-disabled="!loginForm.$valid" -->
-           </div>
-         </form>
-       </div>
-     </div>
+    <form role="form" name="loginForm" ng-submit="ctrl.onLogon()">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-offset-5 col-md-3">
+                  <div class="form-login">
+                  <h4>Welcome back.</h4>
+                  <input type="text" id="userName" ng-model="ctrl.creds.username" class="form-control input-sm chat-input" placeholder="username" />
+                  </br>
+                  <input type="password" id="userPassword" ng-model="ctrl.creds.password" class="form-control input-sm chat-input" placeholder="password" />
+                  </br>
+                  <div class="wrapper">
+                  <span class="group-btn">
+                      <input class="btn btn-primary btn-md" type="submit" value="Log In" ng-click="ctrl.onLogon()"/><br/>
+                  </span>
+                  </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+    </form>
   </body>
 </html>
