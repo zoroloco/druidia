@@ -34,4 +34,4 @@ angular.module('login-module')
   .service('LoginService',['$http','$log',LoginService]);
 
 angular.module('mobile-login-module')
-  .service('LoginService',['$http','$log',LoginService]);
+    .service('LoginService',['$http','$log',LoginService]);
