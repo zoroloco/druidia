@@ -5,14 +5,16 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     log.info("Root page requested.");
 
     if(conf.debugMobile === true){
-        res.sendFile(pathUtil.join(__dirname,'../../public/views/secure/mobile-index.html'));//for testing sake.
+      log.info("mobile root");
+        res.sendFile(pathUtil.join(__dirname,'../../public/views/secure/index-mobile.html'));//for testing sake.
     }
     else{
+      log.info("normal root");
       res.sendFile(pathUtil.join(__dirname,'../../public/views/secure/index.html'));
     }
   };
 
   exports.sendMobileRoot = function(req,res,next){
     log.info("Mobile root page requested.");
-    res.sendFile(pathUtil.join(__dirname,'../../public/views/secure/mobile-index.html'));
+    res.sendFile(pathUtil.join(__dirname,'../../public/views/secure/index-mobile.html'));
   }

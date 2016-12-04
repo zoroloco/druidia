@@ -18,7 +18,7 @@ angular.module('http-module', [])
     },
     'responseError': function(rejection){
       $log.log("Auth Interceptor: Response Error: "+rejection.status);
-      $window.location.href= "/views/login.html";
+      //$window.location.href= "/views/login.html";
       return $q.reject(rejection);
     }
   };//returns

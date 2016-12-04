@@ -5,7 +5,6 @@ var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
     rootController     = require(pathUtil.join(__dirname,'../controllers/root.server.controller.js')),
     commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
-    homeController     = require(pathUtil.join(__dirname,'../controllers/home.server.controller.js')),
     errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js')),
     mobileHandler      = require(pathUtil.join(__dirname,'../handlers/mobileHandler.js'));
 
@@ -39,6 +38,7 @@ module.exports = function(app) {
   app.get('/secure/home',rootController.sendRoot);
   app.post('/secure/logoff',securityController.onLogout);
   app.get('/secure/common/fetchUser',commonController.fetchUser);
+  app.get('/secure/common/fetchMobileStatus',commonController.fetchMobileStatus);
 
   //Everything else requested will get routed back to the root page.
   //Root page will be home if authenticated, login page otherwise.

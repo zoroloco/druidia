@@ -4,9 +4,9 @@
 
   "mobileSite": true,
 
-  "debugMobile": false,
+  "debugMobile": true,
 
-  "port"  : 443,
+  "port"     : 443,
   "httpPort" : 80,
 
   "logger" : {

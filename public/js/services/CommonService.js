@@ -20,14 +20,13 @@ function CommonService($log,$http){
       });
     }
 
+    self.fetchMobileStatus = function(cb){
+      return $http.get('/secure/common/fetchMobileStatus').then(function(response){
+        cb(response.data);
+      });
+    }
 }
 
 //inject this service to the following module controllers.
-angular.module('common-module')
+angular.module('index-module')
   .service('CommonService',['$log','$http',CommonService]);
-
-angular.module('mobile-index-module')
-    .service('CommonService',['$log','$http',CommonService]);
-
-angular.module('mobile-home-module')
-    .service('CommonService',['$log','$http',CommonService]);

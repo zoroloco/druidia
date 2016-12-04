@@ -11,3 +11,5 @@ TODO:
 -- angular-material.css and style.css have many errors.
 -- verify same user, different browsers.
 -- logger name.
+-- clean up angular mobile and normal
+-- maybe merge express mobile and normal routes. very repetitive as is.

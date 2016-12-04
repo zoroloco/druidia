@@ -22,7 +22,7 @@ module.exports = function(app) {
   app.get('/secure/home',rootController.sendRoot);
   app.post('/secure/logoff',securityController.onLogout);
   app.get('/secure/common/fetchUser',commonController.fetchUser);
-
+  app.get('/secure/common/fetchMobileStatus',commonController.fetchMobileStatus);
 
   app.get('*',securityController.auditRequest,
               securityController.reRouteHttps,

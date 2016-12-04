@@ -11,34 +11,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <script src="libs/angular/angular.min.js"></script>
-    <script src="libs/angular-route/angular-route.min.js"></script>
-    <script src="libs/angular-material/angular-material.min.js"></script>
-
-    <!--custom js-->
-    <script src="js/controllers/MobileLoginController.js"></script>
-    <script src="js/controllers/MobileIndexController.js"></script>
-    <script src="js/controllers/LoginController.js"></script>
-    <script src="js/controllers/IndexController.js"></script>
-    <script src="js/controllers/CommonController.js"></script>
-    <script src="js/controllers/MobileHomeController.js"></script>
-
-    <script src="js/services/LoginService.js"></script>
-    <script src="js/services/CommonService.js"></script>
-
-    <script src="js/mobile-app.js"></script>
-    <script src="js/http-module.js"></script>
-    <script src="js/mobile-route-module.js"></script>
   </head>
-  <body ng-app="druidia-mobile-web" ng-controller="MobileIndexController as ctrl" ng-init="ctrl.fetchUser()">
+  <body ng-app="druidia-web" ng-controller="IndexController as ctrl" ng-init="ctrl.init()">
     <span class="label label-default">Welcome:
       <span ng-bind="ctrl.user"></span>
     </span>
     <ul class="nav nav-pills">
-      <li role="presentation" class="active"><a href="/secure/mobile-home">Home</a></li>
+      <li role="presentation"><a href="/secure/mobile-home">Home</a></li>
       <li role="presentation"><a href="/secure/mobile-test">Test</a></li>
-      <li role="presentation"><a href="#">Log Off</a></li>
     </ul>
     <ng-view></ng-view>
+    <input class="btn btn-lg btn-danger btn-block" type="submit" ng-click="ctrl.onLogOff()" value="Log Off"/>
+    <!-- JS -->
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-route/angular-route.min.js"></script>
+    <script src="libs/angular-aria/angular-aria.min.js"></script>
+    <script src="libs/angular-animate/angular-animate.min.js"></script>
+    <script src="libs/angular-material/angular-material.min.js"></script>
+
+    <!--custom js-->
+    <script src="js/controllers/LoginController.js"></script>
+    <script src="js/controllers/IndexController.js"></script>
+
+    <script src="js/services/LoginService.js"></script>
+    <script src="js/services/CommonService.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/http-module.js"></script>
+    <script src="js/route-module.js"></script>
   </body>
 </html>

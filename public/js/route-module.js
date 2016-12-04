@@ -17,9 +17,12 @@ angular.module('route-module', []).
                         templateUrl : '/views/secure/templates/home.html'
                       }).when('/secure/test', {
                         templateUrl : '/views/secure/templates/test.html'
+                      }).when('/secure/mobile-home', {
+                        templateUrl : '/views/secure/templates/home-mobile.html'
+                      }).when('/secure/mobile-test', {
+                        templateUrl : '/views/secure/templates/test.html'
                       }).otherwise({
-                        redirectTo: '/views/login.html',
-                        controller  : 'LoginController'
+                        redirectTo: '/'
                       });
 
         $locationProvider.html5Mode(true);
