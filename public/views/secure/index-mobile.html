@@ -13,15 +13,20 @@
 
   </head>
   <body ng-app="druidia-web" ng-controller="IndexController as ctrl" ng-init="ctrl.init()">
+  <nav class="navbar navbar-default navbar-static-top">
     <span class="label label-default">Welcome:
       <span ng-bind="ctrl.user"></span>
     </span>
     <ul class="nav nav-pills">
       <li role="presentation"><a href="/secure/mobile-home">Home</a></li>
       <li role="presentation"><a href="/secure/mobile-test">Test</a></li>
+      <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="ctrl.onLogOff()">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"</span>
+        LogOff
+      </button>
     </ul>
-    <ng-view></ng-view>
-    <input class="btn btn-lg btn-danger btn-block" type="submit" ng-click="ctrl.onLogOff()" value="Log Off"/>
+  </nav>
+  <ng-view></ng-view>
     <!-- JS -->
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>

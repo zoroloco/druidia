@@ -19,24 +19,28 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     }
   }
 
+  exports.authenticateRoot = function(req,res,next){
+    log.info("AUTHENTICATING ROOT:"+req.session.username+" Trying to access:"+req.originalUrl);
+    if(isAuthenticated(req)){
+      req.url = "/root";
+    }
+    else{
+      req.url = "/login";
+    }
+
+    next('route');
+  }
+
   //Used when trying to access the secure part of the site.
   exports.authenticate = function(req,res,next){
     log.info("AUTHENTICATING:"+req.session.username+" Trying to access:"+req.originalUrl);
-    if(req.session.authenticated){
+    if(isAuthenticated(req)){
       log.info("User session exists!");
       next();//continue the route.
     }
     else{
-      log.warn("User session does not exist.");
-
-      if(underStr.startsWith(req.originalUrl,"/secure")){
-        log.error("Unauthorized tried to access a secure section of the site.");
-        next(401);
-        return;
-      }
-      else{
-        next(200);
-      }
+      log.error("User session does not exist. NOT AUTHORIZED!");
+      res.sendStatus(401);
     }
   }
 
@@ -98,3 +102,9 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
       }
     });
   };
+
+  function isAuthenticated(req){
+    return req.session.authenticated;
+  }
+
+  exports.isAuthenticated = isAuthenticated;

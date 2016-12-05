@@ -1,6 +1,5 @@
-var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
-    _              = require('underscore'),
-    mobileHandler  = require(pathUtil.join(__dirname,'../handlers/mobileHandler.js'));
+var log        = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    commonUtil = require(pathUtil.join(__dirname,'../lib/commonutils.js'));
 
   exports.fetchUser = function(req,res,next){
     log.info("User details requested.");
@@ -10,5 +9,5 @@ var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
 
   exports.fetchMobileStatus = function(req,res,next){
     log.info("Mobile status requested.");
-    res.send(mobileHandler.isMobile(req));
+    res.send(commonUtil.isMobile(req));
   }

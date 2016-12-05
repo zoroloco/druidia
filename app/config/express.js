@@ -63,7 +63,7 @@ module.exports = function() {
       log.info("Setting up mobile express site.");
       var mobileApp = express();
       log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
-      app.use(vhost(conf.virtualHostnameMobile+"."+conf.hostname,mobileApp));
+      app.use(vhost("*."+conf.hostname,mobileApp));
     }
 
     log.info("Defining routing file.");
