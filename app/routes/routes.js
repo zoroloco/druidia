@@ -35,7 +35,7 @@ module.exports = function(app) {
   //once logged in, all of our secure requests will be prepended with 'secure'.
   //As you see above, all 'secure' routes first go through authentication. If auth passes, then the
   //'next' routes are defined below.
-  app.get('/secure/home',rootController.sendRoot);
+  //app.get('/secure/home',rootController.sendRoot);
   app.post('/secure/logoff',securityController.onLogout);
   app.get('/secure/common/fetchUser',commonController.fetchUser);
   app.get('/secure/common/fetchMobileStatus',commonController.fetchMobileStatus);
@@ -47,6 +47,7 @@ module.exports = function(app) {
               securityController.authenticate,
               rootController.sendRoot);
 
+  //app.use()
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
   app.use(errorController.handleError);

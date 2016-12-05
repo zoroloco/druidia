@@ -7,7 +7,6 @@ exports.reRouteMobile = function(req,res,next){
   log.info("Determining if mobile device used.");
 
   if(conf.mobileSite === true && isMobile(req)){
-
        log.info("Mobile device detected!");
        var mobilePath = "https://mobile."+conf.hostname+req.url;
        log.info("Rerouting to: "+mobilePath);
