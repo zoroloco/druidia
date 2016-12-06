@@ -36,7 +36,10 @@ var self = module.exports = {
 
       var UserSchema= new Schema({
         "username"    : {type: String, required: true},
-        "password"    : String,
+        "password"    : {type: String, required: true},
+        "firstname"   : String,
+        "lastname"    : String,
+        "email"       : String,
         "role"        : {type: String, required: true},
         "description" : String
       });

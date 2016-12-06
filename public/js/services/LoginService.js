@@ -15,7 +15,7 @@ function LoginService($http,$log){
      );
     }
 
-    self.processCreateUser = function(newCreds,cb){
+    self.processRegister = function(newCreds,cb){
       $http.post('addUser',newCreds).then(
         function(response){//first method is always the success handler (response of 200)
           $log.log("Create user successful.");

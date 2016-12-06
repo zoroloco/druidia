@@ -9,8 +9,15 @@ angular.module('login-module', ['ngMaterial']).
       "password" : ""
     };
 
-    this.loginMsg   = "";
-    this.addUserMsg = "";
+    this.newCreds = {
+      "username" : "",
+      "password" : "",
+      "password1": "",
+      "password2": "",
+      "email"    : "",
+      "firstName": "",
+      "lastName" : ""
+    };
 
     self.onLogon = function(){
       $log.log("User "+self.creds.username+" is attempting to login.");
@@ -22,16 +29,23 @@ angular.module('login-module', ['ngMaterial']).
           $window.location.href = "/";//reload entire page.
         }
         else{
-          self.loginMsg = response;
+          //self.loginMsg = response;
         }
       });
     }
 
-    self.onCreateUser = function(){
-      $log.log("User "+self.creds.username+" is being added.");
-      loginService.processCreateUser(self.creds,function(err){
+    self.onRegister = function(){
+      $log.log("User "+self.newCreds.username+" is being registered.");
+
+      if(self.newCreds.password1 != self.newCreds.password2){
+        $log.log("Passwords do not match.");
+        return;
+      }
+      self.newCreds.password = self.newCreds.password1;
+
+      loginService.processRegister(self.newCreds,function(err){
         $log.log("Received error when creating user:"+err);
-        self.addUserMsg = err;
+        //self.addUserMsg = err;
       });
     }
 
