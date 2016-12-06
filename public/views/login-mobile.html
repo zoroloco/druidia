@@ -13,82 +13,27 @@
   </head>
   <body ng-app="druidia-web" ng-controller="LoginController as ctrl">
 
-    <div class="container">
-            <div class="row centered-form">
-            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-              <form role="form">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Log on</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-        			    				<input type="text" ng-model="ctrl.creds.username" class="form-control input-sm" placeholder="Username">
-        			    			</div>
-                      </div>
-                    </div>
+    <div class="container" >
+       <div class="col-lg-4 col-md-3 col-sm-2"></div>
+       <div class="col-lg-4 col-md-6 col-sm-8">
+           <div class="row loginbox">
+               <div class="col-lg-12">
+                   <span class="singtext" >Sign in </span>
+               </div>
 
-                    <div class="form-group">
-                      <input type="password" name="password" ng-model="ctrl.creds.password" class="form-control input-sm" placeholder="Password">
-                    </div>
-                  <input type="submit" value="Log In" class="btn btn-info btn-block" ng-click="ctrl.onLogon()">
-                  </div>
-                </div>
+               <div class="col-lg-12 col-md-12 col-sm-12">
+                   <input class="form-control" ng-model="ctrl.creds.username" type="text" placeholder="Please enter your user name" >
+               </div>
+               <div class="col-lg-12  col-md-12 col-sm-12">
+                   <input class="form-control" ng-model="ctrl.creds.password" type="password" placeholder="Please enter password" >
+               </div>
+               <div class="col-lg-12  col-md-12 col-sm-12">
+                   <input type="submit" value="Log In" class="btn submitButton" ng-click="ctrl.onLogon()">
+               </div>
 
-              	<div class="panel panel-default">
-              		<div class="panel-heading">
-                    <h3 class="panel-title">Sign Up</h3>
-                  </div>
-      			 			<div class="panel-body">
-      			    			<div class="row">
-      			    				<div class="col-xs-6 col-sm-6 col-md-6">
-      			    					<div class="form-group">
-      			                <input type="text" ng-model="ctrl.newCreds.firstName"
-                                   class="form-control input-sm" placeholder="First Name">
-      			    					</div>
-      			    				</div>
-      			    				<div class="col-xs-6 col-sm-6 col-md-6">
-      			    					<div class="form-group">
-      			    						<input type="text" ng-model="ctrl.newCreds.lastName"
-                                   class="form-control input-sm" placeholder="Last Name">
-      			    					</div>
-      			    				</div>
-      			    			</div>
-
-      			    			<div class="form-group">
-      			    				<input type="text" ng-model="ctrl.newCreds.username"
-                               class="form-control input-sm" placeholder="Username">
-      			    			</div>
-
-      			    			<div class="row">
-      			    				<div class="col-xs-6 col-sm-6 col-md-6">
-      			    					<div class="form-group">
-      			    						<input type="password" ng-model="ctrl.newCreds.password1"
-                                   class="form-control input-sm" placeholder="Password">
-      			    					</div>
-      			    				</div>
-      			    				<div class="col-xs-6 col-sm-6 col-md-6">
-      			    					<div class="form-group">
-      			    						<input type="password" ng-model="ctrl.newCreds.password2"
-                                   class="form-control input-sm" placeholder="Confirm Password">
-      			    					</div>
-      			    				</div>
-      			    			</div>
-
-      			    			<input type="submit" value="Register" class="btn btn-info btn-block" ng-click="ctrl.onRegister()">
-      			    	</div>
-      	    		</div>
-              </form>
-        		</div>
-        	</div>
-        </div>
-      </div>
-    </div>
-
-
-
+           </div>
+       </div>
+     </div>
 
 
     <!-- JS -->
