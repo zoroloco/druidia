@@ -2,13 +2,13 @@ var pathUtil   = require('path'),
     async      = require('async'),
     _          = require('underscore'),
     vhost      = require('vhost'),
-    log        = require(pathUtil.join(__dirname,'./app/lib/logger.js')),
-    express    = require(pathUtil.join(__dirname,'./app/config/express.js')),
     https      = require('https'),
     http       = require('http'),
     mongoose   = require('mongoose'),
-    mongoloid  = require(pathUtil.join(__dirname,'./app/mongoose/mongoloid.js')),
-    conf       = require(pathUtil.join(__dirname,'./app/config/conf.json'));
+    log        = require(pathUtil.join(__dirname,'./lib/logger.js')),
+    express    = require(pathUtil.join(__dirname,'./config/express.js')),
+    mongoloid  = require(pathUtil.join(__dirname,'./mongoose/mongoloid.js')),
+    conf       = require(pathUtil.join(__dirname,'./config/conf.json'));
 
 module.exports = Server;
 
