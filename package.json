@@ -1,6 +1,6 @@
 {
   "name": "druidia.net",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "druidia.net project.",
   "main": "node index.js",
   "scripts": {
