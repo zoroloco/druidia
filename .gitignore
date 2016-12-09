@@ -2,6 +2,6 @@ node_modules
 *.log
 gulpfile.js
 public/libs
-app/config/credentials.js
-app/security/ssl/druidia.crt
-app/security/ssl/druidia.pem
+app-server/config/credentials.js
+app-server/security/ssl/druidia.crt
+app-server/security/ssl/druidia.pem
