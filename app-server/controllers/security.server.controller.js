@@ -1,4 +1,5 @@
-var log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
+var pathUtil       = require('path'),
+    log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     underStr       = require('underscore.string'),
     _              = require('underscore'),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),

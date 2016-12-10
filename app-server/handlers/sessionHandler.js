@@ -1,5 +1,6 @@
-var log    = require(pathUtil.join(__dirname,'../lib/logger.js')),
-    conf   = require(pathUtil.join(__dirname,'../config/conf.json'));
+var pathUtil = require('path'),
+    log      = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    conf     = require(pathUtil.join(__dirname,'../config/conf.json'));
 
   function createSession(req){
     log.info("Creating session.");

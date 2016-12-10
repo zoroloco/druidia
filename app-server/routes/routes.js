@@ -1,6 +1,7 @@
 //This script defines the routes taken by the server.
 
-var log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
+var pathUtil           = require('path'),
+    log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
     conf               = require(pathUtil.join(__dirname,'../config/conf.json')),
     documentHandler    = require(pathUtil.join(__dirname,'../handlers/documentHandler.js')),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),

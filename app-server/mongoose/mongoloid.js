@@ -1,5 +1,6 @@
 var mongoose   = require('mongoose'),
     _          = require('underscore'),
+    pathUtil   = require('path'),
     conf       = require(pathUtil.join(__dirname,'../config/conf.json')),
     log        = require(pathUtil.join(__dirname,'../lib/logger.js'));
 

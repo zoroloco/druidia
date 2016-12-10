@@ -1,4 +1,5 @@
-var log        = require(pathUtil.join(__dirname,'../lib/logger.js')),
+var pathUtil   = require('path'),
+    log        = require(pathUtil.join(__dirname,'../lib/logger.js')),
     commonUtil = require(pathUtil.join(__dirname,'../lib/commonutils.js'));
 
   exports.fetchUser = function(req,res,next){

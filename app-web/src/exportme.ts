@@ -3,7 +3,7 @@ export function sayHello(name: string){
   return `Hello dude from ${name}`;
 }
 
-export function addNums(num1: poop , num2: number d){
-  console.log("Adding: "+num1+" + "+num2);
-  return num1 + num2;
+export function addNums(num0: number , num1: number){
+  console.log("Adding: "+num0+" + "+num1);
+  return num0 + num1;
 }

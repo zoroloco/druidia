@@ -1,8 +1,7 @@
 {
     "files": [
-        "src/tstest.ts",
-        "src/exportme.ts",
-        "src/student.ts"
+        "src/main.ts",
+        "src/exportme.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,

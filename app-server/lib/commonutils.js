@@ -1,4 +1,5 @@
-var log          = require(pathUtil.join(__dirname,'../lib/logger.js')),
+var pathUtil     = require('path'),
+    log          = require(pathUtil.join(__dirname,'../lib/logger.js')),
     cp           = require('child_process'),
     conf         = require(pathUtil.join(__dirname,'../config/conf.json')),
     MobileDetect = require('mobile-detect');

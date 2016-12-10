@@ -1,5 +1,6 @@
 //sends documents down to the client.
-var log        = require(pathUtil.join(__dirname,'../lib/logger.js')),
+var pathUtil   = require('path'),
+    log        = require(pathUtil.join(__dirname,'../lib/logger.js')),
     conf       = require(pathUtil.join(__dirname,'../config/conf.json')),
     commonUtil = require(pathUtil.join(__dirname,'../lib/commonutils.js'));
 
