@@ -1,10 +1,13 @@
 {
-    "files": [
-        "src/main.ts",
-        "src/exportme.ts"
-    ],
+    "compileOnSave": false,
+
     "compilerOptions": {
         "noImplicitAny": true,
-        "target": "es5"
-    }
+        "target": "es5",
+        "removeComments": true
+    },
+
+    "include": [
+        "src/**/*"
+    ]
 }

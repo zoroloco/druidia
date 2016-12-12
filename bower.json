@@ -1,6 +1,6 @@
 {
   "name": "druidia.net",
-  "version": "1.0.21",
+  "version": "1.0.23",
   "dependencies": {
     "bootstrap"         : "latest",
     "font-awesome"      : "latest",
