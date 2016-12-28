@@ -1,4 +1,5 @@
 node_modules
+app-web/dist
 *.log
 *.store
 gulpfile.js
