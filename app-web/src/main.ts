@@ -1,12 +1,8 @@
-//import * as dog from './dog';
-import {Canine as Dog} from './canine';
-import {Feline as Cat} from './feline';
+import 'zone.js';
+import 'reflect-metadata';
 
-let garfield = new Cat();
-let phoebe   = new Dog("Phoebe");
-let mango    = new Dog("Mango");
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-mango.eat();
-phoebe.bark();
+import { AppModule } from './app.module';
 
-garfield.drink();
+platformBrowserDynamic().bootstrapModule(AppModule);
