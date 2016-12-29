@@ -15,6 +15,11 @@ module.exports = function(app) {
   app.use(securityController.auditRequest,//if not mobile site, then log it.
           securityController.reRouteHttps);//after logging, forward to https site.
 
+  app.get('/',function(req,res,next){
+    log.info("Sending index to client.");
+    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/views/index.html'));
+  })
+  /*
   //Accessing the root / needs to first send down some initial html such as the login
   //or the index, depending if authentication passed.
   app.get('/',securityController.authenticateRoot);
@@ -41,6 +46,7 @@ module.exports = function(app) {
   app.post('/secure/logoff',securityController.onLogout);
   app.get('/secure/common/fetchUser',commonController.fetchUser);
   app.get('/secure/common/fetchMobileStatus',commonController.fetchMobileStatus);
+  */
 
   //everything else is a 404, not found.
   app.get('*',function(req,res,next){

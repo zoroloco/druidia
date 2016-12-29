@@ -3,7 +3,6 @@ app-web/dist
 *.log
 *.store
 gulpfile.js
-public/libs
 app-server/config/credentials.js
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem

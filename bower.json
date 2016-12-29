@@ -1,12 +1,9 @@
 {
   "name": "druidia.net",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "dependencies": {
-    "bootstrap"         : "latest",
-    "font-awesome"      : "latest",
-    "animate.css"       : "latest",
-    "angular"           : "latest",
-    "angular-route"     : "latest",
-    "angular-material"  : "latest"
+    "core-js"          : "latest",
+    "zone"             : "latest",
+    "reflect-metadata" : "latest"
   }
 }
