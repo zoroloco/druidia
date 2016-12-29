@@ -2,8 +2,7 @@
   "name": "druidia.net",
   "version": "1.0.26",
   "dependencies": {
-    "core-js"          : "latest",
-    "zone"             : "latest",
-    "reflect-metadata" : "latest"
+    "bootstrap"         : "latest",
+    "font-awesome"      : "latest"
   }
 }

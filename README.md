@@ -19,6 +19,11 @@ npm install --save-dev gulp-uglify vinyl-buffer gulp-sourcemaps
 
 npm install --save-dev run-sequence
 
+npm install -g uglify
+npm install -g minify
+npm install -g uglifyjs
+npm install -g browserify
+
 #note
 The init script is meant to work on Centos 7.
 
@@ -30,3 +35,7 @@ The init script is meant to work on Centos 7.
 
 This build script will get latest code from github, delete previous version and install
 all NPM and Bower dependencies and restart server.
+
+npm start (starts express js server)
+npm run build (runs gulpfile default to compilte ts and browserify to a bundle.js)
+npm run brun (runs build and start)

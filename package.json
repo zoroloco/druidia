@@ -1,12 +1,18 @@
 {
   "name": "druidia.net",
-  "version": "0.0.26",
-  "description": "druidia.net project.",
+  "version": "0.0.27",
+  "description": "druidia.net MEA2N project.",
   "main": "node index.js",
   "scripts": {
+    "clean": "rm -rf app-web/dist && mkdir app-web/dist && touch app-web/dist/bundle.js && mkdir app-web/dist/views",
     "start": "node app-server/index.js",
-    "build": "./app-web/gulp",
-    "commit": "./app-web/gulp release",
+    "publish" : "gulp release",
+    "copy_views" : "cp app-web/src/views/* app-web/dist/views/",
+    "build" : "tsc -p app-web",
+    "clean_build": "npm run clean && npm run copy_views && npm run build",
+    "build_prod": "npm run clean_build && browserify -s main app-web/dist/main.js > app-web/dist/bundle.js && npm run minify",
+    "minify": "uglifyjs app-web/dist/bundle.js --screw-ie8 --compress --mangle --output app-web/dist/bundle.min.js",
+    "brun" : "npm run build_prod && npm start",
     "test": "node_modules/karma/bin/karma start test/karma.conf.js"
   },
   "keywords": [
@@ -57,6 +63,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0",
+    "minify": "^2.0.13",
+    "uglify": "^0.1.5",
 
     "@angular/common": "~2.3.0",
     "@angular/compiler": "~2.3.0",
