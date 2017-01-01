@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
            <button (click)="togglePause()">
              {{ buttonLabel }}
            </button>
+           <button (click)="reset()">Reset</button>
        </p>`
 })
 export class KenTimerComponent{
