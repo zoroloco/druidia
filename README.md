@@ -6,6 +6,7 @@ https://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/
 
 sudo npm install -g bower
 sudo npm install -g ionic
+npm install -g cordova
 
 npm install -g typescript
 

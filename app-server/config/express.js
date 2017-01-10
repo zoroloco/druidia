@@ -16,8 +16,8 @@ module.exports = function() {
     log.info("Setting default and config values for express app.");
     app.set('port', process.env.PORT || conf.port);
     app.set('httpPort', conf.httpPort);
-    app.set('views',pathUtil.join(__dirname,'../../app-web/views'));
-    app.set('view engine', 'jade');
+    app.set('views',pathUtil.join(__dirname,'../../app-web/www'));
+    //app.set('view engine', 'jade');
     app.set('title', conf.title);
 
     //CONFIGURE SSL
@@ -55,7 +55,7 @@ module.exports = function() {
     // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
     app.use(methodOverride('X-HTTP-Method-Override'));
 
-    // set the static files location /public/img will be /img for users
+    //setup the static dir to be served 
     log.info("Setting static file directory.");
     app.use(express.static(pathUtil.join(__dirname,'../../app-web/dist')));
 

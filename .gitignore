@@ -7,3 +7,5 @@ gulpfile.js
 app-server/config/credentials.js
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
+
+app-web/.DS_Store

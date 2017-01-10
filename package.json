@@ -1,19 +1,23 @@
 {
   "name": "druidia.net",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "druidia.net MEA2N project.",
   "main": "node index.js",
   "scripts": {
-    "clean": "rm -rf app-web/dist && mkdir app-web/dist && touch app-web/dist/bundle.js && mkdir app-web/dist/views",
-    "start": "node app-server/index.js",
-    "publish" : "gulp release",
-    "copy_views" : "cp app-web/src/views/* app-web/dist/views/",
-    "build" : "tsc -p app-web",
-    "clean_build": "npm run clean && npm run copy_views && npm run build",
-    "build_prod": "npm run clean_build && browserify -s main app-web/dist/main.js > app-web/dist/bundle.js && npm run minify",
-    "minify": "uglifyjs app-web/dist/bundle.js --screw-ie8 --compress --mangle --output app-web/dist/bundle.min.js",
-    "brun" : "npm run build_prod && npm start",
-    "test": "node_modules/karma/bin/karma start test/karma.conf.js"
+    "start"      : "node app-server/index.js",
+
+    "clean"                : "rm -rf app-web/dist && mkdir app-web/dist && touch app-web/dist/bundle.js && mkdir app-web/dist/www",
+    "copy_www"             : "cp -R app-web/www/* app-web/dist/www/",
+    "build"                : "tsc -p app-web",
+    "clean_build"          : "npm run clean && npm run copy_www && npm run build",
+    "bundle"               : "browserify -s main app-web/dist/main.js > app-web/dist/bundle.js",
+    "build_bundle"         : "npm run clean_build && npm run bundle",
+    "minify"               : "uglifyjs app-web/dist/bundle.js --screw-ie8 --compress --mangle --output app-web/dist/bundle.min.js",
+    "build_bundle_minify"  : "npm run clean_build && browserify -s main app-web/dist/main.js > app-web/dist/bundle.js && npm run minify",
+    "brun"                 : "npm run build_prod && npm start",
+    "publish"              : "gulp release",
+
+    "test"                 : "node_modules/karma/bin/karma start test/karma.conf.js"
   },
   "keywords": [
     "druidia.net"

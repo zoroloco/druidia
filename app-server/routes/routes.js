@@ -17,7 +17,7 @@ module.exports = function(app) {
 
   app.get('/',function(req,res,next){
     log.info("Sending index to client.");
-    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/views/index.html'));
+    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/www/index.html'));
   })
   /*
   //Accessing the root / needs to first send down some initial html such as the login

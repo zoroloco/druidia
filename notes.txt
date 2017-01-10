@@ -12,5 +12,5 @@ TODO:
 -- verify same user, different browsers.
 -- logger name.
 -- maybe merge express mobile and normal routes. very repetitive as is.
-
--- setup angular 2 env.
+-- split vendor bundle from custom bundle so you only have to bundle small file.
+-- slowly remove gulp file. Using NPM now.
