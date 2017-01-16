@@ -1,11 +1,15 @@
-node_modules
-app-web/dist
-app-web/libs
+client/node_modules
+client/platforms
+client/www
+client/plugins
+client/resources
+
 *.log
 *.store
+*.DS_Store
 gulpfile.js
-app-server/config/credentials.js
-app-server/security/ssl/druidia.crt
-app-server/security/ssl/druidia.pem
 
-app-web/.DS_Store
+server/node_modules
+server/config/credentials.js
+server/security/ssl/druidia.crt
+server/security/ssl/druidia.pem

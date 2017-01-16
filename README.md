@@ -5,10 +5,10 @@ Install MongoDB for Centos 7.
 https://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/
 
 sudo npm install -g bower
+npm install -g typescript
 sudo npm install -g ionic
 npm install -g cordova
-
-npm install -g typescript
+npm install -g ios-sim
 
 npm install --save-dev typescript gulp gulp-typescript
 
@@ -24,6 +24,8 @@ npm install -g uglify
 npm install -g minify
 npm install -g uglifyjs
 npm install -g browserify
+
+ionic platform add ios
 
 #note
 The init script is meant to work on Centos 7.
