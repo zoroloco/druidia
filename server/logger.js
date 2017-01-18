@@ -3,7 +3,7 @@ var winston  = require('winston'),
     pathUtil = require('path'),
 	  fs       = require('fs'),
     _        = require('underscore'),
-    conf     = require(pathUtil.join(__dirname,'../config/conf.json'));
+    conf     = require(pathUtil.join(__dirname,'./conf.json'));
 
 var log = new (winston.Logger)({//create the default console logger.
   transports: [

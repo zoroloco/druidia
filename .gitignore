@@ -7,7 +7,6 @@ client/resources
 *.log
 *.store
 *.DS_Store
-gulpfile.js
 
 server/node_modules
 server/config/credentials.js

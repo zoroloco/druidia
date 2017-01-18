@@ -1,0 +1,11 @@
+{ "title" : "raspy",
+  "hostname" : "raspy",
+
+  "port"     : 443,
+  "httpPort" : 80,
+
+  "logger" : {
+    "enabled" : true,
+    "dir"     : "logs"
+  }
+}
