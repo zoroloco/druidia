@@ -39,6 +39,13 @@ The init script is meant to work on Centos 7.
 This build script will get latest code from github, delete previous version and install
 all NPM and Bower dependencies and restart server.
 
+
+NPM scripts:
+
 npm start (starts express js server)
-npm run build (runs gulpfile default to compilte ts and browserify to a bundle.js)
-npm run brun (runs build and start)
+npm run build (compiles ts and puts compiled files in the app-web/dist folder)
+npm run bundle (bundles all the js files in the dist folder to one file named bundle.js. Also performs browserify.)
+npm run minify (uglifies the bundle.js file and creates a bundle.js.min file)
+npm run copy_www (copies over the static html files from app-web/www to dist/www)
+
+npm run brun (does everything)

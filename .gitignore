@@ -1,5 +1,7 @@
 logs/*.log
 
+gulpfile.js
+
 *.store
 *.DS_Store
 
@@ -9,4 +11,6 @@ app-server/security/credentials.js
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
 
-app-web/libs
+app-web/dist/*
+app-web/libs/*
+npm-debug.log
