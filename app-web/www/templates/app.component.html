@@ -1,0 +1,9 @@
+
+<button (click)="onAction()">Add</button>
+You clicked: {{clickCount}} times. <br/>
+<p>Heroes:</p>
+<ul>
+  <li *ngFor="let hero of heroes">
+    {{ hero }}
+  </li>
+</ul>

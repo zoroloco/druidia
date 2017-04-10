@@ -1,14 +1,12 @@
-client/node_modules
-client/platforms
-client/www
-client/plugins
-client/resources
+logs/*.log
 
-*.log
 *.store
 *.DS_Store
 
-server/node_modules
-server/config/credentials.js
-server/security/ssl/druidia.crt
-server/security/ssl/druidia.pem
+node_modules
+
+app-server/security/credentials.js
+app-server/security/ssl/druidia.crt
+app-server/security/ssl/druidia.pem
+
+app-web/libs
