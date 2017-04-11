@@ -4,11 +4,11 @@
   "debugMobile": true,
 
   "port"     : 443,
-  "httpPort" : 80,
+  "httpPort" : 88,
 
   "logger" : {
     "enabled" : true,
-    "dir"     : "logs"
+    "dir"     : "app-server/logs"
   },
 
   "mySqlServer" : {

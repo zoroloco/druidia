@@ -14,7 +14,6 @@
     "minify": "uglifyjs app-web/dist/bundle.js --screw-ie8 --compress --mangle --output app-web/dist/bundle.min.js",
     "build_bundle_minify": "npm run clean_build && browserify -s main app-web/dist/main.js > app-web/dist/bundle.js && npm run minify",
     "brun": "npm run build_bundle_minify && npm start",
-    "publish": "gulp release",
     "test": "node_modules/karma/bin/karma start test/karma.conf.js"
   },
   "keywords": [

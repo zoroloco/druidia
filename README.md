@@ -1,4 +1,4 @@
-#dependencies
+#Environment Setup
 
 Install MongoDB for Centos 7.
 
@@ -27,20 +27,11 @@ npm install -g browserify
 
 ionic platform add ios
 
-#note
-The init script is meant to work on Centos 7.
+#Install libraries
+bower install (installs front-end static files)
+npm install (installs all front and back-end dependencies)
 
-#Website application.
-
-1.) Move scripts/shell/druidia-build.sh to /usr/local/src
-2.) chmod +x druidia-build.sh
-3.) ./druidia-build.sh
-
-This build script will get latest code from github, delete previous version and install
-all NPM and Bower dependencies and restart server.
-
-
-NPM scripts:
+#NPM scripts:
 
 npm start (starts express js server)
 npm run build (compiles ts and puts compiled files in the app-web/dist folder)

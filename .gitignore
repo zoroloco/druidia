@@ -1,12 +1,9 @@
-logs/*.log
-
-gulpfile.js
-
 *.store
 *.DS_Store
 
 node_modules
 
+app-server/logs/*.log
 app-server/security/credentials.js
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
