@@ -1,3 +1,3 @@
 module.exports = {
-    cookieSecretValue: 'Lebrawn Jaymz test',
+    cookieSecretValue: 'Lebrawn Jaymz test'    
 };

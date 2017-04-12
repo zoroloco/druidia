@@ -1,0 +1,69 @@
+{
+  "name": "druidia.net",
+  "version": "0.0.30",
+  "description": "druidia.net Angular 2 web application.",
+  "scripts": {
+    "clean":       "rm -rf dist && mkdir dist && touch dist/bundle.js && mkdir dist/www",
+    "copy_www":    "cp -R www/* dist/www/",
+    "build":       "tsc",
+    "clean_build": "npm run clean && npm run copy_www && npm run build",
+    "bundle":      "browserify -s main dist/main.js > dist/bundle.js",
+    "build_bundle":"npm run clean_build && npm run bundle",
+    "minify":      "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",
+    "build_browserify_bundle_minify" : "npm run build && browserify -s main dist/main.js > dist/bundle.js && npm run minify",
+    "clean_build_browserify_bundle_minify": "npm run clean_build && browserify -s main dist/main.js > dist/bundle.js && npm run minify",
+    "brun":        "npm run build_bundle_minify && npm start",
+    "test":        "node_modules/karma/bin/karma start test/karma.conf.js"
+  },
+  "keywords": [
+    "druidia.net"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoroloco/druidia.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zoroloco/druidia.git/issues",
+    "email": "kcenturion@yahoo.com"
+  },
+  "author": {
+    "name": "Kenneth Centurion"
+  },
+  "dependencies": {
+    "underscore": "^1.8.3",
+    "@angular/common": "4.0.0",
+    "@angular/compiler": "4.0.0",
+    "@angular/compiler-cli": "4.0.0",
+    "@angular/core": "4.0.0",
+    "@angular/forms": "4.0.0",
+    "@angular/http": "4.0.0",
+    "@angular/platform-browser": "4.0.0",
+    "@angular/platform-browser-dynamic": "4.0.0",
+    "@angular/router": "4.0.0",
+    "systemjs": "0.19.40",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.1.1",
+    "zone.js": "^0.8.4",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1"
+  },
+  "engines": {
+    "node": "^6.9.2"
+  },
+  "devDependencies": {
+    "browserify": "^13.3.0",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "run-sequence": "^1.2.2",
+    "typescript": "~2.2.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "bower": "^1.7.7",
+    "tsify": "^2.0.8",
+    "minify": "^2.0.13",
+    "uglify": "^0.1.5",
+    "watchify": "^3.9.0"
+  }
+}

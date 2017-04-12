@@ -1,12 +1,17 @@
 *.store
 *.DS_Store
 
-node_modules
+app-ios/node_modules
+app-ios/www/build
 
+app-server/node_modules
 app-server/logs/*.log
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
 
-app-web/dist/*
-app-web/libs/*
+app-web/node_modules
+app-web/dist
+app-web/libs
+
 npm-debug.log
+app-web/dist/bundle.js

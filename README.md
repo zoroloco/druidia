@@ -9,17 +9,12 @@ npm install -g typescript
 sudo npm install -g ionic
 npm install -g cordova
 npm install -g ios-sim
-
+npm install passport-facebook
 npm install --save-dev typescript gulp gulp-typescript
-
 npm install --save-dev browserify tsify vinyl-source-stream
-
 npm install --save-dev watchify gulp-util
-
 npm install --save-dev gulp-uglify vinyl-buffer gulp-sourcemaps
-
 npm install --save-dev run-sequence
-
 npm install -g uglify
 npm install -g minify
 npm install -g uglifyjs

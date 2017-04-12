@@ -8,7 +8,7 @@
 
   "logger" : {
     "enabled" : true,
-    "dir"     : "app-server/logs"
+    "dir"     : "logs"
   },
 
   "mySqlServer" : {

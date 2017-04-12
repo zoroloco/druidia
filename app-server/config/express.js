@@ -8,7 +8,9 @@ var   pathUtil       = require('path'),
       fs             = require('fs'),
       credentials    = require(pathUtil.join(__dirname,'../security/credentials.js')),
       conf           = require(pathUtil.join(__dirname,'./conf.json')),
-      log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
+      log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
+      passport       = require('passport'),
+      Strategy       = require('passport-facebook').Strategy;
 
 module.exports = function() {
     var app       = express();
@@ -27,20 +29,42 @@ module.exports = function() {
         cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
     });
 
+    //passport
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(new Strategy({
+    clientID:     process.env.FB_APP_ID,
+    clientSecret: process.env.FB_APP_SECRET,
+    callbackURL:  "http://localhost:3000/auth/facebook/callback"
+      },
+      function(accessToken, refreshToken, profile, cb) {
+        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+          return cb(err, user);
+        });
+      }
+    ));
+
+    passport.serializeUser(function(user, cb) {
+      cb(null, user);
+    });
+
+    passport.deserializeUser(function(obj, cb) {
+      cb(null, obj);
+    });
+
     //CONFIGURE SESSION STORE
     const session    = require('express-session');
-    const MongoStore = require('connect-mongo')(session);
+    //const MongoStore = require('connect-mongo')(session);
     app.use(session({
         secret: credentials.cookieSecretValue,
-        cookie: {secure:true},
-        saveUninitialized: false, // don't create session until something stored
-        resave: false, //don't save session if unmodified
-        maxAge: new Date(Date.now()+3600000),//one hour
-        store: new MongoStore({ url: conf.mongo.connectionString })
+        //cookie: {secure:true},
+        saveUninitialized: true,
+        resave: true,
+        //maxAge: new Date(Date.now()+3600000),//one hour
+        //store: new MongoStore({ url: conf.mongo.connectionString })
     }));
-    log.info("Defined mongo session store with credentials.");
 
-    app.use(require('cookie-parser')(credentials.cookieSecretValue));
+    //app.use(require('cookie-parser')(credentials.cookieSecretValue));
 
     // get all data/stuff of the body (POST) parameters
     // parse application/json
@@ -55,16 +79,14 @@ module.exports = function() {
     // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
     app.use(methodOverride('X-HTTP-Method-Override'));
 
-    //setup the static dir to be served 
+    //setup the static dir to be served
     log.info("Setting static file directory.");
     app.use(express.static(pathUtil.join(__dirname,'../../app-web/dist')));
 
-    if(conf.mobileSite === true){
-      log.info("Setting up mobile express site.");
-      var mobileApp = express();
-      log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
-      app.use(vhost("*."+conf.hostname,mobileApp));
-    }
+    log.info("Setting up mobile express site.");
+    var mobileApp = express();
+    log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
+    app.use(vhost("*."+conf.hostname,mobileApp));
 
     log.info("Defining routing file.");
     require('../routes/routes.js')(app);

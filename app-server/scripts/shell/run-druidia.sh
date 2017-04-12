@@ -12,5 +12,5 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/bin:/var/lib/mongodb/bin
 
 mongod&
 
-cd /home/kcenturion/Documents/dev/druidia
+cd /home/kcenturion/Documents/dev/druidia/app-server
 sudo npm start
