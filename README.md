@@ -35,3 +35,27 @@ npm run minify (uglifies the bundle.js file and creates a bundle.js.min file)
 npm run copy_www (copies over the static html files from app-web/www to dist/www)
 
 npm run brun (does everything)
+
+#run as a service
+chmod 755 /YOURPATH/run-druidia.sh
+sudo nano /etc/systemd/druidia.service
+
+Put the following in the file:
+
+[Unit]
+Description=druidia.net
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=YOURPATH/run-druidia.sh -s
+
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+
+Then run:  sudo systemctl daemon-reload
+
+Now you can:
+sudo systemctl start|stop|status druidia.service
