@@ -33,8 +33,8 @@ module.exports = function() {
     app.use(passport.initialize());
     app.use(passport.session());
     passport.use(new Strategy({
-    clientID:     process.env.FB_APP_ID,
-    clientSecret: process.env.FB_APP_SECRET,
+    clientID:     fs.readFileSync(pathUtil.join(__dirname, "../security/fb_app_id")),
+    clientSecret: fs.readFileSync(pathUtil.join(__dirname, "../security/fb_app_secret")),
     callbackURL:  "http://localhost:3000/auth/facebook/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
@@ -79,9 +79,12 @@ module.exports = function() {
     // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
     app.use(methodOverride('X-HTTP-Method-Override'));
 
-    //setup the static dir to be served
-    log.info("Setting static file directory.");
+    //set up static directory of my own custom files
+    log.info("Defining custom static file directory.");
     app.use(express.static(pathUtil.join(__dirname,'../../app-web/dist')));
+    //set up static directory of 3rd party files
+    log.info("Defining 3rd party static file directory.");
+    app.use(express.static(pathUtil.join(__dirname,'../../app-web/libs')));
 
     log.info("Setting up mobile express site.");
     var mobileApp = express();

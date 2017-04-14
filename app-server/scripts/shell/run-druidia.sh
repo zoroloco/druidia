@@ -13,4 +13,5 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/bin:/var/lib/mongodb/bin
 mongod&
 
 cd /home/kcenturion/Documents/dev/druidia/app-server
-sudo npm start
+# -E to preserve user's run environment so it can use the process.env variables.
+sudo -E npm start

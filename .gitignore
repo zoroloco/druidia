@@ -15,3 +15,7 @@ app-web/libs
 
 npm-debug.log
 app-web/dist/bundle.js
+app-server/security/fb_app_id
+app-server/security/fb_app_secret
+app-web/dist/bundle.js
+app-web/dist/bundle.min.js
