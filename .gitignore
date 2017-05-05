@@ -19,3 +19,71 @@ app-server/security/fb_app_id
 app-server/security/fb_app_secret
 app-web/dist/bundle.js
 app-web/dist/bundle.min.js
+
+
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+.metadata/
+druidai.net.ear/.settings
+druidai.net.ear/target
+druidia.net.ear/.project
+druidia.net.war/target/
+RemoteSystemsTempFiles/.project
+druidia.net.war/.settings
+druidia.net.ejb/target
+druidia.net.ejb/.settings
+druidia.net.ear/target
+druidia.net.war/.classpath
+*.project
+druidia.net.ejb/.classpath
+druidia.net.ear/.settings
+.settings/org.eclipse.m2e.core.prefs
+druidia.net.ng/node_modules
+druidia.net.ng/.settings

@@ -1,0 +1,21 @@
+{
+    "compileOnSave" : false,
+
+    "compilerOptions": {
+        "noImplicitAny"                  : true,
+        "target"                         : "es5",
+        "removeComments"                 : true,
+        "module"                         : "commonjs",
+        "moduleResolution"               : "node",
+        "sourceMap"                      : true,
+        "emitDecoratorMetadata"          : true,
+        "experimentalDecorators"         : true,
+        "lib"                            : [ "es2015", "dom" ],
+        "suppressImplicitAnyIndexErrors" : true,
+        "outDir"                         : "dist"
+    },
+
+    "include" : [
+        "build/src/**/*"
+    ]
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="2.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemalocation="http://java.sun.com/xml/ns/persistence 
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+       <persistence-unit name="LFPU" transaction-type="JTA">
+           <provider>org.hibernate.ejb.HibernatePersistence</provider>  
+           <jta-data-source>java:jboss/datasources/DruidiaDataSource</jta-data-source>
+           <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>         
+           <properties>
+              <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>          
+               <!--  Debugger helpers -->       
+               <property name="hibernate.show_sql" value="false"/>
+               <property name="hibernate.format_sql" value="false"/>               
+               <property name="hibernate.use_sql_comments" value="false"/>         
+
+			   <!-- level 2 JPA Hibernate caching
+               <property name="hibernate.cache.use_second_level_cache" value="true"/>
+    		   <property name="hibernate.cache.use_query_cache" value="true" />     
+    		   <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.infinispan.InfinispanRegionFactory"/>
+    		   -->
+    		  
+               <!-- Batch Size -->   
+               <property name="hibernate.jdbc.batch_size" value="100"/>                                  
+               <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>                            
+           </properties>         
+       </persistence-unit>      
+</persistence>

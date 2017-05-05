@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <properties>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+       <java.version>1.8</java.version>
+  </properties>
+  
+  <parent>
+    <groupId>druidia.net</groupId>
+    <artifactId>druidia.net</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>druidia.net.ear</artifactId>
+  <packaging>ear</packaging>
+  <description>The ear project for druidia.net</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>druidia.net.ejb</groupId>
+  		<artifactId>druidia.net.ejb</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>druidia.net.war</groupId>
+  		<artifactId>druidia.net.war</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<type>war</type>
+  	</dependency>
+  	<dependency>
+  		<groupId>druidia.net.ng</groupId>
+  		<artifactId>druidia.net.ng</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<type>war</type>
+  	</dependency>
+  </dependencies>
+  
+      <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-ear-plugin</artifactId>
+          <version>2.10.1</version>
+          <configuration>
+             <modules>
+               <webModule>
+                 <groupId>druidia.net.war</groupId>
+                 <artifactId>druidia.net.war</artifactId>
+                 <contextRoot>/app</contextRoot>
+               </webModule>
+               <webModule>
+                 <groupId>druidia.net.ng</groupId>
+                 <artifactId>druidia.net.ng</artifactId>
+                 <contextRoot>/</contextRoot>
+               </webModule>
+            </modules>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+</project>
