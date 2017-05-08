@@ -1,0 +1,47 @@
+ <div class="container">   
+	<div class="jumbotron">        
+	  <p class="lead"></p>
+	  
+	  <form>
+		  <div class="form-group">
+		    <label for="name">Username</label>
+		    <input
+		      type="text"
+		      class="form-control"
+		      #username
+		      placeholder="Enter your email">
+		  </div>
+		  <div class="form-group">
+		    <label for="name">Password</label>
+		    <input
+		      type="password"
+		      class="form-control"
+		      #password
+		      placeholder="Enter your password">
+		  </div>
+		  <button
+		    type="submit"
+		    class="btn btn-default"
+		    (click)="auth.login(username.value, password.value)">
+		      Log In
+		  </button>
+		  <button
+		    type="button"
+		    class="btn btn-default"
+		    (click)="auth.signup(username.value, password.value)">
+		      Sign Up
+		  </button>
+		  <button
+		    type="button"
+		    class="btn btn-default btn-primary"
+		    (click)="auth.loginWithFacebook()">
+		      Log In with Facebook
+		  </button>
+		</form>	  
+	                  	      	    
+	</div>
+	
+	<footer class="footer">
+	  <p>&copy; 2017 drudia.net</p>
+	</footer>
+</div> 

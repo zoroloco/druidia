@@ -1,23 +1,16 @@
 
-//root component of the application
+//Component for login.
 import { Component } from '@angular/core';
+import { Auth } from './services/auth.service';
 
 @Component({
   selector: 'Login',
   styleUrls: ['resources/jumbotron-narrow.css','resources/signin.css'],
-  templateUrl: 'www/templates/login.component.html',
+  templateUrl: 'www/templates/login.template.html',
 })
 export class LoginComponent{
 
-  constructor(){
-
-  }
-
-  onLogin(){
-
-  }
-
-  onClear(){
+  constructor(private auth: Auth){
 
   }
 }

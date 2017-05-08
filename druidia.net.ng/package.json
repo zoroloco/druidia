@@ -3,14 +3,13 @@
   "version": "0.0.30",
   "description": "druidia.net Angular 2 web application.",
   "scripts": {
-    "resources" :  "copyfiles -f build/resources/* dist/resources",
-    "html" :       "copyfiles -f build/www/*.html dist && copyfiles -f build/www/templates/*.html dist/www/templates",
-    "compile":     "tsc",
-    "bundle":      "browserify -s main dist/main.js > dist/bundle.js",
-    "minify":      "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",
-    
-    "build" :      "npm run resources && npm run html && npm run compile && npm run bundle",
-    "deploy":      "npm run build && npm run minify"
+    "resources": "copyfiles -f build/resources/* dist/resources",
+    "html": "copyfiles -f build/www/*.html dist && copyfiles -f build/www/templates/*.html dist/www/templates",
+    "compile": "tsc",
+    "bundle": "browserify -s main dist/main.js > dist/bundle.js",
+    "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",
+    "build": "npm run resources && npm run html && npm run compile && npm run bundle",
+    "deploy": "npm run build && npm run minify"
   },
   "keywords": [
     "druidia.net"
@@ -28,7 +27,6 @@
     "name": "Kenneth Centurion"
   },
   "dependencies": {
-    "underscore": "^1.8.3",
     "@angular/common": "4.0.0",
     "@angular/compiler": "4.0.0",
     "@angular/compiler-cli": "4.0.0",
@@ -38,13 +36,16 @@
     "@angular/platform-browser": "4.0.0",
     "@angular/platform-browser-dynamic": "4.0.0",
     "@angular/router": "4.0.0",
-    "systemjs": "0.19.40",
+    "angular2-jwt": "^0.2.3",
+    "auth0-lock": "^10.15.1",
     "core-js": "^2.4.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.1.1",
-    "zone.js": "^0.8.4",
-    "passport": "^0.3.2",
-    "passport-facebook": "^2.1.1"
+    "systemjs": "0.19.40",
+    "underscore": "^1.8.3",
+    "zone.js": "^0.8.4"
   },
   "engines": {
     "node": "^6.9.2"
