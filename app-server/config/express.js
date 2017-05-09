@@ -28,30 +28,7 @@ module.exports = function() {
         key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
         cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
     });
-
-    //passport
-    app.use(passport.initialize());
-    app.use(passport.session());
-    passport.use(new Strategy({
-    clientID:     fs.readFileSync(pathUtil.join(__dirname, "../security/fb_app_id")),
-    clientSecret: fs.readFileSync(pathUtil.join(__dirname, "../security/fb_app_secret")),
-    callbackURL:  "http://localhost:3000/auth/facebook/callback"
-      },
-      function(accessToken, refreshToken, profile, cb) {
-        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-          return cb(err, user);
-        });
-      }
-    ));
-
-    passport.serializeUser(function(user, cb) {
-      cb(null, user);
-    });
-
-    passport.deserializeUser(function(obj, cb) {
-      cb(null, obj);
-    });
-
+    
     //CONFIGURE SESSION STORE
     const session    = require('express-session');
     //const MongoStore = require('connect-mongo')(session);

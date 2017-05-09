@@ -12,16 +12,16 @@ export class Auth {
   auth0 = new auth0.WebAuth({
       domain:       'druidia.auth0.com',
       clientID:     'a4CRvjDPEbYnz0xKy-8IIO-ecdw_eGUF',
-      redirectUri:  'https://localhost:8443/home',
+      redirectUri:  'https://localhost/home',
       responseType: 'token id_token'
   });
-    
-  constructor(private router: Router, private log: Logger) {      
-      log.info("In constructor of auth service.");
+
+  constructor(private router: Router, private log: Logger) {
+      this.log.info("In constructor of auth service.");
   }
 
   public handleAuthentication(): void {
-      
+
       this.auth0.parseHash({ _idTokenVerification: false }, (err, authResult) => {
         if (err) {
           alert(`Error: ${err.errorDescription}`)
@@ -30,12 +30,12 @@ export class Auth {
           window.location.hash = '';
           localStorage.setItem('access_token', authResult.accessToken);
           localStorage.setItem('id_token', authResult.idToken);
-          //log.info("Handling successful authentication and re-routing to secure site.");
+          this.log.info("Handling successful authentication and re-routing to secure site.");
           this.router.navigate(['/home']);
         }
       });
   }
-  
+
   public login(username: string, password: string): void {
       this.auth0.redirect.loginWithCredentials({
         connection: 'Username-Password-Authentication',
@@ -45,7 +45,7 @@ export class Auth {
         if (err) return alert(err.description);
       });
   }
-  
+
   public signup(email, password): void {
       this.auth0.redirect.signupAndLogin({
         connection: 'Username-Password-Authentication',
@@ -55,26 +55,30 @@ export class Auth {
         if (err) return alert(err.description);
       });
   }
-  
+
   public loginWithFacebook(): void {
     this.auth0.authorize({
       connection: 'facebook',
     });
   }
-  
+
   public isAuthenticated(): boolean {
     // Check whether the id_token is expired or not
     return tokenNotExpired('id_token');
   }
 
   public logout(): void {
+    this.log.info("Logging out of the application.");
     // Remove token from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
+
+    this.router.navigateByUrl('https://druidia.auth0.com/v2/logout?returnTo=https%3A%2F%2Flocalhost/logout');
   }
 
   private setUser(authResult): void {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
   }
+
 }

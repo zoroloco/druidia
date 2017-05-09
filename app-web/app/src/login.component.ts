@@ -1,7 +1,8 @@
 
 //Component for login.
 import { Component } from '@angular/core';
-import { Auth } from './services/auth.service';
+import { Auth }      from './services/auth.service';
+import { Logger }    from './services/logger.service';
 
 @Component({
   selector: 'Login',
@@ -10,7 +11,7 @@ import { Auth } from './services/auth.service';
 })
 export class LoginComponent{
 
-  constructor(private auth: Auth){
-
+  constructor(private auth: Auth,private log: Logger){
+    this.log.info("Instantiating login component.");
   }
 }

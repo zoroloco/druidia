@@ -16,6 +16,6 @@
     },
 
     "include" : [
-        "build/src/**/*"
+        "app/src/**/*"
     ]
 }

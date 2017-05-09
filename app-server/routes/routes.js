@@ -15,9 +15,9 @@ module.exports = function(app) {
   app.use(securityController.auditRequest,//if not mobile site, then log it.
           securityController.reRouteHttps);//after logging, forward to https site.
 
-  app.get('/',function(req,res,next){
+  app.get('*',function(req,res,next){
     log.info("Sending index to client.");
-    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/www/index.html'));
+    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
   /*
   //Accessing the root / needs to first send down some initial html such as the login
@@ -49,10 +49,12 @@ module.exports = function(app) {
   */
 
   //everything else is a 404, not found.
+  /*
   app.get('*',function(req,res,next){
     res.sendStatus(404);
   });
-
+  */
+  
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
   app.use(errorController.handleError);

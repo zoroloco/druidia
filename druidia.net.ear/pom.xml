@@ -26,12 +26,6 @@
   		<version>0.0.1-SNAPSHOT</version>
   		<type>war</type>
   	</dependency>
-  	<dependency>
-  		<groupId>druidia.net.ng</groupId>
-  		<artifactId>druidia.net.ng</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>war</type>
-  	</dependency>
   </dependencies>
   
       <build>
@@ -46,12 +40,7 @@
                  <groupId>druidia.net.war</groupId>
                  <artifactId>druidia.net.war</artifactId>
                  <contextRoot>/app</contextRoot>
-               </webModule>
-               <webModule>
-                 <groupId>druidia.net.ng</groupId>
-                 <artifactId>druidia.net.ng</artifactId>
-                 <contextRoot>/</contextRoot>
-               </webModule>
+               </webModule>              
             </modules>
           </configuration>
         </plugin>

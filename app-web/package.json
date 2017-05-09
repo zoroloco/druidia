@@ -3,8 +3,8 @@
   "version": "0.0.30",
   "description": "druidia.net Angular 2 web application.",
   "scripts": {
-    "resources": "copyfiles -f build/resources/* dist/resources",
-    "html": "copyfiles -f build/www/*.html dist && copyfiles -f build/www/templates/*.html dist/www/templates",
+    "resources": "copyfiles -f app/resources/* dist/resources",
+    "html": "copyfiles -f app/www/*.html dist && copyfiles -f app/www/templates/*.html dist/www/templates",
     "compile": "tsc",
     "bundle": "browserify -s main dist/main.js > dist/bundle.js",
     "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",

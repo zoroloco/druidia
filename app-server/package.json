@@ -2,7 +2,7 @@
   "name": "druidia.net",
   "version": "0.0.30",
   "description": "druidia.net ExpressJS back-end server.",
-  "main": "node index.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
