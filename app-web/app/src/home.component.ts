@@ -1,17 +1,26 @@
 //Component for home.
 
-import { Component } from '@angular/core';
-import { Logger }    from './services/logger.service';
-import { Auth }      from './services/auth.service';
+import { Component,OnInit } from '@angular/core';
+import { Logger }           from './services/logger.service';
+
+import { NavBarComponent }  from './navbar.component';
 
 @Component({
     selector: 'Home',
+    styleUrls: ['resources/global.css'],
     templateUrl: 'www/templates/home.template.html'
   })
-  export class HomeComponent{
+  export class HomeComponent implements OnInit{
 
-    constructor(private auth: Auth,private log: Logger){
-        this.log.info("Instantiating home component.");
+    constructor(private log: Logger){
+      this.log.info("Instantiating home component.");
     }
 
+    ngOnInit(){
+      this.log.info("Initializing home component.");
+    }
+
+    ngOnDestroy(){
+      this.log.info("Destroying home component.");
+    }
   }

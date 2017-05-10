@@ -6,6 +6,7 @@ import { Logger }    from './services/logger.service';
 
 @Component({
   selector: 'App',
+  styleUrls: ['resources/jumbotron-narrow.css'],
   templateUrl: 'www/templates/app.template.html',
 })
 export class AppComponent{

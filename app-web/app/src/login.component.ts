@@ -6,7 +6,7 @@ import { Logger }    from './services/logger.service';
 
 @Component({
   selector: 'Login',
-  styleUrls: ['resources/jumbotron-narrow.css','resources/signin.css'],
+  styleUrls: ['resources/signin.css'],
   templateUrl: 'www/templates/login.template.html',
 })
 export class LoginComponent{

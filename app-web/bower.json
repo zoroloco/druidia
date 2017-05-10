@@ -3,6 +3,7 @@
   "version": "1.0.29",
   "dependencies": {
     "bootstrap"         : "latest",
-    "font-awesome"      : "latest"
+    "font-awesome"      : "latest",
+    "auth0-angular"     : "latest"
   }
 }

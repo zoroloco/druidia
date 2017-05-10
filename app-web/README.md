@@ -26,6 +26,7 @@ npm install -g uglify
 npm install -g minify
 npm install -g uglifyjs
 npm install -g browserify
+npm install auth0-js
 
 ionic platform add ios
 
@@ -37,7 +38,7 @@ npm install (installs all front and back-end dependencies)
 npm start (starts express js server)
 
 #Useful NPM Build scripts for the Angular project.
-npm run html    - copies all the html files to the dist folder.
-npm run build   - compiles typescript files and moves generated js in the dist folder.
-npm run compile - runs html and build, but also bundles everything to a bundle.js file ready for development.
-npm run deploy  - runs compile, but also minifies the bundle.js to a bundle.min.js ready for production.
+npm run html      - copies all the html files to the dist folder, including the www folder.
+npm run resources - copies the resources folder to the dist folder.
+npm run build     - runs html and resources scripts, but also compiles the ts and moves js output to dist folder.
+npm run deploy    - runs build, but also minifies the bundle.js to a bundle.min.js ready for production.

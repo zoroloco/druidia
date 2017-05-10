@@ -30,8 +30,8 @@ export class Auth {
           window.location.hash = '';
           localStorage.setItem('access_token', authResult.accessToken);
           localStorage.setItem('id_token', authResult.idToken);
-          this.log.info("Handling successful authentication and re-routing to secure site.");
-          this.log.info("Welcome:"+authResult.userProfile.name);
+
+          this.log.info("Authentication successful. Re-routing to /home.");
           this.router.navigate(['/home']);
         }
       });
@@ -45,6 +45,15 @@ export class Auth {
       }, err => {
         if (err) return alert(err.description);
       });
+  }
+
+  public logout(): void {
+    this.log.info("Logging out of the application.");
+    // Remove token from localStorage
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('id_token');
+
+    this.router.navigate(['/']);
   }
 
   public signup(email, password): void {
@@ -68,18 +77,12 @@ export class Auth {
     return tokenNotExpired('id_token');
   }
 
-  public logout(): void {
-    this.log.info("Logging out of the application.");
-    // Remove token from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-
-    this.router.navigate(['/']);
+  public fetchUserProfile(cb): any {
+    if(this.isAuthenticated){
+      this.auth0.client.userInfo(localStorage.getItem('access_token'), (err,user)=>{
+        this.log.info("Logged in user: "+JSON.stringify(user));
+        cb(user);
+      });
+    }
   }
-
-  private setUser(authResult): void {
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-  }
-
 }
