@@ -2,6 +2,7 @@
 
 import { Component,OnInit } from '@angular/core';
 import { Logger }           from './services/logger.service';
+import { Subject }          from 'rxjs';
 
 @Component({
     selector: 'Chatter',

@@ -10,7 +10,7 @@ import { Auth }             from './services/auth.service';
   export class NavBarComponent implements OnInit{
     private name;
     private pictureUrl;
-    
+
     constructor(private auth:Auth, private log: Logger){
       this.log.info("Instantiating navbar component.");
     }
@@ -21,6 +21,10 @@ import { Auth }             from './services/auth.service';
         this.name=userProfile.name;
         this.pictureUrl=userProfile.picture;
       });
+    }
+
+    onBlog(){
+      this.log.info("Blog button clicked.");
     }
 
     onChatter(){

@@ -2,6 +2,8 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router }          from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AUTH_CONFIG }     from './auth0-variables';
 import { Logger }          from './logger.service';
 
 declare var auth0: any;
@@ -10,9 +12,9 @@ declare var auth0: any;
 export class Auth {
 
   auth0 = new auth0.WebAuth({
-      domain:       'druidia.auth0.com',
-      clientID:     'a4CRvjDPEbYnz0xKy-8IIO-ecdw_eGUF',
-      redirectUri:  'https://localhost/home',
+      domain:       AUTH_CONFIG.CLIENT_DOMAIN,
+      clientID:     AUTH_CONFIG.CLIENT_ID,
+      redirectUri:  AUTH_CONFIG.REDIRECT,//needed for social media redirects.
       responseType: 'token id_token'
   });
 

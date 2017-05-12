@@ -6,6 +6,7 @@ var pathUtil           = require('path'),
     documentHandler    = require(pathUtil.join(__dirname,'../handlers/documentHandler.js')),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
     commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
+    loggerController   = require(pathUtil.join(__dirname,'../controllers/logger.server.controller.js')),
     errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js'));
 
 module.exports = function(app) {
@@ -15,10 +16,21 @@ module.exports = function(app) {
   app.use(securityController.auditRequest,//if not mobile site, then log it.
           securityController.reRouteHttps);//after logging, forward to https site.
 
-  app.get('*',function(req,res,next){
+  //Below is the route to serve the NG2 site.
+  app.get('/',function(req,res,next){
     log.info("Sending index to client.");
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
+
+  app.get('/home',function(req,res,next){
+    log.info("Sending index to client.");
+    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
+  })
+
+  app.get('/api/logger',
+          securityController.jwtCheck,
+          loggerController.log);
+
   /*
   //Accessing the root / needs to first send down some initial html such as the login
   //or the index, depending if authentication passed.
@@ -54,7 +66,7 @@ module.exports = function(app) {
     res.sendStatus(404);
   });
   */
-  
+
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
   app.use(errorController.handleError);

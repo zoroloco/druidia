@@ -8,9 +8,9 @@ var   pathUtil       = require('path'),
       fs             = require('fs'),
       credentials    = require(pathUtil.join(__dirname,'../security/credentials.js')),
       conf           = require(pathUtil.join(__dirname,'./conf.json')),
-      log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
-      passport       = require('passport'),
-      Strategy       = require('passport-facebook').Strategy;
+      log            = require(pathUtil.join(__dirname,'../lib/logger.js'));
+
+const cors = require('cors');
 
 module.exports = function() {
     var app       = express();
@@ -28,7 +28,7 @@ module.exports = function() {
         key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
         cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
     });
-    
+
     //CONFIGURE SESSION STORE
     const session    = require('express-session');
     //const MongoStore = require('connect-mongo')(session);
@@ -56,6 +56,8 @@ module.exports = function() {
     // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
     app.use(methodOverride('X-HTTP-Method-Override'));
 
+    app.use(cors());
+
     //set up static directory of my own custom files
     log.info("Defining custom static file directory.");
     app.use(express.static(pathUtil.join(__dirname,'../../app-web/dist')));
@@ -63,10 +65,10 @@ module.exports = function() {
     log.info("Defining 3rd party static file directory.");
     app.use(express.static(pathUtil.join(__dirname,'../../app-web/libs')));
 
-    log.info("Setting up mobile express site.");
-    var mobileApp = express();
-    log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
-    app.use(vhost("*."+conf.hostname,mobileApp));
+    //log.info("Setting up mobile express site.");
+    //var mobileApp = express();
+    //log.info("Setting up the mobile virtual host: "+conf.virtualHostnameMobile+"."+conf.hostname);
+    //app.use(vhost("*."+conf.hostname,mobileApp));
 
     log.info("Defining routing file.");
     require('../routes/routes.js')(app);
