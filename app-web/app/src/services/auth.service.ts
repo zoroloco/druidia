@@ -31,9 +31,10 @@ export class Auth {
         if (authResult && authResult.accessToken && authResult.idToken) {
           window.location.hash = '';
           localStorage.setItem('access_token', authResult.accessToken);
+          //HERE WE SAVE OFF OUR JWT!!!
           localStorage.setItem('id_token', authResult.idToken);
 
-          this.log.info("Authentication successful. Re-routing to /home.");
+          this.log.info("Authentication successful. Saved JWT. Re-routing to /home.");
           this.router.navigate(['/home']);
         }
       });

@@ -2,8 +2,7 @@
 import { AuthHttp }   from 'angular2-jwt';
 
 export class Logger {
-  constructor(private authHttp: AuthHttp){}
-
+  
   info(msg: any)   {
     console.log(msg);
   }

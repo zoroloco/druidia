@@ -27,7 +27,7 @@ module.exports = function(app) {
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
 
-  app.get('/api/logger',
+  app.post('/api/logger',
           securityController.jwtCheck,
           loggerController.log);
 
