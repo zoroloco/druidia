@@ -3,8 +3,10 @@
   "version": "0.0.30",
   "description": "druidia.net Angular 2 web application.",
   "scripts": {
+    "create": "mkdir dist",
+    "clean": "rimraf dist/ && npm run create",
     "resources": "copyfiles -f app/resources/* dist/resources",
-    "html": "copyfiles -f app/www/*.html dist && copyfiles -f app/www/templates/*.html dist/www/templates",
+    "html": "copyfiles -f app/src/**/*.html dist/html && copyfiles -f app/src/index.html dist/",
     "compile": "tsc",
     "bundle": "browserify -s main dist/main.js > dist/bundle.js",
     "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",
@@ -38,7 +40,7 @@
     "@angular/router": "4.0.0",
     "angular2-jwt": "^0.2.3",
     "auth0-lock": "^10.15.1",
-    "core-js": "^2.4.1",    
+    "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.1.1",
     "systemjs": "0.19.40",
@@ -60,7 +62,6 @@
     "tsify": "^2.0.8",
     "minify": "^2.0.13",
     "uglify": "^0.1.5",
-    "watchify": "^3.9.0",
-    "copyfiles": "^1.2.0"
+    "watchify": "^3.9.0"
   }
 }

@@ -4,14 +4,14 @@
 
 import { Routes } from '@angular/router';
 
-import { LoginComponent }        from './login.component';
+import { LoginComponent }        from './login/login.component';
 import { HomeComponent }         from './home.component';
-import { BlogComponent }         from './blog.component';
-import { ChatterComponent }      from './chatter.component';
-import { PageNotFoundComponent } from './common/page-not-found.component';
+import { BlogComponent }         from './blog/blog.component';
+import { ChatterComponent }      from './chatter/chatter.component';
+import { PageNotFoundComponent } from './page-not-found.component';
 
-import { Auth }                  from './services/auth.service';
-import { AuthGuard }             from './services/auth-guard.service';
+import { Auth }                  from './auth/auth.service';
+import { AuthGuard }             from './auth/auth-guard.service';
 
 export const ROUTES: Routes = [
   { path: 'home/blog'    , component: BlogComponent, canActivate: [AuthGuard] },

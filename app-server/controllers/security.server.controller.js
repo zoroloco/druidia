@@ -4,12 +4,13 @@ var pathUtil       = require('path'),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
 
-const jwt  = require('express-jwt');
-const jwks = require('jwks-rsa');
+const expressJWT = require('express-jwt');
+const jwt        = require('jsonwebtoken');
+const jwks       = require('jwks-rsa');
 
   // We are going to implement a JWT middleware that will ensure the validity of our token.
   //We'll require each protected route to have a valid access_token sent in the Authorization header
-  exports.jwtCheck = jwt({
+  exports.jwtCheck = expressJWT({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
@@ -20,6 +21,9 @@ const jwks = require('jwks-rsa');
     issuer: "https://druidia.auth0.com/",
     algorithms: ['RS256']
   });
+
+  //exports.jwtCheck = expressJWT({secret: "test secret okay"}).unless({ path: ['/', '/api/logger'] });
+  //exports.jwtCheck = expressJWT({secret: "test secrete okay"});
 
   exports.auditRequest = function(req,res,next){
     log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip);

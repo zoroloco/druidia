@@ -27,6 +27,8 @@ npm install -g minify
 npm install -g uglifyjs
 npm install -g browserify
 npm install auth0-js
+npm install rimraf -g
+npm install copyfiles -g
 
 ionic platform add ios
 

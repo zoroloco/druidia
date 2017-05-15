@@ -7,9 +7,9 @@ interface AuthConfig {
 }
 
 export const AUTH_CONFIG: AuthConfig = {
-  CLIENT_ID: 'a4CRvjDPEbYnz0xKy-8IIO-ecdw_eGUF',
+  CLIENT_ID: '',
   CLIENT_DOMAIN: 'druidia.auth0.com',
-  AUDIENCE: '59160649eea54b18bdde9af8',
+  AUDIENCE: '',
   REDIRECT: 'https://localhost/home',
   SCOPE: 'full_access'
 };

@@ -1,10 +1,10 @@
 //Component for a blog.
 import { Component,OnInit } from '@angular/core';
-import { Logger }           from './services/logger.service';
+import { Logger }           from '../services/logger.service';
 
 @Component({
     selector: 'Blog',
-    templateUrl: 'www/templates/blog.template.html'
+    templateUrl: 'html/blog.template.html'
   })
   export class BlogComponent implements OnInit{
 

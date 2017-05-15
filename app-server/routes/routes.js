@@ -9,6 +9,8 @@ var pathUtil           = require('path'),
     loggerController   = require(pathUtil.join(__dirname,'../controllers/logger.server.controller.js')),
     errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js'));
 
+//const jwt        = require('jsonwebtoken');
+
 module.exports = function(app) {
   //order important here.
 
@@ -19,11 +21,14 @@ module.exports = function(app) {
   //Below is the route to serve the NG2 site.
   app.get('/',function(req,res,next){
     log.info("Sending index to client.");
+    //var myToken = jwt.sign({user  },'')
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
 
   app.get('/home',function(req,res,next){
-    log.info("Sending index to client.");
+    log.info("Sending home to client.");
+    //now send back this user's JWT so user can hit rest api.
+    //var myToken = jwt.sign({username: "ken" }, "test secrete okay");
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
 
@@ -32,6 +37,12 @@ module.exports = function(app) {
           loggerController.log);
 
   /*
+  //this is a test for JWT.
+  app.get('/foo/bar',securityController.jwtCheck,function(req,res,next){
+    log.info("got a request to foo/bar endpoint.");
+    res.send("you is authorized.");
+  })
+
   //Accessing the root / needs to first send down some initial html such as the login
   //or the index, depending if authentication passed.
   app.get('/',securityController.authenticateRoot);

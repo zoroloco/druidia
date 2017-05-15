@@ -1,13 +1,13 @@
 
 //Component for login.
 import { Component } from '@angular/core';
-import { Auth }      from './services/auth.service';
-import { Logger }    from './services/logger.service';
+import { Auth }      from '../auth/auth.service';
+import { Logger }    from '../services/logger.service';
 
 @Component({
   selector: 'Login',
   styleUrls: ['resources/signin.css'],
-  templateUrl: 'www/templates/login.template.html',
+  templateUrl: 'html/login.template.html',
 })
 export class LoginComponent{
 

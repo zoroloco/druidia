@@ -4,7 +4,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Router }          from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AUTH_CONFIG }     from './auth0-variables';
-import { Logger }          from './logger.service';
+import { Logger }          from '../services/logger.service';
 
 declare var auth0: any;
 

@@ -8,7 +8,7 @@ import { NavBarComponent }  from './navbar.component';
 @Component({
     selector: 'Home',
     styleUrls: ['resources/global.css'],
-    templateUrl: 'www/templates/home.template.html'
+    templateUrl: 'html/home.template.html'
   })
   export class HomeComponent implements OnInit{
 

@@ -1,8 +1,8 @@
 //This logger will log to the console and to the server.
-import { AuthHttp }   from 'angular2-jwt';
 
 export class Logger {
-  
+  //constructor(public authHttp: AuthHttp){}
+
   info(msg: any)   {
     console.log(msg);
   }
@@ -14,5 +14,6 @@ export class Logger {
   warn(msg: any)   {
     console.warn(msg);
   }
+
 
 }

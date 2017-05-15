@@ -1,11 +1,11 @@
 import { Component,OnInit } from '@angular/core';
 import { Logger }           from './services/logger.service';
-import { Auth }             from './services/auth.service';
+import { Auth }             from './auth/auth.service';
 
 @Component({
     selector: 'NavBar',
     styleUrls: ['resources/global.css'],
-    templateUrl: 'www/templates/navbar.template.html'
+    templateUrl: 'html/navbar.template.html'
   })
   export class NavBarComponent implements OnInit{
     private name;
