@@ -27,10 +27,19 @@
     (click)="auth.signup(username.value, password.value)">
       Sign Up
   </button>
+  <!--
   <button
     type="button"
-    class="btn btn-default btn-primary"
-    (click)="auth.loginWithFacebook()">
+    class="btn btn-default"
+    (click)="loginWithFacebook()">
       Log In with Facebook
   </button>
+  -->
+
+  <a href="https://localhost/auth/facebook"
+    role="button"
+    class="btn btn-default btn-primary">
+      Log In with Facebook
+  </a>
+  
 </form>

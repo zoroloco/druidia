@@ -4,6 +4,7 @@ var pathUtil           = require('path'),
     log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
     conf               = require(pathUtil.join(__dirname,'../config/conf.json')),
     documentHandler    = require(pathUtil.join(__dirname,'../handlers/documentHandler.js')),
+    passport           = require('passport'),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
     commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
     loggerController   = require(pathUtil.join(__dirname,'../controllers/logger.server.controller.js')),
@@ -27,10 +28,35 @@ module.exports = function(app) {
 
   app.get('/home',function(req,res,next){
     log.info("Sending home to client.");
-    //now send back this user's JWT so user can hit rest api.
-    //var myToken = jwt.sign({username: "ken" }, "test secrete okay");
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
+
+  // Redirect the user to Facebook for authentication.  When complete,
+  // Facebook will redirect the user back to the application at
+  //     /auth/facebook/callback
+  app.get('/auth/facebook', passport.authenticate('facebook'));
+
+  // Facebook will redirect the user to this URL after approval.  Finish the
+  // authentication process by attempting to obtain an access token.  If
+  // access was granted, the user will be logged in.  Otherwise,
+  // authentication has failed.
+  app.get('/auth/facebook/callback', function(req, res, next) {
+    passport.authenticate('facebook', function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        log.error("no user");
+        return res.send("secret");
+      }
+      req.logIn(user, function(err) {//CREATE A LOGIN SESSION.
+        if (err) {
+          return next(err);
+        }
+        return res.redirect('/home');
+      });
+    })(req, res, next);
+  });
 
   app.post('/api/logger',
           securityController.jwtCheck,

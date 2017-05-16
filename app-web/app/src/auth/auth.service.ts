@@ -5,6 +5,11 @@ import { Router }          from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AUTH_CONFIG }     from './auth0-variables';
 import { Logger }          from '../services/logger.service';
+import { Http, Response,RequestOptions,Headers }  from '@angular/http';
+import { Observable }      from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
 
 declare var auth0: any;
 
@@ -18,7 +23,7 @@ export class Auth {
       responseType: 'token id_token'
   });
 
-  constructor(private router: Router, private log: Logger) {
+  constructor(private router: Router, private log: Logger, private http: Http) {
       this.log.info("In constructor of auth service.");
   }
 
@@ -69,10 +74,45 @@ export class Auth {
       });
   }
 
-  public loginWithFacebook(): void {
+  public loginWithFacebook(): Observable<string> {
+    this.log.info("FB observable triggered.");
+    var options = new RequestOptions({
+        headers: new Headers({
+          'Access-Control-Allow-Origin' : true//need this to make facebook happy.
+        })
+    });
+
+    return this.http.request('/auth/facebook', options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+
+    //this.router.navigate(['/home']);
+
+    /*
     this.auth0.authorize({
       connection: 'facebook',
     });
+    */
+  }
+
+  private handleError (error: Response | any) {
+    // In a real world app, you might use a remote logging infrastructure
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    //this.log.error(errMsg);
+    return Observable.throw(errMsg);
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    this.log.info(body);
+    return body.data || { };
   }
 
   public isAuthenticated(): boolean {
@@ -88,4 +128,5 @@ export class Auth {
       });
     }
   }
+
 }

@@ -1,7 +1,5 @@
 { "title" : "druidia.net",
-  "hostname" : "druidia.net",
-
-  "debugMobile": true,
+  "hostname" : "localhost",
 
   "port"     : 443,
   "httpPort" : 80,

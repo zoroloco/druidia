@@ -29,7 +29,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 @NgModule({
   imports:      [ BrowserModule,
                   FormsModule,
-                  HttpModule, JsonpModule,
+                  HttpModule,
+									JsonpModule,
                   RouterModule.forRoot(ROUTES) ],//array with all modules for this application
   declarations: [ AppComponent,
                   NavBarComponent,
