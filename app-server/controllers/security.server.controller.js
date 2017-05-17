@@ -2,24 +2,16 @@ var pathUtil       = require('path'),
     log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
-    sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js'));
+    sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js')),
+    credentials    = require(pathUtil.join(__dirname,'../security/credentials.js'));
 
 const expressJWT = require('express-jwt');
-const jwt        = require('jsonwebtoken');
-const jwks       = require('jwks-rsa');
+//const jwt        = require('jsonwebtoken');
+//const jwks       = require('jwks-rsa');
 
-  // We are going to implement a JWT middleware that will ensure the validity of our token.
-  //We'll require each protected route to have a valid access_token sent in the Authorization header
+  //define the jwt middleware
   exports.jwtCheck = expressJWT({
-    secret: jwks.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: "https://druidia.auth0.com/.well-known/jwks.json"
-    }),
-    audience: 'server-logger-api',
-    issuer: "https://druidia.auth0.com/",
-    algorithms: ['RS256']
+    secret    : credentials.jwtSecret
   });
 
   //exports.jwtCheck = expressJWT({secret: "test secret okay"}).unless({ path: ['/', '/api/logger'] });

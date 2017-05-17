@@ -8,9 +8,10 @@ var pathUtil           = require('path'),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
     commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
     loggerController   = require(pathUtil.join(__dirname,'../controllers/logger.server.controller.js')),
-    errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js'));
+    errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js')),
+    credentials        = require(pathUtil.join(__dirname,'../security/credentials.js'));
 
-//const jwt        = require('jsonwebtoken');
+const jwt        = require('jsonwebtoken');
 
 module.exports = function(app) {
   //order important here.
@@ -31,10 +32,16 @@ module.exports = function(app) {
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
 
+  app.get('/authenticated',function(req,res){
+    log.info("Authenticated route hit with JWT = "+req.query.jwtToken);
+    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
+  })
+
   // Redirect the user to Facebook for authentication.  When complete,
   // Facebook will redirect the user back to the application at
   //     /auth/facebook/callback
-  app.get('/auth/facebook', passport.authenticate('facebook'));
+  app.get('/auth/facebook',
+           passport.authenticate('facebook'));
 
   // Facebook will redirect the user to this URL after approval.  Finish the
   // authentication process by attempting to obtain an access token.  If
@@ -47,7 +54,8 @@ module.exports = function(app) {
       }
       if (!user) {
         log.error("no user");
-        return res.send("secret");
+        var myJwt = jwt.sign({username: "ken"}, credentials.jwtSecret);
+        return res.redirect('/authenticated?jwtToken='+myJwt);
       }
       req.logIn(user, function(err) {//CREATE A LOGIN SESSION.
         if (err) {
@@ -58,9 +66,15 @@ module.exports = function(app) {
     })(req, res, next);
   });
 
-  app.post('/api/logger',
+  //test method used to test jwt check
+  app.get('/api/test',
           securityController.jwtCheck,
-          loggerController.log);
+          //loggerController.log
+          function(req,res){
+            log.info("hit /test/data and sending back 200 response with test data json");
+            res.send({test:'foobar'});
+          }
+        );
 
   /*
   //this is a test for JWT.

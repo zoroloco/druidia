@@ -17,10 +17,12 @@ import { Auth }             from './auth/auth.service';
 
     ngOnInit(){
       this.log.info("Initializing home component.");
+      /*
       this.auth.fetchUserProfile((userProfile)=>{
         this.name=userProfile.name;
         this.pictureUrl=userProfile.picture;
       });
+      */
     }
 
     onBlog(){

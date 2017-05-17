@@ -18,9 +18,11 @@ import { RouterModule }            from '@angular/router';
 import { ROUTES,routedComponents } from './app.routes';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+
+	//This is auth0's helper http wrapper that just inserts always the jwt-token to all requests.
 	return new AuthHttp(new AuthConfig({
-		tokenName: 'token',
-		tokenGetter: (() => localStorage.getItem('id_token')),
+		tokenName: 'jwt_token',
+		tokenGetter: (() => localStorage.getItem('jwt_token')),
 		globalHeaders: [{'Content-Type':'application/json'}],
 	}), http, options);
 }

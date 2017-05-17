@@ -9,6 +9,7 @@ import { HomeComponent }         from './home.component';
 import { BlogComponent }         from './blog/blog.component';
 import { ChatterComponent }      from './chatter/chatter.component';
 import { PageNotFoundComponent } from './page-not-found.component';
+import { AuthComponent }         from './auth/auth.component';
 
 import { Auth }                  from './auth/auth.service';
 import { AuthGuard }             from './auth/auth-guard.service';
@@ -17,8 +18,9 @@ export const ROUTES: Routes = [
   { path: 'home/blog'    , component: BlogComponent, canActivate: [AuthGuard] },
   { path: 'home/chatter' , component: ChatterComponent , canActivate: [AuthGuard]},
   { path: 'home'         , component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'authenticated', component: AuthComponent },
   { path: ''             , component: LoginComponent },
   { path: '**'           , component: PageNotFoundComponent }
 ];
 
-export const routedComponents = [LoginComponent,BlogComponent,ChatterComponent,HomeComponent,PageNotFoundComponent];
+export const routedComponents = [LoginComponent,AuthComponent,BlogComponent,ChatterComponent,HomeComponent,PageNotFoundComponent];

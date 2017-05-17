@@ -4,6 +4,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Router }          from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AUTH_CONFIG }     from './auth0-variables';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Logger }          from '../services/logger.service';
 import { Http, Response,RequestOptions,Headers }  from '@angular/http';
 import { Observable }      from 'rxjs/Observable';
@@ -23,7 +24,11 @@ export class Auth {
       responseType: 'token id_token'
   });
 
-  constructor(private router: Router, private log: Logger, private http: Http) {
+  constructor(private router: Router,
+              private log: Logger,
+              private http: Http,
+              private authHttp: AuthHttp) {
+
       this.log.info("In constructor of auth service.");
   }
 
@@ -58,8 +63,9 @@ export class Auth {
   public logout(): void {
     this.log.info("Logging out of the application.");
     // Remove token from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
+    //localStorage.removeItem('access_token');
+    //localStorage.removeItem('id_token');
+    localStorage.removeItem('jwt_token');
 
     this.router.navigate(['/']);
   }
@@ -74,52 +80,34 @@ export class Auth {
       });
   }
 
-  public loginWithFacebook(): Observable<string> {
-    this.log.info("FB observable triggered.");
+  public testData(): Observable<string>{
+    this.log.info("Test data observable triggered.");
+    /*
     var options = new RequestOptions({
         headers: new Headers({
           'Access-Control-Allow-Origin' : true//need this to make facebook happy.
         })
     });
-
-    return this.http.request('/auth/facebook', options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-
-    //this.router.navigate(['/home']);
-
-    /*
-    this.auth0.authorize({
-      connection: 'facebook',
-    });
     */
+
+    return this.authHttp.get('/api/test')
+           .map(this.extractData);
+
   }
 
-  private handleError (error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    //this.log.error(errMsg);
-    return Observable.throw(errMsg);
+  public isAuthenticated(): boolean {
+    //logged on or off is stateless. You either have the token or not.
+    let hasToken:boolean = tokenNotExpired('jwt_token');
+    this.log.info("Checking if token valid: "+hasToken);
+    return hasToken;
   }
 
   private extractData(res: Response) {
     let body = res.json();
-    this.log.info(body);
-    return body.data || { };
+    return body || { };
   }
 
-  public isAuthenticated(): boolean {
-    // Check whether the id_token is expired or not
-    return tokenNotExpired('id_token');
-  }
-
+  /*
   public fetchUserProfile(cb): any {
     if(this.isAuthenticated){
       this.auth0.client.userInfo(localStorage.getItem('access_token'), (err,user)=>{
@@ -128,5 +116,6 @@ export class Auth {
       });
     }
   }
+  */
 
 }

@@ -64,15 +64,14 @@ module.exports = function() {
     //app.use(passport.session());
 
     //CONFIGURE PASSPORT for Facebook
-    var facebookCallbackURL = "https://"+conf.hostname+"/auth/facebook/callback";
     passport.use(new FacebookStrategy({
         clientID     : credentials.fb_app_id,
         clientSecret : credentials.fb_app_secret,
-        callbackURL  : facebookCallbackURL//,
+        callbackURL  : "https://"+conf.hostname+"/auth/facebook/callback",
         //passReqToCallback: true
       },
       function(accessToken, refreshToken, profile, done) {
-        log.info("accessToken = "+accessToken);
+        log.info("Facebook accessToken = "+accessToken);
         log.info("profile = "+JSON.stringify(profile));
 
         //TODO: match FB user with my own mongo user and pass that object to callback.

@@ -15,13 +15,15 @@ export class LoginComponent{
     this.log.info("Instantiating login component.");
   }
 
+  /*
   loginWithFacebook(){
     this.log.info("User is attempting to login with facebook credentials.");
     let s = '';
     this.auth.loginWithFacebook()
              .subscribe(
-               secret => {s = secret; this.log.info("secret from server = "+s)},
+               secret => {s = secret; this.log.info("secret from server = "+JSON.stringify(s))},
                error  => {this.log.error("ERROR:"+error)}
              );
   }
+  */
 }
