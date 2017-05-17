@@ -87,3 +87,4 @@ druidia.net.ear/.settings
 .settings/org.eclipse.m2e.core.prefs
 druidia.net.ng/node_modules
 druidia.net.ng/.settings
+app-server/security/credentials.js
