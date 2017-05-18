@@ -1,8 +1,9 @@
 //Component for home.
 
-import { Component,OnInit } from '@angular/core';
-import { Logger }           from '../services/logger.service';
-import { Subject }          from 'rxjs';
+import { Component,
+         OnInit,
+         OnDestroy } from '@angular/core';
+import { Logger }    from '../services/logger.service';
 
 @Component({
     selector: 'Chatter',

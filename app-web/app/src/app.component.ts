@@ -1,7 +1,6 @@
 //root component of the application, which is really just a router component.
 
 import { Component } from '@angular/core';
-import { Auth }      from './auth/auth.service';
 import { Logger }    from './services/logger.service';
 
 @Component({
@@ -10,11 +9,8 @@ import { Logger }    from './services/logger.service';
   templateUrl: 'html/app.template.html',
 })
 export class AppComponent{
-  private heroes: string[];
-  private clickCount: number;
 
-  constructor(private auth: Auth,private log: Logger){
+  constructor(private log: Logger){
     this.log.info("Instantiating app component.");
-    this.auth.handleAuthentication();
   }
 }

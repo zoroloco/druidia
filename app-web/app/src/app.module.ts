@@ -6,7 +6,7 @@ import { Logger }                  from './services/logger.service';
 import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
 
-import { Auth }                    from './auth/auth.service';
+import { AuthService }             from './auth/auth.service';
 import { AuthGuard }               from './auth/auth-guard.service';
 
 import { Http, RequestOptions }    from '@angular/http';
@@ -37,13 +37,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   declarations: [ AppComponent,
                   NavBarComponent,
                   routedComponents ],//array of components that belong to this module
-  providers:    [ Auth, AuthGuard, Logger,
+  providers:    [ AuthService, AuthGuard, Logger,
                   {
                     provide: AuthHttp,
                     useFactory: authHttpServiceFactory,
                     deps: [Http, RequestOptions]
                   }
                 ],
-  bootstrap:    [ AppComponent]//bootstrap array creates the ONE SINGLE component and inserts into the DOM
+  bootstrap:    [AppComponent]//bootstrap array creates the ONE SINGLE component and inserts into the DOM
 })
 export class AppModule { }//export your empty class decorated as the NgModule

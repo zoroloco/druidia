@@ -1,9 +1,10 @@
 //Component for home.
 
-import { Component,OnInit } from '@angular/core';
-import { Logger }           from './services/logger.service';
-
-import { NavBarComponent }  from './navbar.component';
+import { Component,
+         OnInit,
+         OnDestroy }       from '@angular/core';
+import { Logger }          from './services/logger.service';
+import { NavBarComponent } from './navbar.component';
 
 @Component({
     selector: 'Home',

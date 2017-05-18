@@ -66,14 +66,9 @@ module.exports = function(app) {
     })(req, res, next);
   });
 
-  //test method used to test jwt check
-  app.get('/api/test',
+  app.post('/api/logger',
           securityController.jwtCheck,
-          //loggerController.log
-          function(req,res){
-            log.info("hit /test/data and sending back 200 response with test data json");
-            res.send({test:'foobar'});
-          }
+          loggerController.logger
         );
 
   /*

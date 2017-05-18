@@ -1,6 +1,8 @@
-import { Component,OnInit } from '@angular/core';
-import { Logger }           from './services/logger.service';
-import { Auth }             from './auth/auth.service';
+//Component definition for the site's main navigation bar.
+import { Component,
+         OnInit }      from '@angular/core';
+import { Logger }      from './services/logger.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
     selector: 'NavBar',
@@ -11,18 +13,13 @@ import { Auth }             from './auth/auth.service';
     private name;
     private pictureUrl;
 
-    constructor(private auth:Auth, private log: Logger){
+    constructor(private auth:AuthService, private log: Logger){
       this.log.info("Instantiating navbar component.");
     }
 
     ngOnInit(){
       this.log.info("Initializing home component.");
-      /*
-      this.auth.fetchUserProfile((userProfile)=>{
-        this.name=userProfile.name;
-        this.pictureUrl=userProfile.picture;
-      });
-      */
+      //TODO: fetch user profile with image url.
     }
 
     onBlog(){

@@ -3,7 +3,6 @@
 import { Component,OnInit,OnDestroy }   from '@angular/core';
 import { Logger }                       from '../services/logger.service';
 import { ActivatedRoute,Params,Router } from '@angular/router';
-import { Auth }                         from './auth.service';
 
 @Component({
   template: ``
@@ -11,8 +10,7 @@ import { Auth }                         from './auth.service';
   export class AuthComponent implements OnInit{
     private sub: any;
 
-    constructor(private auth:Auth,
-                private router:Router,
+    constructor(private router:Router,
                 private activatedRoute:ActivatedRoute,
                 private log: Logger){
       this.log.info("Instantiating auth component.");

@@ -1,7 +1,8 @@
 //Component for a blog.
-import { Component,OnInit } from '@angular/core';
-import { Logger }           from '../services/logger.service';
-import { Auth }             from '../auth/auth.service';
+import { Component,
+         OnInit,
+         OnDestroy } from '@angular/core';
+import { Logger }    from '../services/logger.service';
 
 @Component({
     selector: 'Blog',
@@ -9,18 +10,12 @@ import { Auth }             from '../auth/auth.service';
   })
   export class BlogComponent implements OnInit{
 
-    constructor(private log: Logger, private auth:Auth){
-      this.log.info("Instantiating blog component.");
+    constructor(private log: Logger){
+      this.log.info("Instantiating blog component.",true);
     }
 
     ngOnInit(){
       this.log.info("Initializing blog component.");
-
-      this.auth.testData()
-               .subscribe(
-                 testData => {this.log.info("TEST DATA: "+JSON.stringify(testData))},
-                 error  => {this.log.error("ERROR: "+error)}
-               );
     }
 
     ngOnDestroy(){

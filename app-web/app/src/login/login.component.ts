@@ -1,7 +1,6 @@
 
 //Component for login.
 import { Component } from '@angular/core';
-import { Auth }      from '../auth/auth.service';
 import { Logger }    from '../services/logger.service';
 
 @Component({
@@ -11,19 +10,7 @@ import { Logger }    from '../services/logger.service';
 })
 export class LoginComponent{
 
-  constructor(private auth: Auth,private log: Logger){
+  constructor(private log: Logger){
     this.log.info("Instantiating login component.");
   }
-
-  /*
-  loginWithFacebook(){
-    this.log.info("User is attempting to login with facebook credentials.");
-    let s = '';
-    this.auth.loginWithFacebook()
-             .subscribe(
-               secret => {s = secret; this.log.info("secret from server = "+JSON.stringify(s))},
-               error  => {this.log.error("ERROR:"+error)}
-             );
-  }
-  */
 }
