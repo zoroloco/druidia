@@ -6,6 +6,10 @@ var   pathUtil         = require('path'),
       methodOverride   = require('method-override'),
       vhost            = require('vhost'),
       fs               = require('fs'),
+      _                = require('underscore'),
+      mongoloid        = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
+      schemas          = require(pathUtil.join(__dirname,'../mongoose/schemas.js')),
+      userObj          = require(pathUtil.join(__dirname,'../../app-common/collections/user.json')),
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
       credentials      = require(pathUtil.join(__dirname,'../security/credentials.js')),
@@ -68,22 +72,43 @@ module.exports = function() {
         clientID     : credentials.fb_app_id,
         clientSecret : credentials.fb_app_secret,
         callbackURL  : "https://"+conf.hostname+"/auth/facebook/callback",
-        //passReqToCallback: true
       },
       function(accessToken, refreshToken, profile, done) {
         log.info("Facebook accessToken = "+accessToken);
-        log.info("profile = "+JSON.stringify(profile));
+        log.info("Facebook profile = "+JSON.stringify(profile));
 
-        //TODO: match FB user with my own mongo user and pass that object to callback.
-        done(null,null);
-        /*
-        User.findOrCreate(..., function(err, user) {
-          if (err) { return done(err); }
-          done(null, user);
+        mongoloid.findBySearchId(schemas.userModel,profile.id,function(foundUser){
+          if(!_.isEmpty(foundUser)){
+            done(null,foundUser);
+          }
+          else{
+            log.info("User "+profile.displayName+" not found. Attempting to create a new user.");
+            userObj.username = profile.displayName;
+            userObj.searchId = profile.id;
+            userObj.role     = 'user';
+
+            var newUser = schemas.userModel(userObj);
+
+            mongoloid.save(newUser,function(result){
+              if(result){
+                done(null,userObj);
+              }
+              else{
+                log.error("Error saving new user.");
+              }
+            })
+          }
         });
-        */
       }
     ));
+
+    passport.serializeUser(function(user, done) {
+      done(null, user);
+    });
+
+    passport.deserializeUser(function(user, done) {
+      done(null, user);
+    });
 
     //set up static directory of my own custom files
     log.info("Defining custom static file directory.");

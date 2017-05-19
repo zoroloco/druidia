@@ -1,7 +1,6 @@
 var pathUtil       = require('path'),
     log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
-    mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js')),
     credentials    = require(pathUtil.join(__dirname,'../security/credentials.js'));
 
