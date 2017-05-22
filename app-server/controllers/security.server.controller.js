@@ -2,19 +2,20 @@ var pathUtil       = require('path'),
     log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js')),
-    credentials    = require(pathUtil.join(__dirname,'../security/credentials.js'));
+    credentials    = require(pathUtil.join(__dirname,'../security/credentials.js')),
+    mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
+    schemas        = require(pathUtil.join(__dirname,'../mongoose/schemas.js')),
+    userObj        = require(pathUtil.join(__dirname,'../../app-common/collections/user.json')),
+    passport       = require('passport');
 
+const jwt        = require('jsonwebtoken');
 const expressJWT = require('express-jwt');
-//const jwt        = require('jsonwebtoken');
 //const jwks       = require('jwks-rsa');
 
   //define the jwt middleware
   exports.jwtCheck = expressJWT({
     secret    : credentials.jwtSecret
   });
-
-  //exports.jwtCheck = expressJWT({secret: "test secret okay"}).unless({ path: ['/', '/api/logger'] });
-  //exports.jwtCheck = expressJWT({secret: "test secrete okay"});
 
   exports.auditRequest = function(req,res,next){
     log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip);
@@ -31,37 +32,56 @@ const expressJWT = require('express-jwt');
     }
   }
 
-  /*
-  exports.authenticateRoot = function(req,res,next){
-    log.info("AUTHENTICATING ROOT:"+req.session.username+" Trying to access:"+req.originalUrl);
-    if(isAuthenticated(req)){
-      req.url = "/root";
-    }
-    else{
-      req.url = "/login";
-    }
+  //callback after a login is attempted through facebook.
+  exports.processFacebookLogin = function(accessToken, refreshToken, fbProfile, done) {
+    log.info("Facebook accessToken = "+accessToken);
+    log.info("Facebook profile = "+JSON.stringify(fbProfile));
 
-    next('route');
+    mongoloid.find(schemas.userModel,"searchId",fbProfile.id,function(foundUser){
+      if(!_.isEmpty(foundUser)){
+        done(null,foundUser);
+      }
+      else{
+        log.info("User:"+fbProfile.displayName+" not found. Attempting to create a new user from a facebook profile.");
+        userObj.username   = fbProfile.displayName;
+        userObj.searchId   = fbProfile.id;
+        userObj.pictureUrl = fbProfile.photos[0].value;
+        userObj.role       = 'user';
+
+        var newUser = schemas.userModel(userObj);
+
+        mongoloid.save(newUser,function(result){
+          if(!_.isEmpty(result)){
+            done(null,result);
+          }
+          else{
+            log.error("Error saving new user.");
+          }
+        })
+      }
+    });
   }
 
-  //Used when trying to access the secure part of the site.
-  exports.authenticate = function(req,res,next){
-    log.info("AUTHENTICATING:"+req.session.username+" Trying to access:"+req.originalUrl);
-    if(isAuthenticated(req)){
-      log.info("User session exists!");
-      next();//continue the route.
-    }
-    else{
-      log.error("User session does not exist. NOT AUTHORIZED!");
-      res.sendStatus(401);
-    }
+  //callback after successful facebook login.
+  //send back to the user the all important jwt for any future api requests.
+  exports.processFacebookCallback = function(req, res, next) {
+    passport.authenticate('facebook', function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (_.isEmpty(user)) {
+        log.error("Error processing user.");
+        return res.sendStatus(401);
+      }
+      req.logIn(user, function(err) {//CREATE A LOGIN SESSION.
+        if (err) {
+          return next(err);
+        }
+
+        //all good
+        log.info("Successful login. Sending jwt to user:"+JSON.stringify(user));
+        var myJwt = jwt.sign({userId: user.id}, credentials.jwtSecret);
+        return res.redirect('/authenticated?jwtToken='+myJwt);
+      });
+    })(req, res, next);
   }
-
-  exports.onLogin = function(req,res,next){
-    log.info("onLogin: "+JSON.stringify(req.body));
-  };
-
-  exports.onLogout = function(req,res){
-    log.info("logout initiated.");
-  };
-  */

@@ -7,14 +7,12 @@ var   pathUtil         = require('path'),
       vhost            = require('vhost'),
       fs               = require('fs'),
       _                = require('underscore'),
-      mongoloid        = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
-      schemas          = require(pathUtil.join(__dirname,'../mongoose/schemas.js')),
-      userObj          = require(pathUtil.join(__dirname,'../../app-common/collections/user.json')),
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
       credentials      = require(pathUtil.join(__dirname,'../security/credentials.js')),
       conf             = require(pathUtil.join(__dirname,'./conf.json')),
-      log              = require(pathUtil.join(__dirname,'../lib/logger.js'));
+      log              = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js'));
 
 //const cors = require('cors');
 
@@ -72,34 +70,9 @@ module.exports = function() {
         clientID     : credentials.fb_app_id,
         clientSecret : credentials.fb_app_secret,
         callbackURL  : "https://"+conf.hostname+"/auth/facebook/callback",
+        profileFields: ['id', 'displayName', 'photos']
       },
-      function(accessToken, refreshToken, profile, done) {
-        log.info("Facebook accessToken = "+accessToken);
-        log.info("Facebook profile = "+JSON.stringify(profile));
-
-        mongoloid.findBySearchId(schemas.userModel,profile.id,function(foundUser){
-          if(!_.isEmpty(foundUser)){
-            done(null,foundUser);
-          }
-          else{
-            log.info("User "+profile.displayName+" not found. Attempting to create a new user.");
-            userObj.username = profile.displayName;
-            userObj.searchId = profile.id;
-            userObj.role     = 'user';
-
-            var newUser = schemas.userModel(userObj);
-
-            mongoloid.save(newUser,function(result){
-              if(result){
-                done(null,userObj);
-              }
-              else{
-                log.error("Error saving new user.");
-              }
-            })
-          }
-        });
-      }
+      securityController.processFacebookLogin
     ));
 
     passport.serializeUser(function(user, done) {

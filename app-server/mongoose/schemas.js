@@ -1,3 +1,5 @@
+//This file defines all of the Mongo schemas.
+
 var mongoose  = require('mongoose'),
     _         = require('underscore'),
     pathUtil  = require('path'),
@@ -20,7 +22,9 @@ var self = module.exports = {
       "email"       : String,
       "role"        : {type: String, required: true},
       "description" : String,
-      "searchId"    : String
+      "searchId"    : String,
+      "pictureUrl"  : String,
+      "lastLoginDate" : Date
     });
 
     self.userModel = mongoose.model('Users',UserSchema);

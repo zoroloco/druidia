@@ -6,5 +6,7 @@
 "email"       : "",
 "role"        : "",
 "description" : "",
-"searchId"    : ""
+"searchId"    : "",
+"pictureUrl"  : "",
+"lastLoginDate" : ""
 }
