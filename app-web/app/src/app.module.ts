@@ -1,7 +1,9 @@
 //module defines your components.
 import { NgModule }                from '@angular/core';
 import { BrowserModule }           from '@angular/platform-browser';
+
 import { Logger }                  from './services/logger.service';
+import { ApiService }              from './services/api.service';
 
 import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
@@ -37,7 +39,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   declarations: [ AppComponent,
                   NavBarComponent,
                   routedComponents ],//array of components that belong to this module
-  providers:    [ AuthService, AuthGuard, Logger,
+  providers:    [ AuthService, AuthGuard, Logger, ApiService,
                   {
                     provide: AuthHttp,
                     useFactory: authHttpServiceFactory,

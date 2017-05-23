@@ -11,7 +11,7 @@ import { Logger }    from '../services/logger.service';
   export class BlogComponent implements OnInit{
 
     constructor(private log: Logger){
-      this.log.info("Instantiating blog component.",true);
+      this.log.info("Instantiating blog component.");
     }
 
     ngOnInit(){

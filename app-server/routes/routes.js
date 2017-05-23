@@ -40,7 +40,7 @@ module.exports = function(app) {
   // Facebook will redirect the user back to the application at
   //     /auth/facebook/callback
   app.get('/auth/facebook',
-           passport.authenticate('facebook'));
+    passport.authenticate('facebook'));
 
   // Facebook will redirect the user to this URL after approval.  Finish the
   // authentication process by attempting to obtain an access token.  If
@@ -54,7 +54,7 @@ module.exports = function(app) {
     loggerController.logger);
 
   //route to get logged in user's profile.
-  app.post('/api/getprofile',
+  app.get('/api/fetchUser',
     securityController.jwtCheck,
     apiController.fetchUser);
 

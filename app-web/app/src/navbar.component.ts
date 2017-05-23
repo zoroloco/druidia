@@ -3,6 +3,7 @@ import { Component,
          OnInit }      from '@angular/core';
 import { Logger }      from './services/logger.service';
 import { AuthService } from './auth/auth.service';
+import { ApiService }  from './services/api.service'
 
 @Component({
     selector: 'NavBar',
@@ -13,13 +14,21 @@ import { AuthService } from './auth/auth.service';
     private name;
     private pictureUrl;
 
-    constructor(private auth:AuthService, private log: Logger){
+    constructor(private auth:AuthService,
+                private apiService: ApiService,
+                private log: Logger){
       this.log.info("Instantiating navbar component.");
     }
 
     ngOnInit(){
       this.log.info("Initializing home component.");
-      //TODO: fetch user profile with image url.
+
+      this.apiService.fetchUser().subscribe(
+        user  => {
+                    this.log.info("FETCHED MYSELF "+JSON.stringify(user));
+                    this.pictureUrl = user.pictureUrl;
+                  },
+        error => console.log('onError: %s', error));
     }
 
     onBlog(){

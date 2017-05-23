@@ -6,8 +6,8 @@ var pathUtil       = require('path'),
 
     //middleware to grab user object and return to next calling method.
     exports.fetchUser = function(req,res,next){
-      if(!_.isEmpty(req.user.userId)){
-        mongoloid.find(schemas.userModel,"_id",req.user.userId,function(foundUser){
+      if(!_.isEmpty(req.user.id)){
+        mongoloid.find(schemas.userModel,"_id",req.user.id,function(foundUser){
           if(!_.isEmpty(foundUser)){
             log.info("Returning user:"+JSON.stringify(foundUser));
             res.json(foundUser);

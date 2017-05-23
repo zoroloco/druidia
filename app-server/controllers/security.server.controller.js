@@ -80,7 +80,7 @@ const expressJWT = require('express-jwt');
 
         //all good
         log.info("Successful login. Sending jwt to user:"+JSON.stringify(user));
-        var myJwt = jwt.sign({userId: user.id}, credentials.jwtSecret);
+        var myJwt = jwt.sign({id: user.id}, credentials.jwtSecret);
         return res.redirect('/authenticated?jwtToken='+myJwt);
       });
     })(req, res, next);
