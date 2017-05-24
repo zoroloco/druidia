@@ -6,6 +6,7 @@ import { Logger }    from '../services/logger.service';
 
 @Component({
     selector: 'Blog',
+    styleUrls: ['resources/global.css'],
     templateUrl: 'html/blog.template.html'
   })
   export class BlogComponent implements OnInit{
