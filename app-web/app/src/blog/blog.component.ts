@@ -10,6 +10,7 @@ import { Logger }    from '../services/logger.service';
     templateUrl: 'html/blog.template.html'
   })
   export class BlogComponent implements OnInit{
+    blogs = ['hell world','bugga gump'];
 
     constructor(private log: Logger){
       this.log.info("Instantiating blog component.");
