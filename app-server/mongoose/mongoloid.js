@@ -54,13 +54,14 @@ var self = module.exports = {
   //model - the model type to search, such as user or blog.
   //searchFieldName = "id" or "searchId" - the schema field name to search by.
   //searchField = "202202" - the value of the search field name to search by.
-  find: function find(model,searchFieldName,searchFieldValue,cb){
+  findOne: function findOne(model,searchFieldName,searchFieldValue,cb){
     log.info("Querying for document with:"+searchFieldName+"="+searchFieldValue);
 
     //set the key of the query object dynamically.
     var query = {};
     query[searchFieldName]=searchFieldValue;
 
+    //returns only one result or null.
     model.findOne(query,function(err,foundObj){
       if(err){
         log.error(err);
@@ -73,6 +74,32 @@ var self = module.exports = {
         }
         else{
           log.info("Did not find document with query:"+searchFieldName+"="+searchFieldValue);
+          cb(null);
+        }
+      }
+    });
+  },
+
+  //can possibly return a JSON with many results or null if nothing found.
+  find: function find(model,searchFieldName,searchFieldValue,cb){
+    log.info("Querying for document with:"+searchFieldName+"="+searchFieldValue);
+
+    //set the key of the query object dynamically.
+    var query = {};
+    query[searchFieldName]=searchFieldValue;
+
+    model.find(query,function(err,results){
+      if(err){
+        log.info(err);
+        cb(null);
+      }
+      else{
+        if(!_.isEmpty(results)){
+          log.info("Found all documents with query:"+searchFieldName+"="+searchFieldValue);
+          cb(results);
+        }
+        else{
+          log.info("Did not find any results with query:"+searchFieldName+"="+searchFieldValue);
           cb(null);
         }
       }

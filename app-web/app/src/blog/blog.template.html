@@ -1,9 +1,9 @@
 <NavBar>
 </NavBar>
 <textarea rows="3" cols="160" autofocus="true" maxlength="120"
-          class="form-control" #blogEntry placeholder="que pasa?"></textarea>
+          class="form-control" #blogEntry placeholder="Que pasa?"></textarea>
 
-<button class="btn btn-default" type="button">Submit</button>
+<button class="btn btn-default" (click)="onBlog(blogEntry.value)" type="button">Submit Blog</button>
 
 
 <div class="panel panel-primary">
@@ -13,9 +13,11 @@
 
   <!-- List group -->
   <ul class="list-group">
-    <h4 class="list-group-item-heading">
-    <li class="list-group-item" *ngFor="let blog of blogs">
-      {{blog}}
-    </li>
+    <div *ngFor="let blog of blogs">
+      <h3 class="list-group-item-heading">{{blog.heading}} - {{blog.timeStamp}}</h3>
+      <li class="list-group-item">
+        {{blog.text}}
+      </li>
+    </div>
   </ul>
 </div>

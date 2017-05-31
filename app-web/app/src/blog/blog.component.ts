@@ -1,8 +1,9 @@
 //Component for a blog.
 import { Component,
          OnInit,
-         OnDestroy } from '@angular/core';
-import { Logger }    from '../services/logger.service';
+         OnDestroy }   from '@angular/core';
+import { BlogService } from './blog.service';
+import { Logger }      from '../services/logger.service';
 
 @Component({
     selector: 'Blog',
@@ -10,14 +11,35 @@ import { Logger }    from '../services/logger.service';
     templateUrl: 'html/blog.template.html'
   })
   export class BlogComponent implements OnInit{
-    blogs = ['hell world','bugga gump'];
+    blogs = [''];
 
-    constructor(private log: Logger){
+    constructor(private log: Logger,private blogService: BlogService){
       this.log.info("Instantiating blog component.");
+    }
+
+    onBlog(blogEntry: string){
+      this.log.info("User submitted new blog entry:"+blogEntry);
+
+      //subscribing to save Blog observable
+      this.blogService.saveBlog(blogEntry).subscribe(
+        savedBlogEntry => {
+          this.log.info("Save of blog entry returned:"+JSON.stringify(savedBlogEntry))
+          this.blogs.push(savedBlogEntry);
+        },
+        error => this.log.error(error)
+      );
     }
 
     ngOnInit(){
       this.log.info("Initializing blog component.");
+
+      this.blogService.fetchBlogs().subscribe(
+        fetchedBlogs => {
+          this.log.info("Fetched blogs for user:"+JSON.stringify(fetchedBlogs));
+          this.blogs = fetchedBlogs;
+        },
+        error => this.log.error(error)
+      );
     }
 
     ngOnDestroy(){

@@ -9,6 +9,7 @@ import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
 
 import { AuthService }             from './auth/auth.service';
+import { BlogService }             from './blog/blog.service';
 import { AuthGuard }               from './auth/auth-guard.service';
 
 import { Http, RequestOptions }    from '@angular/http';
@@ -39,7 +40,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   declarations: [ AppComponent,
                   NavBarComponent,
                   routedComponents ],//array of components that belong to this module
-  providers:    [ AuthService, AuthGuard, Logger, ApiService,
+  providers:    [ AuthService, AuthGuard, Logger, ApiService, BlogService,
                   {
                     provide: AuthHttp,
                     useFactory: authHttpServiceFactory,

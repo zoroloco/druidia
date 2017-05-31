@@ -49,14 +49,31 @@ module.exports = function(app) {
   app.get('/auth/facebook/callback',
     securityController.processFacebookCallback);
 
+  //any GET to the API will have to be routed through the jwtCheck!
+  app.get('/api/*',
+    securityController.jwtCheck);
+
+  //any POST to the API will have to be routed through the jwtCheck!
+  app.post('/api/*',
+    securityController.jwtCheck);
+
+  //*****START DEFINING API-ROUTES******//
+
+  //log some event from the client.
   app.post('/api/logger',
-    securityController.jwtCheck,
-    loggerController.logger);
+      loggerController.logger);
 
   //route to get logged in user's profile.
   app.get('/api/fetchUser',
-    securityController.jwtCheck,
     apiController.fetchUser);
+
+  //route to get all blogs for a user.
+  app.get('/api/fetchBlogs',
+    apiController.fetchBlogs);
+
+  //route to post a blog entry.
+  app.post('/api/postBlog',
+    apiController.saveBlog);
 
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.

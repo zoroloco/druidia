@@ -5,7 +5,7 @@ var pathUtil       = require('path'),
     credentials    = require(pathUtil.join(__dirname,'../security/credentials.js')),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     schemas        = require(pathUtil.join(__dirname,'../mongoose/schemas.js')),
-    userObj        = require(pathUtil.join(__dirname,'../../app-common/collections/user.json')),
+    userObj        = require(pathUtil.join(__dirname,'../mongoose/collections/user.json')),
     passport       = require('passport');
 
 const jwt        = require('jsonwebtoken');
@@ -17,8 +17,18 @@ const expressJWT = require('express-jwt');
     secret    : credentials.jwtSecret
   });
 
+  //log every single request.
   exports.auditRequest = function(req,res,next){
     log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip);
+    next();
+  }
+
+  //log every authenticated request by capturing the user that made request.
+  exports.auditAuthenticatedRequest = function(req,res,next){
+    //if jwt authenticated, then this audit request will have the user id in the request object.
+    if(!_.isEmpty(req.user) && !_.isEmpty(req.user.id)){
+      log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip+" and user Id:"+req.user.id);
+    }
     next();
   }
 
@@ -37,7 +47,8 @@ const expressJWT = require('express-jwt');
     log.info("Facebook accessToken = "+accessToken);
     log.info("Facebook profile = "+JSON.stringify(fbProfile));
 
-    mongoloid.find(schemas.userModel,"searchId",fbProfile.id,function(foundUser){
+    //try to find a druidia user object based off of the facebook ID (searchID).
+    mongoloid.findOne(schemas.userModel,"searchId",fbProfile.id,function(foundUser){
       if(!_.isEmpty(foundUser)){
         done(null,foundUser);
       }
@@ -46,11 +57,11 @@ const expressJWT = require('express-jwt');
         userObj.username   = fbProfile.displayName;
         userObj.searchId   = fbProfile.id;
         userObj.pictureUrl = fbProfile.photos[0].value;
-        userObj.role       = 'user';
+        userObj.role       = 'facebook_user';
 
-        var newUser = schemas.userModel(userObj);
+        var newUserModel = schemas.userModel(userObj);
 
-        mongoloid.save(newUser,function(result){
+        mongoloid.save(newUserModel,function(result){
           if(!_.isEmpty(result)){
             done(null,result);
           }

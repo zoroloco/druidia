@@ -3,7 +3,8 @@
 var mongoose  = require('mongoose'),
     _         = require('underscore'),
     pathUtil  = require('path'),
-    userObj   = require(pathUtil.join(__dirname,'../../app-common/collections/user.json')),
+    userObj   = require(pathUtil.join(__dirname,'./collections/user.json')),
+    blogObj   = require(pathUtil.join(__dirname,'./collections/blog.json')),
     log       = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
 var userModel;
@@ -31,10 +32,10 @@ var self = module.exports = {
     log.info("Created user schema.");
 
     var BlogSchema = new mongoose.Schema({
-      "user" : {type: userObj, required: true},
-      "text" : {type: String, required: true},
-      "date" : Date,
-      "time" : String
+      "userId"    : {type: String, required: true},
+      "heading"   : String,
+      "text"      : {type: String, required: true},
+      "timeStamp" : String
     });
 
     self.blogModel = mongoose.model('Blogs',BlogSchema);
