@@ -17,5 +17,9 @@
 
     "include" : [
         "app/src/**/*"
+    ],
+
+    "types": [
+      "underscore"
     ]
 }

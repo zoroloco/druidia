@@ -14,14 +14,15 @@ module.exports = Server;
 
 function Server(){
 
+  process.title = conf.title;
+
   log.init();
-  mongoloid.init();
 
   if(this instanceof Server === false){
     throw new TypeError("Classes can't be function-called.");
   }
 
-  var self        = this;
+  var self = this;
 
   try{
     if(!_.isEmpty(conf)){
@@ -37,9 +38,7 @@ function Server(){
     process.exit(1);
   }
 
-  this._app     = express();//This is the main express app that was setup in config/express.js
-
-  process.title = conf.title;
+  this._app = express();//This is the main express app that was setup in config/express.js
 
   //define process handlers
   process.on('SIGTERM', function() {
@@ -81,16 +80,25 @@ function Server(){
     process.exit();
   }
 
+  //starting point.
   Server.prototype.start = function(){
-    //secure site
-    self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
-      log.info(process.title+" server now listening on port:"+self._server.address().port);
-    });
 
-    //non secure site used to reroute to secure site.
-    self._httpServer = http.createServer(self._app).listen(self._app.get('httpPort'),function(){
-      log.info(process.title+" server now listening on port:"+self._httpServer.address().port);
-    })
+    mongoloid.init(function(status){
+      if(status){
+        //secure site
+        self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
+          log.info(process.title+" server now listening on port:"+self._server.address().port);
+        });
+
+        //non secure site used to reroute to secure site.
+        self._httpServer = http.createServer(self._app).listen(self._app.get('httpPort'),function(){
+          log.info(process.title+" server now listening on port:"+self._httpServer.address().port);
+        })
+      }
+      else{
+        log.error("Cannot start server. Error with Mongo connection.");
+      }
+    });
 
     module.exports = self._app;
   }

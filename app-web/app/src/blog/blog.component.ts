@@ -4,6 +4,7 @@ import { Component,
          OnDestroy }   from '@angular/core';
 import { BlogService } from './blog.service';
 import { Logger }      from '../services/logger.service';
+import * as _ from 'underscore';
 
 @Component({
     selector: 'Blog',
@@ -17,13 +18,17 @@ import { Logger }      from '../services/logger.service';
       this.log.info("Instantiating blog component.");
     }
 
-    onBlog(blogEntry: string){
+    onBlog(blogEntry: string,heading: string){
       this.log.info("User submitted new blog entry:"+blogEntry);
 
+      if(_.isEmpty(heading)){
+        heading = "Untitled";
+      }
+
       //subscribing to save Blog observable
-      this.blogService.saveBlog(blogEntry).subscribe(
+      this.blogService.saveBlog(blogEntry,heading).subscribe(
         savedBlogEntry => {
-          this.log.info("Save of blog entry returned:"+JSON.stringify(savedBlogEntry))
+          this.log.info("Save of blog entry returned:"+JSON.stringify(savedBlogEntry));
           this.blogs.push(savedBlogEntry);
         },
         error => this.log.error(error)

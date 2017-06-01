@@ -16,11 +16,12 @@ export class BlogService {
   }
 
   //returns observable for posting a blog entry.
-  saveBlog(blogEntry: string): Observable<any> {
+  saveBlog(blogEntry: string,heading: string): Observable<any> {
     this.log.info("Save blog observable invoked:"+blogEntry);
 
     let blog = {
-      "text" : blogEntry
+      "text"    : blogEntry,
+      "heading" : heading
     };
 
     return this.authHttp.post(`api/postBlog`,blog)

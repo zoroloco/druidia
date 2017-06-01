@@ -1,34 +1,38 @@
-<form>
-  <!--
+
+<b>druidia.net</b>
+<form #loginForm="ngForm" (ngsubmit)="onLogin(username.value, password.value)">
   <div class="form-group">
-    <label for="name">Username</label>
     <input
+      id="username"
       type="text"
       class="form-control"
+      minlength="8"
+      maxlength="16"
+      required
       #username
-      placeholder="Enter your email">
-  </div>
-  <div class="form-group">
-    <label for="name">Password</label>
+      placeholder="username">
     <input
+      id="password"
       type="password"
       class="form-control"
+      minlength="12"
+      maxlength="24"
+      required
       #password
-      placeholder="Enter your password">
+      placeholder="password">
+
+      <div class="alert alert-warning" role="alert" *ngIf="username.errors && (username.dirty || username.touched)">
+        <div [hidden]="!username.errors.required">
+          username is required
+        </div>
+      </div>
   </div>
   <button
     type="submit"
-    class="btn btn-default"
-    (click)="auth.login(username.value, password.value)">
+    [disabled]="!loginForm.form.valid"
+    class="btn btn-default btn-primary">
       Log In
   </button>
-  <button
-    type="button"
-    class="btn btn-default"
-    (click)="auth.signup(username.value, password.value)">
-      Sign Up
-  </button>
-  -->
 
   <a href="/auth/facebook"
     role="button"

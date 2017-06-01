@@ -7,7 +7,7 @@ var mongoose   = require('mongoose'),
 
 var self = module.exports = {
 
-  init: function init(){
+  init: function init(cb){
     var dbURI= conf.mongo.connectionString;
 
       //CONFIGURE MONGO
@@ -22,11 +22,13 @@ var self = module.exports = {
       mongoose.connection.on('connected', function () {
         log.info('Mongoose default connection open to ' + dbURI);
         schemas.init();
+        cb(true);
       });
 
       // If the connection throws an error
       mongoose.connection.on('error',function (err) {
         log.error('Mongoose default connection error: ' + err);
+        cb(false);
       });
 
       // When the connection is disconnected

@@ -38,7 +38,7 @@ var pathUtil       = require('path'),
 
       //fetch the full user object first
       blogObj.userId    = req.user.id;
-      blogObj.heading   = "";
+      blogObj.heading   = req.body.heading;
       blogObj.text      = req.body.text;
       blogObj.timeStamp = timestamp('[YYYY:MM:DD HH:mm:ss:ms]');
 
