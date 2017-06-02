@@ -1,42 +1,52 @@
 
 <b>druidia.net</b>
-<form #loginForm="ngForm" (ngsubmit)="onLogin(username.value, password.value)">
-  <div class="form-group">
-    <input
-      id="username"
-      type="text"
-      class="form-control"
-      minlength="8"
-      maxlength="16"
-      required
-      #username
-      placeholder="username">
-    <input
-      id="password"
-      type="password"
-      class="form-control"
-      minlength="12"
-      maxlength="24"
-      required
-      #password
-      placeholder="password">
+<div [hidden]="submitted">
+  <form #loginForm="ngForm" *ngIf="active"  (ngSubmit)="onLogin()">
+    <div class="form-group">
+      <input
+        id="username"
+        type="text"
+        class="form-control"
+        minlength="8"
+        maxlength="16"
+        required
+        name="username"
+        [(ngModel)]="user.username"
+        #username=ngModel
+        placeholder="username">
 
-      <div class="alert alert-warning" role="alert" *ngIf="username.errors && (username.dirty || username.touched)">
-        <div [hidden]="!username.errors.required">
-          username is required
-        </div>
+      <div *ngIf="formErrors.username" class="alert alert-danger">
+        {{formErrors.username}}
       </div>
-  </div>
-  <button
-    type="submit"
-    [disabled]="!loginForm.form.valid"
-    class="btn btn-default btn-primary">
-      Log In
-  </button>
+    </div>
+    <div class="form-group">
+      <input
+        id="password"
+        type="password"
+        class="form-control"
+        minlength="8"
+        maxlength="16"
+        required
+        name="password"
+        [(ngModel)]="user.password"
+        #password=ngModel
+        placeholder="password">
 
-  <a href="/auth/facebook"
-    role="button"
-    class="btn btn-default btn-primary">
-      Log In with Facebook
-  </a>
-</form>
+      <div *ngIf="formErrors.password" class="alert alert-danger">
+        {{formErrors.password}}
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-default btn-primary"
+      [disabled]="!loginForm.form.valid">
+        Log In
+    </button>
+
+    <a href="/auth/facebook"
+      role="button"
+      class="btn btn-default btn-primary">
+        Log In with Facebook
+    </a>
+  </form>
+</div>

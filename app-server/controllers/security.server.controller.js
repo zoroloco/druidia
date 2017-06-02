@@ -42,6 +42,11 @@ const expressJWT = require('express-jwt');
     }
   }
 
+  exports.processLogin = function(req,res,next){
+    log.info("A new login is being attempted.");
+    res.sendStatus(401);
+  }
+
   //callback after a login is attempted through facebook.
   exports.processFacebookLogin = function(accessToken, refreshToken, fbProfile, done) {
     log.info("Facebook accessToken = "+accessToken);

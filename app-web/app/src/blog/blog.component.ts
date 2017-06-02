@@ -4,7 +4,7 @@ import { Component,
          OnDestroy }   from '@angular/core';
 import { BlogService } from './blog.service';
 import { Logger }      from '../services/logger.service';
-import * as _ from 'underscore';
+import * as _          from 'underscore';
 
 @Component({
     selector: 'Blog',

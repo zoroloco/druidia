@@ -26,15 +26,17 @@ module.exports = function(app) {
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
 
+  app.post('/login',securityController.processLogin);
+
   app.get('/home',function(req,res,next){
     log.info("Sending home to client.");
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
-  })
+  });
 
   app.get('/authenticated',function(req,res){
     log.info("Authenticated route hit with JWT = "+req.query.jwtToken);
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
-  })
+  });
 
   // Redirect the user to Facebook for authentication.  When complete,
   // Facebook will redirect the user back to the application at
