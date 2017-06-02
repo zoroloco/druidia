@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <base href="/">
+    <title>druidia.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/mobile-style.css"> <!-- custom styles -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body ng-app="druidia-web" ng-controller="LoginController as ctrl">
+
+    <div class="container" >
+       <div class="col-lg-4 col-md-3 col-sm-2"></div>
+       <div class="col-lg-4 col-md-6 col-sm-8">
+           <div class="row loginbox">
+               <div class="col-lg-12">
+                   <span class="singtext" >Sign in </span>
+               </div>
+
+               <div class="col-lg-12 col-md-12 col-sm-12">
+                   <input class="form-control" ng-model="ctrl.creds.username" type="text" placeholder="Please enter your user name" >
+               </div>
+               <div class="col-lg-12  col-md-12 col-sm-12">
+                   <input class="form-control" ng-model="ctrl.creds.password" type="password" placeholder="Please enter password" >
+               </div>
+               <div class="col-lg-12  col-md-12 col-sm-12">
+                   <input type="submit" value="Log In" class="btn submitButton" ng-click="ctrl.onLogon()">
+               </div>
+
+           </div>
+       </div>
+     </div>
+
+
+    <!-- JS -->
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-route/angular-route.min.js"></script>
+    <script src="libs/angular-aria/angular-aria.min.js"></script>
+    <script src="libs/angular-animate/angular-animate.min.js"></script>
+    <script src="libs/angular-material/angular-material.min.js"></script>
+
+    <!--custom js-->
+    <script src="js/controllers/LoginController.js"></script>
+    <script src="js/controllers/IndexController.js"></script>
+
+    <script src="js/services/LoginService.js"></script>
+    <script src="js/services/CommonService.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/http-module.js"></script>
+    <script src="js/route-module.js"></script>
+  </body>
+</html>

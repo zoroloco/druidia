@@ -1,0 +1,109 @@
+
+#druidiaForm{
+width: 100%;
+font-size: 16px; /* Primary font size of form. Contained elements' font size are all relative to this setting */
+}
+
+
+#druidiaForm input, #druidiaForm textarea{
+width: 150px;
+border-radius: 5px;
+border: 1px solid gray;
+font: normal 1.5em auto; /* 24px, or 16px x 1.5 */
+padding: 0.1166666666666667em; /* 10px, or 24px x 0.4166666666666667 */
+box-shadow: 0 0 10px gray inset;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+#druidiaForm textarea{
+resize:vertical; /* allow vertical resize of textarea */
+height: 200px;
+}
+
+
+#druidiaForm input:focus, #druidiaForm textarea:focus{
+box-shadow: 0 0 10px green inset;
+}
+
+
+#druidiaForm input[type="radio"], #druidiaForm input[type="checkbox"]{
+padding: 0;
+width: auto;
+height: auto;
+border-radius: 0;
+}
+
+#druidiaForm select{
+width: 80%;
+font-size: 1.5em;
+border: 2px solid #eee;
+}
+
+#druidiaForm .formcolumn{ /* column div inside form */
+width: 49%;
+float: left;
+}
+
+#druidiaForm .formcolumn:first-of-type{
+margin-right: 2%; /* 2% margin after first column */
+}
+
+#druidiaForm .formcolumn label, #druidiaForm .formcolumn fieldset{
+font: bold 0.8em Verdana; /* font size is 12.8px, or 16 x 0.8 */
+text-transform: uppercase;
+display: block;
+margin-top: 2em;
+margin-bottom: 3px;
+}
+
+#druidiaForm fieldset{
+width: 98%;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+#druidiaForm .formcolumn label:first-child, #druidiaForm .formcolumn fieldset:first-child{
+margin-top: 0; /* first label or fieldset within each column should not no top margin */
+}
+
+#druidiaForm fieldset ul{
+list-type: none;
+margin: 0;
+padding: 0;
+}
+
+#druidiaForm fieldset ul li{
+display: inline-block;
+margin-bottom: 5px;
+margin-right: 1em;
+}
+
+.btn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 7px 22px 7px 22px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}

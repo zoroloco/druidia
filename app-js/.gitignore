@@ -1,0 +1,6 @@
+node_modules
+*.log
+public/libs
+app/config/credentials.js
+app/security/ssl/druidia.crt
+app/security/ssl/druidia.pem
