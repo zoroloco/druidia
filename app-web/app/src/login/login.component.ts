@@ -16,35 +16,74 @@ export class LoginComponent{
   @ViewChild('loginForm') currentForm: NgForm;
   submitted: boolean = false;
   active: boolean    = true;
+  failedLogin: boolean = false;
   user: User;
+
+  formErrors = {
+    'username': '',
+    'password': '',
+    'failedLogin': ''
+  };
+
+  validationMessages = {
+    'username' : {
+      'required': 'username is required',
+      'minlength': 'username must be atleast 8 characters',
+      'maxlength': 'username cannot exceed 16 characters'
+    },
+    'password' : {
+      'required': 'password is required',
+      'minlength': 'password must be atleast 8 characters',
+      'maxlength': 'password cannot exceed 16 characters'
+    }
+  };
 
   constructor(private log: Logger,private authService: AuthService){
     this.log.info("Instantiating login component.");
     this.user = new User();
   }
 
-  onLogin(){
-    this.log.info(this.user.username+" is attempting to login.");
-    //this.submitted = true;
-    this.authService.login(this.user).subscribe(
+  onLoginOrCreateAccount(newAccountFlag:boolean=false){
+    this.log.info(this.user.username+" is attempting to login.",true);
+
+    if(newAccountFlag){
+      this.log.info("This is a new account creation.");
+      this.user.isNew=true;
+    }
+
+    this.authService.processLoginOrCreateAccount(this.user).subscribe(
       status => {
         if(status){
-          this.log.info("successful login");
+          this.onSuccessfulLogin();
         }
         else{
-          this.log.error("failed login");
+          this.onFailedLogin();
         }
       },
-      error => {
-        this.log.error(error);
+      error => this.onFailedLogin(),
+      () => {
+        this.log.info("Login complete.");
       }
     );
-  }
+ }
 
-  ngAfterViewChecked() {
+ ngAfterViewChecked() {
    this.formChanged();
  }
 
+ onFailedLogin(){
+   this.log.error("Failed login!");
+   this.failedLogin = true;
+   this.formErrors['failedLogin'] = 'Login Failed. Invalid username and/or password';
+ }
+
+ onSuccessfulLogin(){
+   this.log.info("Successful login");
+   this.failedLogin = false;
+   this.formErrors['failedLogin'] = '';//clear
+ }
+
+ //initialize the subscriber for the first time.
  formChanged() {
    if (this.currentForm === this.loginForm) { return; }
    this.loginForm = this.currentForm;
@@ -55,6 +94,9 @@ export class LoginComponent{
  }
 
  onValueChanged(data?: any) {
+   //this.log.info(data);
+   this.failedLogin = false;
+
    if (!this.loginForm) { return; }
    const form = this.loginForm.form;
 
@@ -71,24 +113,5 @@ export class LoginComponent{
      }
    }
  }
-
-
-  formErrors = {
-    'username': '',
-    'password': ''
-  };
-
-  validationMessages = {
-    'username' : {
-      'required': 'username is required',
-      'minlength': 'username must be atleast 8 characters',
-      'maxlength': 'username cannot exceed 16 characters'
-    },
-    'password' : {
-      'required': 'password is required',
-      'minlength': 'password must be atleast 8 characters',
-      'maxlength': 'password cannot exceed 16 characters'
-    }
-  };
 
 }

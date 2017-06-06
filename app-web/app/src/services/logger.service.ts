@@ -15,10 +15,11 @@ export class Logger {
   info(msg: string, toServer: boolean=false) {
     console.log(msg);
     if(toServer){
-      this.infoObserver(msg)
+      this.loggingObserver(msg,'info')
         .subscribe(
-          result => {console.log("Successfully logged to server.")},
-          error  => {console.log("Error logging to server:"+error)}
+          result => {},
+          error  => console.log("Error logging to server:"+error),
+          ()     => console.log("Successfully logged a message to the server.")
         );
     }
   }
@@ -26,20 +27,30 @@ export class Logger {
   error(msg: string, toServer: boolean=false)  {
     console.error(msg);
     if(toServer){
-
+      this.loggingObserver(msg,'error')
+        .subscribe(
+          result => {},
+          error  => console.log("Error logging to server:"+error),
+          ()     => console.log("Successfully logged a message to the server.")
+        );
     }
   }
 
   warn(msg: string, toServer: boolean=false)   {
     console.warn(msg);
     if(toServer){
-
+      this.loggingObserver(msg,'warn')
+        .subscribe(
+          result => {},
+          error  => console.log("Error logging to server:"+error),
+          ()     => console.log("Successfully logged a message to the server.")
+        );
     }
   }
 
-  infoObserver(msg: string): Observable<Response>{
+  loggingObserver(msg: string,level: string): Observable<Response>{
     console.log("Creating info observable.");
-    let payload = {message:msg};
+    let payload = {message:msg,level:level};
     return this.authHttp.post('/api/logger',JSON.stringify(payload));
   }
 

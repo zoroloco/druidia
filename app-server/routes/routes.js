@@ -26,7 +26,7 @@ module.exports = function(app) {
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
 
-  app.post('/login',securityController.processLogin);
+  app.post('/loginOrCreateAccount',securityController.processLoginOrCreateAccount);
 
   app.get('/home',function(req,res,next){
     log.info("Sending home to client.");

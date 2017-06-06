@@ -21,21 +21,24 @@ export class AuthService {
       this.log.info("In constructor of auth service.");
   }
 
-  public login(user: User): Observable<any>{
-    return this.authHttp.post(`login`,user)
-      .map((res:Response) => res.status)
-      .map((status:number)=> {
+  public processLoginOrCreateAccount(user: User): Observable<boolean>{
+    return this.authHttp.post(`loginOrCreateAccount`,user)
+      .map((res:Response)  => {
+        return res.status;})
+      .map((status:number) => {
         if(status!=200){
           this.log.error("unauthorized login");
           return false;
         }
-        else
-          this.log.info("authorized login");
+        else{
+          this.log.info("AUTHORIZED LOGIN");
           return true;
+        }
       })
+      .catch(error=> Observable.throw(false));
   }
 
-  public logout(): void {
+  public processLogout(): void {
     this.log.info("Logging out of the application.");
     // Remove token from localStorage
     //localStorage.removeItem('access_token');

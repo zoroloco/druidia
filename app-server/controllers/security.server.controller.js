@@ -42,9 +42,45 @@ const expressJWT = require('express-jwt');
     }
   }
 
-  exports.processLogin = function(req,res,next){
-    log.info("A new login is being attempted.");
-    res.sendStatus(401);
+  //this is a manual login.
+  exports.processLoginOrCreateAccount = function(req,res,next){
+    log.info("A new login or create account request is being attempted for payload:"+JSON.stringify(req.body));
+
+    var user = req.body;
+
+    mongoloid.findOne(schemas.userModel,"username",req.body.username,function(foundUser){
+      if(!_.isEmpty(foundUser)){
+        log.info("User found in the database!");
+        if(req.body.isNew){
+          log.warn("Client requested to create a new user - username found in database.");
+          //client tried to create user with an already existing username.
+          res.sendStatus(401);
+        }
+        else{
+          log.info("Client requested to login - username found in database.");
+
+          //match passwords?
+
+          //user found and this is not a new account, just a normal login.
+          //TODO: send down a JWT.
+          res.sendStatus(200);
+        }
+      }
+      else{//user was not found
+        log.info("User NOT found in the database!");
+        if(req.body.isNew){
+          //create new user in database.
+          log.info("Client requested to create a new user - username not found, so proceeding to create a new user.");
+          //TODO: send down a JWT.
+          res.sendStatus(200);
+        }
+        else{
+          //login failed because user does not exist!
+          log.warn("Client requested to login - login failed because username not found.");
+          res.sendStatus(401);
+        }
+      }
+    });
   }
 
   //callback after a login is attempted through facebook.

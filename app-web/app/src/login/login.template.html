@@ -1,7 +1,7 @@
 
 <b>druidia.net</b>
 <div [hidden]="submitted">
-  <form #loginForm="ngForm" *ngIf="active"  (ngSubmit)="onLogin()">
+  <form #loginForm="ngForm">
     <div class="form-group">
       <input
         id="username"
@@ -35,14 +35,23 @@
       <div *ngIf="formErrors.password" class="alert alert-danger">
         {{formErrors.password}}
       </div>
+
+      <div *ngIf="failedLogin" class="alert alert-danger">
+        {{formErrors.failedLogin}}
+      </div>
     </div>
     <button
-      type="submit"
+      (click)="onLoginOrCreateAccount()"
       class="btn btn-default btn-primary"
       [disabled]="!loginForm.form.valid">
         Log In
     </button>
-
+    <button
+      (click)="onLoginOrCreateAccount(true)"
+      class="btn btn-default btn-primary"
+      [disabled]="!loginForm.form.valid">
+      Create Account
+    </button>
     <a href="/auth/facebook"
       role="button"
       class="btn btn-default btn-primary">
