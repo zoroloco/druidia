@@ -22,7 +22,7 @@
            <ul class="dropdown-menu">
              <li><a routerLink="/home/blog" (click)="onBlog()">Blog</a></li>
              <li><a routerLink="/home/chatter" (click)="onChatter()">Chatter</a></li>
-             <li><a href="#" (click)="authService.processLogout()">Log Off</a></li>
+             <li><button type="button" (click)="authService.processLogout()">Log Off</button></li>
            </ul>
          </li>
        </ul>

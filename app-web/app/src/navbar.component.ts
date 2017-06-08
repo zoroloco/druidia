@@ -14,7 +14,7 @@ import { ApiService }  from './services/api.service'
     private name;
     private pictureUrl;
 
-    constructor(private auth:AuthService,
+    constructor(private authService:AuthService,
                 private apiService: ApiService,
                 private log: Logger){
       this.log.info("Instantiating navbar component.");

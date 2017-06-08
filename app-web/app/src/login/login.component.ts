@@ -44,25 +44,25 @@ export class LoginComponent{
   }
 
   onLoginOrCreateAccount(newAccountFlag:boolean=false){
-    this.log.info(this.user.username+" is attempting to login.",true);
+    this.log.info(this.user.username+" is attempting to login.");
 
-    if(newAccountFlag){
-      this.log.info("This is a new account creation.");
-      this.user.isNew=true;
-    }
+    this.user.isNew=newAccountFlag;
 
     this.authService.processLoginOrCreateAccount(this.user).subscribe(
-      status => {
-        if(status){
-          this.onSuccessfulLogin();
+      result => {
+        if(result){
+          this.onSuccessfulLogin(result);
         }
         else{
           this.onFailedLogin();
         }
       },
-      error => this.onFailedLogin(),
+      error => {
+        this.log.error(error);
+        this.onFailedLogin();
+      },
       () => {
-        this.log.info("Login complete.");
+        this.log.info("Login process completed.");
       }
     );
  }
@@ -77,10 +77,11 @@ export class LoginComponent{
    this.formErrors['failedLogin'] = 'Login Failed. Invalid username and/or password';
  }
 
- onSuccessfulLogin(){
+ onSuccessfulLogin(jwtToken){
    this.log.info("Successful login");
    this.failedLogin = false;
    this.formErrors['failedLogin'] = '';//clear
+   this.authService.processAuthenticatedLogin(jwtToken);
  }
 
  //initialize the subscriber for the first time.

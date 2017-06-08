@@ -53,26 +53,53 @@ const expressJWT = require('express-jwt');
         log.info("User found in the database!");
         if(req.body.isNew){
           log.warn("Client requested to create a new user - username found in database.");
-          //client tried to create user with an already existing username.
           res.sendStatus(401);
         }
         else{
           log.info("Client requested to login - username found in database.");
-
-          //match passwords?
-
-          //user found and this is not a new account, just a normal login.
-          //TODO: send down a JWT.
-          res.sendStatus(200);
+          //do the passwords match?
+          if(_.isEqual(foundUser.password,req.body.password)){
+            log.info("Authentication successful!");
+            
+            req.logIn(foundUser, function(err) {//CREATE A LOGIN SESSION.
+              if (err) {
+                return next(err);//call error middleware.
+              }
+              log.info("Sending down JWT JSON in POST.");
+              res.json({'jwt':createJWT(user.id)});
+            });
+          }
+          else{
+            log.warn("Invalid password for username:"+req.body.username);
+            res.sendStatus(401);
+          }
         }
       }
       else{//user was not found
-        log.info("User NOT found in the database!");
+        log.info("User:"+req.body.username+" NOT found in the database!");
         if(req.body.isNew){
-          //create new user in database.
           log.info("Client requested to create a new user - username not found, so proceeding to create a new user.");
-          //TODO: send down a JWT.
-          res.sendStatus(200);
+          userObj.username = req.body.username;
+          userObj.password = req.body.password;
+          userObj.role     = 'druidia_user';
+          var newUserModel = schemas.userModel(userObj);
+          mongoloid.save(newUserModel,function(savedUser){
+            if(!_.isEmpty(savedUser)){
+              log.info("Successfully created new user:"+JSON.stringify(savedUser));
+
+              req.logIn(foundUser, function(err) {//CREATE A LOGIN SESSION.
+                if (err) {
+                  return next(err);//call error middleware.
+                }
+                log.info("Sending down JWT JSON in POST.");
+                res.json({'jwt':createJWT(user.id)});
+              });
+            }
+            else{
+              log.error("Error saving new user.");
+              res.sendStatus(401);
+            }
+          });
         }
         else{
           //login failed because user does not exist!
@@ -125,15 +152,21 @@ const expressJWT = require('express-jwt');
         log.error("Error processing user.");
         return res.sendStatus(401);
       }
+
       req.logIn(user, function(err) {//CREATE A LOGIN SESSION.
         if (err) {
-          return next(err);
+          return next(err);//call error middleware.
         }
 
         //all good
         log.info("Successful login. Sending jwt to user:"+JSON.stringify(user));
-        var myJwt = jwt.sign({id: user.id}, credentials.jwtSecret);
-        return res.redirect('/authenticated?jwtToken='+myJwt);
+        //lets create our own druidia JWT.
+        return res.redirect('/authenticated?jwtToken='+createJWT(user.id));
       });
     })(req, res, next);
+  }
+
+  //returns the JWT based off of the user Id.
+  function createJWT(userId){
+    return jwt.sign({id: userId}, credentials.jwtSecret);
   }

@@ -3,15 +3,16 @@
 import { Component,OnInit,OnDestroy }   from '@angular/core';
 import { Logger }                       from '../services/logger.service';
 import { ActivatedRoute,Params,Router } from '@angular/router';
+import { AuthService}                   from './auth.service';
 
 @Component({
   template: ``
 })
   export class AuthComponent implements OnInit{
-    private sub: any;
 
     constructor(private router:Router,
                 private activatedRoute:ActivatedRoute,
+                private authService:AuthService,
                 private log: Logger){
       this.log.info("Instantiating auth component.");
     }
@@ -21,11 +22,7 @@ import { ActivatedRoute,Params,Router } from '@angular/router';
 
       this.activatedRoute.queryParams.subscribe((params: Params)=> {
         let jwtToken = params['jwtToken'];
-        if(jwtToken){
-          this.log.info("Received the following JWT token: "+jwtToken);
-          localStorage.setItem('jwt_token', jwtToken);
-          this.router.navigate(['/home']);
-        }
+        this.authService.processAuthenticatedLogin(jwtToken);
       });
     }
 

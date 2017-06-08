@@ -5,7 +5,6 @@ var pathUtil           = require('path'),
     conf               = require(pathUtil.join(__dirname,'../config/conf.json')),
     documentHandler    = require(pathUtil.join(__dirname,'../handlers/documentHandler.js')),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
-    commonController   = require(pathUtil.join(__dirname,'../controllers/common.server.controller.js')),
     loggerController   = require(pathUtil.join(__dirname,'../controllers/logger.server.controller.js')),
     errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js')),
     apiController      = require(pathUtil.join(__dirname,'../controllers/api.server.controller.js')),
@@ -33,6 +32,8 @@ module.exports = function(app) {
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   });
 
+  //only used for facebook authentication that was originally triggered by a get request.
+  //  /authenticated?jwtToken=FDSJFLKSDJFL...
   app.get('/authenticated',function(req,res){
     log.info("Authenticated route hit with JWT = "+req.query.jwtToken);
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));

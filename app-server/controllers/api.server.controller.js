@@ -8,6 +8,9 @@ var pathUtil       = require('path'),
 
     //fetch the user object of the requesting user.
     exports.fetchUser = function(req,res,next){
+      //log.warn(req.session.passport.user._id);
+      var jsobj = JSON.parse(req.session.passport);
+      
       mongoloid.findOne(schemas.userModel,"_id",req.user.id,function(foundUser){
         if(!_.isEmpty(foundUser)){
           log.info("Returning user:"+JSON.stringify(foundUser));
@@ -27,6 +30,7 @@ var pathUtil       = require('path'),
           res.json(foundBlogs);
         }
         else{
+          log.info("No blog entries exist for this user.");
           res.json({});//no blogs exist for user. Send empty JSON.
         }
       })
