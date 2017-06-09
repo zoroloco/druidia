@@ -6,7 +6,7 @@
     "create": "mkdir dist",
     "clean": "rimraf dist/ && npm run create",
     "resources": "copyfiles -f app/resources/* dist/resources",
-    "html": "copyfiles -f app/src/**/*.html dist/html && copyfiles -f app/src/index.html dist/",
+    "html": "copyfiles -f 'app/src/**/*.html' dist/html && copyfiles -f app/src/index.html dist/",
     "compile": "tsc",
     "bundle": "browserify -s main dist/main.js > dist/bundle.js",
     "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",
