@@ -65,6 +65,11 @@ module.exports = function() {
     app.use(passport.initialize());
     //app.use(passport.session());
 
+    //CONFIGURE PASSPORT for local authentication
+    passport.use(new LocalStrategy(
+      securityController.processLocalStrategy
+    ));
+
     //CONFIGURE PASSPORT for Facebook
     passport.use(new FacebookStrategy({
         clientID     : credentials.fb_app_id,

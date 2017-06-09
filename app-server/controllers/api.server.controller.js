@@ -8,9 +8,8 @@ var pathUtil       = require('path'),
 
     //fetch the user object of the requesting user.
     exports.fetchUser = function(req,res,next){
-      //log.warn(req.session.passport.user._id);
-      var jsobj = JSON.parse(req.session.passport);
-      
+      log.warn(JSON.stringify(req.user));
+
       mongoloid.findOne(schemas.userModel,"_id",req.user.id,function(foundUser){
         if(!_.isEmpty(foundUser)){
           log.info("Returning user:"+JSON.stringify(foundUser));

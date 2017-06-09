@@ -42,6 +42,16 @@ const expressJWT = require('express-jwt');
     }
   }
 
+  exports.processLocalStrategy = function(username, password, done) {
+    //TODO:::::
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (!user.verifyPassword(password)) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+
   //this is a manual login.
   exports.processLoginOrCreateAccount = function(req,res,next){
     log.info("A new login or create account request is being attempted for payload:"+JSON.stringify(req.body));
@@ -60,14 +70,9 @@ const expressJWT = require('express-jwt');
           //do the passwords match?
           if(_.isEqual(foundUser.password,req.body.password)){
             log.info("Authentication successful!");
-            
-            req.logIn(foundUser, function(err) {//CREATE A LOGIN SESSION.
-              if (err) {
-                return next(err);//call error middleware.
-              }
-              log.info("Sending down JWT JSON in POST.");
-              res.json({'jwt':createJWT(user.id)});
-            });
+
+            log.info("Sending down JWT JSON in POST.");
+            res.json({'jwt':createJWT(foundUser.id),'userId':foundUser.id});
           }
           else{
             log.warn("Invalid password for username:"+req.body.username);
@@ -87,13 +92,8 @@ const expressJWT = require('express-jwt');
             if(!_.isEmpty(savedUser)){
               log.info("Successfully created new user:"+JSON.stringify(savedUser));
 
-              req.logIn(foundUser, function(err) {//CREATE A LOGIN SESSION.
-                if (err) {
-                  return next(err);//call error middleware.
-                }
-                log.info("Sending down JWT JSON in POST.");
-                res.json({'jwt':createJWT(user.id)});
-              });
+              log.info("Sending down JWT JSON in POST.");
+              res.json({'jwt':createJWT(savedUser.id),'userId':savedUser.id});
             }
             else{
               log.error("Error saving new user.");
