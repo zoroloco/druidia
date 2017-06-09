@@ -9,10 +9,11 @@ var   pathUtil         = require('path'),
       _                = require('underscore'),
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
+      LocalStrategy    = require('passport-local').Strategy,
       credentials      = require(pathUtil.join(__dirname,'../security/credentials.js')),
       conf             = require(pathUtil.join(__dirname,'./conf.json')),
-      log              = require(pathUtil.join(__dirname,'../lib/logger.js')),
-    securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js'));
+      log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
+      securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js'));
 
 //const cors = require('cors');
 
@@ -66,8 +67,10 @@ module.exports = function() {
     //app.use(passport.session());
 
     //CONFIGURE PASSPORT for local authentication
-    passport.use(new LocalStrategy(
-      securityController.processLocalStrategy
+    passport.use(new LocalStrategy({
+      callbackURL: "https://"+conf.hostname+"/auth/login/callback"
+    },
+      securityController.processLocalLogin
     ));
 
     //CONFIGURE PASSPORT for Facebook

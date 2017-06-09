@@ -43,12 +43,26 @@ export class LoginComponent{
     this.user = new User();
   }
 
-  onLoginOrCreateAccount(newAccountFlag:boolean=false){
+  onCreateAccount(){
+    this.log.info(this.user.username+" is attempting to create an account.");
+
+    this.authService.processCreateAccount(this.user).subscribe(
+      result => {
+        this.onSuccessfulLogin(result);
+      },
+      error => {
+        this.onFailedLogin();
+      },
+      () => {
+        this.onFailedLogin();
+      }
+    )
+  }
+
+  onLogin(){
     this.log.info(this.user.username+" is attempting to login.");
 
-    this.user.isNew=newAccountFlag;
-
-    this.authService.processLoginOrCreateAccount(this.user).subscribe(
+    this.authService.processLogin(this.user).subscribe(
       result => {
         if(result){
           this.onSuccessfulLogin(result);
@@ -81,7 +95,7 @@ export class LoginComponent{
    this.log.info("Successful login");
    this.failedLogin = false;
    this.formErrors['failedLogin'] = '';//clear
-   this.authService.processAuthenticatedLogin(jwtToken);
+   //this.authService.processAuthenticatedLogin(jwtToken);
  }
 
  //initialize the subscriber for the first time.

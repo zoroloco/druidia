@@ -2,15 +2,18 @@ var pathUtil       = require('path'),
     log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
-    blogObj        = require(pathUtil.join(__dirname,'../mongoose/collections/blog.json')),
-    schemas        = require(pathUtil.join(__dirname,'../mongoose/schemas.js')),
+    Blog           = require(pathUtil.join(__dirname,'../mongoose/blog-model.js')),
+    User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     timestamp      = require('time-stamp');
 
     //fetch the user object of the requesting user.
     exports.fetchUser = function(req,res,next){
       log.warn(JSON.stringify(req.user));
 
-      mongoloid.findOne(schemas.userModel,"_id",req.user.id,function(foundUser){
+      User.findOne({_id:req.user.id},function(err,foundUser){
+        if(err)
+          next(err);
+
         if(!_.isEmpty(foundUser)){
           log.info("Returning user:"+JSON.stringify(foundUser));
           res.json(foundUser);
@@ -23,7 +26,11 @@ var pathUtil       = require('path'),
 
     //fetch the blog objects of the requesting user.
     exports.fetchBlogs = function(req,res,next){
-      mongoloid.find(schemas.blogModel,"userId",req.user.id,function(foundBlogs){
+
+      Blog.find({userId:req.user.id},function(err,foundBlogs){
+        if(err)
+          next(err);
+
         if(!_.isEmpty(foundBlogs)){
           log.info("Found blog entries:"+JSON.stringify(foundBlogs));
           res.json(foundBlogs);
@@ -39,21 +46,18 @@ var pathUtil       = require('path'),
     exports.saveBlog = function(req,res,next){
       log.info("saving blog entry:"+JSON.stringify(req.body));
 
-      //fetch the full user object first
-      blogObj.userId    = req.user.id;
-      blogObj.heading   = req.body.heading;
-      blogObj.text      = req.body.text;
-      blogObj.timeStamp = timestamp('[YYYY:MM:DD HH:mm:ss:ms]');
+      var newBlog = new Blog({
+        userId    : req.user.id,
+        heading   : req.body.heading,
+        text      : req.body.text,
+        timeStamp : timestamp('[YYYY:MM:DD HH:mm:ss:ms]')
+      });
 
-      var newBlogModel = schemas.blogModel(blogObj);
+      newBlog.save(function(err){
+        if(err)
+          next(err);
 
-      mongoloid.save(newBlogModel,function(result){
-        if(!_.isEmpty(result)){
-          log.info("Successfully saved a new blog entry.");
-          res.json(blogObj);
-        }
-        else{
-          next("Error saving new blog entry.")
-        }
+        log.info("Successfully saved a new blog entry.");
+        res.json(newBlog);
       })//save blog
     }

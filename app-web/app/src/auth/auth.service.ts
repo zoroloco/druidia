@@ -20,15 +20,20 @@ export class AuthService {
       this.log.info("In constructor of auth service.");
   }
 
-  public processLoginOrCreateAccount(user: User): Observable<any>{
+  public processCreateAccount(user: User): Observable<any>{
+    return this.http.post('auth/createAccount',user)
+      .map(this.processLocalAuthenticationResponse)
+      .catch(error=> Observable.throw(error));
+  }
 
-    return this.http.post(`loginOrCreateAccount`,user)
-      .map(this.processLoginOrCreateAccountResponse)
+  public processLogin(user: User): Observable<any>{
+    return this.http.post(`auth/login`,user)
+      .map(this.processLocalAuthenticationResponse)
       .catch(error=> Observable.throw(error));
   }
 
   //if successfull, then will return jwt in json. false otherwise.
-  public processLoginOrCreateAccountResponse(res:Response): any{
+  private processLocalAuthenticationResponse(res:Response): any{
     if(res.status == 200){
       let body = res.json();
       return body.jwt || {};

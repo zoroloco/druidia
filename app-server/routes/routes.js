@@ -25,8 +25,6 @@ module.exports = function(app) {
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   })
 
-  app.post('/loginOrCreateAccount',securityController.processLoginOrCreateAccount);
-
   app.get('/home',function(req,res,next){
     log.info("Sending home to client.");
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
@@ -38,6 +36,24 @@ module.exports = function(app) {
     log.info("Authenticated route hit with JWT = "+req.query.jwtToken);
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   });
+
+  app.post('/auth/createAccount',
+    securityController.processCreateAccount,
+    function(req,res,next){
+      log.info("Post account creation middleware. Now routing to login authentication.");
+      next();
+    },
+    passport.authenticate('local'));
+
+  app.get('/auth/login/callback',
+    function(req,res){
+      log.info("in login callback!");//TEST
+      res.sendStatus(200);
+  });
+
+  //route for normal un/pw authentication.
+  app.post('/auth/login',
+    passport.authenticate('local'));
 
   // Redirect the user to Facebook for authentication.  When complete,
   // Facebook will redirect the user back to the application at

@@ -41,13 +41,13 @@
       </div>
     </div>
     <button
-      (click)="onLoginOrCreateAccount()"
+      (click)="onLogin()"
       class="btn btn-default btn-primary"
       [disabled]="!loginForm.form.valid">
         Log In
     </button>
     <button
-      (click)="onLoginOrCreateAccount(true)"
+      (click)="onCreateAccount()"
       class="btn btn-default btn-primary"
       [disabled]="!loginForm.form.valid">
       Create Account

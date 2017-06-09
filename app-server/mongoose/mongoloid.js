@@ -2,7 +2,6 @@ var mongoose   = require('mongoose'),
     _          = require('underscore'),
     pathUtil   = require('path'),
     conf       = require(pathUtil.join(__dirname,'../config/conf.json')),
-    schemas    = require(pathUtil.join(__dirname,'./schemas.js')),
     log        = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
 var self = module.exports = {
@@ -21,7 +20,6 @@ var self = module.exports = {
 
       mongoose.connection.on('connected', function () {
         log.info('Mongoose default connection open to ' + dbURI);
-        schemas.init();
         cb(true);
       });
 

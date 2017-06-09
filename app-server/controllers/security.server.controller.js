@@ -3,9 +3,7 @@ var pathUtil       = require('path'),
     _              = require('underscore'),
     sessionHandler = require(pathUtil.join(__dirname,'../handlers/sessionHandler.js')),
     credentials    = require(pathUtil.join(__dirname,'../security/credentials.js')),
-    mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
-    schemas        = require(pathUtil.join(__dirname,'../mongoose/schemas.js')),
-    userObj        = require(pathUtil.join(__dirname,'../mongoose/collections/user.json')),
+    User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     passport       = require('passport');
 
 const jwt        = require('jsonwebtoken');
@@ -42,103 +40,100 @@ const expressJWT = require('express-jwt');
     }
   }
 
-  exports.processLocalStrategy = function(username, password, done) {
-    //TODO:::::
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (!user.verifyPassword(password)) { return done(null, false); }
-      return done(null, user);
+  exports.processCreateAccount = function(req,res,next){
+    log.info("Processing creation of new account.");
+
+    User.findOne({username:req.body.username},function(err,foundUser){
+      if(err){
+        log.error("Error while searching for during user creation.");
+        next(err);
+      }
+
+      if(!_.isEmpty(foundUser)){
+        log.info("User found in database.");
+        next("User already exists. Cannot create new user.");
+      }
+      else{
+        log.info("User not found in database. Creating new user.");
+
+        var newLocalUser = new User({
+          username: req.body.username,
+          password: req.body.password,
+          role: "local_user"
+        });
+
+        newLocalUser.save(function(err){
+          if(err){
+            next(err);
+          }
+          else{
+            log.info("New user successfully created.");
+            //I have now added this new user to the db.
+            //now call middleware to route to normal login flow.
+            next();
+          }
+        });//save
+      }
     });
   }
 
-  //this is a manual login.
-  exports.processLoginOrCreateAccount = function(req,res,next){
-    log.info("A new login or create account request is being attempted for payload:"+JSON.stringify(req.body));
+  //callback after a login is attempted through regular form-based login.
+  exports.processLocalLogin = function(username, password, done) {
+    log.info("Processing local authentication strategy.");
+    log.info("Local username:"+username);
+    User.findOne({username:username},function(err,foundUser){
+      if(err)
+        return done(err);
 
-    var user = req.body;
-
-    mongoloid.findOne(schemas.userModel,"username",req.body.username,function(foundUser){
-      if(!_.isEmpty(foundUser)){
-        log.info("User found in the database!");
-        if(req.body.isNew){
-          log.warn("Client requested to create a new user - username found in database.");
-          res.sendStatus(401);
-        }
-        else{
-          log.info("Client requested to login - username found in database.");
-          //do the passwords match?
-          if(_.isEqual(foundUser.password,req.body.password)){
-            log.info("Authentication successful!");
-
-            log.info("Sending down JWT JSON in POST.");
-            res.json({'jwt':createJWT(foundUser.id),'userId':foundUser.id});
+      if(_.isEmpty(foundUser)){
+        log.info("User not found.");
+        return done(null,false);
+      }
+      else{
+        log.info("User found in the database! Attempting to authenticate.");
+        if(!foundUser.verifyPassword(password,function(err){
+          if(err){
+            log.info("Password validation failed.");
+            return done(null,false);
           }
           else{
-            log.warn("Invalid password for username:"+req.body.username);
-            res.sendStatus(401);
+            return done(null,foundUser);
           }
-        }
-      }
-      else{//user was not found
-        log.info("User:"+req.body.username+" NOT found in the database!");
-        if(req.body.isNew){
-          log.info("Client requested to create a new user - username not found, so proceeding to create a new user.");
-          userObj.username = req.body.username;
-          userObj.password = req.body.password;
-          userObj.role     = 'druidia_user';
-          var newUserModel = schemas.userModel(userObj);
-          mongoloid.save(newUserModel,function(savedUser){
-            if(!_.isEmpty(savedUser)){
-              log.info("Successfully created new user:"+JSON.stringify(savedUser));
-
-              log.info("Sending down JWT JSON in POST.");
-              res.json({'jwt':createJWT(savedUser.id),'userId':savedUser.id});
-            }
-            else{
-              log.error("Error saving new user.");
-              res.sendStatus(401);
-            }
-          });
-        }
-        else{
-          //login failed because user does not exist!
-          log.warn("Client requested to login - login failed because username not found.");
-          res.sendStatus(401);
-        }
-      }
-    });
+        }));
+      }//else
+    });//findOne
   }
 
   //callback after a login is attempted through facebook.
   exports.processFacebookLogin = function(accessToken, refreshToken, fbProfile, done) {
+    log.info("Processing facebook authentication strategy.");
     log.info("Facebook accessToken = "+accessToken);
     log.info("Facebook profile = "+JSON.stringify(fbProfile));
 
     //try to find a druidia user object based off of the facebook ID (searchID).
-    mongoloid.findOne(schemas.userModel,"searchId",fbProfile.id,function(foundUser){
+    User.findOne({searchId:fbProfile.id},function(err,foundUser){
       if(!_.isEmpty(foundUser)){
         done(null,foundUser);
       }
       else{
         log.info("User:"+fbProfile.displayName+" not found. Attempting to create a new user from a facebook profile.");
-        userObj.username   = fbProfile.displayName;
-        userObj.searchId   = fbProfile.id;
-        userObj.pictureUrl = fbProfile.photos[0].value;
-        userObj.role       = 'facebook_user';
+        var newFacebookUser = new User({
+          username   : fbProfile.displayName,
+          password   : "NA",//not applicable for Facebook Authentication.
+          searchId   : fbProfile.id,
+          pictureUrl : fbProfile.photos[0].value,
+          role       : "facebook_user"
+        });
 
-        var newUserModel = schemas.userModel(userObj);
-
-        mongoloid.save(newUserModel,function(result){
-          if(!_.isEmpty(result)){
-            done(null,result);
-          }
+        newFacebookUser.save(function(err){
+          if(err)
+            done(err);
           else{
-            log.error("Error saving new user.");
+            done(null,newFacebookUser);
           }
-        })
+        });//save
       }
-    });
+    });//findOne
   }
 
   //callback after successful facebook login.
