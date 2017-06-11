@@ -77,30 +77,63 @@ const expressJWT = require('express-jwt');
     });
   }
 
+  //called after passport has determined login was successful.
+  //invoked from our router.
+  exports.processLocalLoginCallback = function(req,res,next){
+    log.info("Processing local login callback with user:"+JSON.stringify(req.user));
+    if (_.isEmpty(req.user)) {
+      log.error("Error processing user.");
+      return res.sendStatus(401);
+    }
+
+    req.logIn(req.user, function(err) {//CREATE A LOGIN SESSION.
+      if (err) {
+        next(err);//call error middleware.
+      }
+
+      //all good
+      log.info("Successful login. Sending jwt to user:"+JSON.stringify(req.user));
+      //lets create our own druidia JWT.
+      //return res.redirect('/authenticated?jwtToken='+createJWT(req.user.id));
+      res.json({'jwt':createJWT(req.user.id)});
+    });
+  }
+
   //callback after a login is attempted through regular form-based login.
+  //this is invoked from passport js middleware. Defined in express.js file.
   exports.processLocalLogin = function(username, password, done) {
     log.info("Processing local authentication strategy.");
     log.info("Local username:"+username);
     User.findOne({username:username},function(err,foundUser){
-      if(err)
-        return done(err);
-
-      if(_.isEmpty(foundUser)){
-        log.info("User not found.");
-        return done(null,false);
+      if(err){
+        log.error("Error encountered finding user:"+err);
+        done(err);
       }
       else{
-        log.info("User found in the database! Attempting to authenticate.");
-        if(!foundUser.verifyPassword(password,function(err){
-          if(err){
-            log.info("Password validation failed.");
-            return done(null,false);
+          if(_.isEmpty(foundUser)){
+            log.info("User not found.");
+            done(null,false);
           }
           else{
-            return done(null,foundUser);
-          }
-        }));
-      }//else
+            log.info("User found in the database! Attempting to authenticate.");
+            foundUser.verifyPassword(password,function(err,isMatch){
+              if(err){
+                log.info("Password validation failed.");
+                done(null,false);
+              }
+              else{
+                if(isMatch){
+                  log.info("Authentication passed.");
+                  done(null,foundUser);
+                }
+                else{
+                  log.error("Passwords do not match.");
+                  done(null,false);
+                }
+              }
+            });
+          }//else
+      }
     });//findOne
   }
 

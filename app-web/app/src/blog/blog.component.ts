@@ -40,7 +40,7 @@ import * as _          from 'underscore';
 
       this.blogService.fetchBlogs().subscribe(
         fetchedBlogs => {
-          this.log.info("Fetched blogs for user:"+JSON.stringify(fetchedBlogs));
+          this.log.info("Fetched blogs:"+JSON.stringify(fetchedBlogs));
           this.blogs = fetchedBlogs;
         },
         error => this.log.error(error)

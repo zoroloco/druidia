@@ -95,7 +95,7 @@ export class LoginComponent{
    this.log.info("Successful login");
    this.failedLogin = false;
    this.formErrors['failedLogin'] = '';//clear
-   //this.authService.processAuthenticatedLogin(jwtToken);
+   this.authService.processAuthenticatedLogin(jwtToken);
  }
 
  //initialize the subscriber for the first time.

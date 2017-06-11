@@ -67,11 +67,7 @@ module.exports = function() {
     //app.use(passport.session());
 
     //CONFIGURE PASSPORT for local authentication
-    passport.use(new LocalStrategy({
-      callbackURL: "https://"+conf.hostname+"/auth/login/callback"
-    },
-      securityController.processLocalLogin
-    ));
+    passport.use(new LocalStrategy(securityController.processLocalLogin));
 
     //CONFIGURE PASSPORT for Facebook
     passport.use(new FacebookStrategy({

@@ -45,11 +45,13 @@ var mongoose  = require('mongoose'),
     UserSchema.methods.verifyPassword = function(candidatePassword, cb) {
       log.info("VERIFYING PASSWORDS");
       bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-          if (err) return cb(err);
-
-          log.info("Result of password verification:"+isMatch);
-
-          cb(null, isMatch);
+          if (err){
+            cb(err);
+          }
+          else{
+            log.info("Result of password verification:"+isMatch);
+            cb(null, isMatch);  
+          }
       });
     };
 

@@ -43,17 +43,13 @@ module.exports = function(app) {
       log.info("Post account creation middleware. Now routing to login authentication.");
       next();
     },
-    passport.authenticate('local'));
-
-  app.get('/auth/login/callback',
-    function(req,res){
-      log.info("in login callback!");//TEST
-      res.sendStatus(200);
-  });
+    passport.authenticate('local'),
+    securityController.processLocalLoginCallback);
 
   //route for normal un/pw authentication.
   app.post('/auth/login',
-    passport.authenticate('local'));
+    passport.authenticate('local'),
+    securityController.processLocalLoginCallback);
 
   // Redirect the user to Facebook for authentication.  When complete,
   // Facebook will redirect the user back to the application at

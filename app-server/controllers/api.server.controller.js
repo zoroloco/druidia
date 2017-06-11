@@ -37,7 +37,7 @@ var pathUtil       = require('path'),
         }
         else{
           log.info("No blog entries exist for this user.");
-          res.json({});//no blogs exist for user. Send empty JSON.
+          res.sendStatus(404);//no blogs exist for user. Send empty JSON.
         }
       })
     }
