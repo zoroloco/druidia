@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap"         : "latest",
     "font-awesome"      : "latest",
-    "auth0-angular"     : "latest"
+    "auth0-angular"     : "latest",
+    "froala-editor"     : "latest" 
   }
 }

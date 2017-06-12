@@ -90,6 +90,10 @@ module.exports = function(app) {
   app.post('/api/postBlog',
     apiController.saveBlog);
 
+  //route to delete a blog entry.
+  app.post('/api/deleteBlog',
+    apiController.deleteBlog);
+
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
   app.use(errorController.handleError);

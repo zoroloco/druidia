@@ -46,7 +46,10 @@ npm run resources - copies the resources folder to the dist folder.
 npm run build     - runs html and resources scripts, but also compiles the ts and moves js output to dist folder.
 npm run deploy    - runs build, but also minifies the bundle.js to a bundle.min.js ready for production.
 
-#Note:
-The NPM command:  npm run html, which copies all the html files to the dist/html folder works for Linux/MAC.  For windows, please add the quotes for it to work.  See below.
+#Sources:
+https://github.com/froala/angular2-froala-wysiwyg
+http://zavoloklom.github.io/material-design-iconic-font/icons.html#application
 
-"html": "copyfiles -f 'app/src/**/*.html' dist/html && copyfiles -f app/src/index.html dist/",
+#Note:
+The NPM command:  npm run html, which copies all the html files to the dist/html folder works for Linux/MAC.  For windows, please add the quotes
+around app/src/**/*.html for it to work.  

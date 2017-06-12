@@ -40,7 +40,6 @@
     "@angular/platform-browser-dynamic": "4.0.0",
     "@angular/router": "4.0.0",
     "angular2-froala-wysiwyg": "^2.6.0",
-    "angular2-froala-wysiwyg-base": "^2.5.1",
     "angular2-jwt": "^0.2.3",
     "auth0-lock": "^10.15.1",
     "core-js": "^2.4.1",

@@ -1,13 +1,7 @@
 <NavBar>
 </NavBar>
-<input type="text" class="form-control" #heading placeholder="Title"/>
-<div [froalaEditor]>Hello, Froala!</div>
-<textarea rows="3" cols="160" autofocus="true" minlength="4" maxlength="120"
-          required
-          class="form-control btn btn-default"
-          #blogEntry placeholder="Que pasa?"
-          (click)="onBlog(blogEntry.value,heading.value)">
-</textarea>
+<input type="text" class="form-control" [(ngModel)]="newBlog.heading" placeholder="Title"/>
+<div [froalaEditor]='options' [(froalaModel)]="newBlog.text"></div>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -18,7 +12,12 @@
   <ul class="list-group">
     <div *ngFor="let blog of blogs">
       <li class="list-group-item">
-        {{blog.heading}} - {{blog.timeStamp}} - {{blog.text}}
+
+        {{blog.timeStamp}}[{{blog.heading}}]
+        <i (click)="deleteBlog(blog)" class="zmdi zmdi-delete"></i>
+        <br/>
+
+        <div [froalaView]= "blog.text"></div>
       </li>
     </div>
   </ul>

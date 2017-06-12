@@ -42,6 +42,21 @@ var pathUtil       = require('path'),
       })
     }
 
+    exports.deleteBlog = function(req,res,next){
+      log.info("deleting blog entry with ID:"+req.body._id);
+
+      Blog.findByIdAndRemove(req.body._id, function(err){
+        if(!err){
+          log.info("Successfully deleted blog entry.");
+          res.sendStatus(200);
+        }
+        else{
+          log.error("Error deleting blog entry.");
+          res.sendStatus(500);
+        }
+      });
+    }
+
     //save a new blog entry.
     exports.saveBlog = function(req,res,next){
       log.info("saving blog entry:"+JSON.stringify(req.body));
