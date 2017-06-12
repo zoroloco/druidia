@@ -1,4 +1,5 @@
 <div class="container">
+  <button type="button" class="btn btn-link" (click)="authService.processLogout()">[Log Off]</button>
   <nav class="navbar navbar-default" role="navigation">
      <!-- Brand and toggle get grouped for better mobile display -->
      <div class="navbar-header">
@@ -22,7 +23,6 @@
            <ul class="dropdown-menu">
              <li><a routerLink="/home/blog" (click)="onBlog()">Blog</a></li>
              <li><a routerLink="/home/chatter" (click)="onChatter()">Chatter</a></li>
-             <li><button type="button" (click)="authService.processLogout()">Log Off</button></li>
            </ul>
          </li>
        </ul>
