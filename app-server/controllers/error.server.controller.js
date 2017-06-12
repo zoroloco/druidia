@@ -5,5 +5,5 @@ var pathUtil       = require('path'),
   //401 , 404s,some 500s sent here.
   exports.handleError = function(err,req,res,next){
     log.error("Error middleware caught with error:"+err);
-    res.sendStatus(err);
+    res.sendStatus(500);
   }

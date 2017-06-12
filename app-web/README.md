@@ -28,7 +28,8 @@ npm install -g uglifyjs
 npm install -g browserify
 npm install auth0-js
 npm install rimraf -g
-npm install copyfiles -g
+npm install copyfiles -g ( please see Note below )
+npm install angular2-froala-wysiwyg --save
 
 ionic platform add ios
 
@@ -44,3 +45,8 @@ npm run html      - copies all the html files to the dist folder, including the 
 npm run resources - copies the resources folder to the dist folder.
 npm run build     - runs html and resources scripts, but also compiles the ts and moves js output to dist folder.
 npm run deploy    - runs build, but also minifies the bundle.js to a bundle.min.js ready for production.
+
+#Note:
+The NPM command:  npm run html, which copies all the html files to the dist/html folder works for Linux/MAC.  For windows, please add the quotes for it to work.  See below.
+
+"html": "copyfiles -f 'app/src/**/*.html' dist/html && copyfiles -f app/src/index.html dist/",

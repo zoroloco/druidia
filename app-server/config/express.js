@@ -91,8 +91,8 @@ module.exports = function() {
     log.info("Defining custom static file directory.");
     app.use(express.static(pathUtil.join(__dirname,'../../app-web/dist')));
     //set up static directory of 3rd party files
-    log.info("Defining 3rd party static file directory.");
-    app.use(express.static(pathUtil.join(__dirname,'../../app-web/libs')));
+    //log.info("Defining 3rd party static file directory.");
+    //app.use(express.static(pathUtil.join(__dirname,'../../app-web/node_modules')));
 
     log.info("Defining routing file.");
     require('../routes/routes.js')(app);

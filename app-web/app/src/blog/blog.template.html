@@ -1,13 +1,13 @@
 <NavBar>
 </NavBar>
 <input type="text" class="form-control" #heading placeholder="Title"/>
+<div [froalaEditor]>Hello, Froala!</div>
 <textarea rows="3" cols="160" autofocus="true" minlength="4" maxlength="120"
           required
-          class="form-control" #blogEntry placeholder="Que pasa?"></textarea>
-
-<button class="btn btn-default"
-  (click)="onBlog(blogEntry.value,heading.value)"
-  type="button">Submit Blog</button>
+          class="form-control btn btn-default"
+          #blogEntry placeholder="Que pasa?"
+          (click)="onBlog(blogEntry.value,heading.value)">
+</textarea>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
