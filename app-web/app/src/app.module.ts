@@ -4,7 +4,6 @@ import { BrowserModule }           from '@angular/platform-browser';
 
 //Services
 import { Logger }                  from './services/logger.service';
-import { ApiService }              from './services/api.service';
 import { BlogService }             from './blog/blog.service';
 
 import { AppComponent }            from './app.component';;
@@ -46,7 +45,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   declarations: [ AppComponent,
                   NavBarComponent,
                   routedComponents ],//array of components that belong to this module
-  providers:    [ AuthService, AuthGuard, Logger, ApiService, BlogService,
+  providers:    [ AuthService, AuthGuard, Logger, BlogService,
                   {
                     provide: AuthHttp,
                     useFactory: authHttpServiceFactory,

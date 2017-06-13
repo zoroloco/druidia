@@ -22,6 +22,7 @@ import { AuthService}                   from './auth.service';
 
       this.activatedRoute.queryParams.subscribe((params: Params)=> {
         let jwtToken = params['jwtToken'];
+        this.log.info(JSON.stringify(params));
         this.authService.processAuthenticatedLogin(jwtToken);
       });
     }

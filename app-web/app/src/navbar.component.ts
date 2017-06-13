@@ -3,7 +3,7 @@ import { Component,
          OnInit }      from '@angular/core';
 import { Logger }      from './services/logger.service';
 import { AuthService } from './auth/auth.service';
-import { ApiService }  from './services/api.service'
+import {User}          from './auth/user';
 
 @Component({
     selector: 'NavBar',
@@ -12,23 +12,22 @@ import { ApiService }  from './services/api.service'
   })
   export class NavBarComponent implements OnInit{
     private name;
-    private pictureUrl;
+    private pictureURL;
 
     constructor(private authService:AuthService,
-                private apiService: ApiService,
                 private log: Logger){
       this.log.info("Instantiating navbar component.");
     }
 
     ngOnInit(){
-      this.log.info("Initializing home component.");
-
-      this.apiService.fetchUser().subscribe(
-        user  => {
-                    this.log.info("FETCHED MYSELF "+JSON.stringify(user));
-                    this.pictureUrl = user.pictureUrl;
-                  },
-        error => console.log('onError: %s', error));
+      this.log.info("Initializing navbar component.");
+      this.authService.fetchUser().subscribe(
+          user => {
+            this.log.info("Picture URL:"+JSON.stringify(user));
+            this.pictureURL = user.pictureUrl;
+          },
+          error=> this.log.error(error)
+      );
     }
 
     onBlog(){
@@ -38,5 +37,4 @@ import { ApiService }  from './services/api.service'
     onChatter(){
       this.log.info("Chatter button clicked.");
     }
-
   }

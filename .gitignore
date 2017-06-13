@@ -1,6 +1,6 @@
 *.store
 *.DS_Store
-
+.recommenders
 app-ios/node_modules
 app-ios/www/build
 
@@ -90,3 +90,4 @@ druidia.net.ng/.settings
 app-server/security/credentials.js
 app-server/security/credentials.js
 *.ppk
+*.gen

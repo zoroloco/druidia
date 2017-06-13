@@ -3,7 +3,7 @@
 import { Component,ViewChild } from '@angular/core';
 import { Logger }              from '../services/logger.service';
 import {NgForm}                from '@angular/forms';
-import {User}                  from '../auth/user';
+import { LocalUser }           from '../auth/localUser';
 import {AuthService}           from '../auth/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent{
   submitted: boolean = false;
   active: boolean    = true;
   failedLogin: boolean = false;
-  user: User;
+  user: LocalUser;
 
   formErrors = {
     'username': '',
@@ -40,7 +40,7 @@ export class LoginComponent{
 
   constructor(private log: Logger,private authService: AuthService){
     this.log.info("Instantiating login component.");
-    this.user = new User();
+    this.user = new LocalUser();
   }
 
   onCreateAccount(){
