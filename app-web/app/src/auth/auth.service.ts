@@ -9,7 +9,7 @@ import { Response,Http }            from '@angular/http';
 import { AuthHttp }                 from 'angular2-jwt';
 import { Observable }               from 'rxjs/Observable';
 import * as _                       from 'underscore';
-import { UserFactory,UserType }     from './userFactory'
+import { UserFactory }              from './userFactory'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -66,15 +66,8 @@ export class AuthService {
       return Observable.of(localStorage.getItem('user'))
         .map((userStr:string) => {
           this.log.info("Returning local storage saved user.");
-          let user:User;
           let resultUser:BaseUser = JSON.parse(userStr);
-          if(_.isEqual(resultUser.role,'facebook_user')){
-            user = this.userFactory.createUser(UserType.facebookUser,resultUser);
-          }
-          else{
-            user = this.userFactory.createUser(UserType.localUser,resultUser);
-          }
-          return user;
+          return this.userFactory.createUser(resultUser);
         });
     }
     else{//fetch from back-end api.
@@ -82,15 +75,8 @@ export class AuthService {
       return this.authHttp.get(`api/fetchUser`)
         .map((res:Response) => {
           //store away for next time
-          let user:User;
           let resultUser:BaseUser = res.json();
-          if(_.isEqual(resultUser.role,'facebook_user')){
-            user = this.userFactory.createUser(UserType.facebookUser,resultUser);
-          }
-          else{
-            user = this.userFactory.createUser(UserType.localUser,resultUser);
-          }
-
+          let user:User = this.userFactory.createUser(resultUser);
           this.log.info("Returning api fetched user.");
           localStorage.setItem('user',JSON.stringify(user));
           return user;
