@@ -66,7 +66,15 @@ export class AuthService {
       return Observable.of(localStorage.getItem('user'))
         .map((userStr:string) => {
           this.log.info("Returning local storage saved user.");
-          return JSON.parse(userStr);
+          let user:User;
+          let resultUser:BaseUser = JSON.parse(userStr);
+          if(_.isEqual(resultUser.role,'facebook_user')){
+            user = this.userFactory.createUser(UserType.facebookUser,resultUser);
+          }
+          else{
+            user = this.userFactory.createUser(UserType.localUser,resultUser);
+          }
+          return user;
         });
     }
     else{//fetch from back-end api.
