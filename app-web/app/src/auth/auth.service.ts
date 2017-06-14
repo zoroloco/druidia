@@ -17,6 +17,7 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class AuthService {
+  private userFactory: UserFactory;
 
   constructor(private router: Router,
               private log: Logger,
@@ -24,6 +25,7 @@ export class AuthService {
               private authHttp: AuthHttp) {
 
       this.log.info("In constructor of auth service.");
+      this.userFactory = new UserFactory(log);
   }
 
   public processCreateAccount(user: User): Observable<any>{
@@ -72,10 +74,14 @@ export class AuthService {
       return this.authHttp.get(`api/fetchUser`)
         .map((res:Response) => {
           //store away for next time
-          let user:BaseUser = res.json();
-
-          //now polymorphism
-          let specificUser:User = UserFactory.createUser(UserType.facebookUser,user);
+          let user:User;
+          let resultUser:BaseUser = res.json();
+          if(_.isEqual(resultUser.role,'facebook_user')){
+            user = this.userFactory.createUser(UserType.facebookUser,resultUser);
+          }
+          else{
+            user = this.userFactory.createUser(UserType.localUser,resultUser);
+          }
 
           this.log.info("Returning api fetched user.");
           localStorage.setItem('user',JSON.stringify(user));

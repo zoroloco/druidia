@@ -4,6 +4,7 @@ import { Component,ViewChild } from '@angular/core';
 import { Logger }              from '../services/logger.service';
 import {NgForm}                from '@angular/forms';
 import { LocalUser }           from '../auth/localUser';
+import { BaseUser }            from '../auth/baseUser';
 import {AuthService}           from '../auth/auth.service';
 
 @Component({
@@ -40,7 +41,7 @@ export class LoginComponent{
 
   constructor(private log: Logger,private authService: AuthService){
     this.log.info("Instantiating login component.");
-    this.user = new LocalUser();
+    this.user = new LocalUser(null);
   }
 
   onCreateAccount(){

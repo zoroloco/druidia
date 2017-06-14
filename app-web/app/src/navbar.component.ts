@@ -4,6 +4,7 @@ import { Component,
 import { Logger }      from './services/logger.service';
 import { AuthService } from './auth/auth.service';
 import {User}          from './auth/user';
+import { FacebookUser }from './auth/facebookUser';
 
 @Component({
     selector: 'NavBar',
@@ -24,7 +25,13 @@ import {User}          from './auth/user';
       this.authService.fetchUser().subscribe(
           user => {
             this.log.info("Picture URL:"+JSON.stringify(user));
-            this.pictureURL = user.pictureUrl;
+            if(user instanceof FacebookUser){
+              this.log.info("User is of type Facebook user.");
+              this.pictureURL = user.pictureUrl;
+            }
+            else{
+              this.log.info("User is not of type Facebook user. No picture URL.");
+            }
           },
           error=> this.log.error(error)
       );
