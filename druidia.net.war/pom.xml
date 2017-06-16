@@ -7,10 +7,10 @@
     <artifactId>druidia.net</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>druidia.net.war</groupId>
-  <artifactId>druidia.net.war</artifactId>  
   
-  <packaging>war</packaging>
+  <artifactId>web</artifactId>  
+   <packaging>war</packaging>
+  
   <name>druidia.net.war Maven Webapp</name>
   <url>https://www.druidia.net</url>
   
@@ -33,7 +33,15 @@
    </repositories>
   
   <dependencies>    	       
-        <!-- PrimeFaces -->
+        <!-- PrimeFaces -->        
+		
+		<dependency>
+			<groupId>druidia.net</groupId>
+			<artifactId>druidia.net.ejb</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+        
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
@@ -73,6 +81,12 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		      
+		 <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+        </dependency>
 		      
   </dependencies>
   <build>

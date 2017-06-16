@@ -6,7 +6,7 @@
   <display-name>druidia.net.ear</display-name>
   <module>
     <ejb>druidia.net.ejb</ejb>
-  </module>
+  </module>  
  
   <module>
   	<web>

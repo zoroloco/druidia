@@ -7,8 +7,10 @@
     <artifactId>druidia.net</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>druidia.net.ejb</groupId>
+  
+  
   <artifactId>druidia.net.ejb</artifactId>
+  <packaging>ejb</packaging>
   
   <name>druidia.net.ejb</name>
   <url>http://maven.apache.org</url>
@@ -20,6 +22,11 @@
 	    <groupId>javax</groupId>
 	    <artifactId>javaee-api</artifactId>
 	    <version>7.0</version>
-	</dependency>	 
+	</dependency>
+	<dependency>
+	    <groupId>druidia.net</groupId>
+	    <artifactId>druidia.net.persistence</artifactId>
+	    <version>0.0.1-SNAPSHOT</version>
+	</dependency>	 	 
   </dependencies>
 </project>

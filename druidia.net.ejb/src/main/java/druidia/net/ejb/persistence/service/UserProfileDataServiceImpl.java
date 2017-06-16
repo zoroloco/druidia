@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
 @Stateless
-public class DataServiceImpl implements DataService,Serializable{
+public class UserProfileDataServiceImpl implements UserProfileDataService,Serializable{
 	
 	/**
 	 * 
@@ -22,6 +22,26 @@ public class DataServiceImpl implements DataService,Serializable{
 	
 	public EntityManager getEntityManager(){
 		return entityManager;
+	}
+
+	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void read() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void delete() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/*

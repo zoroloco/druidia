@@ -7,9 +7,10 @@
     <artifactId>druidia.net</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>druidia.net.persistence</groupId>
+  
   <artifactId>druidia.net.persistence</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+   <packaging>jar</packaging>
+  
   <name>druidia.net.persistence</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -33,5 +34,10 @@
          <version>5.1.18</version>
          <scope>test</scope>
      </dependency>      
+      <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+        </dependency>
   </dependencies>
 </project>
