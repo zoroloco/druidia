@@ -5,7 +5,7 @@ public class SingleObject {
 	//this static member will exist only once for this whole class.
 	private static SingleObject instance = new SingleObject();
 	
-	//make this class private so it cannot be instantiated.
+	//make this constructor private so it cannot be instantiated.
 	private SingleObject(){
 		
 	}

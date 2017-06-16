@@ -1,7 +1,7 @@
 //Component for home.
 
 import { Component,OnInit,OnDestroy }   from '@angular/core';
-import { Logger }                       from '../services/logger.service';
+import { Logger,LogLevels }             from '../loggers/logger.service';
 import { ActivatedRoute,Params,Router } from '@angular/router';
 import { AuthService}                   from './auth.service';
 
@@ -14,20 +14,20 @@ import { AuthService}                   from './auth.service';
                 private activatedRoute:ActivatedRoute,
                 private authService:AuthService,
                 private log: Logger){
-      this.log.info("Instantiating auth component.");
+      this.log.log(LogLevels.INFO,"Instantiating auth component.");
     }
 
     ngOnInit(){
-      this.log.info("Initializing auth component.");
+      this.log.log(LogLevels.INFO,"Initializing auth component.");
 
       this.activatedRoute.queryParams.subscribe((params: Params)=> {
         let jwtToken = params['jwtToken'];
-        this.log.info(JSON.stringify(params));
+        this.log.log(LogLevels.INFO,JSON.stringify(params));
         this.authService.processAuthenticatedLogin(jwtToken);
       });
     }
 
     ngOnDestroy(){
-      this.log.info("Destroying auth component.");
+      this.log.log(LogLevels.INFO,"Destroying auth component.");
     }
   }

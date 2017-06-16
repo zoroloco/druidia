@@ -3,13 +3,13 @@ import { NgModule }                from '@angular/core';
 import { BrowserModule }           from '@angular/platform-browser';
 
 //Services
-import { Logger }                  from './services/logger.service';
 import { BlogService }             from './blog/blog.service';
+import { Logger }                  from './loggers/logger.service';
+import { AuthService }             from './auth/auth.service';
 
 import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
 
-import { AuthService }             from './auth/auth.service';
 import { AuthGuard }               from './auth/auth-guard.service';
 import { Http, RequestOptions }    from '@angular/http';
 import { AuthHttp, AuthConfig }    from 'angular2-jwt';

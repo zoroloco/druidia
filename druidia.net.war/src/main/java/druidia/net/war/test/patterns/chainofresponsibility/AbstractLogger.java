@@ -9,6 +9,10 @@ public abstract class AbstractLogger {
 	
 	protected AbstractLogger nextLogger;
 
+	public AbstractLogger(){
+		
+	}
+	
 	protected void setNext(AbstractLogger nextLogger){
 		this.nextLogger = nextLogger;
 	}

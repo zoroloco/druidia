@@ -7,6 +7,10 @@ package druidia.net.war.test.patterns.observer;
  * 
  * @author kcenturion
  *
+ * An observer takes in a subject and adds itself to the subject's list of observers.
+ * The subject will notify all observers when a certain action on the subject changes.
+ *
+ *
  */
 
 public class ObserverPatternDemo {

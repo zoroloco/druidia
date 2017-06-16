@@ -1,7 +1,7 @@
 
 //Component for login.
 import { Component,ViewChild } from '@angular/core';
-import { Logger }              from '../services/logger.service';
+import { Logger,LogLevels }    from '../loggers/logger.service';
 import {NgForm}                from '@angular/forms';
 import { LocalUser }           from '../auth/localUser';
 import { BaseUser }            from '../auth/baseUser';
@@ -40,12 +40,12 @@ export class LoginComponent{
   };
 
   constructor(private log: Logger,private authService: AuthService){
-    this.log.info("Instantiating login component.");
+    this.log.log(LogLevels.INFO,"Instantiating login component.");
     this.user = new LocalUser(null);
   }
 
   onCreateAccount(){
-    this.log.info(this.user.username+" is attempting to create an account.");
+    this.log.log(LogLevels.INFO,this.user.username+" is attempting to create an account.");
 
     this.authService.processCreateAccount(this.user).subscribe(
       result => {
@@ -61,7 +61,7 @@ export class LoginComponent{
   }
 
   onLogin(){
-    this.log.info(this.user.username+" is attempting to login.");
+    this.log.log(LogLevels.INFO,this.user.username+" is attempting to login.");
 
     this.authService.processLogin(this.user).subscribe(
       result => {
@@ -73,11 +73,11 @@ export class LoginComponent{
         }
       },
       error => {
-        this.log.error(error);
+        this.log.log(LogLevels.ERROR,error);
         this.onFailedLogin();
       },
       () => {
-        this.log.info("Login process completed.");
+        this.log.log(LogLevels.INFO,"Login process completed.");
       }
     );
  }
@@ -87,13 +87,13 @@ export class LoginComponent{
  }
 
  onFailedLogin(){
-   this.log.error("Failed login!");
+   this.log.log(LogLevels.ERROR2,"Failed login!");
    this.failedLogin = true;
    this.formErrors['failedLogin'] = 'Login Failed. Invalid username and/or password';
  }
 
  onSuccessfulLogin(jwtToken){
-   this.log.info("Successful login");
+   this.log.log(LogLevels.INFO,"Successful login");
    this.failedLogin = false;
    this.formErrors['failedLogin'] = '';//clear
    this.authService.processAuthenticatedLogin(jwtToken);

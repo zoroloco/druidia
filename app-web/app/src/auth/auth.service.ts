@@ -1,7 +1,7 @@
 
 import { Injectable }               from '@angular/core';
 import { Router }                   from '@angular/router';
-import { Logger }                   from '../services/logger.service';
+import { Logger,LogLevels }         from '../loggers/logger.service';
 import { User }                     from './user';
 import { BaseUser }                 from './baseUser';
 import { tokenNotExpired }          from 'angular2-jwt';
@@ -24,7 +24,7 @@ export class AuthService {
               private http: Http,
               private authHttp: AuthHttp) {
 
-      this.log.info("In constructor of auth service.");
+      this.log.log(LogLevels.INFO,"In constructor of auth service.");
       this.userFactory = new UserFactory(log);
   }
 
@@ -52,7 +52,7 @@ export class AuthService {
   //method called after authentication successful.
   public processAuthenticatedLogin(jwtToken){
     if(jwtToken){
-      this.log.info("Received the following JWT token: "+jwtToken);
+      this.log.log(LogLevels.INFO,"Received the following JWT token: "+jwtToken);
       localStorage.setItem('jwt_token', jwtToken);
       this.router.navigate(['/home']);
     }
@@ -62,22 +62,22 @@ export class AuthService {
   //anyone subscribing to this observable will only fetch from back-end the first time.
   public fetchUser(): Observable<User>{
     if(!_.isEmpty(localStorage.getItem('user'))){
-      this.log.info("Returning observable for local storage user.");
+      this.log.log(LogLevels.INFO,"Returning observable for local storage user.");
       return Observable.of(localStorage.getItem('user'))
         .map((userStr:string) => {
-          this.log.info("Returning local storage saved user.");
+          this.log.log(LogLevels.INFO,"Returning local storage saved user.");
           let resultUser:BaseUser = JSON.parse(userStr);
           return this.userFactory.createUser(resultUser);
         });
     }
     else{//fetch from back-end api.
-      this.log.info("Returning observable for api call fetch user.");
+      this.log.log(LogLevels.INFO,"Returning observable for api call fetch user.");
       return this.authHttp.get(`api/fetchUser`)
         .map((res:Response) => {
           //store away for next time
           let resultUser:BaseUser = res.json();
           let user:User = this.userFactory.createUser(resultUser);
-          this.log.info("Returning api fetched user.");
+          this.log.log(LogLevels.INFO,"Returning api fetched user.");
           localStorage.setItem('user',JSON.stringify(user));
           return user;
         }
@@ -87,7 +87,7 @@ export class AuthService {
 
   //concept of logged in is stateless.  Remove token and you are outta here!
   public processLogout(): void {
-    this.log.info("Logging out of the application.");
+    this.log.log(LogLevels.INFO,"Logging out of the application.");
     // Remove token from localStorage
     localStorage.removeItem('jwt_token');
     localStorage.removeItem('user');

@@ -1,7 +1,7 @@
 //root component of the application, which is really just a router component.
 
-import { Component } from '@angular/core';
-import { Logger }    from './services/logger.service';
+import { Component }        from '@angular/core';
+import { Logger,LogLevels } from './loggers/logger.service';
 
 @Component({
   selector: 'App',
@@ -10,7 +10,7 @@ import { Logger }    from './services/logger.service';
 })
 export class AppComponent{
 
-  constructor(private log: Logger){
-    this.log.info("Instantiating app component.");
+  constructor(private logger: Logger){
+    this.logger.log(LogLevels.INFO,"Instantiating app component.");
   }
 }

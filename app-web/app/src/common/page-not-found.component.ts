@@ -1,7 +1,7 @@
 //Component to display 404 error.
 
-import { Component } from '@angular/core';
-import { Logger }    from '../services/logger.service';
+import { Component }        from '@angular/core';
+import { Logger,LogLevels } from '../loggers/logger.service';
 
 @Component({
     selector: 'PageNotFound',
@@ -10,7 +10,7 @@ import { Logger }    from '../services/logger.service';
   export class PageNotFoundComponent{
 
     constructor(private log: Logger){
-        log.info("Instantiating page not found component.");
+        log.log(LogLevels.INFO,"Instantiating page not found component.");
     }
 
   }

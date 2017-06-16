@@ -1,10 +1,10 @@
 //Component definition for the site's main navigation bar.
 import { Component,
-         OnInit }      from '@angular/core';
-import { Logger }      from './services/logger.service';
-import { AuthService } from './auth/auth.service';
-import {User}          from './auth/user';
-import { FacebookUser }from './auth/facebookUser';
+         OnInit }           from '@angular/core';
+import { Logger,LogLevels } from './loggers/logger.service';
+import { AuthService }      from './auth/auth.service';
+import {User}               from './auth/user';
+import { FacebookUser }     from './auth/facebookUser';
 
 @Component({
     selector: 'NavBar',
@@ -17,31 +17,31 @@ import { FacebookUser }from './auth/facebookUser';
 
     constructor(private authService:AuthService,
                 private log: Logger){
-      this.log.info("Instantiating navbar component.");
+      this.log.log(LogLevels.INFO,"Instantiating navbar component.");
     }
 
     ngOnInit(){
-      this.log.info("Initializing navbar component.");
+      this.log.log(LogLevels.INFO,"Initializing navbar component.");
       this.authService.fetchUser().subscribe(
           user => {
-            this.log.info("Picture URL:"+JSON.stringify(user));
+            this.log.log(LogLevels.INFO,"Picture URL:"+JSON.stringify(user));
             if(user instanceof FacebookUser){
-              this.log.info("User is of type Facebook user.");
+              this.log.log(LogLevels.INFO,"User is of type Facebook user.");
               this.pictureURL = user.pictureUrl;
             }
             else{
-              this.log.info("User is not of type Facebook user. No picture URL.");
+              this.log.log(LogLevels.INFO,"User is not of type Facebook user. No picture URL.");
             }
           },
-          error=> this.log.error(error)
+          error=> this.log.log(LogLevels.ERROR,error)
       );
     }
 
     onBlog(){
-      this.log.info("Blog button clicked.");
+      this.log.log(LogLevels.INFO,"Blog button clicked.");
     }
 
     onChatter(){
-      this.log.info("Chatter button clicked.");
+      this.log.log(LogLevels.INFO,"Chatter button clicked.");
     }
   }
