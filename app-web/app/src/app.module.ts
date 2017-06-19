@@ -1,5 +1,7 @@
 //module defines your components.
 import { NgModule }                from '@angular/core';
+
+//BrowserModule is required for any angular 2 web based application!!!
 import { BrowserModule }           from '@angular/platform-browser';
 
 //Services
@@ -19,6 +21,8 @@ import { AuthHttp, AuthConfig }    from 'angular2-jwt';
 import { FormsModule }             from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule }            from '@angular/router';
+
+import { MaterialModule }          from './material.module';
 
 //UI
 //import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -54,6 +58,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
                   FormsModule,
                   HttpModule,
 									JsonpModule,
+									MaterialModule,//MY OWN CUSTOM MODULE 
 									//BrowserAnimationsModule,
 									FroalaEditorModule.forRoot(),
 									FroalaViewModule.forRoot(),

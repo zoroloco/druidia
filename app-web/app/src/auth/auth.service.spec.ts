@@ -26,6 +26,8 @@ import { AuthHttp }               from 'angular2-jwt';
 import { AuthService }            from './auth.service';
 import { authHttpServiceFactory } from '../app.module';
 import { LocalUser }              from './localUser';
+import { Router }                 from '@angular/router';
+import { Logger,LogLevels }       from '../loggers/logger.service';
 
 var JWT_TEST_TOKEN = "TEST_JSON_WEB_TOKEN_RESPONSE";
 
@@ -33,71 +35,53 @@ var JWT_TEST_TOKEN = "TEST_JSON_WEB_TOKEN_RESPONSE";
 
 describe('AuthService', () =>{
 
+  let authService: AuthService;
+  let mockBackend: MockBackend;
+
   //configure the setup hook that gets called before each test is run.
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthService,
+      imports: [HttpModule],
+      providers: [
+        AuthService,
+        Logger,
+        Router,
+        MockBackend,
+        BaseRequestOptions,
         {
-          provide: Http, useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
-          return new Http(backend, defaultOptions);
-        }, deps: [MockBackend, BaseRequestOptions]
-        },
-        {provide: MockBackend, useClass: MockBackend},
-        {provide: BaseRequestOptions, useClass: BaseRequestOptions}
+          provide: Http,
+          useFactory: (mockBackend,options) => new Http(mockBackend, options),
+          deps: [MockBackend, BaseRequestOptions]
+        }
       ]
     });
+
   });//before each
 
-  it('tests a valid login', () =>{
-    inject([AuthService, MockBackend], fakeAsync((authService: AuthService, mockBackend: MockBackend) => {
-       let res: Response;
-       mockBackend.connections.subscribe(c => {
-         expect(c.request.url).toBe('assets/data/people.json');
-         const response = new ResponseOptions({body: '[{"name": "John Elway"}, {"name": "Gary Kubiak"}]'});
-         c.mockRespond(new Response(response));
-       });
-       authService.processLogin(new LocalUser(null)).subscribe((response) => {
-         res = response;
-       });
-       tick();
-       expect(res[0].name).toBe('John es gay');
-     }))
-  });//it
+  it('login success', fakeAsync(() => {
+
+    let response = {
+      "jwt": JWT_TEST_TOKEN
+    };
+
+    inject([AuthService,MockBackend], (authService,mockBackend)=>{
+      expect(authService).toBeDefined();
+      // When the request subscribes for results on a connection, return a fake response
+      mockBackend.connections.subscribe(connection => {
+        connection.mockRespond(new Response(<ResponseOptions>{
+          body: JSON.stringify(response)
+        }));
+      });
+
+      // Perform a request and make sure we get the response we expect
+      authService.processLogin(new LocalUser(null)).subscribe((result)=>{
+        expect(false).toBeTruthy();
+        expect(result).toEqual("fsdjkl");
+      });
+
+      tick();
+    })
+
+  }));
 
 });
-
-
-
-/*
-//this is how we can congigure alternative class implementations.
-function configure(){//setup callback called before each test is run.
-  TestBed.configureTestingModule({
-    providers: [
-      BaseRequestOptions,
-      MockBackend,
-      AuthService,
-      {
-        provide: Http,
-        useFactory: (backend: ConnectionBackend,
-                     defaultOptions: BaseRequestOptions)=> {
-                       return new Http(backend, defaultOptions);
-                     },
-        deps: [MockBackend, BaseRequestOptions]
-      }
-    ]
-  });
-}
-*/
-
-/*
-//this is where we put the logic for our fake server.
-//given an input url, we return some expected response based off of that.
-function expectLocalLoginSuccessURL(backEnd: MockBackend, url: string){
-  backEnd.connections.subscribe((connection: MockConnection) => {
-      let options = new ResponseOptions({
-        body: JSON.stringify(mockResponse)
-      });
-      connection.mockRespond(new Response(options));
-  });
-}
-*/

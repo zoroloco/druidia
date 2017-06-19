@@ -43,6 +43,8 @@ npm install ts-loader
 npm install karma-jasmine --save-dev
 npm install --save-dev karma-typescript
 npm install --save-dev karma-typescript-angular2-transform
+npm install --save-dev intl
+npm install --save @angular/animations
 
 ionic platform add ios
 

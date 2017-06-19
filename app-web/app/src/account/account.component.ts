@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: 'html/account.template.html'
 })
 export class AccountComponent{
+  private address1: string;
 
+  constructor(){
+    this.address1 = "addr1";
+  }
 }
