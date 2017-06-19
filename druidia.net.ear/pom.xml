@@ -14,26 +14,6 @@
   <artifactId>druidia.net.ear</artifactId>
   <packaging>ear</packaging>
   <description>The ear project for druidia.net</description>
-  <dependencies>
-  	<dependency>
-  		<groupId>druidia.net</groupId>
-  		<artifactId>druidia.net.ejb</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>ejb</type>
-  	</dependency>
-  	<!--  <dependency>
-  		<groupId>druidia.net</groupId>
-  		<artifactId>druidia.net.persistence</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>ejb</type>
-  	</dependency>-->
-  	<dependency>
-  		<groupId>druidia.net</groupId>
-  		<artifactId>web</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>war</type>
-  	</dependency>
-  </dependencies>
   
       <build>
       <plugins>
@@ -44,8 +24,8 @@
           <configuration>
              <modules>
                <webModule>
-                 <groupId>druidia.net.war</groupId>
-                 <artifactId>druidia.net.war</artifactId>
+                 <groupId>druidia.net</groupId>
+                 <artifactId>web</artifactId>
                  <contextRoot>/app</contextRoot>
                </webModule>              
             </modules>
@@ -53,4 +33,19 @@
         </plugin>
       </plugins>
     </build>
+      <dependencyManagement>
+      	<dependencies>
+      		<dependency>
+      			<groupId>druidia.net</groupId>
+      			<artifactId>war</artifactId>
+      			<version>0.0.1-SNAPSHOT</version>
+      			<type>war</type>
+      		</dependency>
+      		<dependency>
+      			<groupId>druidia.net</groupId>
+      			<artifactId>druidia.net.ejb</artifactId>
+      			<version>0.0.1-SNAPSHOT</version>
+      		</dependency>
+      	</dependencies>
+      </dependencyManagement>
 </project>

@@ -1,9 +1,8 @@
 package druidia.net.war.test;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @author kcenturion
@@ -11,26 +10,27 @@ import java.util.List;
  */
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		
-		try {
-			String druidiaHostname = InetAddress.getByName("34.201.38.178").getHostName();
-			//System.out.println(druidiaHostname);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		String foo = "i purchased phoebe on my birthday almost ten years ago. Good doggy.";
 		
-		String dogs[] = {"phoebe","mango","bubba","jonesy"};
-		
-		List<String> dogsArrayList = new ArrayList<String>();
-		for(String dog : dogs){
-			//System.out.println(dog);
-			dogsArrayList.add(dog);
+		Map<String,Integer> charCounter = new HashMap<String,Integer>();
+		for(int i = 0; i < foo.length(); i++){
+			if(charCounter.containsKey(foo.charAt(i))){
+				Integer charCount = charCounter.get(foo.charAt(i));
+				charCount++;
+				charCounter.put(String.valueOf(foo.charAt(i)), charCount);
+			}
+			else{
+				charCounter.put(String.valueOf(foo.charAt(i)), new Integer(0));
+			}
 		}
 		
-		
-		
+		Iterator<String> it = charCounter.keySet().iterator();
+		while(it.hasNext()){
+			String val = (String)it.next();
+			System.out.println(val+charCounter.get(val));
+		}
 	}
 
 }

@@ -19,6 +19,7 @@ app-server/security/fb_app_id
 app-server/security/fb_app_secret
 app-web/dist/bundle.js
 app-web/dist/bundle.min.js
+app-web/coverage
 
 
 
@@ -91,3 +92,9 @@ app-server/security/credentials.js
 app-server/security/credentials.js
 *.ppk
 *.gen
+
+app-web/coverage/Chrome 58.0.3029 (Mac OS X 10.11.5)/html/base.css
+
+druidia.net.persistence/.settings/org.eclipse.jdt.core.prefs
+
+druidia.net.persistence/.classpath

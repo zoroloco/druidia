@@ -1,10 +1,14 @@
 //Component for home.
+/*
+  Home is the entry point of the secure section of our site.
+  The server will secure all content
+*/
 
 import { Component,
          OnInit,
          OnDestroy }        from '@angular/core';
-import { Logger,LogLevels } from './loggers/logger.service';
-import { NavBarComponent }  from './navbar.component';
+import { Logger,LogLevels } from '../loggers/logger.service';
+import { NavBarComponent }  from '../navbar.component';
 
 @Component({
     selector: 'Home',

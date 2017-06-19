@@ -21,3 +21,6 @@ import 'core-js/es6/reflect';
 
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
+
+import 'intl';//this is used for angular default pipes.
+//i could have also just added CDN link in index.html.

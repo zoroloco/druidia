@@ -13,7 +13,7 @@
     <div *ngFor="let blog of blogs">
       <li class="list-group-item">
 
-        {{blog.timeStamp}}[{{blog.heading}}]
+        {{blog.timeStamp | timestampPipe}}[{{blog.heading}}]
         <i (click)="deleteBlog(blog)" class="zmdi zmdi-delete"></i>
         <br/>
 

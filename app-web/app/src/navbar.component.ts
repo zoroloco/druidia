@@ -44,4 +44,8 @@ import { FacebookUser }     from './auth/facebookUser';
     onChatter(){
       this.log.log(LogLevels.INFO,"Chatter button clicked.");
     }
+
+    onAccount(){
+      this.log.log(LogLevels.INFO2,"Account button clicked.");
+    }
   }

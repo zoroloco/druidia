@@ -20,6 +20,8 @@
     ],
 
     "types": [
-      "underscore"
+      "underscore",
+      "jasmine",
+      "node"
     ]
 }

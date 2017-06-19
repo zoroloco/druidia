@@ -25,7 +25,7 @@ declare var $ :any;
       charCounterCount: true,
       spellcheck: true,
       emoticonsStep: 10,
-      toolbarButtons: ['bold','italic','underline','fontFamily','fontSize','colors','emoticons','undo','redo','submitBlog'],
+      toolbarButtons:   ['bold','italic','underline','fontFamily','fontSize','colors','emoticons','undo','redo','submitBlog'],
       toolbarButtonsXS: ['bold','italic','underline','fontFamily','fontSize','colors','emoticons','undo','redo','submitBlog'],
       toolbarButtonsSM: ['bold','italic','underline','fontFamily','fontSize','colors','emoticons','undo','redo','submitBlog'],
       toolbarButtonsMD: ['bold','italic','underline','fontFamily','fontSize','colors','emoticons','undo','redo','submitBlog']
