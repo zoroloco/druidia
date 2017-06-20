@@ -11,6 +11,7 @@ import { AuthService }             from './auth/auth.service';
 
 import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
+import { AddressComponent }        from './common/address.component';
 
 //pipes
 import { TimeStampPipe }           from './pipes/timestamp.pipe';
@@ -58,13 +59,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
                   FormsModule,
                   HttpModule,
 									JsonpModule,
-									MaterialModule,//MY OWN CUSTOM MODULE 
+									MaterialModule,//MY OWN CUSTOM MODULE
 									//BrowserAnimationsModule,
 									FroalaEditorModule.forRoot(),
 									FroalaViewModule.forRoot(),
                   RouterModule.forRoot(ROUTES) ],//array with all modules for this application
   declarations: [ AppComponent,
                   NavBarComponent,
+									AddressComponent,
                   routedComponents,
 								  TimeStampPipe ],//array of components and pipes that belong to this module
   providers:    [ AuthService, AuthGuard, Logger, BlogService,

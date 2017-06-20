@@ -30,7 +30,7 @@
     "name": "Kenneth Centurion"
   },
   "dependencies": {
-    "@angular/animations": "latest",
+    "@angular/animations": "^4.2.3",
     "@angular/common": "latest",
     "@angular/compiler": "latest",
     "@angular/compiler-cli": "latest",

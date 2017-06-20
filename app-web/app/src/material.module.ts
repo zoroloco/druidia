@@ -7,20 +7,35 @@ single module that gets bootstrapped in main.ts.
 import { NgModule }                from '@angular/core';
 import { MdButtonModule,
 	       MdCheckboxModule,
-				 MdInputModule}            from '@angular/material';
+				 MdInputModule,
+			   MdCardModule,
+				 MdSlideToggleModule,
+			   MdListModule,
+				 MdDatepickerModule,
+				 MdNativeDateModule,
+				 MdSelectModule
+			                }            from '@angular/material';
 import { BrowserModule }           from '@angular/platform-browser';
-import {BrowserAnimationsModule}   from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//single list of material 2 modules to import , export.
+const materialModules = [
+ MdButtonModule,
+ MdCheckboxModule,
+ MdInputModule,
+ MdCardModule,
+ MdSlideToggleModule,
+ MdListModule,
+ MdDatepickerModule,
+ MdNativeDateModule,
+ MdSelectModule
+];
 
 @NgModule({
   imports: [
             BrowserModule,
             BrowserAnimationsModule,
-            MdButtonModule,
-  	        MdCheckboxModule,
-  			   	MdInputModule],
-  exports: [
-            MdButtonModule,
-  	        MdCheckboxModule,
-  				  MdInputModule]
+            materialModules],
+  exports: [materialModules]
 })
 export class MaterialModule{}
