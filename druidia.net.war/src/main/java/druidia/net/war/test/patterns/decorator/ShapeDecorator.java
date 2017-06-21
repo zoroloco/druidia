@@ -7,7 +7,8 @@ public abstract class ShapeDecorator implements Shape{
 		this.decoratedShape = decoratedShape;
 	}
 	
-	public void draw(){
-		this.decoratedShape.draw();
+	//can't override this final method.
+	public final void p(){
+		
 	}
 }

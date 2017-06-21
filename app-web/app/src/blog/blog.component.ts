@@ -15,9 +15,9 @@ declare var $ :any;
     templateUrl: 'html/blog.template.html'
   })
   export class BlogComponent implements OnInit{
-    blogs: Array<Blog> = [];
-    newBlog: Blog;
-    editorContent: string;
+    blogs         : Array<Blog>;//use of generics to know the type.
+    newBlog       : Blog;
+    editorContent : string;
 
     //froala editor options.
     options: Object = {
@@ -104,7 +104,12 @@ declare var $ :any;
         error => this.log.log(LogLevels.ERROR,error)
       );
 
-      return false;
+      this.clearScreen();
+      return false;//returning false will not trigger a whole page refresh.
+    }
+
+    private clearScreen(): void{
+      this.newBlog = new Blog();
     }
 
     ngOnDestroy(){
