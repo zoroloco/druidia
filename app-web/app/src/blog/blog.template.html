@@ -8,17 +8,13 @@
   </div>
   <div class="panel-body"></div>
 
-  <!-- List group -->
-  <ul class="list-group">
-    <div *ngFor="let blog of blogs">
-      <li class="list-group-item">
-
+    <md-list>
+      <md-list-item *ngFor="let blog of blogs">
         {{blog.timeStamp | timestampPipe}}[{{blog.heading}}]
         <i (click)="deleteBlog(blog)" class="zmdi zmdi-delete"></i>
         <br/>
 
         <div [froalaView]= "blog.text"></div>
-      </li>
-    </div>
-  </ul>
+      </md-list-item>
+    </md-list>
 </div>

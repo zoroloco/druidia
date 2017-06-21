@@ -3,8 +3,8 @@ import { Component,
          OnInit,
          AfterViewInit,
          Input }             from '@angular/core';
-import { Address }           from './address';
-import { State }             from './state';
+import { Address }           from './address.model';
+import { State }             from './state.model';
 import { Logger, LogLevels } from '../loggers/logger.service';
 
 @Component({
@@ -22,13 +22,15 @@ import { Logger, LogLevels } from '../loggers/logger.service';
                 Enter your U.S. city name.
               </md-hint>
               <input mdInput placeholder="City" name="city" [required]=requiredFlag [(ngModel)]=address.city>
-              <div mdSuffix>United States</div>
              </md-input-container>
-             <div *ngIf="verticalAlign"><br/></div>
              <md-select placeholder="State" [required]=requiredFlag [(ngModel)]=address.state>
               <md-option *ngFor="let state of states" [value]="state.code">{{ state.name }}</md-option>
              </md-select>
              <div *ngIf="verticalAlign"><br/></div>
+             <md-input-container>
+              <input mdInput placeholder="Zip" name="zip" [(ngModel)]=address.zip>
+              <div mdSuffix>U.S.</div>
+             </md-input-container>
              `,
    inputs: [ "verticalAlign" ]
 })

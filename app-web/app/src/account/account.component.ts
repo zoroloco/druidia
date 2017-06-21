@@ -1,7 +1,7 @@
 //component for user account manipulation.
-import { Component, OnInit }        from '@angular/core';
+import { Component, OnInit }from '@angular/core';
 import { AddressComponent } from '../common/address.component';
-import { UserProfile }      from './userProfile';
+import { UserProfile }      from './userProfile.model';
 import { Logger, LogLevels }from '../loggers/logger.service';
 
 @Component({
@@ -33,5 +33,9 @@ export class AccountComponent implements OnInit{
     this.myFilter      = (picker: Date) => picker.getFullYear() > 1885;
     this.minDate       =  new Date(1885, 0, 1);
     this.maxDate       =  new Date();
+  }
+
+  onSubmit(){
+    this.log.log(LogLevels.INFO,"User Profile Submitted:"+this.userProfile.address.address1);
   }
 }

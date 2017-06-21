@@ -23,7 +23,7 @@ import { FormsModule }             from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule }            from '@angular/router';
 
-import { MaterialModule }          from './material.module';
+import { MaterialModule }          from './material.module';//my own module 
 
 //UI
 //import {BrowserAnimationsModule} from '@angular/platform-browser/animations';

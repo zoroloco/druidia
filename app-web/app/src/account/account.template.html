@@ -8,7 +8,9 @@
 
   <md-card-content>
 
-    <AddressComponent [verticalAlign]="verticalAlign" [required]=true [address]=userProfile.address></AddressComponent>
+    <AddressComponent [verticalAlign]="verticalAlign"
+                      [required]=true
+                      [address]=userProfile.address></AddressComponent>
     <div *ngIf="verticalAlign"><br/></div>
 
     <md-input-container>
@@ -22,4 +24,7 @@
     <div *ngIf="verticalAlign"><br/></div>
 
   </md-card-content>
+  <md-card-footer>
+    <button (click)= "onSubmit()" md-button focused=true>Submit</button>
+  </md-card-footer>
 </md-card>

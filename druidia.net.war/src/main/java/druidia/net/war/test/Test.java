@@ -11,8 +11,25 @@ import java.util.Map;
 public class Test {
 
 	public static void main(String[] args){
-		
-		String foo = "i purchased phoebe on my birthday almost ten years ago. Gooooooooooooooooooooooooooooooooood doggy.";
+		//testNumLettersInStringWithMax();
+		fib();
+	}
+	
+	//how does this worK?
+	static void fib() {
+	    int n = 20;
+        int f = 0, g = 1;
+
+        for (int i = 1; i <= n; i++) {
+            f = f + g;
+            g = f - g;
+            System.out.println(f); 
+        }
+	}
+	
+	private static void testNumLettersInStringWithMax(){
+        String foo = "i purchased phoebe on my birthday almost "
+        		+ "ten years ago. Gooooooooooooooooooooooooooooooooood doggy.";
 		
 		Map<String,Integer> charCounter = new HashMap<String,Integer>();
 		for(int i = 0; i < foo.length(); i++){

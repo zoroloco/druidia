@@ -3,7 +3,7 @@ import { Component,
          OnInit,
          OnDestroy }   from '@angular/core';
 import { BlogService } from './blog.service';
-import { Blog }        from './blog';
+import { Blog }        from './blog.model';
 import { Logger,LogLevels } from '../loggers/logger.service';
 import * as _          from 'underscore';
 
@@ -63,7 +63,7 @@ declare var $ :any;
       );
     }
 
-    public deleteBlog(deleteBlog: Blog){
+    public deleteBlog(deleteBlog: Blog): boolean{
       this.log.log(LogLevels.INFO,"User wants to delete blog:"+deleteBlog._id);
 
       this.blogService.deleteBlog(deleteBlog).subscribe(
@@ -82,9 +82,11 @@ declare var $ :any;
         },
         error => this.log.log(LogLevels.ERROR,error)
       );
+
+      return false;//returning false will not trigger a whole page refresh.
     }
 
-    private saveBlog(){
+    private saveBlog(): boolean{
       this.log.log(LogLevels.INFO,"User submitted new blog entry:"+this.newBlog.text);
 
       if(_.isEmpty(this.newBlog.heading)){
@@ -101,6 +103,8 @@ declare var $ :any;
         },
         error => this.log.log(LogLevels.ERROR,error)
       );
+
+      return false;
     }
 
     ngOnDestroy(){

@@ -1,4 +1,4 @@
-import { Address } from '../common/address';
+import { Address } from '../common/address.model';
 
 export class UserProfile{
   address: Address;
