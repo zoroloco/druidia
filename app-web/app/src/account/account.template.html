@@ -10,17 +10,21 @@
 
     <AddressComponent [verticalAlign]="verticalAlign"
                       [required]=true
-                      [address]=userProfile.address></AddressComponent>
+                      [address]=account.address
+                      (addressStateSelected)="onAddressStateSelected($event)">
+    </AddressComponent>
     <div *ngIf="verticalAlign"><br/></div>
 
     <md-input-container>
-        <input mdInput [mdDatepicker]="picker" [mdDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" placeholder="dob:">
+        <input mdInput [mdDatepicker]="picker" [mdDatepickerFilter]="myFilter"
+               [min]="minDate" [max]="maxDate" placeholder="dob:">
         <button [mdDatepickerToggle]="picker"></button>
     </md-input-container>
     <md-datepicker #picker></md-datepicker>
     <div *ngIf="verticalAlign"><br/></div>
 
-    <md-slide-toggle [(ngModel)]="userProfile.gender" [required]=true (change)=onGenderToggle()>Male</md-slide-toggle>
+    <md-slide-toggle name="#gender" (gender)="account.gender" [required]=true
+                     (change)=onGenderToggle()>Male</md-slide-toggle>
     <div *ngIf="verticalAlign"><br/></div>
 
   </md-card-content>

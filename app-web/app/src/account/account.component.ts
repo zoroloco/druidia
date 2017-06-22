@@ -1,7 +1,8 @@
 //component for user account manipulation.
 import { Component, OnInit }from '@angular/core';
-import { AddressComponent } from '../common/address.component';
-import { UserProfile }      from './userProfile.model';
+import { Address }          from '../common/address.model';
+import { Account }          from './account.model';
+import { State }            from '../common/state.model';
 import { Logger, LogLevels }from '../loggers/logger.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class AccountComponent implements OnInit{
   private maxDate: Date;
   private verticalAlign: boolean;
 
-  private userProfile: UserProfile;
+  private account: Account;
 
   constructor(private log:Logger){}
 
@@ -24,18 +25,23 @@ export class AccountComponent implements OnInit{
   }
 
   onGenderToggle(){
-    this.log.log(LogLevels.INFO,"Gender toggle value="+this.userProfile.gender);
+    this.log.log(LogLevels.INFO,"Gender toggle value="+this.account.gender);
   }
 
   private init(){
     this.verticalAlign = true;
-    this.userProfile   = new UserProfile();
+    this.account       = new Account();
     this.myFilter      = (picker: Date) => picker.getFullYear() > 1885;
     this.minDate       =  new Date(1885, 0, 1);
     this.maxDate       =  new Date();
   }
 
+  //action method 
+  onAddressStateSelected(stateSelected: State){
+    this.log.log(LogLevels.INFO,"Account knows that address selected state of:"+stateSelected.name);
+  }
+
   onSubmit(){
-    this.log.log(LogLevels.INFO,"User Profile Submitted:"+this.userProfile.address.address1);
+    this.log.log(LogLevels.INFO,"User Profile Submitted:"+this.account.address.address1);
   }
 }

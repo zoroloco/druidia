@@ -46,6 +46,6 @@ import { FacebookUser }     from './auth/facebookUser';
     }
 
     onAccount(){
-      this.log.log(LogLevels.INFO2,"Account button clicked.");
+      this.log.log(LogLevels.INFO,"Account button clicked.");
     }
   }
