@@ -1,12 +1,19 @@
 package druidia.net.ejb.persistence.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 
+import druidia.net.persistence.domain.entities.UserProfile;
+
+//@Stateless(name="ejb/UserProfileDataService
 @Stateless
 public class UserProfileDataServiceImpl implements UserProfileDataService,Serializable{
 	
@@ -24,23 +31,33 @@ public class UserProfileDataServiceImpl implements UserProfileDataService,Serial
 		return entityManager;
 	}
 
-	public void create() {
-		// TODO Auto-generated method stub
-		
+	public void create(UserProfile userProfile) {
+		entityManager.merge(userProfile);		
 	}
 
-	public void read() {
-		// TODO Auto-generated method stub
-		
+	public UserProfile read(Integer id)  throws NoResultException{
+		Query query = entityManager.createNamedQuery("UserProfile.findById");
+    	query.setParameter("userProfileId", id );    
+    	List<UserProfile>results = new ArrayList<UserProfile>();
+    	
+    	try{
+    		results = (List<UserProfile>)query.getResultList();
+    		if(null != results && results.size()>0)
+    			return results.get(0);
+    	}
+    	catch(NoResultException e){
+    		throw new NoResultException("No user profile found.");
+    	}
+    	
+    	return null;
 	}
 
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	public void update(UserProfile userProfile) {
+		entityManager.merge(userProfile);
+		entityManager.flush();
 	}
 
-	public void delete() {
-		// TODO Auto-generated method stub
+	public void delete(Integer id) {
 		
 	}
 	

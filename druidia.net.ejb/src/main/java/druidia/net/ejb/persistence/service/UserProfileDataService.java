@@ -1,6 +1,9 @@
 package druidia.net.ejb.persistence.service;
 
 import javax.ejb.Local;
+import javax.persistence.NoResultException;
+
+import druidia.net.persistence.domain.entities.UserProfile;
 
 /**
  * This is @local because this interface that exposes the business methods for persistence 
@@ -12,8 +15,26 @@ import javax.ejb.Local;
 
 @Local
 public interface UserProfileDataService {
-	public void create();
-	public void read();
-	public void update();
-	public void delete();
+	/**
+	 * 
+	 * @param userProfile
+	 */
+	public void create(UserProfile userProfile);
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NoResultException
+	 */
+	public UserProfile read(Integer id) throws NoResultException;
+	/**
+	 * 
+	 * @param userProfile
+	 */
+	public void update(UserProfile userProfile);
+	/**
+	 * Deletes a user profile from the user_profile table.
+	 * @param userProfile
+	 */
+	public void delete(Integer id);
 }

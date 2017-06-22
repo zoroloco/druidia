@@ -75,13 +75,13 @@ Temporary Items
 druidai.net.ear/.settings
 druidai.net.ear/target
 druidia.net.ear/.project
-druidia.net.war/target/
+druidia.net.web/target/
 RemoteSystemsTempFiles/.project
-druidia.net.war/.settings
+druidia.net.web/.settings
 druidia.net.ejb/target
 druidia.net.ejb/.settings
 druidia.net.ear/target
-druidia.net.war/.classpath
+druidia.net.web/.classpath
 *.project
 druidia.net.ejb/.classpath
 druidia.net.ear/.settings
@@ -98,3 +98,4 @@ app-web/coverage/Chrome 58.0.3029 (Mac OS X 10.11.5)/html/base.css
 druidia.net.persistence/.settings/org.eclipse.jdt.core.prefs
 
 druidia.net.persistence/.classpath
+druidia.net.web/.classpath

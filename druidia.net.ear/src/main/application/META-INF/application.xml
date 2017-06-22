@@ -5,14 +5,13 @@
 <application>
   <display-name>druidia.net.ear</display-name>
   <module>
-    <ejb>druidia.net.ejb</ejb>
+    <ejb>druidia.net.ejb.ejb</ejb>
   </module>  
- 
-  <module>
+  <module id="WebModule_1498157411222">
   	<web>
-  		<web-uri>druidia.net.war</web-uri>
+  		<web-uri>druidia.net.web.war</web-uri>
   		<context-root>/app</context-root>
-  	</web>  	
+  	</web>
   </module>
   
 </application>

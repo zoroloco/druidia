@@ -4,10 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="user_profile")
+@NamedQueries({
+	@NamedQuery(name="UserProfile.findById", query="SELECT p FROM user_profile p where p.id=:userProfileId")
+})
 public class UserProfile extends EntityBase implements Serializable{
 
 	/**

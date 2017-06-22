@@ -10,7 +10,7 @@
   
   
   <artifactId>druidia.net.ejb</artifactId>
-  <packaging>ejb</packaging>
+  <packaging>ejb</packaging> 
   
   <name>druidia.net.ejb</name>
   <url>http://maven.apache.org</url>
@@ -29,4 +29,18 @@
 	    <version>0.0.1-SNAPSHOT</version>
 	</dependency>	 	 
   </dependencies>
+  
+    <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>      
+    </plugins>
+  </build>
 </project>

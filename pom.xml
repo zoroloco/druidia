@@ -9,9 +9,26 @@
   <description>Parent POM file for druidia.net</description>
   <modules>
   	<module>druidia.net.ejb</module>
-  	<module>druidia.net.war</module>
-  	<module>druidia.net.ng</module>
+  	<module>druidia.net.web</module>
   	<module>druidia.net.ear</module>
-    <module>druidia.net.persistence</module>
   </modules>
+  
+  <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>druidia.net</groupId>
+                <artifactId>ear-module</artifactId>
+                <scope>provided</scope>
+            </dependency>            
+            <dependency>
+                <groupId>druidia.net</groupId>
+                <artifactId>ejb-module</artifactId>
+            </dependency>
+			<dependency>
+                <groupId>druidia.net</groupId>
+                <artifactId>druidia.net.web</artifactId>
+        		<scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
