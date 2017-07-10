@@ -1,4 +1,4 @@
-package druidia.net.ejb.persistence.service;
+package druidia.net.ejb.services;
 
 import javax.ejb.Local;
 import javax.persistence.NoResultException;

@@ -7,6 +7,9 @@
   <module>
     <ejb>druidia.net.ejb.ejb</ejb>
   </module>  
+  <module>
+  	<ejb>druidia.net.facade.ejb.ejb</ejb>
+  </module>
   <module id="WebModule_1498157411222">
   	<web>
   		<web-uri>druidia.net.web.war</web-uri>

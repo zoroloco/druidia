@@ -15,7 +15,7 @@
    <dependencies>    	               
 	<dependency>
 		<groupId>druidia.net</groupId>
-		<artifactId>druidia.net.ejb</artifactId>
+		<artifactId>druidia.net.facade.ejb</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<scope>provided</scope>
 	</dependency>

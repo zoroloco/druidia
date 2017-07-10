@@ -1,6 +1,5 @@
 package druidia.net.web.rest;
 
-import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -14,15 +13,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import druidia.net.ejb.persistence.service.UserProfileDataService;
 import druidia.net.web.rest.json.RequestPayload;
 import druidia.net.web.rest.json.ResponsePayload;
 
 @Path("/user-profile")
 public class RestUserProfile {
 	
-	@EJB
-	private UserProfileDataService userProfileSvc;
+	//@EJB
+	//private UserProfileDataService userProfileSvc;
 
 	/**
 	 * 

@@ -99,3 +99,7 @@ druidia.net.persistence/.settings/org.eclipse.jdt.core.prefs
 
 druidia.net.persistence/.classpath
 druidia.net.web/.classpath
+
+druidia.net.facade.ejb/.settings
+druidia.net.facade.ejb/.classpath
+

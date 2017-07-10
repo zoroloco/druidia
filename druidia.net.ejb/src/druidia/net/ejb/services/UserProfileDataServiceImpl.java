@@ -1,4 +1,4 @@
-package druidia.net.ejb.persistence.service;
+package druidia.net.ejb.services;
 
 import java.io.Serializable;
 import java.util.ArrayList;
