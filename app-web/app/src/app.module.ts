@@ -13,6 +13,10 @@ import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
 import { AddressComponent }        from './common/address.component';
 
+//directives
+import { InputStyler }             from './directives/inputStyler.directive';
+import { Unless }                  from './directives/unless.directive';
+
 //pipes
 import { TimeStampPipe }           from './pipes/timestamp.pipe';
 
@@ -23,7 +27,7 @@ import { FormsModule }             from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule }            from '@angular/router';
 
-import { MaterialModule }          from './material.module';//my own module 
+import { MaterialModule }          from './material.module';//my own module
 
 //UI
 //import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -68,7 +72,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
                   NavBarComponent,
 									AddressComponent,
                   routedComponents,
-								  TimeStampPipe ],//array of components and pipes that belong to this module
+								  TimeStampPipe,
+								  InputStyler,
+								  Unless ],//array of components and pipes that belong to this module
   providers:    [ AuthService, AuthGuard, Logger, BlogService,
                   {
                     provide: AuthHttp,

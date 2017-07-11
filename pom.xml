@@ -12,6 +12,7 @@
 	<module>druidia.net.facade.ejb</module>
   	<module>druidia.net.web</module>
   	<module>druidia.net.ear</module>
+    <module>druidia.persistence</module>
   </modules>
   
   <dependencyManagement>

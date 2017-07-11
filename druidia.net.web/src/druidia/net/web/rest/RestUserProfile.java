@@ -13,6 +13,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+<<<<<<< Updated upstream
+=======
+import druidia.net.ejb.services.UserProfileDataService;
+>>>>>>> Stashed changes
 import druidia.net.web.rest.json.RequestPayload;
 import druidia.net.web.rest.json.ResponsePayload;
 

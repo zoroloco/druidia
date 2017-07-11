@@ -12,7 +12,6 @@
         required
         name="username"
         [(ngModel)]="user.username"
-        #username=ngModel
         placeholder="username">
 
       <div *ngIf="formErrors.username" class="alert alert-danger">
@@ -29,7 +28,6 @@
         required
         name="password"
         [(ngModel)]="user.password"
-        #password=ngModel
         placeholder="password">
 
       <div *ngIf="formErrors.password" class="alert alert-danger">

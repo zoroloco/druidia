@@ -1,0 +1,71 @@
+<form #addressForm=ngForm>
+  <div id="address-id"
+       ngModelGroup="addressGroup"
+       #addressGroup=ngModelGroup>
+
+    <md-input-container color="blue">
+      <input mdInput placeholder="Address 1"
+             class="form-control"
+             inputstyler
+             [required]=requiredFlag
+             ngModel
+             name="address1Name"
+             #address1="ngModel">
+      <md-hint *ngIf="!address1.valid && address1.dirty">
+        <label>Please enter a valid address.</label>
+      </md-hint>
+    </md-input-container>
+
+    <div *ngIf="verticalAlign"><br/></div>
+
+    <div *unless="!address1.valid"></div>
+
+    <md-input-container color="blue">
+     <input mdInput placeholder="Address 2"
+            inputstyler
+            class="form-control"
+            ngModel
+            name="address2Name"
+            #address2="ngModel">
+    </md-input-container>
+
+    <div *ngIf="verticalAlign"><br/></div>
+
+    <md-input-container color="blue">
+     <input mdInput placeholder="City"
+            [required]=requiredFlag
+            class="form-control"
+            ngModel
+            name="cityName"
+            #city="ngModel">
+     <md-hint *ngIf="!city.valid && city.dirty">
+        <label>Please enter a city.</label>
+     </md-hint>
+    </md-input-container>
+
+    <md-select placeholder="State"
+               [required]=requiredFlag
+               class="form-control"
+               ngModel
+               name="stateName">
+     <md-option *ngFor="let state of states"
+               (click)="onState(state)"
+               [value]="state.code">{{ state.name }}
+     </md-option>
+    </md-select>
+
+    <div *ngIf="verticalAlign"><br/></div>
+
+    <md-input-container>
+     <input mdInput placeholder="Zip"
+            ngModel
+            name="zipName"
+            class="form-control"
+            #zip = "ngModel">
+     <md-hint *ngIf="!zip.valid && zip.dirty">
+      <label>Please enter a valid zip code.</label>
+     </md-hint>
+     <div mdSuffix>U.S.</div>
+    </md-input-container>
+  </div>
+</form>

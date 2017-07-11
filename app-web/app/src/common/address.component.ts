@@ -7,59 +7,27 @@
 import { Component,
          OnInit,
          AfterViewInit,
+         ViewChild,
          Input,EventEmitter }from '@angular/core';
+import { NgForm ,FormControl}            from '@angular/forms';
 import { Address }           from './address.model';
 import { State }             from './state.model';
 import { Logger, LogLevels } from '../loggers/logger.service';
 
 @Component({
   selector: 'AddressComponent',
-  template: `<md-input-container color="blue">
-               <input mdInput placeholder="Address 1"
-                      [required]=requiredFlag
-                      [(ngModel)]=address.address1>
-             </md-input-container>
-             <div *ngIf="verticalAlign"><br/></div>
-             <md-input-container color="blue">
-              <input mdInput placeholder="Address 2"
-                     [(ngModel)]=address.address2>
-             </md-input-container>
-             <div *ngIf="verticalAlign"><br/></div>
-             <md-input-container color="blue">
-              <md-hint>
-                Enter your U.S. city name.
-              </md-hint>
-              <input mdInput placeholder="City"
-                     [required]=requiredFlag
-                     [(ngModel)]="address.city">
-             </md-input-container>
-             <md-select placeholder="State"
-                        [required]=requiredFlag
-                        [(ngModel)]=address.state>
-              <md-option *ngFor="let state of states"
-                        (click)="onState(state)"
-                        [value]="state.code">{{ state.name }}
-              </md-option>
-             </md-select>
-             <div *ngIf="verticalAlign"><br/></div>
-             <md-input-container>
-              <input mdInput placeholder="Zip"
-                     [(ngModel)]=address.zip>
-              <md-hint>
-                Format: XXXXX
-              </md-hint>
-              <div mdSuffix>U.S.</div>
-             </md-input-container>
-             `,
-   inputs: [ "verticalAlign" ],//a message from the outside world.
-   outputs: ["addressStateSelected"]//a message to the outside world.
+  templateUrl: 'html/address.template.html',
+  inputs: [ "verticalAlign" ],//a message from the outside world.
+  outputs: ["addressStateSelected"],//a message to the outside world.
+  styles: ['.mat-input-container.ng-invalid.ng-dirty{ border: 1px solid red;}']
 })
 export class AddressComponent implements OnInit{
   @Input() address      : Address;//comes from the parent component.
-  @Input('required') requiredFlag : any;//this input has an alias.
+  @Input('required') requiredFlag : boolean;//this input has an alias.
   private states        : Array<State>;
   private verticalAlign : string;
-  addressStateSelected  : EventEmitter<State>;
+  private addressStateSelected  : EventEmitter<State>;
+  @ViewChild('addressForm') addressForm: NgForm;
 
   constructor(private log:Logger){
     this.states = new Array<State>();
@@ -77,8 +45,28 @@ export class AddressComponent implements OnInit{
 
   //called when you click on a state on the state dropdown.
   onState(state: State){
-    this.log.log(LogLevels.INFO,"Emitted/propagating up state clicked event to any listeners:"+state.name);
-    this.addressStateSelected.emit(state);
+    //this.log.log(LogLevels.INFO,"Emitted/propagating up state clicked event to any listeners:"+state.name);
+    //console.log(addressGroup.value);
+    //this.addressStateSelected.emit(state);
+  }
+
+  //called from some parent component when the form is submitted.
+  public onSubmit(){
+    this.log.log(LogLevels.INFO,"Parent component has submitted their form.");
+
+    let c:any;
+    for(c in this.addressForm.form.controls){
+      let control:FormControl = c;
+      console.log("control value = "+control.value);
+    }
+
+    console.log("YOUR FORM:  "+this.addressForm.form.get('address1Name'));
+
+
+// TODO: figure out why for loop up there doesnt go in and learn directives!!!
+
+
+
   }
 
 }

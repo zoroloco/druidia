@@ -1,34 +1,58 @@
 <NavBar>
 </NavBar>
 
-<md-card class="profile-card">
-  <md-card-header align="center">
-    <md-card-title>User Personal Information</md-card-title>
-  </md-card-header>
+<form (ngSubmit)="onSaveAccount(addressComponent)" #accountForm="ngForm">
+  <md-card class="profile-card">
+    <md-card-header align="center">
+      <md-card-title>User Personal Information</md-card-title>
+    </md-card-header>
 
-  <md-card-content>
+    <md-card-content>
 
-    <AddressComponent [verticalAlign]="verticalAlign"
-                      [required]=true
-                      [address]=account.address
-                      (addressStateSelected)="onAddressStateSelected($event)">
-    </AddressComponent>
-    <div *ngIf="verticalAlign"><br/></div>
+      <AddressComponent [verticalAlign]="verticalAlign"
+                        [required]=true
+                        [address]=account.address
+                        #addressComponent
+                        (addressStateSelected)="onAddressStateSelected($event)">
+      </AddressComponent>
 
-    <md-input-container>
-        <input mdInput [mdDatepicker]="picker" [mdDatepickerFilter]="myFilter"
-               [min]="minDate" [max]="maxDate" placeholder="dob:">
-        <button [mdDatepickerToggle]="picker"></button>
-    </md-input-container>
-    <md-datepicker #picker></md-datepicker>
-    <div *ngIf="verticalAlign"><br/></div>
+      <div *ngIf="verticalAlign"><br/></div>
 
-    <md-slide-toggle name="#gender" (gender)="account.gender" [required]=true
-                     (change)=onGenderToggle()>Male</md-slide-toggle>
-    <div *ngIf="verticalAlign"><br/></div>
+      <md-input-container>
+        <input class="form-control"
+               inputstyler
+               placeholder="email"
+               ngModel
+               name="emailName"
+               mdInput
+               #email = "ngModel"
+               (input)="onInputEmail($event)"
+               email>
+        <md-hint *ngIf="!email.valid && email.dirty">
+          {{email}} is invalid.
+        </md-hint>
+      </md-input-container>
 
-  </md-card-content>
-  <md-card-footer>
-    <button (click)= "onSubmit()" md-button focused=true>Submit</button>
-  </md-card-footer>
-</md-card>
+      <md-input-container>
+          <input class="form-control"
+                  ngModel
+                  name="dateName" #date mdInput [mdDatepicker]="picker" [mdDatepickerFilter]="myFilter"
+                 [min]="minDate" [max]="maxDate" placeholder="dob:">
+          <button [mdDatepickerToggle]="picker"></button>
+      </md-input-container>
+      <md-datepicker #picker></md-datepicker>
+      <div *ngIf="verticalAlign"><br/></div>
+
+      <md-slide-toggle class="form-control"
+                       ngModel
+                       name="genderName"
+                       [required]=true
+                       (change)=onGenderToggle()>Male</md-slide-toggle>
+      <div *ngIf="verticalAlign"><br/></div>
+
+    </md-card-content>
+    <md-card-footer>
+      <button type="submit" [disabled]=!accountForm.valid md-button>Save</button>
+    </md-card-footer>
+  </md-card>
+</form>

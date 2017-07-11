@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
-import druidia.net.persistence.domain.entities.UserProfile;
+import druidia.net.persistence.entities.UserProfile;
 
 //@Stateless(name="ejb/UserProfileDataService
 @Stateless
@@ -35,6 +35,7 @@ public class UserProfileDataServiceImpl implements UserProfileDataService,Serial
 		entityManager.merge(userProfile);		
 	}
 
+	@SuppressWarnings("unchecked")
 	public UserProfile read(Integer id)  throws NoResultException{
 		Query query = entityManager.createNamedQuery("UserProfile.findById");
     	query.setParameter("userProfileId", id );    

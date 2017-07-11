@@ -3,7 +3,7 @@ package druidia.net.ejb.services;
 import javax.ejb.Local;
 import javax.persistence.NoResultException;
 
-import druidia.net.persistence.domain.entities.UserProfile;
+import druidia.net.persistence.entities.UserProfile;
 
 /**
  * This is @local because this interface that exposes the business methods for persistence 

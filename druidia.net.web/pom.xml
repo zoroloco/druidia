@@ -17,7 +17,7 @@
 		<groupId>druidia.net</groupId>
 		<artifactId>druidia.net.facade.ejb</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<scope>provided</scope>
+		<scope>compiled</scope>
 	</dependency>
        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 	<dependency>
