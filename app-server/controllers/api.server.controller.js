@@ -24,6 +24,22 @@ var pathUtil       = require('path'),
       });//find user
     }
 
+    exports.fetchUsers = function(req,res,next){
+      User.find(function(err,foundUsers){
+        if(err)
+          next(err);
+
+        if(!_.isEmpty(foundUsers)){
+          log.info("Found users:"+JSON.stringify(foundUsers));
+          res.json(foundUsers);
+        }
+        else{
+          log.info("No users found...this should not be possible.");
+          res.sendStatus(404);
+        }
+      });
+    }
+
     //fetch the blog objects of the requesting user.
     exports.fetchBlogs = function(req,res,next){
 

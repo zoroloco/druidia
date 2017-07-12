@@ -9,6 +9,7 @@ import { MdButtonModule,
 	       MdCheckboxModule,
 				 MdInputModule,
 			   MdCardModule,
+				 MdGridListModule,
 				 MdSlideToggleModule,
 			   MdListModule,
 				 MdDatepickerModule,
@@ -27,6 +28,7 @@ const materialModules = [
  MdSlideToggleModule,
  MdListModule,
  MdDatepickerModule,
+ MdGridListModule,
  MdNativeDateModule,
  MdSelectModule
 ];

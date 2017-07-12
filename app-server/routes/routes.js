@@ -82,6 +82,10 @@ module.exports = function(app) {
   app.get('/api/fetchUser',
     apiController.fetchUser);
 
+  //fetch all users in application.
+  app.get('./api/fetchUsers',
+    apiController.fetchUsers);
+
   //route to get all blogs for a user.
   app.get('/api/fetchBlogs',
     apiController.fetchBlogs);

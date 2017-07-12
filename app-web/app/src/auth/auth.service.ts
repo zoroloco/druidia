@@ -58,6 +58,22 @@ export class AuthService {
     }
   }
 
+  //returns all users
+  public fetchUsers(): Observable<Array<User>>{
+    return this.authHttp.get('api/fetchUsers')
+      .map((res:Response)=>{
+        let resultUsers: Array<User>;
+        resultUsers = new Array<User>();
+        let users = res.json();
+        for(var i in users){
+          let resultUser:BaseUser = JSON.parse(i);
+          let user:User = this.userFactory.createUser(resultUser);
+          resultUsers.push(user);
+        }
+        return resultUsers;
+      })
+  }
+
   //observe fetching user either from the localstorage or the back-end.
   //anyone subscribing to this observable will only fetch from back-end the first time.
   public fetchUser(): Observable<User>{

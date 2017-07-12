@@ -1,4 +1,18 @@
 <NavBar>
 </NavBar>
 
-chatter [coming soon!]
+<md-grid-list cols="2" rowHeight="100px">
+  <md-grid-tile
+    [colspan] = "1"
+    [rowspan] = "2"
+    [style.background] = 'lightblue'>
+    <user-list></user-list>
+  </md-grid-tile>
+  <md-grid-tile
+    [colspan] = "1"
+    [rowspan] = "2"
+    [style.background] = 'lightpink'>
+    Chat Area
+  </md-grid-tile>
+
+</md-grid-list>

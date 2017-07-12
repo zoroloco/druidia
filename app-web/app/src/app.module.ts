@@ -12,6 +12,7 @@ import { AuthService }             from './auth/auth.service';
 import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
 import { AddressComponent }        from './common/address.component';
+import { UserListComponent }       from './common/userlist.component';
 
 //directives
 import { InputStyler }             from './directives/inputStyler.directive';
@@ -28,6 +29,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule }            from '@angular/router';
 
 import { MaterialModule }          from './material.module';//my own module
+
 
 //UI
 //import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -63,14 +65,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
                   FormsModule,
                   HttpModule,
 									JsonpModule,
-									MaterialModule,//MY OWN CUSTOM MODULE
+									MaterialModule,//MY OWN CUSTOM MODULE									
 									//BrowserAnimationsModule,
 									FroalaEditorModule.forRoot(),
 									FroalaViewModule.forRoot(),
                   RouterModule.forRoot(ROUTES) ],//array with all modules for this application
+  exports:      [NavBarComponent],
   declarations: [ AppComponent,
                   NavBarComponent,
 									AddressComponent,
+									UserListComponent,
                   routedComponents,
 								  TimeStampPipe,
 								  InputStyler,
