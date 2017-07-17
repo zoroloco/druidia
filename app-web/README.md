@@ -20,12 +20,7 @@ sudo npm install -g browserify
 sudo npm install copyfiles -g ( please see Note below )
 sudo npm install -g karma-cli
 
-npm install passport-facebook
-npm install --save-dev typescript gulp gulp-typescript
-npm install --save-dev browserify tsify vinyl-source-stream
-npm install --save-dev watchify gulp-util
-npm install --save-dev gulp-uglify vinyl-buffer gulp-sourcemaps
-npm install --save-dev run-sequence
+
 npm install auth0-js
 npm install angular2-froala-wysiwyg --save
 npm install --save-dev @types/jasmine
