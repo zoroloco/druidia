@@ -12,31 +12,26 @@ Install MongoDB for Centos 7.
 https://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/
 
 sudo npm install -g bower
-npm install -g typescript
-sudo npm install -g ionic
-npm install -g cordova
-npm install -g ios-sim
+sudo npm install -g typescript
+sudo npm install -g uglify
+sudo npm install -g uglifyjs
+sudo npm install -g minify
+sudo npm install -g browserify
+sudo npm install copyfiles -g ( please see Note below )
+sudo npm install -g karma-cli
+
 npm install passport-facebook
 npm install --save-dev typescript gulp gulp-typescript
 npm install --save-dev browserify tsify vinyl-source-stream
 npm install --save-dev watchify gulp-util
 npm install --save-dev gulp-uglify vinyl-buffer gulp-sourcemaps
 npm install --save-dev run-sequence
-npm install -g uglify
-npm install -g minify
-npm install -g uglifyjs
-npm install -g browserify
 npm install auth0-js
-npm install rimraf -g
-npm install copyfiles -g ( please see Note below )
 npm install angular2-froala-wysiwyg --save
 npm install --save-dev @types/jasmine
 npm install karma --save-dev
 npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
 npm install jasmine-core --save-dev
-npm install -g karma-cli
-npm install --save-dev webpack
-npm install --save-dev karma-webpack
 npm install awesome-typescript-loader --save-dev
 npm install angular2-template-loader --save-dev
 npm install ts-loader

@@ -13,6 +13,8 @@ app-web/node_modules
 app-web/dist
 app-web/libs
 
+.metadata
+
 npm-debug.log
 app-web/dist/bundle.js
 app-server/security/fb_app_id
@@ -20,7 +22,6 @@ app-server/security/fb_app_secret
 app-web/dist/bundle.js
 app-web/dist/bundle.min.js
 app-web/coverage
-
 
 
 # Windows image file caches
@@ -71,35 +72,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-.metadata/
-druidai.net.ear/.settings
-druidai.net.ear/target
-druidia.net.ear/.project
-druidia.net.web/target/
-RemoteSystemsTempFiles/.project
-druidia.net.web/.settings
-druidia.net.ejb/target
-druidia.net.ejb/.settings
-druidia.net.ear/target
-druidia.net.web/.classpath
-*.project
-druidia.net.ejb/.classpath
-druidia.net.ear/.settings
-.settings/org.eclipse.m2e.core.prefs
-druidia.net.ng/node_modules
-druidia.net.ng/.settings
+
 app-server/security/credentials.js
 app-server/security/credentials.js
 *.ppk
 *.gen
-
-app-web/coverage/Chrome 58.0.3029 (Mac OS X 10.11.5)/html/base.css
-
-druidia.net.persistence/.settings/org.eclipse.jdt.core.prefs
-
-druidia.net.persistence/.classpath
-druidia.net.web/.classpath
-
-druidia.net.facade.ejb/.settings
-druidia.net.facade.ejb/.classpath
-
