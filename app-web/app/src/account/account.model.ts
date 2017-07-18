@@ -1,4 +1,4 @@
-import { Address } from '../common/address.model';
+import { Address } from './address.model';
 
 export class Account{
   //by default, the members are all public.

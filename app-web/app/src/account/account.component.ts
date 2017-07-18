@@ -1,44 +1,36 @@
 //component for user account manipulation.
 import { Component,
-         OnChanges,
          OnInit,
-         DoCheck,
-         AfterContentInit,
-         AfterContentChecked,
-         AfterViewInit,
-         AfterViewChecked,
          ViewChild,
-         OnDestroy,
          Input,
-         SimpleChanges }            from '@angular/core';
+         SimpleChanges }    from '@angular/core';
 import { NgForm }           from '@angular/forms';
-import { Address }          from '../common/address.model';
 import { Account }          from './account.model';
-import { State }            from '../common/state.model';
+import { State }            from './state.model';
 import { Logger, LogLevels }from '../loggers/logger.service';
-import { AddressComponent } from '../common/address.component';
 
 @Component({
   selector: 'AccountComponent',
   templateUrl: 'html/account.template.html',
   styles: [`.profile-card {width: 100%;}
             .mat-input-container.ng-invalid.ng-dirty{ border: 1px solid red;}
-          `]
+          `],
+  styleUrls: ['resources/global.css' ]
 })
 export class AccountComponent implements OnInit{
   private myFilter: any;
   private minDate: Date;
   private maxDate: Date;
-  private verticalAlign: boolean;
+  private states : Array<State>;
 
   private account: Account;
-  private email: string;
 
   @ViewChild('accountForm') accountForm: NgForm;
   //@ViewChild('addressComponent') addressComponent: AddressComponent;
 
   constructor(private log:Logger){
     this.log.log(LogLevels.INFO,"Constructor called.");
+    this.states = new Array<State>();
   }
 
   ngOnChanges(changes: SimpleChanges){
@@ -48,31 +40,13 @@ export class AccountComponent implements OnInit{
 
   ngOnInit(){
     this.log.log(LogLevels.INFO,"ngOnInit");
+
+    this.states.push(new State('TX',"Texas"));
+    this.states.push(new State('AZ',"Arizona"));
+    this.states.push(new State('CA',"California"));
+    this.states.push(new State('IL',"Illinois"));
+
     this.init();
-  }
-
-  ngDoCheck(){
-    this.log.log(LogLevels.INFO,"ngDoCheck");
-  }
-
-  ngAfterContentInit(){
-    this.log.log(LogLevels.INFO,"ngAfterContentInit");
-  }
-
-  ngAfterContentChecked(){
-    this.log.log(LogLevels.INFO,"ngAfterContentChecked");
-  }
-
-  ngAfterViewInit(){
-    this.log.log(LogLevels.INFO,"ngAfterViewInit");
-  }
-
-  ngAfterViewChecked(){
-    this.log.log(LogLevels.INFO,"ngAfterViewChecked");
-  }
-
-  ngOnDestroy(){
-    this.log.log(LogLevels.INFO,"ngOnDestroy");
   }
 
   onGenderToggle(){
@@ -80,7 +54,6 @@ export class AccountComponent implements OnInit{
   }
 
   private init(){
-    this.verticalAlign = true;
     this.account       = new Account();
     this.myFilter      = (picker: Date) => picker.getFullYear() > 1885;
     this.minDate       =  new Date(1885, 0, 1);
@@ -93,14 +66,13 @@ export class AccountComponent implements OnInit{
   }
 
   onInputEmail(e:any){
-    this.email = e.target.value;
+    this.account.email = e.target.value;
   }
 
-  onSaveAccount(addressComponent: AddressComponent){
-    console.log(this.accountForm.form.controls.emailName.value);
+  onSaveAccount(){
+    //console.log(this.accountForm.form.controls.emailName.value);
     //this.email = this.accountForm.form.controls.emailName.value;
     //this.log.log(LogLevels.INFO,"Gender:"+formValue.genderName);
     //this.log.log(LogLevels.INFO,"Date:"+formValue.dateName);
-    addressComponent.onSubmit();
   }
 }

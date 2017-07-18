@@ -21,6 +21,14 @@
   text-align: center;
 }
 
+.full-width-input{
+  width: 100%;
+}
+
+.half-width-input{
+  width: 50%;
+}
+
 textarea {
    resize: none;
 }
