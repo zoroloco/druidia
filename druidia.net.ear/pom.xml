@@ -27,10 +27,7 @@
                	<groupId>druidia.net</groupId>
                	<artifactId>druidia.net.ejb</artifactId>               	               	
                </ejbModule>
-               <ejbModule>
-               	<groupId>druidia.net</groupId>
-               	<artifactId>druidia.net.facade.ejb</artifactId>
-               </ejbModule>
+               
                <webModule>
                  <groupId>druidia.net</groupId>
                  <artifactId>druidia.net.web</artifactId>
@@ -50,12 +47,7 @@
       		<version>0.0.1-SNAPSHOT</version>
       		<type>ejb</type>
       	</dependency>
-      	<dependency>
-      		<groupId>druidia.net</groupId>
-      		<artifactId>druidia.net.facade.ejb</artifactId>
-      		<version>0.0.1-SNAPSHOT</version>
-      		<type>ejb</type>
-      	</dependency>
+      
       	<dependency>
       		<groupId>druidia.net</groupId>
       		<artifactId>druidia.net.web</artifactId>

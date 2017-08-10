@@ -8,6 +8,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import druidia.net.persistence.domain.entities.EntityBase;
+
 @Entity
 @Table(name="user_profile")
 @NamedQueries({

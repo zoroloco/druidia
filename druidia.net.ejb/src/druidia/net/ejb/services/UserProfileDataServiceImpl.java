@@ -1,27 +1,17 @@
 package druidia.net.ejb.services;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.Query;
-
-import druidia.net.persistence.entities.UserProfile;
 
 //@Stateless(name="ejb/UserProfileDataService
 @Stateless
 public class UserProfileDataServiceImpl implements UserProfileDataService,Serializable{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -4180029320339341961L;
 
+	/*
 	@PersistenceContext(unitName = "LFPU", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
 	
@@ -61,6 +51,7 @@ public class UserProfileDataServiceImpl implements UserProfileDataService,Serial
 	public void delete(Integer id) {
 		
 	}
+	*/
 	
 	/*
 	@Override

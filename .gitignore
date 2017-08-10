@@ -103,3 +103,5 @@ druidia.net.web/.classpath
 druidia.net.facade.ejb/.settings
 druidia.net.facade.ejb/.classpath
 
+
+druidia.net.persistence/src/druidia/net/persistence/entities/EntityBase.java
