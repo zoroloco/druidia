@@ -1,54 +1,118 @@
 <NavBar>
 </NavBar>
 
-<form (ngSubmit)="onSaveAccount(addressComponent)" #accountForm="ngForm">
+<form (ngSubmit)="onSaveAccount()" #accountForm="ngForm">
   <md-card class="profile-card">
     <md-card-header align="center">
-      <md-card-title>User Personal Information</md-card-title>
+      <md-card-title>
+        <label><b>Account Details</b></label>
+      </md-card-title>
     </md-card-header>
 
     <md-card-content>
+      <md-grid-list cols="2" rowHeight="100px">
 
-      <AddressComponent [verticalAlign]="verticalAlign"
-                        [required]=true
-                        [address]=account.address
-                        #addressComponent
-                        (addressStateSelected)="onAddressStateSelected($event)">
-      </AddressComponent>
+        <md-grid-tile [colspan]="2">
+          <md-input-container color="blue" class="full-width-input">
+            <input mdInput placeholder="Address 1"
+                   class="form-control"
+                   [required]="true"
+                   ngModel
+                   name="address1Name"
+                   #address1="ngModel">
+            <md-hint *ngIf="!address1.valid && address1.touched">
+              <label>Please enter a valid address.</label>
+            </md-hint>
+          </md-input-container>
+        </md-grid-tile>
 
-      <div *ngIf="verticalAlign"><br/></div>
-
-      <md-input-container>
-        <input class="form-control"
-               inputstyler
-               placeholder="email"
-               ngModel
-               name="emailName"
-               mdInput
-               #email = "ngModel"
-               (input)="onInputEmail($event)"
-               email>
-        <md-hint *ngIf="!email.valid && email.dirty">
-          {{email}} is invalid.
-        </md-hint>
-      </md-input-container>
-
-      <md-input-container>
-          <input class="form-control"
+        <md-grid-tile [colspan]="2">
+          <md-input-container color="blue" class="full-width-input">
+           <input mdInput placeholder="Address 2"
+                  class="form-control"
                   ngModel
-                  name="dateName" #date mdInput [mdDatepicker]="picker" [mdDatepickerFilter]="myFilter"
-                 [min]="minDate" [max]="maxDate" placeholder="dob:">
-          <button [mdDatepickerToggle]="picker"></button>
-      </md-input-container>
-      <md-datepicker #picker></md-datepicker>
-      <div *ngIf="verticalAlign"><br/></div>
+                  name="address2Name"
+                  #address2="ngModel">
+          </md-input-container>
+        </md-grid-tile>
 
-      <md-slide-toggle class="form-control"
-                       ngModel
-                       name="genderName"
-                       [required]=true
-                       (change)=onGenderToggle()>Male</md-slide-toggle>
-      <div *ngIf="verticalAlign"><br/></div>
+        <md-grid-tile [colspan]="2">
+          <md-input-container color="blue" class="full-width-input">
+           <input mdInput placeholder="City"
+                  [required]="true"
+                  class="form-control"
+                  ngModel
+                  name="cityName"
+                  #city="ngModel">
+           <md-hint *ngIf="!city.valid && city.touched">
+              <label>Please enter a city.</label>
+           </md-hint>
+          </md-input-container>
+        </md-grid-tile>
+
+        <md-grid-tile [colspan]="2">
+          <md-select placeholder="State"
+                     [required]="true"
+                     class="form-control full-width-input"
+                     ngModel
+                     name="stateName">
+           <md-option *ngFor="let state of states"
+                     [value]="state.code">{{ state.name }}
+           </md-option>
+          </md-select>
+        </md-grid-tile>
+
+        <md-grid-tile>
+          <md-input-container class="full-width-input">
+           <input mdInput placeholder="Zip"
+                  ngModel
+                  name="zipName"
+                  class="form-control"
+                  #zip = "ngModel">
+           <md-hint *ngIf="!zip.valid && zip.dirty">
+            <label>Please enter a valid zip code.</label>
+           </md-hint>
+           <md-hint>
+             <label>Format: 90210</label>
+           </md-hint>
+           <div mdSuffix>U.S.</div>
+          </md-input-container>
+        </md-grid-tile>
+
+        <md-grid-tile [colspan]="2">
+          <md-input-container class="full-width-input">
+            <input class="form-control"
+                   placeholder="email"
+                   ngModel
+                   name="email"
+                   mdInput
+                   #email = "ngModel"
+                   (input)="onInputEmail($event)"
+                   email>
+            <md-hint *ngIf="!email.valid && email.dirty">
+              {{email.value}} is invalid.
+            </md-hint>
+          </md-input-container>
+        </md-grid-tile>
+
+        <md-grid-tile>
+          <md-input-container class="full-width-input">
+              <input class="form-control"
+                      ngModel
+                      name="dateName" #date mdInput [mdDatepicker]="picker" [mdDatepickerFilter]="myFilter"
+                     [min]="minDate" [max]="maxDate" placeholder="dob:">
+              <button [mdDatepickerToggle]="picker"></button>
+          </md-input-container>
+          <md-datepicker #picker></md-datepicker>
+        </md-grid-tile>
+
+        <md-grid-tile>
+          <md-radio-group name="genderName" [(ngModel)]="account.gender">
+            <md-radio-button value="Male">Male</md-radio-button>
+            <md-radio-button value="Female">Female</md-radio-button>
+          </md-radio-group>
+        </md-grid-tile>
+      </md-grid-list>
 
     </md-card-content>
     <md-card-footer>

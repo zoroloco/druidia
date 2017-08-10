@@ -11,7 +11,6 @@ import { AuthService }             from './auth/auth.service';
 
 import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
-import { AddressComponent }        from './common/address.component';
 import { UserListComponent }       from './common/userlist.component';
 
 //directives
@@ -65,7 +64,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
                   FormsModule,
                   HttpModule,
 									JsonpModule,
-									MaterialModule,//MY OWN CUSTOM MODULE									
+									MaterialModule,//MY OWN CUSTOM MODULE
 									//BrowserAnimationsModule,
 									FroalaEditorModule.forRoot(),
 									FroalaViewModule.forRoot(),
@@ -73,7 +72,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   exports:      [NavBarComponent],
   declarations: [ AppComponent,
                   NavBarComponent,
-									AddressComponent,
 									UserListComponent,
                   routedComponents,
 								  TimeStampPipe,
