@@ -75,22 +75,4 @@ Temporary Items
 
 app-server/security/credentials.js
 app-server/security/credentials.js
-*.ppk
-<<<<<<< HEAD
-*.gen
 
-app-web/coverage/Chrome 58.0.3029 (Mac OS X 10.11.5)/html/base.css
-
-druidia.net.persistence/.settings/org.eclipse.jdt.core.prefs
-
-druidia.net.persistence/.classpath
-druidia.net.web/.classpath
-
-druidia.net.facade.ejb/.settings
-druidia.net.facade.ejb/.classpath
-
-
-druidia.net.persistence/src/druidia/net/persistence/entities/EntityBase.java
-=======
-*.gen
->>>>>>> origin/master

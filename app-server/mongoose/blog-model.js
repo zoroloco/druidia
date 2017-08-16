@@ -1,6 +1,5 @@
 var mongoose  = require('mongoose'),
-    pathUtil  = require('path'),
-    log       = require(pathUtil.join(__dirname,'../lib/logger.js'));
+    pathUtil  = require('path');
 
 var BlogSchema = new mongoose.Schema({
   "userId"    : {type: String, required: true},

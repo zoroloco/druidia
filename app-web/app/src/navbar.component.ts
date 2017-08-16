@@ -3,7 +3,7 @@ import { Component,
          OnInit }           from '@angular/core';
 import { Logger,LogLevels } from './loggers/logger.service';
 import { AuthService }      from './auth/auth.service';
-import {User}               from './auth/user';
+import { User }             from './auth/user';
 import { FacebookUser }     from './auth/facebookUser';
 
 @Component({
@@ -17,35 +17,33 @@ import { FacebookUser }     from './auth/facebookUser';
 
     constructor(private authService:AuthService,
                 private log: Logger){
-      this.log.log(LogLevels.INFO,"Instantiating navbar component.");
     }
 
     ngOnInit(){
-      this.log.log(LogLevels.INFO,"Initializing navbar component.");
       this.authService.fetchUser().subscribe(
           user => {
-            this.log.log(LogLevels.INFO,"Picture URL:"+JSON.stringify(user));
+            this.log.log("Picture URL:"+JSON.stringify(user));
             if(user instanceof FacebookUser){
-              this.log.log(LogLevels.INFO,"User is of type Facebook user.");
+              this.log.log("User is of type Facebook user.");
               this.pictureURL = user.pictureUrl;
             }
             else{
-              this.log.log(LogLevels.INFO,"User is not of type Facebook user. No picture URL.");
+              this.log.log("User is not of type Facebook user. No picture URL.");
             }
           },
-          error=> this.log.log(LogLevels.ERROR,error)
+          error=> this.log.log(error,LogLevels.ERROR)
       );
     }
 
     onBlog(){
-      this.log.log(LogLevels.INFO,"Blog button clicked.");
+      this.log.log("Blog button clicked.");
     }
 
     onChatter(){
-      this.log.log(LogLevels.INFO,"Chatter button clicked.");
+      this.log.log("Chatter button clicked.");
     }
 
     onAccount(){
-      this.log.log(LogLevels.INFO,"Account button clicked.");
+      this.log.log("Account button clicked.");
     }
   }

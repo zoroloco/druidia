@@ -13,11 +13,11 @@ import 'rxjs/add/observable/throw';
 export class BlogService {
 
   constructor(private authHttp: AuthHttp,private log: Logger) {
-      this.log.log(LogLevels.INFO,"In constructor of blog service.");
+      this.log.log("In constructor of blog service.");
   }
 
   deleteBlog(deleteBlog: Blog): Observable<boolean> {
-    this.log.log(LogLevels.INFO,"Delete blog observable invoked:"+deleteBlog._id);
+    this.log.log("Delete blog observable invoked:"+deleteBlog._id);
 
     return this.authHttp.post('api/deleteBlog',deleteBlog)
       .map((res:Response) => {
@@ -30,7 +30,7 @@ export class BlogService {
 
   //returns observable for posting a blog entry.
   saveBlog(newBlog: Blog): Observable<any> {
-    this.log.log(LogLevels.INFO,"Save blog observable invoked:"+newBlog.text);
+    this.log.log("Save blog observable invoked:"+newBlog.text);
 
     let blog = {
       "text"    : newBlog.text,
@@ -42,7 +42,7 @@ export class BlogService {
   }
 
   fetchBlogs(): Observable<any> {
-    this.log.log(LogLevels.INFO,"Fetch blog observable invoked.");
+    this.log.log("Fetch blog observable invoked.");
 
     return this.authHttp.get('api/fetchBlogs')
       .map((res:Response) => res.json());

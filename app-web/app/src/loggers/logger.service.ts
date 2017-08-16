@@ -31,8 +31,51 @@ export class Logger {
     this.logger.setNext(new ServerLogger(authHttp,LogLevels.ERROR2));
   }
 
-  //api
-  public log(logLevel:LogLevels,msg:string){
+  //defaults to info if optional second param not set.
+  public log(msg:string,logLevel?:LogLevels){
+    if(!logLevel)
+      logLevel = LogLevels.INFO;//set default on optional param.
+
     this.logger.log(logLevel,msg);
+  }
+
+  //logs debug message to console
+  public debug(msg:string){
+    this.logger.log(LogLevels.DEBUG,msg);
+  }
+
+  //logs debug message to server
+  public debugToServer(msg:string){
+    this.logger.log(LogLevels.DEBUG2,msg);
+  }
+
+  //logs info message to console
+  public info(msg:string){
+    this.logger.log(LogLevels.INFO,msg);
+  }
+
+  //logs info message to server
+  public infoToServer(msg:string){
+    this.logger.log(LogLevels.INFO2,msg);
+  }
+
+  //log warn message to console
+  public warn(msg:string){
+    this.logger.log(LogLevels.WARN,msg);
+  }
+
+  //log warn message to server
+  public warnToServer(msg:string){
+    this.logger.log(LogLevels.WARN2,msg);
+  }
+
+  //log error message to console
+  public error(msg:string){
+    this.logger.log(LogLevels.ERROR,msg);
+  }
+
+  //log error message to server
+  public errorToServer(msg:string){
+    this.logger.log(LogLevels.ERROR2,msg);
   }
 }

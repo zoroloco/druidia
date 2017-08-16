@@ -1,9 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Logger,LogLevels }    from '../loggers/logger.service';
 
 @Pipe({name: 'timestampPipe'})
 export class TimeStampPipe implements PipeTransform {
-  constructor(private log:Logger){}
 
   //Convert 2017:06:13 00:09:04:731 -> 06-13-2017 00:09:04
   transform(timeStampStr: string): string {

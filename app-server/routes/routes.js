@@ -98,6 +98,9 @@ module.exports = function(app) {
   app.post('/api/deleteBlog',
     apiController.deleteBlog);
 
+  app.get('/api/fetchStates',
+    apiController.fetchStates);
+
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
   app.use(errorController.handleError);

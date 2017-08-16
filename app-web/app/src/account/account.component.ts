@@ -8,6 +8,7 @@ import { NgForm }           from '@angular/forms';
 import { Account }          from './account.model';
 import { State }            from './state.model';
 import { Logger, LogLevels }from '../loggers/logger.service';
+import { CommonService }    from '../common/common.service';
 
 @Component({
   selector: 'AccountComponent',
@@ -28,29 +29,30 @@ export class AccountComponent implements OnInit{
   @ViewChild('accountForm') accountForm: NgForm;
   //@ViewChild('addressComponent') addressComponent: AddressComponent;
 
-  constructor(private log:Logger){
-    this.log.log(LogLevels.INFO,"Constructor called.");
+  constructor(private log:Logger,private commonService:CommonService){
     this.states = new Array<State>();
   }
 
   ngOnChanges(changes: SimpleChanges){
-    this.log.log(LogLevels.INFO,"ngOnChanges");
     console.log(changes);
   }
 
   ngOnInit(){
-    this.log.log(LogLevels.INFO,"ngOnInit");
+    this.log.log("ngOnInit of account component.");
 
-    this.states.push(new State('TX',"Texas"));
-    this.states.push(new State('AZ',"Arizona"));
-    this.states.push(new State('CA',"California"));
-    this.states.push(new State('IL',"Illinois"));
+    this.commonService.fetchStates().subscribe(
+        fetchedStates => {
+          this.states = fetchedStates;
+          this.log.log("Received states.");
+        },
+        error => { this.log.log("Error fetching U.S. states.",LogLevels.ERROR) }
+    );
 
     this.init();
   }
 
   onGenderToggle(){
-    this.log.log(LogLevels.INFO,"Gender toggle value="+this.accountForm.form.controls.genderName.value);
+    this.log.log("Gender toggle value="+this.accountForm.form.controls.genderName.value);
   }
 
   private init(){
@@ -62,7 +64,7 @@ export class AccountComponent implements OnInit{
 
   //action method
   onAddressStateSelected(stateSelected: State){
-    this.log.log(LogLevels.INFO,"Account knows that address selected state of:"+stateSelected.name);
+    this.log.log("Account knows that address selected state of:"+stateSelected.name);
   }
 
   onInputEmail(e:any){

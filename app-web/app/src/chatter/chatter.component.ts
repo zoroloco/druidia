@@ -12,14 +12,14 @@ import { Logger,LogLevels } from '../loggers/logger.service';
   export class ChatterComponent implements OnInit{
 
     constructor(private log: Logger){
-      this.log.log(LogLevels.INFO,"Instantiating chatter component.");
+      this.log.log("Instantiating chatter component.");
     }
 
     ngOnInit(){
-      this.log.log(LogLevels.INFO,"Initializing chatter component.");
+      this.log.log("Initializing chatter component.");
     }
 
     ngOnDestroy(){
-      this.log.log(LogLevels.INFO,"Destroying chatter component.");
+      this.log.log("Destroying chatter component.");
     }
   }

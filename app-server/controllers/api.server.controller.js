@@ -4,6 +4,7 @@ var pathUtil       = require('path'),
     mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     Blog           = require(pathUtil.join(__dirname,'../mongoose/blog-model.js')),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
+    State          = require(pathUtil.join(__dirname,'../mongoose/state-model.js')),
     timestamp      = require('time-stamp');
 
     //fetch the user object of the requesting user.
@@ -91,4 +92,21 @@ var pathUtil       = require('path'),
         log.info("Successfully saved a new blog entry.");
         res.json(newBlog);
       })//save blog
+    }
+
+    //fetches all states.
+    exports.fetchStates = function(req,res,next){
+      State.find({},function(err,foundStates){
+        if(err)
+          next(err);
+
+        if(!_.isEmpty(foundStates)){
+          log.info("Found U.S. state entries:"+JSON.stringify(foundStates));
+          res.json(foundStates);
+        }
+        else{
+          log.info("No U.S. State entries exist in collection: states.");
+          res.sendStatus(404);//no states exist for user. Send empty JSON.
+        }
+      })
     }

@@ -10,7 +10,6 @@ import { Logger,LogLevels } from '../loggers/logger.service';
   export class PageNotFoundComponent{
 
     constructor(private log: Logger){
-        log.log(LogLevels.INFO,"Instantiating page not found component.");
+        log.log("Instantiating page not found component.");
     }
-
   }

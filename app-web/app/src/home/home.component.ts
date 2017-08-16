@@ -6,9 +6,9 @@
 
 import { Component,
          OnInit,
-         OnDestroy }        from '@angular/core';
-import { Logger,LogLevels } from '../loggers/logger.service';
-import { NavBarComponent }  from '../navbar.component';
+         OnDestroy }       from '@angular/core';
+import { Logger }          from '../loggers/logger.service';
+import { NavBarComponent } from '../navbar.component';
 
 @Component({
     selector: 'Home',
@@ -18,14 +18,14 @@ import { NavBarComponent }  from '../navbar.component';
   export class HomeComponent implements OnInit{
 
     constructor(private log: Logger){
-      this.log.log(LogLevels.INFO,"Instantiating home component.");
+      this.log.log("Instantiating home component.");
     }
 
     ngOnInit(){
-      this.log.log(LogLevels.INFO,"Initializing home component.");
+      this.log.log("Initializing home component.");
     }
 
     ngOnDestroy(){
-      this.log.log(LogLevels.INFO,"Destroying home component.");
+      this.log.log("Destroying home component.");
     }
   }

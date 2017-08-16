@@ -14,20 +14,20 @@ import { AuthService}                   from './auth.service';
                 private activatedRoute:ActivatedRoute,
                 private authService:AuthService,
                 private log: Logger){
-      this.log.log(LogLevels.INFO,"Instantiating auth component.");
+      this.log.log("Instantiating auth component.");
     }
 
     ngOnInit(){
-      this.log.log(LogLevels.INFO,"Initializing auth component.");
+      this.log.log("Initializing auth component.");
 
       this.activatedRoute.queryParams.subscribe((params: Params)=> {
         let jwtToken = params['jwtToken'];
-        this.log.log(LogLevels.INFO,JSON.stringify(params));
+        //this.log.log(JSON.stringify(params));
         this.authService.processAuthenticatedLogin(jwtToken);
       });
     }
 
     ngOnDestroy(){
-      this.log.log(LogLevels.INFO,"Destroying auth component.");
+      this.log.log("Destroying auth component.");
     }
   }

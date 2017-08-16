@@ -11,6 +11,6 @@ import { Logger,LogLevels } from './loggers/logger.service';
 export class AppComponent{
 
   constructor(private logger: Logger){
-    this.logger.log(LogLevels.INFO,"Instantiating app component.");
+    this.logger.log("Instantiating app component.");
   }
 }

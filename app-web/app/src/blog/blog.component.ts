@@ -32,11 +32,11 @@ declare var $ :any;
     };
 
     constructor(private log: Logger,private blogService: BlogService){
-      this.log.log(LogLevels.INFO,"Instantiating blog component.");
+      this.log.log("Instantiating blog component.");
     }
 
     ngOnInit(){
-      this.log.log(LogLevels.INFO,"Initializing blog component.");
+      this.log.log("Initializing blog component.");
       this.newBlog = new Blog();
       //define our post blog custom button to froala editor toolbar.
       $.FroalaEditor.DefineIconTemplate('submit_icon', '<i class="zmdi zmdi-upload"></i>');
@@ -55,39 +55,39 @@ declare var $ :any;
 
       this.blogService.fetchBlogs().subscribe(
         fetchedBlogs => {
-          this.log.log(LogLevels.INFO,"Fetched blogs:"+JSON.stringify(fetchedBlogs));
+          this.log.log("Fetched blogs:"+JSON.stringify(fetchedBlogs));
           this.blogs = fetchedBlogs;
           this.blogs = this.blogs.reverse();
         },
-        error => this.log.log(LogLevels.ERROR,error)
+        error => this.log.log(error,LogLevels.ERROR)
       );
     }
 
     public deleteBlog(deleteBlog: Blog): boolean{
-      this.log.log(LogLevels.INFO,"User wants to delete blog:"+deleteBlog._id);
+      this.log.log("User wants to delete blog:"+deleteBlog._id);
 
       this.blogService.deleteBlog(deleteBlog).subscribe(
         ()=> {
-          this.log.log(LogLevels.INFO,"Blog deleted successfully.");
+          this.log.log("Blog deleted successfully.");
           //update the model.
           //find the one you were deleting in array.
           let i: any;
           for(i in this.blogs){
-            this.log.log(LogLevels.INFO,"traversing blogs:"+this.blogs[i]);
+            this.log.log("traversing blogs:"+this.blogs[i]);
             if(_.isEqual(this.blogs[i]._id,deleteBlog._id)){
-              this.log.log(LogLevels.INFO,"Found blog model entry at index:"+i);
+              this.log.log("Found blog model entry at index:"+i);
               this.blogs.splice(i,1);
             }
           }
         },
-        error => this.log.log(LogLevels.ERROR,error)
+        error => this.log.log(error,LogLevels.ERROR)
       );
 
       return false;//returning false will not trigger a whole page refresh.
     }
 
     private saveBlog(): boolean{
-      this.log.log(LogLevels.INFO,"User submitted new blog entry:"+this.newBlog.text);
+      this.log.log("User submitted new blog entry:"+this.newBlog.text);
 
       if(_.isEmpty(this.newBlog.heading)){
         this.newBlog.heading = "Untitled";
@@ -96,12 +96,12 @@ declare var $ :any;
       //subscribing to save Blog observable
       this.blogService.saveBlog(this.newBlog).subscribe(
         savedBlogEntry => {
-          this.log.log(LogLevels.INFO,"Save of blog entry returned:"+JSON.stringify(savedBlogEntry));
+          this.log.log("Save of blog entry returned:"+JSON.stringify(savedBlogEntry));
           //this.blogs.push(savedBlogEntry);
           this.blogs.splice(0,0,savedBlogEntry);//at 0 element, insert new blog to top of array.
           this.newBlog = new Blog();//reset.
         },
-        error => this.log.log(LogLevels.ERROR,error)
+        error => this.log.log(error,LogLevels.ERROR)
       );
 
       this.clearScreen();
@@ -113,6 +113,6 @@ declare var $ :any;
     }
 
     ngOnDestroy(){
-      this.log.log(LogLevels.INFO,"Destroying blog component.");
+      this.log.log("Destroying blog component.");
     }
   }

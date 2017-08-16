@@ -7,12 +7,12 @@ import { Router }      from '@angular/router';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService,private router: Router,private log: Logger){
-    this.log.log(LogLevels.INFO, "Instantiating AuthGuard.");
+    this.log.log("Instantiating AuthGuard.");
   }
 
   canActivate() {
     let authenticated: boolean = this.auth.isAuthenticated();
-    this.log.log(LogLevels.INFO,"CanActivate triggered. Authenticated flag is: "+authenticated);
+    this.log.log("CanActivate triggered. Authenticated flag is: "+authenticated);
 
     if(authenticated){
       return true;
