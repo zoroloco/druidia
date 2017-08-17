@@ -5,6 +5,7 @@ var pathUtil       = require('path'),
     Blog           = require(pathUtil.join(__dirname,'../mongoose/blog-model.js')),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     State          = require(pathUtil.join(__dirname,'../mongoose/state-model.js')),
+    Account        = require(pathUtil.join(__dirname,'../mongoose/account-model.js')),
     timestamp      = require('time-stamp');
 
     //fetch the user object of the requesting user.
@@ -108,5 +109,26 @@ var pathUtil       = require('path'),
           log.info("No U.S. State entries exist in collection: states.");
           res.sendStatus(404);//no states exist for user. Send empty JSON.
         }
+      })
+    }
+
+    //save an account
+    exports.saveAccount = function(req,res,next){
+      log.info("saving account:"+JSON.stringify(req.body));
+
+      var acct = new Account({
+        user   : req.user,
+        address: req.body.address,
+        email  : req.body.email,
+        gender : req.body.gender
+        //dob    : req.body.dob
+      });
+
+      acct.save(function(err){
+        if(err)
+          next(err);
+
+        log.info("Successfully saved account info for user:"+req.user.id);
+        res.sendStatus(200);
       })
     }

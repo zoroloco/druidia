@@ -9,7 +9,6 @@ var mongoose  = require('mongoose'),
       "password"    : {type: String, required: true},
       "firstname"   : String,
       "lastname"    : String,
-      "email"       : String,
       "role"        : {type: String, required: true},
       "description" : String,
       "searchId"    : String,
@@ -50,7 +49,7 @@ var mongoose  = require('mongoose'),
           }
           else{
             log.info("Result of password verification:"+isMatch);
-            cb(null, isMatch);  
+            cb(null, isMatch);
           }
       });
     };

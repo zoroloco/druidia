@@ -101,6 +101,9 @@ module.exports = function(app) {
   app.get('/api/fetchStates',
     apiController.fetchStates);
 
+  app.post('/api/postAccount',
+    apiController.saveAccount);
+
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.
   app.use(errorController.handleError);

@@ -7,8 +7,10 @@ import { Component,
 import { NgForm }           from '@angular/forms';
 import { Account }          from './account.model';
 import { State }            from './state.model';
+import { User }             from '../auth/user';
 import { Logger, LogLevels }from '../loggers/logger.service';
 import { CommonService }    from '../common/common.service';
+import { AccountService }   from './account.service';
 
 @Component({
   selector: 'AccountComponent',
@@ -29,8 +31,11 @@ export class AccountComponent implements OnInit{
   @ViewChild('accountForm') accountForm: NgForm;
   //@ViewChild('addressComponent') addressComponent: AddressComponent;
 
-  constructor(private log:Logger,private commonService:CommonService){
+  constructor(private log:Logger,
+              private commonService:CommonService,
+              private accountService:AccountService){
     this.states = new Array<State>();
+    this.account= new Account();
   }
 
   ngOnChanges(changes: SimpleChanges){
@@ -71,10 +76,16 @@ export class AccountComponent implements OnInit{
     this.account.email = e.target.value;
   }
 
+  //user clicked on save button.
   onSaveAccount(){
-    //console.log(this.accountForm.form.controls.emailName.value);
-    //this.email = this.accountForm.form.controls.emailName.value;
-    //this.log.log(LogLevels.INFO,"Gender:"+formValue.genderName);
-    //this.log.log(LogLevels.INFO,"Date:"+formValue.dateName);
+    this.log.info("User clicked to save account information.");
+
+    this.account.email  = this.accountForm.form.controls.emailName.value;
+    this.account.gender = this.accountForm.form.controls.genderName.value;
+    this.account.address.address1 = this.accountForm.form.controls.address1Name.value;
+
+    this.accountService.saveAccount(this.account)
+      .subscribe(result=>this.log.info("Saved account result:"+result),
+                 error=>this.log.error("Error saving account info:"+error));
   }
 }

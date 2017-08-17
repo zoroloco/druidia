@@ -9,6 +9,7 @@ import { BlogService }             from './blog/blog.service';
 import { Logger }                  from './loggers/logger.service';
 import { AuthService }             from './auth/auth.service';
 import { CommonService }           from './common/common.service';
+import { AccountService }          from './account/account.service';
 
 import { AppComponent }            from './app.component';;
 import { NavBarComponent }         from './navbar.component';
@@ -78,7 +79,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 								  TimeStampPipe,
 								  InputStyler,
 								  Unless ],//array of components and pipes that belong to this module
-  providers:    [ AuthService, AuthGuard, Logger, BlogService, CommonService,
+  providers:    [ AuthService, AuthGuard, Logger, BlogService, CommonService, AccountService,
                   {
                     provide: AuthHttp,
                     useFactory: authHttpServiceFactory,
