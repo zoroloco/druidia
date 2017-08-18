@@ -12,10 +12,7 @@ var pathUtil       = require('path'),
     exports.fetchUser = function(req,res,next){
       log.warn(JSON.stringify(req.user));
 
-      User.findOne({_id:req.user.id},function(err,foundUser){
-        if(err)
-          next(err);
-
+      getUser(req.user.id).then(function(foundUser){
         if(!_.isEmpty(foundUser)){
           log.info("Returning user:"+JSON.stringify(foundUser));
           res.json(foundUser);
@@ -23,11 +20,15 @@ var pathUtil       = require('path'),
         else{
           next("No user found.");//pass to error middleware.
         }
-      });//find user
+      },
+      function(err){
+        if(err)
+          next(err);
+      });
     }
 
     exports.fetchUsers = function(req,res,next){
-      User.find(function(err,foundUsers){
+      User.model.find(function(err,foundUsers){
         if(err)
           next(err);
 
@@ -97,7 +98,7 @@ var pathUtil       = require('path'),
 
     //fetches all states.
     exports.fetchStates = function(req,res,next){
-      State.find({},function(err,foundStates){
+      State.model.find({},function(err,foundStates){
         if(err)
           next(err);
 
@@ -116,19 +117,53 @@ var pathUtil       = require('path'),
     exports.saveAccount = function(req,res,next){
       log.info("saving account:"+JSON.stringify(req.body));
 
-      var acct = new Account({
-        user   : req.user,
-        address: req.body.address,
-        email  : req.body.email,
-        gender : req.body.gender
-        //dob    : req.body.dob
-      });
+      getUser(req.user.id).then(function(foundUser){
+        var acct = new Account.model({
+          user   : foundUser,
+          address: req.body.address,
+          email  : req.body.email,
+          gender : req.body.gender
+          //dob    : req.body.dob
+        });
 
-      acct.save(function(err){
+        log.info("Attempting to save account:"+JSON.stringify(acct));
+
+        acct.save(function(err){
+          if(err)
+            next(err);
+
+          log.info("Successfully saved account info for user:"+req.user.id);
+          res.sendStatus(200);
+        })
+      });
+    }
+
+    //returns an account for a user.
+    exports.fetchAccount = function(req,res,next){
+      Account.model.findOne({'user._id':req.user.id},function(err,foundAccount){
         if(err)
           next(err);
 
-        log.info("Successfully saved account info for user:"+req.user.id);
-        res.sendStatus(200);
+        if(!_.isEmpty(foundAccount)){
+          log.info("Found account:"+JSON.stringify(foundAccount));
+          res.json(foundAccount);
+        }
+        else{
+          log.info("No account exists for this user.");
+          res.sendStatus(404);//no blogs exist for user. Send empty JSON.
+        }
+      }
+      )
+    }
+
+    //returns a promise with error or found user.
+    function getUser(userId){
+      return new Promise(function (resolve, reject) {
+        User.model.findOne({_id:userId},function(err,foundUser){
+          if (err)
+            return reject(err) // rejects the promise with `err` as the reason
+
+          resolve(foundUser) // fulfills the promise with `data` as the value
+        })
       })
     }

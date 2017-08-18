@@ -53,11 +53,11 @@
         <md-grid-tile [colspan]="2">
           <md-select placeholder="State"
                      [required]="true"
+                     name="stateName"
                      class="form-control full-width-input"
-                     ngModel
-                     name="stateName">
+                     [(ngModel)]="account.address.state">
            <md-option *ngFor="let state of states"
-                     [value]="state.code">{{ state.name }}
+                     [value]="state">{{ state.name }}
            </md-option>
           </md-select>
         </md-grid-tile>

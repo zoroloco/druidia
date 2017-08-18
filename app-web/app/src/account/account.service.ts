@@ -12,7 +12,16 @@ export class AccountService{
   public saveAccount(account:Account) : Observable<boolean>{
     return this.authHttp.post('/api/postAccount',account)
       .map((res:Response)=>{
-        return(res.status == 200 ? true : false);        
+        return(res.status == 200 ? true : false);
+      });
+  }
+
+  public fetchAccount() : Observable<Account>{
+    return this.authHttp.get('/api/fetchAccount')
+      .map((res:Response)=>{
+        let fetchedAccount:Account = res.json();
+        this.log.info("Received account:"+JSON.stringify(fetchedAccount));
+        return fetchedAccount;
       });
   }
 }

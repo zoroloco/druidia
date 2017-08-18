@@ -53,18 +53,23 @@ export class AccountComponent implements OnInit{
         error => { this.log.log("Error fetching U.S. states.",LogLevels.ERROR) }
     );
 
+    this.accountService.fetchAccount().subscribe(
+      fetchedAccount => { this.account = fetchedAccount },
+      error => { this.log.warn("No account info found.")}
+    );
+
     this.init();
   }
 
-  onGenderToggle(){
-    this.log.log("Gender toggle value="+this.accountForm.form.controls.genderName.value);
-  }
-
   private init(){
-    this.account       = new Account();
     this.myFilter      = (picker: Date) => picker.getFullYear() > 1885;
     this.minDate       =  new Date(1885, 0, 1);
     this.maxDate       =  new Date();
+  }
+
+
+  onGenderToggle(){
+    this.log.log("Gender toggle value="+this.accountForm.form.controls.genderName.value);
   }
 
   //action method
@@ -80,9 +85,12 @@ export class AccountComponent implements OnInit{
   onSaveAccount(){
     this.log.info("User clicked to save account information.");
 
-    this.account.email  = this.accountForm.form.controls.emailName.value;
-    this.account.gender = this.accountForm.form.controls.genderName.value;
+    this.account.email            = this.accountForm.form.controls.emailName.value;
+    this.account.gender           = this.accountForm.form.controls.genderName.value;
     this.account.address.address1 = this.accountForm.form.controls.address1Name.value;
+    this.account.address.address2 = this.accountForm.form.controls.address2Name.value;
+    this.account.address.city     = this.accountForm.form.controls.cityName.value;
+    //this.account.address.state    = this.accountForm.form.controls.stateName.value;
 
     this.accountService.saveAccount(this.account)
       .subscribe(result=>this.log.info("Saved account result:"+result),

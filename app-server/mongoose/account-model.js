@@ -4,11 +4,12 @@ var mongoose  = require('mongoose'),
     User      = require(pathUtil.join(__dirname,'./user-model.js'));
 
 var AccountSchema = new mongoose.Schema({
-  user      : {type: User, required: true},
-  address   : {type: Address, required: true},
+  user      : {type: User.schema, required: true},
+  address   : {type: Address.schema, required: true},
   email     : String,
   gender    : String,
   dob       : Date
 });
 
-module.exports = mongoose.model('Accounts',AccountSchema);
+exports.schema = AccountSchema;
+exports.model  = mongoose.model('Accounts',AccountSchema);

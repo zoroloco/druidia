@@ -43,7 +43,7 @@ const expressJWT = require('express-jwt');
   exports.processCreateAccount = function(req,res,next){
     log.info("Processing creation of new account.");
 
-    User.findOne({username:req.body.username},function(err,foundUser){
+    User.model.findOne({username:req.body.username},function(err,foundUser){
       if(err){
         log.error("Error while searching for during user creation.");
         next(err);
@@ -56,7 +56,7 @@ const expressJWT = require('express-jwt');
       else{
         log.info("User not found in database. Creating new user.");
 
-        var newLocalUser = new User({
+        var newLocalUser = new User.model({
           username: req.body.username,
           password: req.body.password,
           role: "local_user"
@@ -104,7 +104,7 @@ const expressJWT = require('express-jwt');
   exports.processLocalLogin = function(username, password, done) {
     log.info("Processing local authentication strategy.");
     log.info("Local username:"+username);
-    User.findOne({username:username},function(err,foundUser){
+    User.model.findOne({username:username},function(err,foundUser){
       if(err){
         log.error("Error encountered finding user:"+err);
         done(err);
@@ -144,13 +144,13 @@ const expressJWT = require('express-jwt');
     log.info("Facebook profile = "+JSON.stringify(fbProfile));
 
     //try to find a druidia user object based off of the facebook ID (searchID).
-    User.findOne({searchId:fbProfile.id},function(err,foundUser){
+    User.model.findOne({searchId:fbProfile.id},function(err,foundUser){
       if(!_.isEmpty(foundUser)){
         done(null,foundUser);
       }
       else{
         log.info("User:"+fbProfile.displayName+" not found. Attempting to create a new user from a facebook profile.");
-        var newFacebookUser = new User({
+        var newFacebookUser = new User.model({
           username   : fbProfile.displayName,
           password   : "NA",//not applicable for Facebook Authentication.
           searchId   : fbProfile.id,

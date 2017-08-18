@@ -5,5 +5,6 @@ var StateSchema = new mongoose.Schema({
   name    : {type: String, required: true}
 });
 
-var stateModel = mongoose.model('States',StateSchema);
-module.exports = stateModel;
+exports.schema = StateSchema;
+
+exports.model = mongoose.model('States',StateSchema);

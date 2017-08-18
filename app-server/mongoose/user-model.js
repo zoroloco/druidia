@@ -54,4 +54,5 @@ var mongoose  = require('mongoose'),
       });
     };
 
-module.exports = mongoose.model('Users', UserSchema);
+exports.schema = UserSchema;
+exports.model  = mongoose.model('Users', UserSchema);
