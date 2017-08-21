@@ -18,10 +18,6 @@ export class AccountService{
 
   public fetchAccount() : Observable<Account>{
     return this.authHttp.get('/api/fetchAccount')
-      .map((res:Response)=>{
-        let fetchedAccount:Account = res.json();
-        this.log.info("Received account:"+JSON.stringify(fetchedAccount));
-        return fetchedAccount;
-      });
+      .map((res:Response)=>res.json());
   }
 }

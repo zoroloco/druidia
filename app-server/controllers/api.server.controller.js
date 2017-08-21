@@ -162,7 +162,7 @@ var pathUtil       = require('path'),
         User.model.findOne({_id:userId},function(err,foundUser){
           if (err)
             return reject(err) // rejects the promise with `err` as the reason
-
+          foundUser.isNew = false;//allows updates
           resolve(foundUser) // fulfills the promise with `data` as the value
         })
       })

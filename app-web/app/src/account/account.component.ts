@@ -54,8 +54,11 @@ export class AccountComponent implements OnInit{
     );
 
     this.accountService.fetchAccount().subscribe(
-      fetchedAccount => { this.account = fetchedAccount },
-      error => { this.log.warn("No account info found.")}
+      fetchedAccount => {
+        this.log.info("Account info fetched.");
+        this.account = fetchedAccount
+      },
+      error => { this.log.warn("No account info found:"+error)}
     );
 
     this.init();

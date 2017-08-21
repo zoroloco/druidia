@@ -83,7 +83,7 @@
           <md-input-container class="full-width-input">
             <input class="form-control"
                    placeholder="email"
-                   ngModel
+                   [ngModel]="account.email"
                    name="emailName"
                    mdInput
                    #email = "ngModel"
