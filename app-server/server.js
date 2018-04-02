@@ -82,7 +82,7 @@ function Server(){
   Server.prototype.start = function(){
 
     mongoloid.init(function(status){
-      if(status){
+      if(true){
         //secure site
         self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
           log.info(process.title+" server now listening on port:"+self._server.address().port);
