@@ -1,7 +1,5 @@
 var pathUtil   = require('path'),
-    async      = require('async'),
     _          = require('underscore'),
-    vhost      = require('vhost'),
     https      = require('https'),
     http       = require('http'),
     mongoose   = require('mongoose'),

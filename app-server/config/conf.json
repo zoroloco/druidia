@@ -2,7 +2,7 @@
   "hostname" : "localhost",
 
   "port"     : 443,
-  "httpPort" : 80,
+  "httpPort" : 8888,
 
   "logger" : {
     "enabled" : true,
