@@ -4,9 +4,7 @@ const express          = require('express');
 var   pathUtil         = require('path'),
       bodyParser       = require('body-parser'),
       methodOverride   = require('method-override'),
-      vhost            = require('vhost'),
       fs               = require('fs'),
-      _                = require('underscore'),
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
       LocalStrategy    = require('passport-local').Strategy,
@@ -14,8 +12,6 @@ var   pathUtil         = require('path'),
       conf             = require(pathUtil.join(__dirname,'./conf.json')),
       log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
       securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js'));
-
-//const cors = require('cors');
 
 module.exports = function() {
     var app       = express();
@@ -60,8 +56,6 @@ module.exports = function() {
 
     // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
     app.use(methodOverride('X-HTTP-Method-Override'));
-
-    //app.use(cors());
 
     app.use(passport.initialize());
     //app.use(passport.session());

@@ -1,60 +1,27 @@
-#Description
-This github repo has 3 projects.
+# AppWeb
 
-app-server = A node express JS server.
-app-web    = An angular 2 front-end application.
-app-ios    = An Ionic 2 application that calls app-server via REST.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
-#Environment Setup
+## Development server
 
-Install MongoDB for Centos 7.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-https://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/
+## Code scaffolding
 
-sudo npm install -g bower
-sudo npm install -g typescript
-sudo npm install -g uglify
-sudo npm install -g uglifyjs
-sudo npm install -g minify
-sudo npm install -g browserify
-sudo npm install copyfiles -g ( please see Note below )
-sudo npm install -g karma-cli
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+## Build
 
-npm install auth0-js
-npm install angular2-froala-wysiwyg --save
-npm install --save-dev @types/jasmine
-npm install karma --save-dev
-npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
-npm install jasmine-core --save-dev
-npm install awesome-typescript-loader --save-dev
-npm install angular2-template-loader --save-dev
-npm install ts-loader
-npm install karma-jasmine --save-dev
-npm install --save-dev karma-typescript
-npm install --save-dev karma-typescript-angular2-transform
-npm install --save-dev intl
-npm install --save @angular/animations
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-ionic platform add ios
+## Running unit tests
 
-#Install libraries
-bower install (installs front-end static files)
-npm install (installs all front and back-end dependencies)
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-#NPM scripts for app-server
-npm start (starts express js server)
+## Running end-to-end tests
 
-#Useful NPM Build scripts for the Angular project.
-npm run html      - copies all the html files to the dist folder, including the www folder.
-npm run resources - copies the resources folder to the dist folder.
-npm run build     - runs html and resources scripts, but also compiles the ts and moves js output to dist folder.
-npm run deploy    - runs build, but also minifies the bundle.js to a bundle.min.js ready for production.
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-#Sources:
-https://github.com/froala/angular2-froala-wysiwyg
-http://zavoloklom.github.io/material-design-iconic-font/icons.html#application
+## Further help
 
-#Note:
-The NPM command:  npm run html, which copies all the html files to the dist/html folder works for Linux/MAC.  For windows, please add the quotes
-around app/src/**/*.html for it to work.  
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
