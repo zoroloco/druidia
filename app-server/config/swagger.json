@@ -1,0 +1,23 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "druidia.net API documentation.",
+    "description": "",
+    "version": "1.0"
+  },
+  "produces": ["application/json"],
+  "host": "https://wwww.druidia.net",
+  "basePath": "/api",
+  "paths": {
+    "/movies": {
+      "get": {
+        "x-swagger-router-controller": "middleware-name1",
+        "operationId": "swagTest",
+        "tags": ["/movies"],
+        "description": "Returns all movies listed on shared drive.",
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  }
+}

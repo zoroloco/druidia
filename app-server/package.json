@@ -40,7 +40,8 @@
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "bcryptjs": "^2.4.3",
-    "q": "^1.5.0"
+    "q": "^1.5.0",
+    "swagger-ui-express": "latest"
   },
   "engines": {
     "node": "^6.9.2"

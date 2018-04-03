@@ -12,10 +12,10 @@ var self = module.exports = {
 
       //CONFIGURE MONGO
       var opts = {
-          server: {
-             socketOptions: { keepAlive: conf.mongo.keepAlive }
-          }
+          useMongoClient: true,
+          keepAlive: conf.mongo.keepAlive
       };
+
       mongoose.connect(dbURI,opts);
       mongoose.Promise = require('q').Promise;
 

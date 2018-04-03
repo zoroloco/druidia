@@ -1,6 +1,8 @@
 //This is my express wrapper object where all the config for the server takes place.
 
-const express          = require('express');
+const express          = require('express'),
+      swaggerUi        = require('swagger-ui-express'),
+      swaggerDocument  = require('./swagger.json');
 var   pathUtil         = require('path'),
       bodyParser       = require('body-parser'),
       methodOverride   = require('method-override'),
@@ -19,8 +21,6 @@ module.exports = function() {
     log.info("Setting default and config values for express app.");
     app.set('port', process.env.PORT || conf.port);
     app.set('httpPort', conf.httpPort);
-    //app.set('views',pathUtil.join(__dirname,'../../app-web/www'));
-    //app.set('view engine', 'jade');
     app.set('title', conf.title);
 
     //CONFIGURE SSL
@@ -29,6 +29,9 @@ module.exports = function() {
         key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
         cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
     });
+
+    //setup swagger
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     //CONFIGURE SESSION STORE
     const session    = require('express-session');
