@@ -6,7 +6,7 @@
     "version": "1.0"
   },
   "produces": ["application/json"],
-  "host": "https://wwww.druidia.net",
+  "host": "localhost",
   "basePath": "/api",
   "paths": {
     "/movies": {

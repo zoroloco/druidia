@@ -6,6 +6,7 @@ var pathUtil   = require('path'),
     log        = require(pathUtil.join(__dirname,'./lib/logger.js')),
     express    = require(pathUtil.join(__dirname,'./config/express.js')),
     mongoloid  = require(pathUtil.join(__dirname,'./mongoose/mongoloid.js')),
+    svcMgr     = require(pathUtil.join(__dirname,'./services/serviceManager.js')),
     conf       = require(pathUtil.join(__dirname,'./config/conf.json'));
 
 module.exports = Server;
@@ -35,6 +36,8 @@ function Server(){
     log.warn("Starting server resulted in the exception:"+e);
     process.exit(1);
   }
+
+  svcMgr.startServices();
 
   this._app = express();//This is the main express app that was setup in config/express.js
 

@@ -2,8 +2,6 @@
 
 var pathUtil           = require('path'),
     log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
-    conf               = require(pathUtil.join(__dirname,'../config/conf.json')),
-    documentHandler    = require(pathUtil.join(__dirname,'../handlers/documentHandler.js')),
     securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js')),
     loggerController   = require(pathUtil.join(__dirname,'../controllers/logger.server.controller.js')),
     errorController    = require(pathUtil.join(__dirname,'../controllers/error.server.controller.js')),
@@ -64,15 +62,18 @@ module.exports = function(app) {
   app.get('/auth/facebook/callback',
     securityController.processFacebookCallback);
 
-  //any GET to the API will have to be routed through the jwtCheck!
+  app.get('/api/movies',
+          apiController.fetchMovies);
+
+  /*****START DEFINING API-ROUTES*****
+
+    // any GET to the API will have to be routed through the jwtCheck!
   app.get('/api/*',
     securityController.jwtCheck);
 
   //any POST to the API will have to be routed through the jwtCheck!
   app.post('/api/*',
     securityController.jwtCheck);
-
-  //*****START DEFINING API-ROUTES******//
 
   //log some event from the client.
   app.post('/api/logger',
@@ -106,6 +107,7 @@ module.exports = function(app) {
 
   app.get('/api/fetchAccount',
     apiController.fetchAccount);
+*/
 
   //error middleware triggered by next('some error');
   //error handling middleware is always declared last.

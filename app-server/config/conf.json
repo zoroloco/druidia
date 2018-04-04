@@ -21,6 +21,8 @@
 
   "messages" : {
     "notFoundMessage" : "404 Error. Page not found."
-  }
+  },
+
+  "movieDir" : "/Users/kcenturion/dev/movies"
 
 }

@@ -1,11 +1,11 @@
 var pathUtil       = require('path'),
     log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
-    mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     Blog           = require(pathUtil.join(__dirname,'../mongoose/blog-model.js')),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     State          = require(pathUtil.join(__dirname,'../mongoose/state-model.js')),
     Account        = require(pathUtil.join(__dirname,'../mongoose/account-model.js')),
+    Movie          = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
     timestamp      = require('time-stamp');
 
     //fetch the user object of the requesting user.
@@ -80,7 +80,7 @@ var pathUtil       = require('path'),
     exports.saveBlog = function(req,res,next){
       log.info("saving blog entry:"+JSON.stringify(req.body));
 
-      var newBlog = new Blog({
+      var newBlog = new Blog.model({
         userId    : req.user.id,
         heading   : req.body.heading,
         text      : req.body.text,
@@ -156,14 +156,30 @@ var pathUtil       = require('path'),
       )
     }
 
+    exports.fetchMovies = function(req,res,next){
+        Movie.model.find({},function(err,foundMovies){
+            if(err)
+                next(err);
+
+            if(!_.isEmpty(foundMovies)){
+                log.info("Found movies:"+JSON.stringify(foundMovies));
+                res.json(foundMovies);
+            }
+            else{
+                log.info("No movies exist in collection: movies.");
+                res.sendStatus(404);//no states exist for user. Send empty JSON.
+            }
+        })
+    }
+
     //returns a promise with error or found user.
     function getUser(userId){
-      return new Promise(function (resolve, reject) {
-        User.model.findOne({_id:userId},function(err,foundUser){
-          if (err)
-            return reject(err) // rejects the promise with `err` as the reason
-          foundUser.isNew = false;//allows updates
-          resolve(foundUser) // fulfills the promise with `data` as the value
+        return new Promise(function (resolve, reject) {
+            User.model.findOne({_id:userId},function(err,foundUser){
+                if (err)
+                    return reject(err) // rejects the promise with `err` as the reason
+                foundUser.isNew = false;//allows updates
+                resolve(foundUser) // fulfills the promise with `data` as the value
+            })
         })
-      })
     }

@@ -1,7 +1,6 @@
 var mongoose   = require('mongoose'),
     _          = require('underscore'),
     pathUtil   = require('path'),
-    state      = require(pathUtil.join(__dirname,'./state-model.js')),
     conf       = require(pathUtil.join(__dirname,'../config/conf.json')),
     log        = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
@@ -15,9 +14,8 @@ var self = module.exports = {
           useMongoClient: true,
           keepAlive: conf.mongo.keepAlive
       };
-
+      //mongoose.Promise = require('bluebird');
       mongoose.connect(dbURI,opts);
-      mongoose.Promise = require('q').Promise;
 
       mongoose.connection.on('connected', function () {
         log.info('Mongoose default connection open to ' + dbURI);
