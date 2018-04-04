@@ -10,7 +10,7 @@ var   pathUtil         = require('path'),
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
       LocalStrategy    = require('passport-local').Strategy,
-      credentials      = require(pathUtil.join(__dirname,'../security/credentials.js')),
+      //credentials      = require(pathUtil.join(__dirname,'../security/credentials.js')),
       conf             = require(pathUtil.join(__dirname,'./conf.json')),
       log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
       securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js'));
@@ -36,6 +36,7 @@ module.exports = function() {
     //CONFIGURE SESSION STORE
     const session    = require('express-session');
     //const MongoStore = require('connect-mongo')(session);
+    /*
     app.use(session({
         secret: credentials.cookieSecretValue,
         //cookie: {secure:true},
@@ -44,7 +45,7 @@ module.exports = function() {
         //maxAge: new Date(Date.now()+3600000),//one hour
         //store: new MongoStore({ url: conf.mongo.connectionString })
     }));
-
+    */
     //app.use(require('cookie-parser')(credentials.cookieSecretValue));
 
     // get all data/stuff of the body (POST) parameters
@@ -67,6 +68,7 @@ module.exports = function() {
     passport.use(new LocalStrategy(securityController.processLocalLogin));
 
     //CONFIGURE PASSPORT for Facebook
+    /*
     passport.use(new FacebookStrategy({
         clientID     : credentials.fb_app_id,
         clientSecret : credentials.fb_app_secret,
@@ -75,7 +77,8 @@ module.exports = function() {
       },
       securityController.processFacebookLogin
     ));
-
+    */
+    
     //attaches user to the session.
     passport.serializeUser(function(user, done) {
       done(null, user);

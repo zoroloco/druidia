@@ -4,4 +4,4 @@ This is a MEAN stack version of druidia.net using:
 - Express 4+
 - Angular 5
 - Typescript 2+
-- Mongo 4
+- Mongo 3.2+

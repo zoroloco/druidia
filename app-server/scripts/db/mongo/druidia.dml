@@ -1,3 +1,5 @@
+#assumes you have at least Mongo 3.2
+
 db.users.insert({
   username: 'kcenturion',
   password: 'kcenturion',
