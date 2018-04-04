@@ -19,7 +19,6 @@ npm-debug.log
 app-web/dist/bundle.js
 app-server/security/fb_app_id
 app-server/security/fb_app_secret
-app-web/dist/bundle.js
 app-web/dist/bundle.min.js
 app-web/coverage
 
@@ -73,7 +72,3 @@ Temporary Items
 .apdisk
 
 .idea
-
-app-server/security/credentials.js
-app-server/security/credentials.js
-
