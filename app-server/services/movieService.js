@@ -25,12 +25,17 @@ function loadMovies(dir){
     var m = new Movie.model({
         title: 'White men cant jump'
     });
-    m.save().then(function(doc){
-        console.info("saved doc");
+    m.save(function(err){
+       if(err){
+           console.error("error saving movie!");
+       }
+       else{
+           console.info("Saved movie!");
+       }
     });
 
 }
 
 log.info("Now starting movie service!");
-//loadMovies(conf.movieDir);
+loadMovies(conf.movieDir);
 watchMovies(conf.movieDir);
