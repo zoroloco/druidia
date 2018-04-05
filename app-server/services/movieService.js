@@ -1,6 +1,7 @@
 var pathUtil = require('path'),
     fs       = require('fs'),
     log      = require(pathUtil.join(__dirname,'../lib/logger.js')),
+    mongoloid= require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
     Movie    = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
     conf     = require(pathUtil.join(__dirname,'../config/conf.json'));
 

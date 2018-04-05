@@ -11,11 +11,10 @@ var self = module.exports = {
 
       //CONFIGURE MONGO
       var opts = {
-          useMongoClient: true,
           keepAlive: conf.mongo.keepAlive
       };
       //mongoose.Promise = require('bluebird');
-      mongoose.connect(dbURI,opts);
+      connection = mongoose.createConnection(dbURI,opts);
 
       mongoose.connection.on('connected', function () {
         log.info('Mongoose default connection open to ' + dbURI);
