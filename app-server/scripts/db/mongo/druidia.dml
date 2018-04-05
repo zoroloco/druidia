@@ -7,6 +7,23 @@ db.users.insert({
   description: 'root'
   })
 
+db.users.insert({first_name: 'John', last_name: 'Snow'})
+db.users.insert({first_name: 'Daenerys', last_name: 'Targaryen'})
+db.users.insert({first_name: 'Arya', last_name: 'Stark'})
+db.users.insert({first_name: 'Ramsey', last_name: 'Snow'})
+db.users.insert({first_name: 'Jamie', last_name: 'Lannister'})
+db.users.insert({first_name: 'Walder', last_name: 'Frey'})
+db.users.insert({first_name: 'Gregor', last_name: 'Clegane'})
+db.users.insert({first_name: 'Joffrey', last_name: 'Baratheon'})
+db.users.insert({first_name: 'Eddard', last_name: 'Stark'})
+db.users.insert({first_name: 'Margaery', last_name: 'Tyrell'})
+db.users.insert({first_name: 'Tyrion', last_name: 'Lannister'})
+db.users.insert({first_name: 'Samwell', last_name: 'Tarly'})
+db.users.insert({first_name: 'Jorah', last_name: 'Mormont'})
+db.users.insert({first_name: 'Theon', last_name: 'Greyjoy'})
+db.users.insert({first_name: 'Hodor', last_name: 'Hodor'})
+
+
 db.movies.insertMany(
 [
     {title: 'Saving Private Ryan'},

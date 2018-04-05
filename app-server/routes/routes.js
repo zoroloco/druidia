@@ -65,6 +65,9 @@ module.exports = function(app) {
   app.get('/api/movies',
           apiController.fetchMovies);
 
+  app.get('/api/users',
+      apiController.fetchUsers);
+
   /*****START DEFINING API-ROUTES*****
 
     // any GET to the API will have to be routed through the jwtCheck!

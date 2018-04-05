@@ -4,6 +4,7 @@ var mongoose  = require('mongoose'),
     log       = require(pathUtil.join(__dirname,'../lib/logger.js')),
     SALT_WORK_FACTOR = 10;
 
+/*
     var UserSchema = new mongoose.Schema({
       "username"    : {type: String, required: true, index: {unique: true} },
       "password"    : {type: String, required: true},
@@ -15,6 +16,7 @@ var mongoose  = require('mongoose'),
       "pictureUrl"  : String,
       "lastLoginDate" : Date
     });
+
 
     //http://devsmash.com/blog/password-authentication-with-mongoose-and-bcrypt
     //mongoose middleware that will automatically hash the password before it is saved to the db.
@@ -53,6 +55,13 @@ var mongoose  = require('mongoose'),
           }
       });
     };
+    */
+
+var UserSchema = new mongoose.Schema({
+    "first_name"   : String,
+    "last_name"    : String
+});
+
 
 exports.schema = UserSchema;
 exports.model  = mongoose.model('Users', UserSchema);
