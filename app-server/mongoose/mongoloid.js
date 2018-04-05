@@ -13,8 +13,8 @@ var self = module.exports = {
       var opts = {
           keepAlive: conf.mongo.keepAlive
       };
-      //mongoose.Promise = require('bluebird');
-      connection = mongoose.createConnection(dbURI,opts);
+
+      mongoose.connect(dbURI,opts);
 
       mongoose.connection.on('connected', function () {
         log.info('Mongoose default connection open to ' + dbURI);
@@ -40,11 +40,11 @@ var self = module.exports = {
     model.save(function(err){
       if(err){
         log.error("Save failed:"+err);
-        cb(null);
+        if(cb) cb(null);
       }
       else{
         log.info("Save successful:"+JSON.stringify(model));
-        cb(model);
+        if(cb) cb(model);
       }
     });
   },
@@ -63,16 +63,16 @@ var self = module.exports = {
     model.findOne(query,function(err,foundObj){
       if(err){
         log.error(err);
-        cb(null);
+        if(cb) cb(null);
       }
       else{
         if(!_.isEmpty(foundObj)){
           log.info("Found document with query:"+searchFieldName+"="+searchFieldValue);
-          cb(foundObj);
+          if(cb) cb(foundObj);
         }
         else{
           log.info("Did not find document with query:"+searchFieldName+"="+searchFieldValue);
-          cb(null);
+          if(cb) cb(null);
         }
       }
     });
@@ -89,16 +89,16 @@ var self = module.exports = {
     model.find(query,function(err,results){
       if(err){
         log.info(err);
-        cb(null);
+        if(cb) cb(null);
       }
       else{
         if(!_.isEmpty(results)){
           log.info("Found all documents with query:"+searchFieldName+"="+searchFieldValue);
-          cb(results);
+          if(cb) cb(results);
         }
         else{
           log.info("Did not find any results with query:"+searchFieldName+"="+searchFieldValue);
-          cb(null);
+          if(cb) cb(null);
         }
       }
     });

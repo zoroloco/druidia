@@ -5,4 +5,4 @@ var pathUtil = require('path'),
 exports.startServices = function(){
     log.info("Forking movieService");
     var movieService = cp.fork(pathUtil.join(__dirname,'../services/movieService.js'));
-}
+};

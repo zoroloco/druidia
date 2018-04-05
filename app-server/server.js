@@ -12,7 +12,6 @@ var pathUtil   = require('path'),
 module.exports = Server;
 
 function Server(){
-
   process.title = conf.title;
 
   log.init();
@@ -36,8 +35,6 @@ function Server(){
     log.warn("Starting server resulted in the exception:"+e);
     process.exit(1);
   }
-
-  svcMgr.startServices();
 
   this._app = express();//This is the main express app that was setup in config/express.js
 
@@ -86,6 +83,7 @@ function Server(){
 
     mongoloid.init(function(status){
       if(status){
+        svcMgr.startServices();
         //secure site
         self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
           log.info(process.title+" server now listening on port:"+self._server.address().port);

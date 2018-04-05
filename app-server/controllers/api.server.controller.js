@@ -25,7 +25,7 @@ var pathUtil       = require('path'),
         if(err)
           next(err);
       });
-    }
+    };
 
     exports.fetchUsers = function(req,res,next){
       User.model.find(function(err,foundUsers){
@@ -41,7 +41,7 @@ var pathUtil       = require('path'),
           res.sendStatus(404);
         }
       });
-    }
+    };
 
     //fetch the blog objects of the requesting user.
     exports.fetchBlogs = function(req,res,next){
@@ -59,7 +59,7 @@ var pathUtil       = require('path'),
           res.sendStatus(404);//no blogs exist for user. Send empty JSON.
         }
       })
-    }
+    };
 
     exports.deleteBlog = function(req,res,next){
       log.info("deleting blog entry with ID:"+req.body._id);
@@ -74,7 +74,7 @@ var pathUtil       = require('path'),
           res.sendStatus(500);
         }
       });
-    }
+    };
 
     //save a new blog entry.
     exports.saveBlog = function(req,res,next){
@@ -94,7 +94,7 @@ var pathUtil       = require('path'),
         log.info("Successfully saved a new blog entry.");
         res.json(newBlog);
       })//save blog
-    }
+    };
 
     //fetches all states.
     exports.fetchStates = function(req,res,next){
@@ -111,7 +111,7 @@ var pathUtil       = require('path'),
           res.sendStatus(404);//no states exist for user. Send empty JSON.
         }
       })
-    }
+    };
 
     //save an account
     exports.saveAccount = function(req,res,next){
@@ -136,7 +136,7 @@ var pathUtil       = require('path'),
           res.sendStatus(200);
         })
       });
-    }
+    };
 
     //returns an account for a user.
     exports.fetchAccount = function(req,res,next){
@@ -154,7 +154,7 @@ var pathUtil       = require('path'),
         }
       }
       )
-    }
+    };
 
     exports.fetchMovies = function(req,res,next){
         Movie.model.find({},function(err,foundMovies){
@@ -170,7 +170,7 @@ var pathUtil       = require('path'),
                 res.sendStatus(404);//no states exist for user. Send empty JSON.
             }
         })
-    }
+    };
 
     //returns a promise with error or found user.
     function getUser(userId){

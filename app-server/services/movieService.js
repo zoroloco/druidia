@@ -18,25 +18,27 @@ function watchMovies(dir){
             log.info('filename not provided');
         }
     });
-
 }
 
 function loadMovies(dir){
     log.info("Loading movies from "+dir+" to movie collection.");
-    var m = new Movie.model({
-        title: 'White men cant jump'
-    });
-    m.save(function(err){
-       if(err){
-           console.error("error saving movie!");
-       }
-       else{
-           console.info("Saved movie!");
-       }
-    });
 
+    fs.readdir(dir, function(err, items) {
+        for (let i=0; i<items.length; i++) {
+            let flick = new Movie.model({
+                title: items[i]
+            });
+            mongoloid.save(flick);
+        }
+    });
 }
 
-log.info("Now starting movie service!");
-loadMovies(conf.movieDir);
-watchMovies(conf.movieDir);
+let start = function(){
+    log.info("Now starting movie service!");
+    mongoloid.init(function(status){
+       if(status){
+           loadMovies(conf.movieDir);
+           watchMovies(conf.movieDir);
+       }
+    });
+}();

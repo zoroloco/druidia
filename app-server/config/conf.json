@@ -15,7 +15,7 @@
   },
 
   "mongo" : {
-    "connectionString" : "mongodb://localhost/druidia",
+    "connectionString" : "mongodb://localhost:27017/druidia",
     "keepAlive" : 300000
   },
 
