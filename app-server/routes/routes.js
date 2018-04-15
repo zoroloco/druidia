@@ -19,50 +19,10 @@ module.exports = function(app) {
   app.use(securityController.reRouteHttps);//reroute and use https
 
   //Below is the route to serve the NG2 site.
-  app.get('/',function(req,res,next){
+  app.get('/',function(req,res){
     log.info("Sending index to client.");
-    //var myToken = jwt.sign({user  },'')
-    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
-  })
-
-  app.get('/home',function(req,res,next){
-    log.info("Sending home to client.");
     res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
   });
-
-  //only used for facebook authentication that was originally triggered by a get request.
-  //  /authenticated?jwtToken=FDSJFLKSDJFL...
-  app.get('/authenticated',function(req,res){
-    log.info("Authenticated route hit with JWT = "+req.query.jwtToken);
-    res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
-  });
-
-  app.post('/auth/createAccount',
-    securityController.processCreateAccount,
-    function(req,res,next){
-      log.info("Post account creation middleware. Now routing to login authentication.");
-      next();
-    },
-    passport.authenticate('local'),
-    securityController.processLocalLoginCallback);
-
-  //route for normal un/pw authentication.
-  app.post('/auth/login',
-    passport.authenticate('local'),
-    securityController.processLocalLoginCallback);
-
-  // Redirect the user to Facebook for authentication.  When complete,
-  // Facebook will redirect the user back to the application at
-  //     /auth/facebook/callback
-  app.get('/auth/facebook',
-    passport.authenticate('facebook'));
-
-  // Facebook will redirect the user to this URL after approval.  Finish the
-  // authentication process by attempting to obtain an access token.  If
-  // access was granted, the user will be logged in.  Otherwise,
-  // authentication has failed.
-  app.get('/auth/facebook/callback',
-    securityController.processFacebookCallback);
 
   app.get('/api/movies',
           apiController.fetchMovies);

@@ -40,6 +40,12 @@ const expressJWT = require('express-jwt');
     }
   };
 
+  exports.cors = function(req,res,next){
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+  }
+
   exports.processCreateAccount = function(req,res,next){
     log.info("Processing creation of new account.");
 
