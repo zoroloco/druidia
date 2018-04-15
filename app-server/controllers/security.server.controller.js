@@ -19,7 +19,7 @@ const expressJWT = require('express-jwt');
   exports.auditRequest = function(req,res,next){
     log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip);
     next();
-  }
+  };
 
   //log every authenticated request by capturing the user that made request.
   exports.auditAuthenticatedRequest = function(req,res,next){
@@ -28,7 +28,7 @@ const expressJWT = require('express-jwt');
       log.info(req.method+" request to:"+req.originalUrl+" made by IP Address: "+req.ip+" and user Id:"+req.user.id);
     }
     next();
-  }
+  };
 
   exports.reRouteHttps = function(req,res,next){
     if('https' == req.protocol){
@@ -38,7 +38,7 @@ const expressJWT = require('express-jwt');
       log.warn("Request not secure. Redirecting to secure site:"+req.hostname+req.url);
       res.redirect("https://"+req.hostname+req.url);
     }
-  }
+  };
 
   exports.processCreateAccount = function(req,res,next){
     log.info("Processing creation of new account.");
@@ -75,7 +75,7 @@ const expressJWT = require('express-jwt');
         });//save
       }
     });
-  }
+  };
 
   //called after passport has determined login was successful.
   //invoked from our router.
@@ -97,7 +97,7 @@ const expressJWT = require('express-jwt');
       //return res.redirect('/authenticated?jwtToken='+createJWT(req.user.id));
       res.json({'jwt':createJWT(req.user.id)});
     });
-  }
+  };
 
   //callback after a login is attempted through regular form-based login.
   //this is invoked from passport js middleware. Defined in express.js file.
@@ -135,7 +135,7 @@ const expressJWT = require('express-jwt');
           }//else
       }
     });//findOne
-  }
+  };
 
   //callback after a login is attempted through facebook.
   exports.processFacebookLogin = function(accessToken, refreshToken, fbProfile, done) {
@@ -167,7 +167,7 @@ const expressJWT = require('express-jwt');
         });//save
       }
     });//findOne
-  }
+  };
 
   //callback after successful facebook login.
   //send back to the user the all important jwt for any future api requests.
@@ -192,7 +192,7 @@ const expressJWT = require('express-jwt');
         return res.redirect('/authenticated?jwtToken='+createJWT(user.id));
       });
     })(req, res, next);
-  }
+  };
 
   //returns the JWT based off of the user Id.
   function createJWT(userId){

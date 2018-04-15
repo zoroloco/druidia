@@ -12,9 +12,11 @@ var pathUtil           = require('path'),
 module.exports = function(app) {
   //order important here.
 
-  //EVERYTHING WILL BE AUDITED AND REROUTED TO SECURE SITE.
-  app.use(securityController.auditRequest,//if not mobile site, then log it.
-          securityController.reRouteHttps);//after logging, forward to https site.
+  app.use(securityController.auditRequest);//audit
+
+  app.get('/api/users',apiController.fetchUsers);//test code, not secure
+
+  app.use(securityController.reRouteHttps);//reroute and use https
 
   //Below is the route to serve the NG2 site.
   app.get('/',function(req,res,next){
@@ -64,9 +66,6 @@ module.exports = function(app) {
 
   app.get('/api/movies',
           apiController.fetchMovies);
-
-  app.get('/api/users',
-      apiController.fetchUsers);
 
   /*****START DEFINING API-ROUTES*****
 
