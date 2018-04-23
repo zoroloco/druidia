@@ -5,3 +5,5 @@ This is a MEAN stack version of druidia.net using:
 - Angular 5
 - Typescript 2+
 - Mongo 3.2+
+
+npm install --unsafe-perm
