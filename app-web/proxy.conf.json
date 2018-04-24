@@ -1,0 +1,6 @@
+{
+	"/restSecureServices" : {
+		"target" : "http://localhost:7482",
+		"secure" : false
+	}
+}

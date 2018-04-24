@@ -11,17 +11,17 @@ var pathUtil           = require('path'),
 
 module.exports = function(app) {
     //order important here.
-    app.use(securityController.auditRequest);//audit
+    app.use(securityController.auditRequest,
+            securityController.reRouteHttps);//audit
 
     //Below is the route to serve the NG2 site.
     app.get('/',
-        securityController.reRouteHttps,
         function(req,res){
       log.info("Sending index to client.");
       res.sendFile(pathUtil.join(__dirname,'../../app-web/dist/index.html'));
     });
 
-    app.get('/test/users',apiController.fetchUsers);//test code, not secure
+    app.get('/api/users',apiController.fetchUsers);//test code, not secure
 
     app.get('/api/movies',
             securityController.reRouteHttps,
