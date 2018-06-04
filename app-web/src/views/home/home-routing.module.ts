@@ -1,21 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { LoginComponent }     from './login.component';
+import {AppLayoutComponent} from "../../components/app-layout";
+import {UserService} from "../../services";
+import {MovieComponent} from "../movies/movie.component";
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Home'
+      title: 'home'
     },
     children: [
       {
-        path: 'home',
-        component: LoginComponent,
-        data: {
-          title: 'home'
-        }
+        path: '',
+        component: AppLayoutComponent,
+        resolve: {
+          team: UserService
+        },
+        children: [
+          {
+            path: 'movies',
+            component: MovieComponent
+          }
+        ]
       }
     ]
   }
@@ -23,6 +30,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [UserService]
 })
 export class HomeRoutingModule {}

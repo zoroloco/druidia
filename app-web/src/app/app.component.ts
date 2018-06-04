@@ -1,12 +1,12 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
-  selector: 'druidia',
+  selector: 'app-component',
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
-  title = 'druidia.net';
+  title: 'app';
 
   constructor(private router: Router) { }
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     });
   }
 }

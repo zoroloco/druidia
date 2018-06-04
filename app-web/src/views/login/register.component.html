@@ -1,0 +1,114 @@
+<form #registerForm="ngForm">
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4">
+          <div class="card-body p-4">
+            <h1>Register</h1>
+            <p class="text-muted">Create your account</p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-user"></i></span>
+              </div>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Username"
+                     minlength="8"
+                     maxlength="16"
+                     required
+                     name="username"
+                     [(ngModel)]="user.username"
+                     #usernameLocal="ngModel">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+              </div>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Email"
+                     [(ngModel)]="user.email"
+                     #emailLocal="ngModel"
+                     name="email">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-lock"></i></span>
+              </div>
+              <input type="password"
+                     class="form-control"
+                     placeholder="Password"
+                     required
+                     minlength="8"
+                     name="password"
+                     [(ngModel)]="user.password"
+                     #passwordLocal="ngModel">
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-lock"></i></span>
+              </div>
+              <input type="password"
+                     class="form-control"
+                     placeholder="Repeat password"
+                     required
+                     minlength="8"
+                     name="password2"
+                     [(ngModel)]="password2"
+                     #password2Local="ngModel">
+            </div>
+
+            <button type="button"
+                    class="btn btn-block btn-success"
+                    (click)="onCreateAccount()">Create Account</button>
+          </div>
+
+          <div *ngIf="usernameLocal.invalid && usernameLocal.touched"
+               class="alert alert-danger">
+            <div *ngIf="usernameLocal?.errors.required">
+              Username is required.
+            </div>
+            <div *ngIf="usernameLocal?.errors.minlength"
+                 class="alert alert-danger">
+              Username must be at least 8 characters long.
+            </div>
+          </div>
+          <div *ngIf="passwordLocal.invalid && passwordLocal.touched"
+               class="alert alert-danger">
+            <div *ngIf="passwordLocal?.errors.required">
+              Password is required.
+            </div>
+            <div *ngIf="passwordLocal?.errors.minlength"
+                 class="alert alert-danger">
+              Password must be at least 8 characters long.
+            </div>
+          </div>
+          <div *ngIf="password2Local.invalid && password2Local.touched"
+               class="alert alert-danger">
+            <div *ngIf="password2Local?.errors.required">
+              Please re-enter password.
+            </div>
+            <div *ngIf="password2Local?.errors.minlength"
+                 class="alert alert-danger">
+              Password must be at least 8 characters long.
+            </div>
+          </div>
+
+          <div *ngIf="passwordMatchErrorMsg" class="alert alert-danger">
+            {{passwordMatchErrorMsg}}
+          </div>
+
+          <div *ngIf="createAccountErrorMsg" class="alert alert-danger">
+            {{createAccountErrorMsg}}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

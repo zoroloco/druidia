@@ -2,16 +2,18 @@
 
 const express          = require('express'),
       swaggerUi        = require('swagger-ui-express'),
-      swaggerDocument  = require('./swagger.json');
-var   pathUtil         = require('path'),
-      bodyParser       = require('body-parser'),
-      methodOverride   = require('method-override'),
-      fs               = require('fs'),
-      passport         = require('passport'),
-      FacebookStrategy = require('passport-facebook').Strategy,
-      LocalStrategy    = require('passport-local').Strategy,
-      credentials      = require(pathUtil.join(__dirname,'../security/credentials.js')),
-      conf             = require(pathUtil.join(__dirname,'./conf.json')),
+      swaggerDocument  = require('./swagger.json'),
+      cors             = require('cors');
+
+var   pathUtil           = require('path'),
+      bodyParser         = require('body-parser'),
+      methodOverride     = require('method-override'),
+      fs                 = require('fs'),
+      passport           = require('passport'),
+      FacebookStrategy   = require('passport-facebook').Strategy,
+      LocalStrategy      = require('passport-local').Strategy,
+      authConf           = require(pathUtil.join(__dirname,'./auth.conf.js')),
+      conf               = require(pathUtil.join(__dirname,'./conf.json')),
       log                = require(pathUtil.join(__dirname,'../lib/logger.js')),
       securityController = require(pathUtil.join(__dirname,'../controllers/security.server.controller.js'));
 
@@ -33,11 +35,14 @@ module.exports = function() {
     //setup swagger
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-    //CONFIGURE SESSION STORE
+    //configure the session
+    //In a typical web app, the credentials used to authenticate a user will only be transmitted during the login
+    //request. If authentication succeeds, a session will be established and maintained via a cookie set in the user's
+    //browser.
     const session    = require('express-session');
     //const MongoStore = require('connect-mongo')(session);
     app.use(session({
-        secret: credentials.cookieSecretValue,
+        secret: authConf.cookieSecretValue,
         //cookie: {secure:true},
         saveUninitialized: true,
         resave: true,
@@ -45,35 +50,28 @@ module.exports = function() {
         //store: new MongoStore({ url: conf.mongo.connectionString })
     }));
 
-    //app.use(require('cookie-parser')(credentials.cookieSecretValue));
+    app.use(require('cookie-parser')(authConf.cookieSecretValue));
 
     // get all data/stuff of the body (POST) parameters
     // parse application/json
     app.use(bodyParser.json());
 
-    // parse application/vnd.api+json as json
-    app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
     // parse application/x-www-form-urlencoded
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
-    app.use(methodOverride('X-HTTP-Method-Override'));
-
-    app.use(passport.initialize());
-    //app.use(passport.session());
+    app.use(cors());
 
     //CONFIGURE PASSPORT for local authentication
     passport.use(new LocalStrategy(securityController.processLocalLogin));
 
     //CONFIGURE PASSPORT for Facebook
     passport.use(new FacebookStrategy({
-        clientID     : credentials.fb_app_id,
-        clientSecret : credentials.fb_app_secret,
+        clientID     : authConf.fb_app_id,
+        clientSecret : authConf.fb_app_secret,
         callbackURL  : "https://"+conf.hostname+"/auth/facebook/callback",
         profileFields: ['id', 'displayName', 'photos']
       },
-      securityController.processFacebookLogin
+      securityController.processFacebookLogin //This is the VERIFY callback for facebook authentication.
     ));
 
     //attaches user to the session.
@@ -84,6 +82,9 @@ module.exports = function() {
     passport.deserializeUser(function(user, done) {
       done(null, user);
     });
+
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     //set up static directory of my own custom files
     log.info("Defining custom static file directory.");

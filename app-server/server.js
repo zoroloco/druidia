@@ -1,3 +1,5 @@
+'use strict';
+
 var pathUtil   = require('path'),
     _          = require('underscore'),
     https      = require('https'),
@@ -76,7 +78,7 @@ function Server(){
       self._server.close();
     }
     process.exit();
-  }
+  };
 
   //starting point.
   Server.prototype.start = function(){
@@ -95,11 +97,11 @@ function Server(){
         })
       }
       else{
-        log.error("Cannot start server. Error with Mongo connection.");
+        log.error("Cannot start server. Verify your Mongo connection.");
       }
     });
 
     module.exports = self._app;
-  }
+  };
 
 }//server

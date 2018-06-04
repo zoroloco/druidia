@@ -1,10 +1,7 @@
 var pathUtil       = require('path'),
     log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
-    Blog           = require(pathUtil.join(__dirname,'../mongoose/blog-model.js')),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
-    State          = require(pathUtil.join(__dirname,'../mongoose/state-model.js')),
-    Account        = require(pathUtil.join(__dirname,'../mongoose/account-model.js')),
     Movie          = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
     timestamp      = require('time-stamp');
 
@@ -41,119 +38,6 @@ var pathUtil       = require('path'),
           res.sendStatus(404);
         }
       });
-    };
-
-    //fetch the blog objects of the requesting user.
-    exports.fetchBlogs = function(req,res,next){
-
-      Blog.find({userId:req.user.id},function(err,foundBlogs){
-        if(err)
-          next(err);
-
-        if(!_.isEmpty(foundBlogs)){
-          log.info("Found blog entries:"+JSON.stringify(foundBlogs));
-          res.json(foundBlogs);
-        }
-        else{
-          log.info("No blog entries exist for this user.");
-          res.sendStatus(404);//no blogs exist for user. Send empty JSON.
-        }
-      })
-    };
-
-    exports.deleteBlog = function(req,res,next){
-      log.info("deleting blog entry with ID:"+req.body._id);
-
-      Blog.findByIdAndRemove(req.body._id, function(err){
-        if(!err){
-          log.info("Successfully deleted blog entry.");
-          res.sendStatus(200);
-        }
-        else{
-          log.error("Error deleting blog entry.");
-          res.sendStatus(500);
-        }
-      });
-    };
-
-    //save a new blog entry.
-    exports.saveBlog = function(req,res,next){
-      log.info("saving blog entry:"+JSON.stringify(req.body));
-
-      var newBlog = new Blog.model({
-        userId    : req.user.id,
-        heading   : req.body.heading,
-        text      : req.body.text,
-        timeStamp : timestamp('[YYYY:MM:DD HH:mm:ss:ms]')
-      });
-
-      newBlog.save(function(err){
-        if(err)
-          next(err);
-
-        log.info("Successfully saved a new blog entry.");
-        res.json(newBlog);
-      })//save blog
-    };
-
-    //fetches all states.
-    exports.fetchStates = function(req,res,next){
-      State.model.find({},function(err,foundStates){
-        if(err)
-          next(err);
-
-        if(!_.isEmpty(foundStates)){
-          log.info("Found U.S. state entries:"+JSON.stringify(foundStates));
-          res.json(foundStates);
-        }
-        else{
-          log.info("No U.S. State entries exist in collection: states.");
-          res.sendStatus(404);//no states exist for user. Send empty JSON.
-        }
-      })
-    };
-
-    //save an account
-    exports.saveAccount = function(req,res,next){
-      log.info("saving account:"+JSON.stringify(req.body));
-
-      getUser(req.user.id).then(function(foundUser){
-        var acct = new Account.model({
-          user   : foundUser,
-          address: req.body.address,
-          email  : req.body.email,
-          gender : req.body.gender
-          //dob    : req.body.dob
-        });
-
-        log.info("Attempting to save account:"+JSON.stringify(acct));
-
-        acct.save(function(err){
-          if(err)
-            next(err);
-
-          log.info("Successfully saved account info for user:"+req.user.id);
-          res.sendStatus(200);
-        })
-      });
-    };
-
-    //returns an account for a user.
-    exports.fetchAccount = function(req,res,next){
-      Account.model.findOne({'user._id':req.user.id},function(err,foundAccount){
-        if(err)
-          next(err);
-
-        if(!_.isEmpty(foundAccount)){
-          log.info("Found account:"+JSON.stringify(foundAccount));
-          res.json(foundAccount);
-        }
-        else{
-          log.info("No account exists for this user.");
-          res.sendStatus(404);//no blogs exist for user. Send empty JSON.
-        }
-      }
-      )
     };
 
     exports.fetchMovies = function(req,res,next){
