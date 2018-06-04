@@ -3,7 +3,7 @@ import { CommonModule }        from '@angular/common';
 import { FormsModule }         from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule} from "../../app/material.module";
-import { UserService} from '../../services/';
+import { UserService, MovieService} from '../../services/';
 import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {JwtInterceptor} from "../../app/auth/auth.jwt.interceptor";
 
@@ -63,7 +63,7 @@ const HOME_COMPONENTS = [
   APP_SIDEBAR_NAV,
   MovieComponent];
 
-const HOME_SERVICES = [UserService];
+const HOME_SERVICES = [UserService, MovieService];
 
 @NgModule({
   imports: [

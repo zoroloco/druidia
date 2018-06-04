@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'home'
+      title: ''
     },
     children: [
       {
@@ -20,7 +20,10 @@ const routes: Routes = [
         children: [
           {
             path: 'movies',
-            component: MovieComponent
+            component: MovieComponent,
+            data: {
+              title: 'movies'
+            }
           }
         ]
       }

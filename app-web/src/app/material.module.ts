@@ -5,19 +5,23 @@ single module that gets bootstrapped in main.ts.
 */
 
 import { NgModule }                from '@angular/core';
-import { MatButtonModule,
-         MatCheckboxModule,
-         MatInputModule,
-         MatCardModule,
-         MatRadioModule,
-         MatGridListModule,
-         MatSlideToggleModule,
-         MatListModule,
-         MatDatepickerModule,
-         MatNativeDateModule,
-         MatSelectModule,
-         MatTableModule,
-         MatDialogModule }  from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatCardModule,
+  MatRadioModule,
+  MatGridListModule,
+  MatSlideToggleModule,
+  MatListModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatDialogModule
+} from '@angular/material';
 
 // single list of material 2 modules to import , export.
 const MATERIAL_MODULES = [
@@ -33,6 +37,8 @@ const MATERIAL_MODULES = [
     MatNativeDateModule,
     MatSelectModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatDialogModule
 ];
 

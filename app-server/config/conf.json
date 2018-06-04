@@ -23,6 +23,6 @@
     "notFoundMessage" : "404 Error. Page not found."
   },
 
-  "movieDir" : "/mnt/movies"
+  "movieDir" : "/Users/kcenturion/dev/movies"
 
 }

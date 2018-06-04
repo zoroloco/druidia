@@ -8,7 +8,7 @@ var pathUtil   = require('path'),
     log        = require(pathUtil.join(__dirname,'./lib/logger.js')),
     express    = require(pathUtil.join(__dirname,'./config/express.js')),
     mongoloid  = require(pathUtil.join(__dirname,'./mongoose/mongoloid.js')),
-    svcMgr     = require(pathUtil.join(__dirname,'./services/serviceManager.js')),
+    movieSvc   = require(pathUtil.join(__dirname,'./services/movieService.js')),
     conf       = require(pathUtil.join(__dirname,'./config/conf.json'));
 
 module.exports = Server;
@@ -85,7 +85,9 @@ function Server(){
 
     mongoloid.init(function(status){
       if(status){
-        svcMgr.startServices();
+        //svcMgr.startServices();
+        movieSvc.loadMovies();
+
         //secure site
         self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
           log.info(process.title+" server now listening on port:"+self._server.address().port);

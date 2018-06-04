@@ -67,7 +67,7 @@ module.exports = function(app) {
     app.get('/api/fetchUser',
         apiController.fetchUser);
 
-    app.get('/api/movies',
+    app.get('/api/fetchMovies',
         securityController.reRouteHttps,
         apiController.fetchMovies);
 

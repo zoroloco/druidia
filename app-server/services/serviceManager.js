@@ -3,6 +3,6 @@ var pathUtil = require('path'),
     log      = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
 exports.startServices = function(){
-    log.info("Forking movieService");
+    //log.info("Forking movieService");
     //var movieService = cp.fork(pathUtil.join(__dirname,'../services/movieService.js'));
 };

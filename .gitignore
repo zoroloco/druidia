@@ -5,6 +5,7 @@ app-ios/node_modules
 app-ios/www/build
 
 app-server/node_modules
+app-server/config/auth.conf.js
 app-server/logs/*.log
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
