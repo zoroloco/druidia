@@ -53,7 +53,7 @@ var pathUtil       = require('path'),
                 log.info("No movies exist in collection: movies.");
                 res.sendStatus(404);//no states exist for user. Send empty JSON.
             }
-        })
+        }).sort( { title: 1 } )
     };
 
     //returns a promise with error or found user.

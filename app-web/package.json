@@ -9,12 +9,7 @@
     "build-prod-aot": "ng build --aot --preserve-symlinks --prod",
     "build-prod": "ng build --prod",
     "serve-dev-jit": "ng serve --proxy-config proxy.conf.json",
-    "serve-dev-jit-noproxy": "ng serve --preserve-symlinks",
-    "build-dev-jit": "ng build  --preserve-symlinks",
     "build-dev-aot": "ng build --aot --preserve-symlinks",
-    "serve-qa-jit": "ng serve --environment=qa --preserve-symlinks",
-    "build-qa-jit": "ng build --environment=qa --preserve-symlinks",
-    "build-qa-aot": "ng build --aot --environment=qa --preserve-symlinks",
     "test": "ng test --preserve-symlinks",
     "lint": "ng lint",
     "e2e": "ng e2e"

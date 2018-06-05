@@ -23,7 +23,9 @@ exports.loadMovies =function() {
 
     fs.readdir(conf.movieDir, function(err, items) {
         for (let i=0; i<items.length; i++) {
-            saveMovie(items[i]);
+            if(!items[i].startsWith('.', 0)){//ignore the hidden files.
+                saveMovie(items[i]);
+            }
         }
     });
 };

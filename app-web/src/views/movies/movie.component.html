@@ -2,9 +2,18 @@
   <div class="card">
     <div class="card-header">Movie List</div>
     <div class="card-body">
-      <mat-table [dataSource]="movies" class="mat-elevation-z8">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+
+      <mat-table [dataSource]="datasource" class="mat-elevation-z8">
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+          <mat-cell *matCellDef="let movie; let i = index;">{{i}}</mat-cell>
+        </ng-container>
 
         <!-- Position Column -->
         <ng-container matColumnDef="title">
