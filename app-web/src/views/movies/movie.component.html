@@ -15,10 +15,24 @@
           <mat-cell *matCellDef="let movie; let i = index;">{{i}}</mat-cell>
         </ng-container>
 
-        <!-- Position Column -->
         <ng-container matColumnDef="title">
           <mat-header-cell *matHeaderCellDef>title</mat-header-cell>
-          <mat-cell *matCellDef="let movie">{{movie.title}}</mat-cell>
+          <mat-cell *matCellDef="let movie;">{{movie.title}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="poster">
+          <mat-header-cell *matHeaderCellDef>movie</mat-header-cell>
+          <mat-cell *matCellDef="let movie;"><img src={{movie.poster_path}}/></mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="overview">
+          <mat-header-cell *matHeaderCellDef>overview</mat-header-cell>
+          <mat-cell *matCellDef="let movie;">{{movie.overview}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="release date">
+          <mat-header-cell *matHeaderCellDef>release date</mat-header-cell>
+          <mat-cell *matCellDef="let movie;">{{movie.release_date}}</mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

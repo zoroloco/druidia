@@ -10,7 +10,7 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class MovieComponent implements OnInit{
   datasource: any;
-  displayedColumns = ['index','title'];
+  displayedColumns = ['index','title','poster','overview','release date'];
 
   constructor(private log: LoggerService, private movieService: MovieService) { }
 

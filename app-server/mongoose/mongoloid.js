@@ -36,14 +36,14 @@ var self = module.exports = {
   //returns the saved model if save successful.
   //returns null if not successful.
   save: function save(model,cb){
-    log.info("Saving:"+JSON.stringify(model));
+    //log.info("Saving:"+JSON.stringify(model));
     model.save(function(err){
       if(err){
         log.error("Save failed:"+err);
         if(cb) cb(null);
       }
       else{
-        log.info("Save successful:"+JSON.stringify(model));
+        //log.info("Save successful:"+JSON.stringify(model));
         if(cb) cb(model);
       }
     });
@@ -53,7 +53,7 @@ var self = module.exports = {
   //searchFieldName = "id" or "searchId" - the schema field name to search by.
   //searchField = "202202" - the value of the search field name to search by.
   findOne: function findOne(model,searchFieldName,searchFieldValue,cb){
-    log.info("Querying for document with:"+searchFieldName+"="+searchFieldValue);
+    //log.info("Querying for document with:"+searchFieldName+"="+searchFieldValue);
 
     //set the key of the query object dynamically.
     var query = {};
@@ -67,11 +67,11 @@ var self = module.exports = {
       }
       else{
         if(!_.isEmpty(foundObj)){
-          log.info("Found document with query:"+searchFieldName+"="+searchFieldValue);
+          //log.info("Found document with query:"+searchFieldName+"="+searchFieldValue);
           if(cb) cb(foundObj);
         }
         else{
-          log.info("Did not find document with query:"+searchFieldName+"="+searchFieldValue);
+          //log.warn("Did not find document with query:"+searchFieldName+"="+searchFieldValue);
           if(cb) cb(null);
         }
       }
