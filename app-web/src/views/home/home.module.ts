@@ -3,7 +3,6 @@ import { CommonModule }        from '@angular/common';
 import { FormsModule }         from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule} from "../../app/material.module";
-import { UserService, MovieService} from '../../services/';
 import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {JwtInterceptor} from "../../app/auth/auth.jwt.interceptor";
 
@@ -35,6 +34,7 @@ const HOME_DIRECTIVES = [
 
 //Components
 import {MovieComponent} from "../movies/movie.component";
+import {HumiditempComponent} from "../humiditemp/humiditemp.component";
 
 import {
   AppLayoutComponent,
@@ -61,9 +61,15 @@ const HOME_COMPONENTS = [
   AppSidebarHeaderComponent,
   AppSidebarMinimizerComponent,
   APP_SIDEBAR_NAV,
-  MovieComponent];
+  MovieComponent,
+  HumiditempComponent];
 
-const HOME_SERVICES = [UserService, MovieService];
+//services
+import { UserService,
+  MovieService,
+  HumidiTempService} from '../../services/';
+
+const HOME_SERVICES = [UserService, MovieService, HumidiTempService];
 
 @NgModule({
   imports: [

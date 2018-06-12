@@ -18,6 +18,11 @@ export const appNavigation = [
         name: 'movies',
         url: '/home/movies',
         icon: 'icon-film'
+      },
+      {
+        name: 'humiditemp',
+        url: '/home/humiditemp',
+        icon: 'icon-drop'
       }
     ]
   }

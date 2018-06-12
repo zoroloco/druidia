@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AppLayoutComponent} from "../../components/app-layout";
 import {UserService} from "../../services";
 import {MovieComponent} from "../movies/movie.component";
+import {HumiditempComponent} from "../humiditemp/humiditemp.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,13 @@ const routes: Routes = [
             component: MovieComponent,
             data: {
               title: 'movies'
+            }
+          },
+          {
+            path: 'humiditemp',
+            component: HumiditempComponent,
+            data: {
+              title: 'humiditemp'
             }
           }
         ]

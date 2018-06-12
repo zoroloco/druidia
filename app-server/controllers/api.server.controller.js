@@ -3,7 +3,12 @@ var pathUtil       = require('path'),
     _              = require('underscore'),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     Movie          = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
+    Humiditemp     = require(pathUtil.join(__dirname,'../mongoose/humiditemp-model.js')),
     timestamp      = require('time-stamp');
+
+    exports.fetchLatestHumiditemp = function(req,res,next){
+
+    };
 
     //fetch the user object of the requesting user.
     exports.fetchUser = function(req,res,next){
@@ -51,7 +56,7 @@ var pathUtil       = require('path'),
             }
             else{
                 log.info("No movies exist in collection: movies.");
-                res.sendStatus(404);//no states exist for user. Send empty JSON.
+                res.sendStatus(404);
             }
         }).sort( { title: 1 } )
     };
@@ -67,3 +72,19 @@ var pathUtil       = require('path'),
             })
         })
     }
+
+    exports.fetchLatestHumidiTemp = function(req,res,next){
+        Humiditemp.model.find({},function(err,latestHumidiTemp){
+            if(err)
+                next(err);
+
+            if(!_.isEmpty(latestHumidiTemp)){
+                log.info("Latest humiditemp found:"+JSON.stringify(latestHumidiTemp));
+                res.json(latestHumidiTemp);
+            }
+            else{
+                log.info("No humiditemps exist in collection: Humiditemp.");
+                res.sendStatus(404);
+            }
+        }).sort( { _id:1} ).limit(1);
+    };

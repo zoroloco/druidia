@@ -68,8 +68,10 @@ module.exports = function(app) {
         apiController.fetchUser);
 
     app.get('/api/fetchMovies',
-        securityController.reRouteHttps,
         apiController.fetchMovies);
+
+    app.get('/api/fetchLatestHumidiTemp',
+            apiController.fetchLatestHumidiTemp);
 
     //error middleware triggered by next('some error');
     //error handling middleware is always declared last.
