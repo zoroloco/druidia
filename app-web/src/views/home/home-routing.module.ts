@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AppLayoutComponent} from "../../components/app-layout";
-import {UserService} from "../../services";
+import {HumidiTempService, UserService} from "../../services";
 import {MovieComponent} from "../movies/movie.component";
 import {HumiditempComponent} from "../humiditemp/humiditemp.component";
 
@@ -16,7 +16,7 @@ const routes: Routes = [
         path: '',
         component: AppLayoutComponent,
         resolve: {
-          team: UserService
+          user: UserService
         },
         children: [
           {

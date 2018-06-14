@@ -17,11 +17,8 @@ export class HumiditempComponent implements OnInit{
   ngOnInit() {
     this.humiditempService.fetchLatestHumidiTemp().subscribe(latestHumiditemp=>{
       this.masterClosetLatestHumiditemp = latestHumiditemp;
-      this.log.info('Location:' + this.masterClosetLatestHumiditemp.sensor_name);
-      this.log.info('Humidity:' + this.masterClosetLatestHumiditemp.humidity);
-      this.log.info('Temperature:' + this.masterClosetLatestHumiditemp.temperature);
     }, error=> {
-      this.log.error('Error fetching latest humidity/temp for master closet.');
+      this.log.error('Error fetching latest humidity/temp for master closet:' + error);
     })
   }
 }

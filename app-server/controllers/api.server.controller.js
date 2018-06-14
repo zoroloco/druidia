@@ -79,12 +79,12 @@ var pathUtil       = require('path'),
                 next(err);
 
             if(!_.isEmpty(latestHumidiTemp)){
-                log.info("Latest humiditemp found:"+JSON.stringify(latestHumidiTemp));
-                res.json(latestHumidiTemp);
+                log.info("Latest humiditemp found:"+JSON.stringify(latestHumidiTemp[0]));
+                res.json(latestHumidiTemp[0]);
             }
             else{
                 log.info("No humiditemps exist in collection: Humiditemp.");
                 res.sendStatus(404);
             }
-        }).sort( { _id:1} ).limit(1);
+        }).sort( { event_time:-1} ).limit(1);//sort by most recent event time and limit to 1.
     };

@@ -1,9 +1,10 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header">Temperature/Humidity</div>
+    <div class="card-header">{{masterClosetLatestHumiditemp.sensor_name}}</div>
     <div class="card-body">
-      Temperature: {{masterClosetLatestHumiditemp.temperature}}
-      Humidity: {{masterClosetLatestHumiditemp.humidity}}
+      <b>Temperature:</b> {{masterClosetLatestHumiditemp.temperature}}˚<br>
+      <b>Humidity:</b> {{masterClosetLatestHumiditemp.humidity}}%<br>
+      <b>Event Time:</b> {{masterClosetLatestHumiditemp.event_time}}
     </div>
   </div>
 </div>

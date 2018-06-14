@@ -16,14 +16,15 @@ export class HumidiTempService extends BaseService {
     super();
     this.log.info('Constructor of HumidiTempService');
   }
-
+  //let resultUsers: Array<User>;
+  //resultUsers = new Array<User>();
+  //let users = res.json();
   //returns all users
   public fetchLatestHumidiTemp(): Observable<Humiditemp>{
     return this.http.get('api/fetchLatestHumidiTemp')
       .map((res:Response)=>{
-        let latestHumidiTemp: any = res;
-        this.log.info('Fetched the latest humiditemp:' + JSON.stringify(latestHumidiTemp));
-        return latestHumidiTemp;
+        let result: any = res;
+        return result;
       })
   }
 
