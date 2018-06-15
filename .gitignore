@@ -1,11 +1,9 @@
 *.store
 *.DS_Store
 .recommenders
-app-ios/node_modules
-app-ios/www/build
 
 app-server/node_modules
-app-server/config/auth.conf.js
+app-server/config
 app-server/logs/*.log
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
@@ -22,7 +20,6 @@ app-server/security/fb_app_id
 app-server/security/fb_app_secret
 app-web/dist/bundle.min.js
 app-web/coverage
-
 
 # Windows image file caches
 Thumbs.db
@@ -50,7 +47,6 @@ $RECYCLE.BIN/
 # OSX
 # =========================
 
-.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -73,5 +69,3 @@ Temporary Items
 .apdisk
 
 .idea
-
-app-server/config/conf.json

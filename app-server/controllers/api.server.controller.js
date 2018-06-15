@@ -4,7 +4,10 @@ var pathUtil       = require('path'),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     Movie          = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
     Humiditemp     = require(pathUtil.join(__dirname,'../mongoose/humiditemp-model.js')),
-    timestamp      = require('time-stamp');
+    timestamp      = require('time-stamp'),
+    moment = require('moment');
+
+    moment().format();
 
     exports.fetchLatestHumiditemp = function(req,res,next){
 
@@ -80,7 +83,17 @@ var pathUtil       = require('path'),
 
             if(!_.isEmpty(latestHumidiTemp)){
                 log.info("Latest humiditemp found:"+JSON.stringify(latestHumidiTemp[0]));
-                res.json(latestHumidiTemp[0]);
+
+                var latestHT = {
+                    sensor_name: latestHumidiTemp[0].sensor_name,
+                    humidity    : latestHumidiTemp[0].humidity,
+                    temperature: latestHumidiTemp[0].temperature,
+                    event_time: moment.utc(latestHumidiTemp[0].event_time).local().format('dddd, MMMM Do YYYY, h:mm:ss a')
+                };
+
+                log.info("sending back dh:"+ JSON.stringify(latestHT));
+
+                res.json(latestHT);
             }
             else{
                 log.info("No humiditemps exist in collection: Humiditemp.");

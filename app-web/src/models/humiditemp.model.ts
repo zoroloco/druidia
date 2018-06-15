@@ -3,5 +3,5 @@ export class Humiditemp {
   sensor_name: string;
   humidity: string;
   temperature: string;
-  event_time: Date;
+  event_time: string;
 }
