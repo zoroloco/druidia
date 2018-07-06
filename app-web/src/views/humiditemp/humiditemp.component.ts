@@ -9,17 +9,26 @@ import {Humiditemp} from "../../models";
 })
 export class HumiditempComponent implements OnInit{
   masterClosetLatestHumiditemp: Humiditemp;
+  upstairsLatestHumiditemp: Humiditemp;
 
   constructor(private log: LoggerService, private humiditempService: HumidiTempService) {
     this.masterClosetLatestHumiditemp = new Humiditemp();
+    this.upstairsLatestHumiditemp = new Humiditemp();
   }
 
   ngOnInit() {
-    this.humiditempService.fetchLatestHumidiTemp().subscribe(latestHumiditemp=>{
+    this.humiditempService.fetchLatestHumidiTemp('master-closet').subscribe(latestHumiditemp=>{
       this.masterClosetLatestHumiditemp = latestHumiditemp;
-      this.log.info('RX latest humiditemp:'+JSON.stringify(this.masterClosetLatestHumiditemp));
+      this.log.info('RX latest master closet humiditemp:'+JSON.stringify(this.masterClosetLatestHumiditemp));
     }, error=> {
       this.log.error('Error fetching latest humidity/temp for master closet:' + error);
+    })
+
+    this.humiditempService.fetchLatestHumidiTemp('upstairs').subscribe(latestHumiditemp=>{
+      this.upstairsLatestHumiditemp = latestHumiditemp;
+      this.log.info('RX latest upstairs humiditemp:'+JSON.stringify(this.upstairsLatestHumiditemp));
+    }, error=> {
+      this.log.error('Error fetching latest humidity/temp for upstairs:' + error);
     })
   }
 }

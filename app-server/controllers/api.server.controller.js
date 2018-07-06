@@ -4,8 +4,7 @@ var pathUtil       = require('path'),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     Movie          = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
     Humiditemp     = require(pathUtil.join(__dirname,'../mongoose/humiditemp-model.js')),
-    timestamp      = require('time-stamp'),
-    moment = require('moment');
+    moment         = require('moment');
 
     moment().format();
 
@@ -76,8 +75,11 @@ var pathUtil       = require('path'),
         })
     }
 
+    //get latest humidity for sensor with given name.
     exports.fetchLatestHumidiTemp = function(req,res,next){
-        Humiditemp.model.find({},function(err,latestHumidiTemp){
+        log.info("Fetching latest humiditemp for sensor-name:"+JSON.stringify(req.query.sensor_name));
+
+        Humiditemp.model.find({sensor_name:req.query.sensor_name},function(err,latestHumidiTemp){
             if(err)
                 next(err);
 
