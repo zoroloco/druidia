@@ -86,7 +86,7 @@ function Server(){
     mongoloid.init(function(status){
       if(status){
         //svcMgr.startServices();
-        movieSvc.loadMovies();
+        //movieSvc.loadMovies();
 
         //secure site
         self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
