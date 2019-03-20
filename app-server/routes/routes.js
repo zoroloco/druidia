@@ -10,7 +10,8 @@ var pathUtil           = require('path'),
 module.exports = function(app) {
     //order important here.
     app.use(securityController.auditRequest,
-            securityController.reRouteHttps);
+            //securityController.reRouteHttps
+    );
 
     var serveIndex = function(req,res){
         log.info("Sending index to client.");
@@ -41,6 +42,7 @@ module.exports = function(app) {
     // Redirect the user to Facebook for authentication.  When complete,
     // Facebook will redirect the user back to the application at
     //     /auth/facebook/callback
+    /*
     app.get('/auth/facebook',
         passport.authenticate('facebook'));
 
@@ -50,6 +52,7 @@ module.exports = function(app) {
     // authentication has failed.  This route is defined on the facebook website under your app's settings.
     app.get('/auth/facebook/callback',
         securityController.processSuccessfulFacebookCallback);
+    */
 
     //any GET to the API will have to be routed through the jwtCheck!
     app.get('/api/*',

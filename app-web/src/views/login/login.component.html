@@ -49,17 +49,6 @@
                 -->
               </div>
 
-              <div class="row">
-                <div class="col-10">
-                  <a href="/auth/facebook"
-                     role="button"
-                     class="btn btn-sm btn-facebook">
-                    <span>Facebook</span>
-                  </a>
-                  <!--<button class="btn btn-sm btn-google-plus" type="button"><span>Google</span></button>-->
-                </div>
-              </div>
-
               <div *ngIf="usernameLocal.touched && formErrors.username" class="alert alert-danger">
                 {{formErrors.username}}
               </div>

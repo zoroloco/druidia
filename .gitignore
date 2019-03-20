@@ -2,11 +2,16 @@
 *.DS_Store
 .recommenders
 
+node_modules/
+
+package-lock.json
+
 app-server/node_modules
 app-server/config
 app-server/config/auth.conf.js
 app-server/config/conf.json
 app-server/logs/*.log
+app-server/package-lock.json
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
 app-server/security/fb_app_id
@@ -18,6 +23,7 @@ app-web/libs
 app-web/dist/bundle.js
 app-web/dist/bundle.min.js
 app-web/coverage
+app-web/package-lock.json
 
 .metadata
 

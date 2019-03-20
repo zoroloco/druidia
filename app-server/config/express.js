@@ -10,7 +10,7 @@ var   pathUtil           = require('path'),
       methodOverride     = require('method-override'),
       fs                 = require('fs'),
       passport           = require('passport'),
-      FacebookStrategy   = require('passport-facebook').Strategy,
+      //FacebookStrategy   = require('passport-facebook').Strategy,
       LocalStrategy      = require('passport-local').Strategy,
       authConf           = require(pathUtil.join(__dirname,'./auth.conf.js')),
       conf               = require(pathUtil.join(__dirname,'./conf.json')),
@@ -65,6 +65,7 @@ module.exports = function() {
     passport.use(new LocalStrategy(securityController.processLocalLogin));
 
     //CONFIGURE PASSPORT for Facebook
+    /*
     passport.use(new FacebookStrategy({
         clientID     : authConf.fb_app_id,
         clientSecret : authConf.fb_app_secret,
@@ -73,6 +74,7 @@ module.exports = function() {
       },
       securityController.processFacebookLogin //This is the VERIFY callback for facebook authentication.
     ));
+    */
 
     //attaches user to the session.
     passport.serializeUser(function(user, done) {

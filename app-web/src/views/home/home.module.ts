@@ -35,6 +35,7 @@ const HOME_DIRECTIVES = [
 //Components
 import {MovieComponent} from "../movies/movie.component";
 import {HumiditempComponent} from "../humiditemp/humiditemp.component";
+import {MusicPlayerComponent} from "../musicplayer/musicplayer.component";
 
 import {
   AppLayoutComponent,
@@ -62,14 +63,16 @@ const HOME_COMPONENTS = [
   AppSidebarMinimizerComponent,
   APP_SIDEBAR_NAV,
   MovieComponent,
-  HumiditempComponent];
+  HumiditempComponent,
+  MusicPlayerComponent];
 
 //services
 import { UserService,
   MovieService,
-  HumidiTempService} from '../../services/';
+  HumidiTempService,
+  MusicPlayerService} from '../../services/';
 
-const HOME_SERVICES = [UserService, MovieService, HumidiTempService];
+const HOME_SERVICES = [UserService, MovieService, HumidiTempService,MusicPlayerService];
 
 @NgModule({
   imports: [

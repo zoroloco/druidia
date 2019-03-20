@@ -15,6 +15,12 @@ export const appNavigation = [
     icon: 'icon-home',
     children: [
       {
+        name: 'Music Player',
+        url: '/home/mplayer',
+        icon: 'icon-film'
+      }
+      /*
+      {
         name: 'movies',
         url: '/home/movies',
         icon: 'icon-film'
@@ -24,6 +30,7 @@ export const appNavigation = [
         url: '/home/humiditemp',
         icon: 'icon-drop'
       }
+      */
     ]
   }
 ];

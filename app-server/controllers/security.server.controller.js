@@ -31,7 +31,7 @@ const expressJWT = require('express-jwt');
   };
 
   exports.reRouteHttps = function(req,res,next){
-    if('https' == req.protocol){
+    if('https' === req.protocol){
       next();
     }
     else{
