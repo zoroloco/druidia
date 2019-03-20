@@ -26,11 +26,13 @@ module.exports = function() {
     app.set('title', conf.title);
 
     //CONFIGURE SSL
-    app.set('httpsOptions',
-    {
-        key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
-        cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
-    });
+    if(conf.enableSSL){
+        app.set('httpsOptions',
+        {
+            key:  fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.pem")),
+            cert: fs.readFileSync(pathUtil.join(__dirname, "../security/ssl/druidia.crt"))
+        });
+    }
 
     //setup swagger
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
