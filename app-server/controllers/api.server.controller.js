@@ -8,10 +8,6 @@ var pathUtil       = require('path'),
 
     moment().format();
 
-    exports.fetchLatestHumiditemp = function(req,res,next){
-
-    };
-
     //fetch the user object of the requesting user.
     exports.fetchUser = function(req,res,next){
       log.warn(JSON.stringify(req.user));
