@@ -36,6 +36,7 @@ const HOME_DIRECTIVES = [
 import {MovieComponent} from "../movies/movie.component";
 import {HumiditempComponent} from "../humiditemp/humiditemp.component";
 import {MusicPlayerComponent} from "../musicplayer/musicplayer.component";
+import {RaspibotComponent} from "../raspibot/raspibot.component";
 
 import {
   AppLayoutComponent,
@@ -64,15 +65,17 @@ const HOME_COMPONENTS = [
   APP_SIDEBAR_NAV,
   MovieComponent,
   HumiditempComponent,
-  MusicPlayerComponent];
+  MusicPlayerComponent,
+  RaspibotComponent];
 
 //services
 import { UserService,
   MovieService,
   HumidiTempService,
-  MusicPlayerService} from '../../services/';
+  MusicPlayerService,
+  RaspyService} from '../../services/';
 
-const HOME_SERVICES = [UserService, MovieService, HumidiTempService,MusicPlayerService];
+const HOME_SERVICES = [UserService, MovieService, HumidiTempService,MusicPlayerService,RaspyService];
 
 @NgModule({
   imports: [

@@ -18,6 +18,10 @@ export const appNavigation = [
         name: 'Music Player',
         url: '/home/mplayer',
         icon: 'icon-film'
+      },
+      {
+        name: 'Raspibot',
+        url: '/home/raspibot'
       }
       /*
       {

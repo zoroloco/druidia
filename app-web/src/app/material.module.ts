@@ -20,7 +20,7 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatDialogModule
+  MatDialogModule, MatSliderModule
 } from '@angular/material';
 
 // single list of material 2 modules to import , export.
@@ -39,7 +39,8 @@ const MATERIAL_MODULES = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSliderModule
 ];
 
 @NgModule({

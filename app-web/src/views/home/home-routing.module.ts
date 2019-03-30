@@ -5,6 +5,7 @@ import {HumidiTempService, MusicPlayerService, UserService} from "../../services
 import {MovieComponent} from "../movies/movie.component";
 import {HumiditempComponent} from "../humiditemp/humiditemp.component";
 import {MusicPlayerComponent} from "../musicplayer/musicplayer.component";
+import {RaspibotComponent} from "../raspibot/raspibot.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,13 @@ const routes: Routes = [
             component: MusicPlayerComponent,
             data:{
               title: 'Music Player'
+            }
+          },
+          {
+            path: 'raspibot',
+            component: RaspibotComponent,
+            data:{
+              title: 'RaspiBot'
             }
           }
         ]
