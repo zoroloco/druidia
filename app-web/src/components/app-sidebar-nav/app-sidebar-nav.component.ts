@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
-
 import { appNavigation } from './_nav';
 
 @Component({

@@ -16,12 +16,12 @@ export const appNavigation = [
     children: [
       {
         name: 'Music Player',
-        url: '/home/mplayer',
-        icon: 'icon-film'
+        url: '/home/mplayer'
       },
       {
         name: 'Raspibot',
-        url: '/home/raspibot'
+        url: '/home/raspibot',
+        icon: 'icon-sunglasses'
       }
       /*
       {

@@ -4,6 +4,7 @@ var pathUtil       = require('path'),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
     Movie          = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
     Humiditemp     = require(pathUtil.join(__dirname,'../mongoose/humiditemp-model.js')),
+    Xmms           = require(pathUtil.join(__dirname,'../mongoose/xmms-model.js')),
     moment         = require('moment');
 
     moment().format();
@@ -41,6 +42,22 @@ var pathUtil       = require('path'),
           res.sendStatus(404);
         }
       });
+    };
+
+    exports.fetchSongHistory = function(req,res,next){
+        Xmms.model.find({},function(err,foundSongs){
+            if(err)
+                next(err);
+
+            if(!_.isEmpty(foundSongs)){
+                log.info("Found songs:"+JSON.stringify(foundSongs));
+                res.json(foundSongs);
+            }
+            else{
+                log.info("No songs exist in collection: music_histories.");
+                res.sendStatus(404);
+            }
+        }).sort({event_time: -1});
     };
 
     exports.fetchMovies = function(req,res,next){

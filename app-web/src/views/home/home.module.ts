@@ -4,6 +4,10 @@ import { FormsModule }         from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule} from "../../app/material.module";
 import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faRobot,faPlay,faStop,faRandom,faForward,faBackward,faSync } from '@fortawesome/free-solid-svg-icons';
+
 import {JwtInterceptor} from "../../app/auth/auth.jwt.interceptor";
 
 // Import 3rd party components
@@ -90,7 +94,8 @@ const HOME_SERVICES = [UserService, MovieService, HumidiTempService,MusicPlayerS
     TimepickerModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    FontAwesomeModule
   ],
   declarations: [ HOME_COMPONENTS,
                   HOME_DIRECTIVES],
@@ -103,4 +108,9 @@ const HOME_SERVICES = [UserService, MovieService, HumidiTempService,MusicPlayerS
     HOME_SERVICES
   ]
 })
-export class HomeModule { }
+export class HomeModule {
+  constructor() {
+    // Add an icon to the library for convenient access in other components
+    library.add(faRobot,faPlay,faStop,faRandom,faForward,faBackward,faSync);
+  }
+}

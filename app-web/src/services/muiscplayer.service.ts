@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
+import {Movie, Song} from "../models";
 
 @Injectable()
 export class MusicPlayerService extends BaseService {
@@ -50,5 +51,14 @@ export class MusicPlayerService extends BaseService {
       .map((res:Response)=>{
         this.log.info('Shuffling songs on music player.');
       });
+  }
+
+  public fetchSongHistory(): Observable<Array<Song>>{
+    return this.http.get('api/fetchSongHistory')
+      .map((res:Response)=>{
+        let resultSongHistory: any = res;
+        this.log.info('Fetched the following movies:' + JSON.stringify(resultSongHistory));
+        return resultSongHistory;
+      })
   }
 }

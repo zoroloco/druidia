@@ -1,6 +1,7 @@
 // BrowserModule is required for any angular 2 web based application.
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // module defines your components.
 import { NgModule } from '@angular/core'
 
@@ -83,4 +84,6 @@ export function tokenGetter() {
   providers: [APP_SERVICES, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

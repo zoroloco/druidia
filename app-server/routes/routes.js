@@ -73,6 +73,9 @@ module.exports = function(app) {
     app.get('/api/fetchMovies',
         apiController.fetchMovies);
 
+    app.get('/api/fetchSongHistory',
+        apiController.fetchSongHistory);
+
     app.get('/api/fetchLatestHumidiTemp',
             apiController.fetchLatestHumidiTemp);
 
