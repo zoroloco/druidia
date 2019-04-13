@@ -7,7 +7,7 @@ import {Command} from '../views/raspibot/command';
 
 @Injectable()
 export class RaspyService extends BaseService{
-  private host = 'http://192.168.1.237:7482';
+  private host = 'http://192.168.1.236:7482';
   private movePath = '/move';
   private connectPath = '/connect';
   private disconnectPath = '/disconnect';
