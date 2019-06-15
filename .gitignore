@@ -1,28 +1,33 @@
 *.store
 *.DS_Store
 .recommenders
-app-ios/node_modules
-app-ios/www/build
+
+node_modules/
+
+package-lock.json
 
 app-server/node_modules
+app-server/config
+app-server/config/auth.conf.js
+app-server/config/conf.json
 app-server/logs/*.log
+app-server/package-lock.json
 app-server/security/ssl/druidia.crt
 app-server/security/ssl/druidia.pem
+app-server/security/fb_app_id
+app-server/security/fb_app_secret
 
 app-web/node_modules
 app-web/dist
 app-web/libs
+app-web/dist/bundle.js
+app-web/dist/bundle.min.js
+app-web/coverage
+app-web/package-lock.json
 
 .metadata
 
 npm-debug.log
-app-web/dist/bundle.js
-app-server/security/fb_app_id
-app-server/security/fb_app_secret
-app-web/dist/bundle.js
-app-web/dist/bundle.min.js
-app-web/coverage
-
 
 # Windows image file caches
 Thumbs.db
@@ -50,7 +55,6 @@ $RECYCLE.BIN/
 # OSX
 # =========================
 
-.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -72,7 +76,4 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
-app-server/security/credentials.js
-app-server/security/credentials.js
-
+.idea

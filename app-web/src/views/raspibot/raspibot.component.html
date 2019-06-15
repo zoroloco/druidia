@@ -1,0 +1,42 @@
+<div class="animated fadeIn">
+  Cam
+  <br/>
+  <mat-grid-list cols="3" rowHeight="300px">
+    <mat-grid-tile>
+      <iframe src="http://192.168.1.236:8081" width="400" height="300"></iframe>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      Pan<mat-slider min={{headPanMin}} max={{headPanMax}} thumbLabel tickInterval={{step}}
+                     step={{step}} [(ngModel)]="headPan" (change)="onHeadPan()"></mat-slider>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      Tilt<mat-slider vertical min={{headTiltMin}} max={{headTiltMax}} thumbLabel tickInterval={{step}}
+                      step={{step}} [(ngModel)]="headTilt"></mat-slider>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <br/>
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile>
+      Base
+      <mat-slider min={{armBaseMin}} max={{armBaseMax}} thumbLabel tickInterval={{step}}
+                  step={{step}} [(ngModel)]="armBase"></mat-slider>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      Shoulder<mat-slider vertical min={{armShoulderMin}} max={{armShoulderMax}} thumbLabel tickInterval={{step}}
+                          step={{step}} [(ngModel)]="armShoulder"></mat-slider>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      Elbow<mat-slider vertical min={{armElbowMin}} max={{armElbowMax}} thumbLabel tickInterval={{step}}
+                       step={{step}} [(ngModel)]="armElbow"></mat-slider>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      Wrist<mat-slider vertical min={{armWristMin}} max={{armWristMax}} thumbLabel tickInterval={{step}}
+                       step={{step}} [(ngModel)]="armWrist"></mat-slider>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  Claw
+  <mat-slider min={{gripperMin}} max={{gripperMax}} thumbLabel tickInterval={{step}}
+              step={{step}} [(ngModel)]="hand">
+  </mat-slider>
+</div>

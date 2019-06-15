@@ -1,0 +1,43 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">Movie List (data credit to themoviedb.org)</div>
+    <div class="card-body">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+
+      <mat-table [dataSource]="datasource" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+          <mat-cell *matCellDef="let movie; let i = index;">{{i}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef>title</mat-header-cell>
+          <mat-cell *matCellDef="let movie;">{{movie.song_title}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="poster">
+          <mat-header-cell *matHeaderCellDef>movie</mat-header-cell>
+          <mat-cell *matCellDef="let movie;"><img src={{movie.poster_path}}/></mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="overview">
+          <mat-header-cell *matHeaderCellDef>overview</mat-header-cell>
+          <mat-cell *matCellDef="let movie;">{{movie.overview}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="release date">
+          <mat-header-cell *matHeaderCellDef>release date</mat-header-cell>
+          <mat-cell *matCellDef="let movie;">{{movie.release_date}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

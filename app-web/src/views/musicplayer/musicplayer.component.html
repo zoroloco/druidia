@@ -1,0 +1,53 @@
+<div class="animated fadeIn">
+
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="option1" autocomplete="off"
+             (click)="onShuffle()"><fa-icon [icon]="faRandom"></fa-icon>
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="option2" autocomplete="off"
+             (click)="onPrev()"><fa-icon [icon]="faBackward"></fa-icon>
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="option3" autocomplete="off"
+             (click)="onNext()"><fa-icon [icon]="faForward"></fa-icon>
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="option4" autocomplete="off"
+             (click)="onPlay()"><fa-icon [icon]="faPlay"></fa-icon>
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="option5" autocomplete="off"
+             (click)="onStop()"><fa-icon [icon]="faStop"></fa-icon>
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="option6" autocomplete="off"
+             (click)="refreshSongHistory()"><fa-icon [icon]="faSync"></fa-icon>
+    </label>
+  </div>
+
+  <mat-table [dataSource]="datasource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let song; let i = index;">{{i}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>title</mat-header-cell>
+      <mat-cell *matCellDef="let song;">{{song.song_title}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef>time</mat-header-cell>
+      <mat-cell *matCellDef="let song;">{{song.event_time}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

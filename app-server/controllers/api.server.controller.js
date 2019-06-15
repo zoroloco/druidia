@@ -1,12 +1,13 @@
 var pathUtil       = require('path'),
     log            = require(pathUtil.join(__dirname,'../lib/logger.js')),
     _              = require('underscore'),
-    mongoloid      = require(pathUtil.join(__dirname,'../mongoose/mongoloid.js')),
-    Blog           = require(pathUtil.join(__dirname,'../mongoose/blog-model.js')),
     User           = require(pathUtil.join(__dirname,'../mongoose/user-model.js')),
-    State          = require(pathUtil.join(__dirname,'../mongoose/state-model.js')),
-    Account        = require(pathUtil.join(__dirname,'../mongoose/account-model.js')),
-    timestamp      = require('time-stamp');
+    Movie          = require(pathUtil.join(__dirname,'../mongoose/movie-model.js')),
+    Humiditemp     = require(pathUtil.join(__dirname,'../mongoose/humiditemp-model.js')),
+    Xmms           = require(pathUtil.join(__dirname,'../mongoose/xmms-model.js')),
+    moment         = require('moment');
+
+    moment().format();
 
     //fetch the user object of the requesting user.
     exports.fetchUser = function(req,res,next){
@@ -25,7 +26,7 @@ var pathUtil       = require('path'),
         if(err)
           next(err);
       });
-    }
+    };
 
     exports.fetchUsers = function(req,res,next){
       User.model.find(function(err,foundUsers){
@@ -41,129 +42,77 @@ var pathUtil       = require('path'),
           res.sendStatus(404);
         }
       });
-    }
+    };
 
-    //fetch the blog objects of the requesting user.
-    exports.fetchBlogs = function(req,res,next){
+    exports.fetchSongHistory = function(req,res,next){
+        Xmms.model.find({},function(err,foundSongs){
+            if(err)
+                next(err);
 
-      Blog.find({userId:req.user.id},function(err,foundBlogs){
-        if(err)
-          next(err);
+            if(!_.isEmpty(foundSongs)){
+                log.info("Found songs:"+JSON.stringify(foundSongs));
+                res.json(foundSongs);
+            }
+            else{
+                log.info("No songs exist in collection: music_histories.");
+                res.sendStatus(404);
+            }
+        }).sort({event_time: -1});
+    };
 
-        if(!_.isEmpty(foundBlogs)){
-          log.info("Found blog entries:"+JSON.stringify(foundBlogs));
-          res.json(foundBlogs);
-        }
-        else{
-          log.info("No blog entries exist for this user.");
-          res.sendStatus(404);//no blogs exist for user. Send empty JSON.
-        }
-      })
-    }
+    exports.fetchMovies = function(req,res,next){
+        Movie.model.find({},function(err,foundMovies){
+            if(err)
+                next(err);
 
-    exports.deleteBlog = function(req,res,next){
-      log.info("deleting blog entry with ID:"+req.body._id);
-
-      Blog.findByIdAndRemove(req.body._id, function(err){
-        if(!err){
-          log.info("Successfully deleted blog entry.");
-          res.sendStatus(200);
-        }
-        else{
-          log.error("Error deleting blog entry.");
-          res.sendStatus(500);
-        }
-      });
-    }
-
-    //save a new blog entry.
-    exports.saveBlog = function(req,res,next){
-      log.info("saving blog entry:"+JSON.stringify(req.body));
-
-      var newBlog = new Blog({
-        userId    : req.user.id,
-        heading   : req.body.heading,
-        text      : req.body.text,
-        timeStamp : timestamp('[YYYY:MM:DD HH:mm:ss:ms]')
-      });
-
-      newBlog.save(function(err){
-        if(err)
-          next(err);
-
-        log.info("Successfully saved a new blog entry.");
-        res.json(newBlog);
-      })//save blog
-    }
-
-    //fetches all states.
-    exports.fetchStates = function(req,res,next){
-      State.model.find({},function(err,foundStates){
-        if(err)
-          next(err);
-
-        if(!_.isEmpty(foundStates)){
-          log.info("Found U.S. state entries:"+JSON.stringify(foundStates));
-          res.json(foundStates);
-        }
-        else{
-          log.info("No U.S. State entries exist in collection: states.");
-          res.sendStatus(404);//no states exist for user. Send empty JSON.
-        }
-      })
-    }
-
-    //save an account
-    exports.saveAccount = function(req,res,next){
-      log.info("saving account:"+JSON.stringify(req.body));
-
-      getUser(req.user.id).then(function(foundUser){
-        var acct = new Account.model({
-          user   : foundUser,
-          address: req.body.address,
-          email  : req.body.email,
-          gender : req.body.gender
-          //dob    : req.body.dob
-        });
-
-        log.info("Attempting to save account:"+JSON.stringify(acct));
-
-        acct.save(function(err){
-          if(err)
-            next(err);
-
-          log.info("Successfully saved account info for user:"+req.user.id);
-          res.sendStatus(200);
-        })
-      });
-    }
-
-    //returns an account for a user.
-    exports.fetchAccount = function(req,res,next){
-      Account.model.findOne({'user._id':req.user.id},function(err,foundAccount){
-        if(err)
-          next(err);
-
-        if(!_.isEmpty(foundAccount)){
-          log.info("Found account:"+JSON.stringify(foundAccount));
-          res.json(foundAccount);
-        }
-        else{
-          log.info("No account exists for this user.");
-          res.sendStatus(404);//no blogs exist for user. Send empty JSON.
-        }
-      }
-      )
-    }
+            if(!_.isEmpty(foundMovies)){
+                log.info("Found movies:"+JSON.stringify(foundMovies));
+                res.json(foundMovies);
+            }
+            else{
+                log.info("No movies exist in collection: movies.");
+                res.sendStatus(404);
+            }
+        }).sort( { title: 1 } )
+    };
 
     //returns a promise with error or found user.
     function getUser(userId){
-      return new Promise(function (resolve, reject) {
-        User.model.findOne({_id:userId},function(err,foundUser){
-          if (err)
-            return reject(err) // rejects the promise with `err` as the reason
-          foundUser.isNew = false;//allows updates
-          resolve(foundUser) // fulfills the promise with `data` as the value
+        return new Promise(function (resolve, reject) {
+            User.model.findOne({_id:userId},function(err,foundUser){
+                if (err)
+                    return reject(err) // rejects the promise with `err` as the reason
+                foundUser.isNew = false;//allows updates
+                resolve(foundUser) // fulfills the promise with `data` as the value
+            })
         })
-      })
     }
+
+    //get latest humidity for sensor with given name.
+    exports.fetchLatestHumidiTemp = function(req,res,next){
+        log.info("Fetching latest humiditemp for sensor-name:"+JSON.stringify(req.query.sensor_name));
+
+        Humiditemp.model.find({sensor_name:req.query.sensor_name},function(err,latestHumidiTemp){
+            if(err)
+                next(err);
+
+            if(!_.isEmpty(latestHumidiTemp)){
+                log.info("Latest humiditemp found:"+JSON.stringify(latestHumidiTemp[0]));
+
+                var latestHT = {
+                    sensor_name: latestHumidiTemp[0].sensor_name,
+                    humidity    : latestHumidiTemp[0].humidity,
+                    temperature: latestHumidiTemp[0].temperature,
+                    event_time: moment.utc(latestHumidiTemp[0].event_time).local().format('dddd, MMMM Do YYYY, h:mm:ss a')
+                };
+
+                log.info("sending back dh:"+ JSON.stringify(latestHT));
+
+                res.json(latestHT);
+            }
+            else{
+                log.info("No humiditemps exist in collection: Humiditemp.");
+                res.sendStatus(404);
+            }
+        }).sort( { event_time:-1} ).limit(1);//sort by most recent event time and limit to 1.
+    };

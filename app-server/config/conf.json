@@ -1,21 +1,19 @@
-{ "title" : "druidia.net",
+{ "title" : "druidia",
   "hostname" : "localhost",
 
   "port"     : 443,
   "httpPort" : 80,
+
+  "enableHttp" : true,
+  "enableSSL": false,
 
   "logger" : {
     "enabled" : true,
     "dir"     : "logs"
   },
 
-  "mySqlServer" : {
-    "host" : "",
-    "port" : ""
-  },
-
   "mongo" : {
-    "connectionString" : "mongodb://localhost/druidia",
+    "connectionString" : "mongodb://localhost:27017/druidia",
     "keepAlive" : 300000
   },
 

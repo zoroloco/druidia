@@ -1,19 +1,19 @@
+'use strict';
+
 var pathUtil   = require('path'),
-    async      = require('async'),
     _          = require('underscore'),
-    vhost      = require('vhost'),
     https      = require('https'),
     http       = require('http'),
     mongoose   = require('mongoose'),
     log        = require(pathUtil.join(__dirname,'./lib/logger.js')),
     express    = require(pathUtil.join(__dirname,'./config/express.js')),
     mongoloid  = require(pathUtil.join(__dirname,'./mongoose/mongoloid.js')),
+    //movieSvc   = require(pathUtil.join(__dirname,'./services/movieService.js')),
     conf       = require(pathUtil.join(__dirname,'./config/conf.json'));
 
 module.exports = Server;
 
 function Server(){
-
   process.title = conf.title;
 
   log.init();
@@ -78,29 +78,35 @@ function Server(){
       self._server.close();
     }
     process.exit();
-  }
+  };
 
   //starting point.
   Server.prototype.start = function(){
 
     mongoloid.init(function(status){
       if(status){
-        //secure site
-        self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
-          log.info(process.title+" server now listening on port:"+self._server.address().port);
-        });
+        //svcMgr.startServices();
+        //movieSvc.loadMovies();
 
-        //non secure site used to reroute to secure site.
-        self._httpServer = http.createServer(self._app).listen(self._app.get('httpPort'),function(){
-          log.info(process.title+" server now listening on port:"+self._httpServer.address().port);
-        })
+        //secure site
+        if(conf.enableSSL){
+          self._server = https.createServer(self._app.get('httpsOptions'),self._app).listen(self._app.get('port'), function(){
+            log.info(process.title+" server now listening on SSL port:"+self._server.address().port);
+          });
+        }
+
+        if(conf.enableHttp){
+          self._httpServer = http.createServer(self._app).listen(self._app.get('httpPort'),function(){
+            log.info(process.title+" server now listening on HTTP port:"+self._httpServer.address().port);
+          })
+        }
       }
       else{
-        log.error("Cannot start server. Error with Mongo connection.");
+        log.error("Cannot start server. Verify your Mongo connection.");
       }
     });
 
     module.exports = self._app;
-  }
+  };
 
 }//server

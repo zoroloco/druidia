@@ -1,7 +1,6 @@
 var mongoose   = require('mongoose'),
     _          = require('underscore'),
     pathUtil   = require('path'),
-    state      = require(pathUtil.join(__dirname,'./state-model.js')),
     conf       = require(pathUtil.join(__dirname,'../config/conf.json')),
     log        = require(pathUtil.join(__dirname,'../lib/logger.js'));
 
@@ -12,12 +11,10 @@ var self = module.exports = {
 
       //CONFIGURE MONGO
       var opts = {
-          server: {
-             socketOptions: { keepAlive: conf.mongo.keepAlive }
-          }
+          keepAlive: conf.mongo.keepAlive
       };
+
       mongoose.connect(dbURI,opts);
-      mongoose.Promise = require('q').Promise;
 
       mongoose.connection.on('connected', function () {
         log.info('Mongoose default connection open to ' + dbURI);
@@ -39,15 +36,15 @@ var self = module.exports = {
   //returns the saved model if save successful.
   //returns null if not successful.
   save: function save(model,cb){
-    log.info("Saving:"+JSON.stringify(model));
+    //log.info("Saving:"+JSON.stringify(model));
     model.save(function(err){
       if(err){
         log.error("Save failed:"+err);
-        cb(null);
+        if(cb) cb(null);
       }
       else{
-        log.info("Save successful:"+JSON.stringify(model));
-        cb(model);
+        //log.info("Save successful:"+JSON.stringify(model));
+        if(cb) cb(model);
       }
     });
   },
@@ -56,7 +53,7 @@ var self = module.exports = {
   //searchFieldName = "id" or "searchId" - the schema field name to search by.
   //searchField = "202202" - the value of the search field name to search by.
   findOne: function findOne(model,searchFieldName,searchFieldValue,cb){
-    log.info("Querying for document with:"+searchFieldName+"="+searchFieldValue);
+    //log.info("Querying for document with:"+searchFieldName+"="+searchFieldValue);
 
     //set the key of the query object dynamically.
     var query = {};
@@ -66,16 +63,16 @@ var self = module.exports = {
     model.findOne(query,function(err,foundObj){
       if(err){
         log.error(err);
-        cb(null);
+        if(cb) cb(null);
       }
       else{
         if(!_.isEmpty(foundObj)){
-          log.info("Found document with query:"+searchFieldName+"="+searchFieldValue);
-          cb(foundObj);
+          //log.info("Found document with query:"+searchFieldName+"="+searchFieldValue);
+          if(cb) cb(foundObj);
         }
         else{
-          log.info("Did not find document with query:"+searchFieldName+"="+searchFieldValue);
-          cb(null);
+          //log.warn("Did not find document with query:"+searchFieldName+"="+searchFieldValue);
+          if(cb) cb(null);
         }
       }
     });
@@ -92,16 +89,16 @@ var self = module.exports = {
     model.find(query,function(err,results){
       if(err){
         log.info(err);
-        cb(null);
+        if(cb) cb(null);
       }
       else{
         if(!_.isEmpty(results)){
           log.info("Found all documents with query:"+searchFieldName+"="+searchFieldValue);
-          cb(results);
+          if(cb) cb(results);
         }
         else{
           log.info("Did not find any results with query:"+searchFieldName+"="+searchFieldValue);
-          cb(null);
+          if(cb) cb(null);
         }
       }
     });

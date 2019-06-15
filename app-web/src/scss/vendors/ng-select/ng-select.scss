@@ -1,0 +1,161 @@
+// Import variables
+@import '../variables';
+
+ng-select.bootstrap {
+  display: inline-block;
+  margin: 0;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  // Container.
+  > div {
+    display: block;
+    width: 100%;
+    // padding: $input-btn-padding-y $input-btn-padding-x;
+    font-size: $font-size-base;
+    line-height: $input-btn-line-height;
+    color: $input-color;
+    background-color: $input-bg;
+    // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214.
+    background-image: none;
+    background-clip: padding-box;
+    border: $input-btn-border-width solid $input-border-color;
+
+    &.open {
+
+    }
+
+    &.focus {
+
+    }
+
+    &.below {
+
+    }
+
+    &.disabled {
+      background-color: #eee;
+      color: #aaa;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    >div.single {
+      display: flex;
+      height: 34px;
+      width: 100%;
+
+      >div.value,
+      >div.placeholder {
+        flex: 1;
+        line-height: 34px;
+        overflow: hidden;
+        padding: 0 10px;
+        white-space: nowrap;
+      }
+
+      >div.placeholder {
+        color: #757575;
+      }
+
+      >div.clear,
+      >div.toggle {
+        color: #aaa;
+        line-height: 30px;
+        text-align: center;
+        width: 30px;
+
+        &:hover {
+          background-color: #ececec;
+        }
+      }
+
+      >div.clear {
+        font-size:18px;
+      }
+
+      >div.toggle {
+        font-size:14px;
+      }
+    }
+
+    >div.multiple {
+      display: flex;
+      flex-flow: row wrap;
+      height: 100%;
+      min-height: 34px;
+      padding: 0;
+      width: 100%;
+
+      >div.option {
+        background-color: #f2f9fc;
+        @if $enable-rounded {
+          border-radius: $input-border-radius;
+        } @else {
+          border-radius: 0;
+        }
+    		border: 1px solid darken(#f2f9fc, 10%);
+    		color: #08c;
+    		display: inline-block;
+    		font-size: .9em;
+        margin: 0;
+        padding: 0 5px 0 0;
+    		margin-left: 5px;
+    		margin-top: 5px;
+    		vertical-align: top;
+        height: 24px;
+
+        span.deselect-option {
+          display: inline-block;
+          color: #08c;
+          cursor: pointer;
+          font-size: .9em;
+          height: 22px;
+          line-height: 22px;
+          border-right: 1px solid darken(#f2f9fc, 10%);
+          padding: 0 5px;
+          margin-right: 5px;
+
+          &:hover {
+            color: #08c;
+            background-color: darken(#f2f9fc, 5%);
+          }
+        }
+      }
+
+      input {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        height: 34px;
+        line-height: 34px;
+        padding: 0;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          flex: 1;
+          line-height: 34px;
+          overflow: hidden;
+          padding: 0 10px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  // Label.
+  label {
+    color: rgba(0, 0, 0, 0.38);
+    display: block;
+    font-size: 13px;
+    padding: 4px 0;
+  }
+}
