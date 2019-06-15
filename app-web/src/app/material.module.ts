@@ -4,7 +4,7 @@ This module will then be imported to our main app module that is the one
 single module that gets bootstrapped in main.ts.
 */
 
-import { NgModule }                from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
   MatButtonModule,
   MatCheckboxModule,

@@ -1,25 +1,23 @@
-import { NgModule }            from '@angular/core';
-import { CommonModule }        from '@angular/common';
-import { FormsModule }         from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
-import { MaterialModule} from "../../app/material.module";
+import { MaterialModule} from '../../app/material.module';
 import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faRobot,faPlay,faStop,faRandom,faForward,faBackward,faSync } from '@fortawesome/free-solid-svg-icons';
+import { faRobot, faPlay, faStop, faRandom, faForward, faBackward, faSync } from '@fortawesome/free-solid-svg-icons';
 
-import {JwtInterceptor} from "../../app/auth/auth.jwt.interceptor";
+import {JwtInterceptor} from '../../app/auth/auth.jwt.interceptor';
 
 // Import 3rd party components
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TimepickerModule }   from 'ngx-bootstrap';
-//import { BsDatepickerModule } from 'ngx-bootstrap';
+import { TimepickerModule } from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
-//Directives
+// Directives
 import {
   ClickCounterDirective,
   AsideToggleDirective,
@@ -36,11 +34,12 @@ const HOME_DIRECTIVES = [
   SIDEBAR_TOGGLE_DIRECTIVES
 ];
 
-//Components
-import {MovieComponent} from "../movies/movie.component";
-import {HumiditempComponent} from "../humiditemp/humiditemp.component";
-import {MusicPlayerComponent} from "../musicplayer/musicplayer.component";
-import {RaspibotComponent} from "../raspibot/raspibot.component";
+// Components
+import {MovieComponent} from '../movies/movie.component';
+import {HumiditempComponent} from '../humiditemp/humiditemp.component';
+import {MusicPlayerComponent} from '../musicplayer/musicplayer.component';
+import {RaspibotComponent} from '../raspibot/raspibot.component';
+import {BabynamerComponent} from '../babynamer/babynamer.component';
 
 import {
   AppLayoutComponent,
@@ -70,9 +69,10 @@ const HOME_COMPONENTS = [
   MovieComponent,
   HumiditempComponent,
   MusicPlayerComponent,
-  RaspibotComponent];
+  RaspibotComponent,
+  BabynamerComponent];
 
-//services
+// services
 import { UserService,
   MovieService,
   HumidiTempService,
@@ -88,8 +88,6 @@ const HOME_SERVICES = [UserService, MovieService, HumidiTempService,MusicPlayerS
     HomeRoutingModule,
     MaterialModule,
     HttpClientModule,
-    ChartsModule,
-    //BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     TimepickerModule.forRoot(),
     ModalModule.forRoot(),
@@ -111,6 +109,6 @@ const HOME_SERVICES = [UserService, MovieService, HumidiTempService,MusicPlayerS
 export class HomeModule {
   constructor() {
     // Add an icon to the library for convenient access in other components
-    library.add(faRobot,faPlay,faStop,faRandom,faForward,faBackward,faSync);
+    library.add(faRobot, faPlay, faStop, faRandom, faForward, faBackward, faSync);
   }
 }

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/filter';
-import {filter} from "rxjs-compat/operator/filter";
-import { Observable } from 'rxjs/Observable';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -17,15 +16,17 @@ import { Observable } from 'rxjs/Observable';
   </ng-template>`
 })
 export class AppBreadcrumbsComponent {
-  breadcrumbs: Array<Object>;
+  breadcrumbs: Array<object>;
   constructor(
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event) => {
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this.breadcrumbs = [];
-      let currentRoute = this.route.root,
-      url = '';
+      let currentRoute = this.route.root;
+      let url = '';
       do {
         const childrenRoutes = currentRoute.children;
         currentRoute = null;
@@ -36,12 +37,13 @@ export class AppBreadcrumbsComponent {
             url += '/' + routeSnapshot.url.map(segment => segment.path).join('/');
             this.breadcrumbs.push({
               label: route.snapshot.data,
-              url:   url
+              url
             });
             currentRoute = route;
           }
         });
       } while (currentRoute);
     });
+
   }
 }

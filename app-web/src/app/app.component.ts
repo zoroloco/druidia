@@ -1,12 +1,13 @@
-import { Component, OnInit }      from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-component',
-  template: '<router-outlet></router-outlet>'
+  selector: 'app-root',
+  template: '<router-outlet></router-outlet>',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title: 'app';
+export class AppComponent {
+  title = 'druidia.net';
 
   constructor(private router: Router) { }
 
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
    * Since this is the root component, we listen to all
      events when a navigation is complete via the router.
    */
-  ngOnInit() {
+  onInit() {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;

@@ -1,13 +1,13 @@
 // Component for login.
 import { Component, OnInit } from '@angular/core';
 import {LoggerService} from '../../services';
-import { RaspyService} from "../../services/raspy.service";
-import {_} from 'underscore';
+import { RaspyService} from '../../services/raspy.service';
+import * as _ from 'underscore';
 
 enum Servo{
   ELBOW = 0,
     HEAD_PAN,
-    NA,//skip unused pin 2
+    NA, // skip unused pin 2
     HEAD_TILT,
     SHOULDER,
     BASE,

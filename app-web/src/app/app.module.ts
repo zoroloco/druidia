@@ -1,53 +1,44 @@
-// BrowserModule is required for any angular 2 web based application.
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {AuthGuard} from './auth/auth-guard';
 
-// module defines your components.
-import { NgModule } from '@angular/core'
+import { AppRoutingModule } from './app-routing.module';
+import { LoginModule} from '../views/login/login.module';
 
-// components specific to this web application.
+// components
 import { AppComponent } from './app.component';
-import { HomeComponent} from "./home.component";
-import { AuthComponent } from "./auth/auth.component";
-
-import {AuthGuard} from "./auth/auth-guard";
-
-import { HttpClientModule } from '@angular/common/http'
+import { AuthComponent } from './auth/auth.component';
+import { HomeComponent } from './home.component';
 
 import {
   P404Component,
   P500Component
 } from '../components';
 
-// bundle all the components of this app in an array to make life easier.
+// services
+import {AuthService} from './auth/auth.service';
+import {LoggerService} from '../services/';
+import { HttpClientModule } from '@angular/common/http';
+
 const APP_COMPONENTS = [
   AppComponent,
-  P404Component,
-  P500Component,
   AuthComponent,
-  HomeComponent
+  HomeComponent,
+  P404Component,
+  P500Component
 ];
-
-import { FormsModule} from "@angular/forms";
-import {RouterModule} from "@angular/router";
-import {AppRoutingModule} from "./app-routing.module";
-import { LoginModule} from "../views/login/login.module";
-
-import { TimeStampPipe} from "../pipes";
-
-const APP_PIPES = [TimeStampPipe];
-
-import {AuthService} from "./auth/auth.service";
-import {LoggerService} from '../services/';
 
 const APP_SERVICES = [
   AuthService,
   LoggerService
 ];
 
-const APP_DIRECTIVES = [
+const APP_DIRECTIVES = [];
 
-];
+const APP_PIPES = [];
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -72,18 +63,14 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     RouterModule,
     LoginModule,
-    AppRoutingModule,
     HttpClientModule
   ],
-  //providing a service in app Module guarantees only one instance will exist in whole app. Also allows
-  //you to inject other services inside these services.
   providers: [APP_SERVICES, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule { }

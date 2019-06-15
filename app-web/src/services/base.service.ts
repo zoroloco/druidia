@@ -1,6 +1,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import {ErrorObservable} from "rxjs-compat/observable/ErrorObservable";
+import {ErrorObservable} from 'rxjs-compat/observable/ErrorObservable';
 import {Observable} from 'rxjs/Observable';
+
 export class BaseService {
   constructor() {}
 
@@ -11,13 +12,13 @@ export class BaseService {
       return ErrorObservable.create(error.error.message);
     } else {
 
-      console.info('body ===='+JSON.stringify(error.error));
+      console.info('body ====' + JSON.stringify(error.error));
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
-        return ErrorObservable.create(error.error);
+      return ErrorObservable.create(error.error);
     }
   }
 }

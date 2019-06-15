@@ -1,4 +1,4 @@
-//define all of your navigation for the side bar nav on the side bar.
+// define all of your navigation for the side bar nav on the side bar.
 export const appNavigation = [
   {
     title: true,
@@ -22,6 +22,11 @@ export const appNavigation = [
         name: 'Raspibot',
         url: '/home/raspibot',
         icon: 'icon-sunglasses'
+      },
+      {
+        name: 'Baby Namer',
+        url: '/home/babynamer',
+        icon: 'fas fa-baby'
       }
       /*
       {

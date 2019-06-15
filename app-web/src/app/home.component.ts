@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {LoggerService} from '../services';
 
 @Component({
-  selector: 'druidia-home',
+  selector: 'app-home',
   template: `<router-outlet></router-outlet>`,
 })
 export class HomeComponent {

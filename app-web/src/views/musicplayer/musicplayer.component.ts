@@ -1,17 +1,17 @@
 // Component for login.
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as _ from 'underscore';
 import {LoggerService, MusicPlayerService} from '../../services';
-import {MatTableDataSource} from "@angular/material";
-import { faPlay,faStop,faRandom,faForward,faBackward,faSync } from '@fortawesome/free-solid-svg-icons';
+import {MatTableDataSource} from '@angular/material';
+import { faPlay, faStop, faRandom, faForward, faBackward, faSync } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-musicplayer',
   templateUrl: './musicplayer.component.html'
 })
-export class MusicPlayerComponent implements OnInit{
+export class MusicPlayerComponent implements OnInit {
   datasource: any;
-  displayedColumns = ['title','time'];
+  displayedColumns = ['title', 'time'];
   faPlay = faPlay;
   faStop = faStop;
   faRandom = faRandom;
@@ -30,68 +30,77 @@ export class MusicPlayerComponent implements OnInit{
   onShuffle(){
     this.musicPlayerService.shuffle()
       .subscribe(
-        data=>{
+        data => {
           this.log.info('Successfully sent a shuffle command.');
           this.refreshSongHistory();
         },
-        error=>{
-          if(!_.isEmpty(error)){this.log.error('Error trying to shuffle:'+JSON.stringify(error));}
-        })
+        error => {
+          if (!_.isEmpty(error)) {
+            this.log.error('Error trying to shuffle:' + JSON.stringify(error)); 
+          }
+        });
   }
 
-  onPrev(){
+  onPrev() {
     this.musicPlayerService.prev()
       .subscribe(
-        data=>{
+        data => {
           this.log.info('Successfully sent a prev command.');
           this.refreshSongHistory();
         },
-        error=>{
-          if(!_.isEmpty(error)){this.log.error('Error trying to go to previous song:'+JSON.stringify(error));}
-        })
+        error => {
+          if (!_.isEmpty(error)) {
+            this.log.error('Error trying to go to previous song:' + JSON.stringify(error));
+        }
+        });
   }
 
-  onNext(){
+  onNext() {
     this.musicPlayerService.next()
       .subscribe(
-        data=>{
+        data => {
           this.log.info('Successfully sent a next command.');
           this.refreshSongHistory();
         },
-        error=>{
-          if(!_.isEmpty(error)){this.log.error('Error trying to go to next song:'+JSON.stringify(error));}
-        })
+        error => {
+          if (!_.isEmpty(error)){
+            this.log.error('Error trying to go to next song:'+JSON.stringify(error));
+          }
+        });
   }
 
-  onPlay(){
+  onPlay() {
     this.musicPlayerService.play()
       .subscribe(
-        data=>{
+        data => {
           this.log.info('Successfully sent a play command.');
           this.refreshSongHistory();
     },
-      error=>{
-        if(!_.isEmpty(error)){this.log.error('Error trying to play:'+JSON.stringify(error));}
-      })
+      error => {
+        if (!_.isEmpty(error)) {
+          this.log.error('Error trying to play:' + JSON.stringify(error));
+        }
+      });
   }
 
-  onStop(){
+  onStop() {
     this.musicPlayerService.stop()
       .subscribe(
-        data=>{
+        data => {
           this.log.info('Successfully sent a stop command.');
           this.refreshSongHistory();
         },
-        error=>{
-          if(!_.isEmpty(error)){this.log.error('Error trying to stop:'+JSON.stringify(error));}
-        })
+        error => {
+          if (!_.isEmpty(error)){this.log.error('Error trying to stop:' + JSON.stringify(error));
+        }
+        });
   }
 
-  refreshSongHistory(){
-    this.musicPlayerService.fetchSongHistory().subscribe(songs=>{
+  refreshSongHistory() {
+    this.musicPlayerService.fetchSongHistory().subscribe(songs => {
       this.datasource = new MatTableDataSource(songs);
-    }, error=> {
+    }, error => {
       this.log.error('Error fetching songs.');
-    })
+    });
   }
 }
