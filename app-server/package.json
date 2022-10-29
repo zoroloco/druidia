@@ -49,7 +49,7 @@
     "node": "^6.9.2"
   },
   "devDependencies": {
-    "karma": "^0.13.22",
+    "karma": "^6.4.1",
     "karma-chrome-launcher": "^0.2.3",
     "run-sequence": "^1.2.2"
   }
